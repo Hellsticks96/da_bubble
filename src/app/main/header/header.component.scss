@@ -1,0 +1,59 @@
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 1rem;
+
+    .searchbar-wrapper {
+        width: 50%;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        input {
+            width: 100%;
+            height: 75%;
+            border-radius: 2.5rem;
+            border: none;
+            padding: 0.5rem 1.5rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        span {
+            position: absolute;
+            right: 1.5rem;
+        }
+    }
+
+    .profile-info {
+        display: flex;
+        align-items: center;
+
+        .avatar-wrapper {
+            position: relative;
+            
+            .online-status {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+
+                img {
+                    width: 1rem;
+                    height: 1rem;
+                }
+            }
+
+            img {
+                height: 4rem;
+                width: 4rem;
+                border-radius: 100%;
+                margin-left: 2rem;
+            }
+        }
+
+
+    }
+}
