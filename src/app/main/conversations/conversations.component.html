@@ -17,17 +17,18 @@
                 <img src="../../../assets/img/icons/add.svg">
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-button-toggle-group hideSingleSelectionIndicator="true">
-            <mat-button-toggle value="Entwicklerteam">
+
+        <div class="channel-list">
+            <div class="channel">
                 <img src="../../../assets/img/icons/tag.svg">
                 <h3>Entwicklerteam</h3>
-            </mat-button-toggle>
-            <mat-button-toggle value="Office-Team">
+            </div>
+            <div class="channel active">
                 <img src="../../../assets/img/icons/tag.svg">
                 <h3>Office-Team</h3>
-            </mat-button-toggle>
-        </mat-button-toggle-group>
-        <div>
+            </div>
+        </div>
+        <div class="new-channel">
             <img src="../../../assets/img/icons/add_circle.svg">
             <span>Channel hinzufügen</span>
         </div>
@@ -41,6 +42,16 @@
                 </div>
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
+        <div class="contact" *ngFor="let contact of contacts">
+            <div>
+                <img src="../../../assets/img/avatar/{{ contact.avatar }}.svg">
+                @if(contact.online) {
+                <img src="../../../assets/img/icons/online.svg">
+                } @else {
+                <img src="../../../assets/img/icons/offline.svg">
+                }
+            </div>
+            <span>{{ contact.name }}</span>
+        </div>
     </mat-expansion-panel>
 </main>
