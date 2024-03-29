@@ -1,1 +1,46 @@
-<p>login works!</p>
+<section>
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>
+                <h2>Anmeldung</h2>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Wir empfehlen dir, die E-Mail Adresse zu nutzen, die du bei der Arbeit verwendest.</p>
+            <form (ngSubmit)="login()" #loginForm="ngForm">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
+                        <mat-label>E-Mail</mat-label>
+                        <input type="email" id="email" matInput placeholder="beispielname@email.com" [(ngModel)]="email"
+                            name="email" required #emailField="ngModel">
+                    </mat-form-field>
+                    <p *ngIf="emailField.invalid && emailField.touched" class="error-message">Bitte gib eine gültige
+                        E-Mail-Adresse ein.</p>
+                </div>
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
+                        <mat-label>Passwort</mat-label>
+                        <input type="password" id="password" matInput placeholder="Passwort:" [(ngModel)]="password"
+                            name="password" required #passwordField="ngModel">
+                    </mat-form-field>
+                    <p *ngIf="passwordField.invalid && passwordField.touched" class="error-message">Bitte gib ein Passwort
+                        ein.</p>
+                </div>
+                <div>
+                    <div>
+                        <button mat-button type="button">Anmelden mit Google</button>
+                    </div>
+                    <div>
+                        <button mat-button type="submit" [disabled]="loginForm.invalid">Anmelden</button>
+                        <button mat-button type="button">Einloggen</button>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <p>Noch keinen Account? <a href="#">Registriere dich hier</a></p>
+        </mat-card-actions>
+    </mat-card>
+</section>
