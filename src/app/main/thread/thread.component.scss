@@ -1,0 +1,135 @@
+main {
+    width: 30.3125rem;
+    height: 58.75rem;
+    flex-shrink: 0;
+    border-radius: 1.875rem;
+    background: var(--white);
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    width: calc(100% - 2.5rem - 2.5rem);
+    padding: 2rem 2.5rem;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+
+    >div {
+        display: flex;
+        align-items: center;
+        gap: 0.3125rem;
+
+
+        >h1 {
+            font-size: 1.5rem;
+        }
+
+        >div {
+            display: flex;
+            align-items: center;
+            gap: 0.3125rem;
+
+            >img {
+                width: 1rem;
+                height: 1rem;
+            }
+
+            >span {
+                color: var(--purple-2);
+                font-size: 0.875rem;
+            }
+        }
+    }
+
+    >img {
+        padding: 0.5rem;
+    }
+}
+
+.chat {}
+
+.message {
+    display: flex;
+    width: calc(100% - 2.5rem - 2.5rem);
+    padding: 0.625rem 2.5rem;
+    align-items: flex-start;
+    gap: 1.25rem;
+
+    >img {
+        width: 4.375rem;
+        height: 4.375rem;
+        border-radius: 50%;
+    }
+
+    >div:not(.message-info) {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+    }
+}
+
+.message-info {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+
+    >h5 {
+        font-size: 1.125rem;
+    }
+
+    >span {
+        color: var(--text-gray);
+        font-size: 0.875rem;
+    }
+}
+
+.message-text {
+    padding: 0.9375rem;
+    align-self: stretch;
+    border-radius: 0rem 1.25rem 1.25rem 1.25rem;
+    background: var(--bg-color);
+}
+
+.reaction {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    >button {
+        padding: 0.3125rem 0.625rem;
+        border-radius: 1.25rem;
+        border: 1px solid var(--light-purple-line);
+        background: var(--white);
+        box-shadow: unset;
+
+        ::ng-deep::ng-deep .mdc-button__label {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+
+            >img {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+
+            >span {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    >img {
+        padding: 0.3125rem;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+
+.input-area {
+    width: 30.3125rem;
+height: 58.75rem;
+flex-shrink: 0;
+}
