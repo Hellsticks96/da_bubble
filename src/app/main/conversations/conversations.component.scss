@@ -1,0 +1,108 @@
+main {
+    display: inline-flex;
+    height: 58.75rem;
+    padding: 2rem 1.875rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5625rem;
+    flex-shrink: 0;
+    border-radius: 1.875rem;
+    background: var(white);
+}
+
+.workspace {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9375rem;
+    width: 19.125rem;
+
+    >.logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 3.75rem;
+        height: 3.75rem;
+        border-radius: 1.875rem;
+        overflow: hidden;
+
+        >img:first-child {
+            width: 3.75rem;
+            height: 3.75rem;
+        }
+
+        >img:last-child {
+            position: absolute;
+            width: 2.16rem;
+            height: 1.4505rem;
+        }
+    }
+
+    >h2 {
+        flex: 1 0 0;
+        padding-right: 1.25rem;
+    }
+
+    >img {
+        padding: 0.5rem;
+    }
+}
+
+.channels,
+.directmessages {
+    width: 100%;
+    box-shadow: none !important;
+
+    >mat-expansion-panel-header {
+        padding: 0.5rem 0;
+        height: unset;
+
+        mat-panel-title {
+
+            display: flex;
+            justify-content: space-between;
+            margin: 0;
+            width: 100%;
+
+            >div {
+                display: flex;
+                gap: 0.625rem;
+                padding-right: 0.625rem;
+
+                >h3 {
+                    font-size: 1.25rem;
+                }
+            }
+
+            >img {
+                padding: 0.1875rem;
+            }
+        }
+    }
+}
+
+.channels {
+    mat-button-toggle-group {
+        flex-direction: column;
+        width: 100%;
+
+        ::ng-deep::ng-deep .mat-button-toggle-label-content {
+            display: flex;
+            padding: 0.25rem 1.25rem;
+            align-items: center;
+            gap: 0.625rem;
+        }
+    }
+
+
+    ::ng-deep::ng-deep .mat-expansion-panel-body {
+        padding: 0 1.5625rem;
+    }
+}
+
+::ng-deep::ng-deep .mat-expansion-indicator {
+    width: 1.875rem;
+    height: 1.875rem;
+    margin-right: 0.9375rem !important;
+    content: url(../../../assets/img/icons/arrow_drop_down.svg);
+}
