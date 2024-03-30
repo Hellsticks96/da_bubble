@@ -1,1 +1,57 @@
-<p>conversations works!</p>
+<main>
+    <section class="workspace">
+        <div class="logo">
+            <img src="../../../assets/img/devspace/background.png">
+            <img src="../../../assets/img/devspace/devspace.svg">
+        </div>
+        <h2>Devspace</h2>
+        <img src="../../../assets/img/icons/edit_square.svg">
+    </section>
+    <mat-expansion-panel togglePosition="before" class="channels">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <div>
+                    <img src="../../../assets/img/icons/workspaces.svg">
+                    <h3>Channels</h3>
+                </div>
+                <img src="../../../assets/img/icons/add.svg">
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="channel-list">
+            <div class="channel">
+                <img src="../../../assets/img/icons/tag.svg">
+                <h3>Entwicklerteam</h3>
+            </div>
+            <div class="channel active">
+                <img src="../../../assets/img/icons/tag.svg">
+                <h3>Office-Team</h3>
+            </div>
+        </div>
+        <div class="new-channel">
+            <img src="../../../assets/img/icons/add_circle.svg">
+            <span>Channel hinzufügen</span>
+        </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel togglePosition="before" class="directmessages">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <div>
+                    <img src="../../../assets/img/icons/account_circle.svg">
+                    <h3>Direktnachrichten</h3>
+                </div>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="contact" *ngFor="let contact of contacts">
+            <div>
+                <img src="../../../assets/img/avatar/{{ contact.avatar }}.svg">
+                @if(contact.online) {
+                <img src="../../../assets/img/icons/online.svg">
+                } @else {
+                <img src="../../../assets/img/icons/offline.svg">
+                }
+            </div>
+            <span>{{ contact.name }}</span>
+        </div>
+    </mat-expansion-panel>
+</main>
