@@ -5,6 +5,12 @@
 
 main {
     display: flex;
+    justify-content: space-between;
     gap: 1.25rem;
     padding: 0 1.25rem 1.5625rem 1.25rem;
+
+    app-chat {
+        min-width: 60%;
+        width: 100%;
+    }
 }

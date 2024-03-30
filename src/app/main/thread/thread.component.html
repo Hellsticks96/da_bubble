@@ -35,14 +35,10 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="input-area">
-        <div class="textarea-wrapper">
-            <!-- TODO: add textarea-wrapper onclick focus textarea -->
-            <textarea placeholder="Antworten..." rows="3" wrap="hard" type="text">
-            </textarea>
-            <div class="input-buttons">
-                <div>
+        <div class="chat-input">
+            <input type="text" placeholder="Nachricht an">
+            <div class="action-buttons">
+                <div class="button-wrapper">
                     <button mat-icon-button>
                         <img src="../../../assets/img/icons/add-gray.svg" alt="Add image">
                     </button>
@@ -54,7 +50,9 @@
                         <img src="../../../assets/img/icons/alternate_email.svg" alt="Tag someone">
                     </button>
                 </div>
-                <img src="../../../assets/img/icons/send-button.svg" alt="Send message">
+                <button mat-icon-button>
+                    <span class="material-icons">send</span>
+                </button>
             </div>
         </div>
     </div>

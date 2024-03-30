@@ -4,8 +4,6 @@ import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ThreadComponent } from './thread/thread.component';
 
-import { ChatComponent } from './chat/chat.component';
-
 @Component({
   selector: 'app-main',
   standalone: true,
