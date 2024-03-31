@@ -1,1 +1,66 @@
-<p>chat works!</p>
+<section class="chat-body">
+    <div class="chat-header">
+        <button mat-button>
+            <h1># ChannelName</h1>
+            <span class="material-icons">keyboard_arrow_down</span>
+        </button>
+        <div class="participants-wrapper">
+            <img src="../../../assets/img/avatar/2.svg">
+            <img src="../../../assets/img/avatar/2.svg">
+            <img src="../../../assets/img/avatar/2.svg">
+            <h1>3</h1>
+            <button mat-icon-button>
+                <span class="material-icons">person_add_alt</span>
+            </button>
+        </div>
+    </div>
+    <div class="chat-content">
+        <div class="chat">
+            <!-- TODO: Add answers to thread amount -->
+            <div class="message" *ngFor="let message of messages">
+                <img src="../../../assets/img/avatar/{{ message.avatar }}.svg">
+                <div>
+                    <div class="message-info">
+                        <h5>{{ message.name }}</h5>
+                        <span>{{ message.time }}</span>
+                    </div>
+                    <div class="message-text">{{ message.message }}</div>
+                    <div>
+                        <div class="reaction">
+                            @if(objectKeysLength(message.reactions) > 0) {
+                            @for(reaction of objectKeys(message.reactions); track reaction; let i = $index) {
+                            <button mat-raised-button>
+                                <img src="../../../assets/img/icons/emoji-{{ objectKeys(message.reactions)[i] }}.svg">
+                                <span>{{ objectValues(message.reactions)[i] }}</span>
+                            </button>
+                            }
+                            }
+                            <img src="../../../assets/img/icons/add_reaction.svg" alt="Add reaction">
+                        </div>
+                        <img src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Nachricht an">
+            <div class="action-buttons">
+                <div class="button-wrapper">
+                    <button mat-icon-button>
+                        <img src="../../../assets/img/icons/add-gray.svg" alt="Add image">
+                    </button>
+                    <div class="vector"></div>
+                    <button mat-icon-button>
+                        <img src="../../../assets/img/icons/sentiment_satisfied.svg" alt="Add emoji">
+                    </button>
+                    <button mat-icon-button>
+                        <img src="../../../assets/img/icons/alternate_email.svg" alt="Tag someone">
+                    </button>
+                </div>
+                <button mat-icon-button>
+                    <span class="material-icons">send</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
