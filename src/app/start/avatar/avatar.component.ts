@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-avatar',
   standalone: true,
-  imports: [],
+  imports: [ MatButtonModule ],
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.scss'
 })
 export class AvatarComponent {
-
 }

@@ -1,1 +1,24 @@
-<p>avatar works!</p>
+<main>
+    <h1>Wähle deinen Avatar</h1>
+    <div class="content-container">
+        <div class="profilePic">
+            <img src="../../../assets/img/icons/person.svg">
+        </div>
+        <div>
+            <h2>Frederik Beck</h2>
+            <p>Aus der Liste wählen</p>
+            <div class="defaultPics">
+                @for(number of [1,2,3,4,5,6]; track number) {
+                    <img src="../../../assets/img/avatar/{{ number }}.svg">
+                }
+            </div>
+        </div>
+        <div>
+            <p>eigenes Bild verwenden</p>
+            <button mat-stroked-button class="uploadPic">Datei hochladen</button>
+        </div>
+    </div>
+    <div class="submit-wrapper">
+        <button mat-flat-button class="submit">Weiter</button>
+    </div>
+</main>

@@ -156,13 +156,10 @@ mat-checkbox {
 .submit {
     align-self: flex-end;
     width: min-content;
+    padding: 0 1.5625rem;
+    height: 3.0625rem;
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
-        display: flex;
-        padding: 0.75rem 1.5625rem;
-        justify-content: center;
-        align-items: center;
-        gap: 0.625rem;
         border-radius: 1.5625rem;
         background: var(--Purple-1, #444DF2);
         overflow: hidden;
@@ -177,10 +174,9 @@ mat-checkbox {
         color: var(--White, #FFF);
         font-family: Nunito;
         font-size: 1.125rem;
+        padding: 0;
         font-style: normal;
         font-weight: 700;
         line-height: normal;
     }
-
-
 }
