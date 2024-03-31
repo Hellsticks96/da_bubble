@@ -5,11 +5,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { FormsModule, NgForm } from '@angular/forms';
+import { StartComponent } from '../start.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, AvatarComponent, FormsModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, AvatarComponent, FormsModule, StartComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })

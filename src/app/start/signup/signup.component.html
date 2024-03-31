@@ -1,39 +1,29 @@
-<main>
-    <section class="logo">
-        <img src="../../../assets/img/logo/icon.svg">
-        <img src="../../../assets/img/logo/name.svg" alt="DABubble">
-    </section>
-    <section class="content">
-        <button class="goBack" mat-icon-button>
-            <img src="../../../assets/img/icons/arrow_back.svg" alt="Go back">
-        </button>
-        @if(accountCreated) {
-            <app-avatar></app-avatar>
-        } @else {
-            <div class="description">
-                <h1>Konto erstellen</h1>
-                <p>Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues DABubble-Konto.</p>
+<app-start>
+    <button class="goBack" mat-icon-button>
+        <img src="../../../assets/img/icons/arrow_back.svg" alt="Go back">
+    </button>
+    @if(accountCreated) {
+        <app-avatar></app-avatar>
+    } @else {
+        <div class="description">
+            <h1>Konto erstellen</h1>
+            <p>Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues DABubble-Konto.</p>
+        </div>
+        <form (ngSubmit)="onSubmit(accountForm)" #accountForm="ngForm">
+            <div>
+                <input type="text" placeholder="Name und Nachname" id="name">
+                <img src="../../../assets/img/icons/person-gray.svg">
             </div>
-            <form (ngSubmit)="onSubmit(accountForm)" #accountForm="ngForm">
-                <div>
-                    <input type="text" placeholder="Name und Nachname" id="name">
-                    <img src="../../../assets/img/icons/person-gray.svg">
-                </div>
-                <div>
-                    <input type="email" placeholder="beispielname@email.com" name="" id="email">
-                    <img src="../../../assets/img/icons/mail-gray.svg">
-                </div>
-                <div>
-                    <input type="password" placeholder="Passwort" name="" id="password">
-                    <img src="../../../assets/img/icons/lock-gray.svg">
-                </div>
-                <mat-checkbox class="checkbox">Ich stimme der <a href="">Datenschutzerklärung</a> zu.</mat-checkbox>
-                <button mat-flat-button class="submit">Weiter</button>
-            </form>
-        }
-    </section>
-    <section class="footer">
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-    </section>
-</main>
+            <div>
+                <input type="email" placeholder="beispielname@email.com" name="" id="email">
+                <img src="../../../assets/img/icons/mail-gray.svg">
+            </div>
+            <div>
+                <input type="password" placeholder="Passwort" name="" id="password">
+                <img src="../../../assets/img/icons/lock-gray.svg">
+            </div>
+            <mat-checkbox class="checkbox">Ich stimme der <a href="">Datenschutzerklärung</a> zu.</mat-checkbox>
+            <button mat-flat-button class="submit">Weiter</button>
+        </form>
+    }
+</app-start>
