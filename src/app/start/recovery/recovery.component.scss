@@ -52,7 +52,7 @@ form {
     width: calc(100% - 0.8125rem - 0.8125rem );
 
     >p {
-        color: var(--Text-gray, #686868);
+        color: var(--text-gray);
         text-align: center;
         font-family: Nunito;
         font-size: 1.25rem;
@@ -74,14 +74,14 @@ form {
             border-radius: 6.25rem;
             background: var(--bg-color);
             color: var(--text-gray);
-            font-size: 18px;
+            font-size: 1.125rem;
             font-weight: 500;
             line-height: 120%;
             /* 21.6px */
 
             &::placeholder {
                 color: var(--text-gray);
-                font-size: 18px;
+                font-size: 1.125rem;
                 font-weight: 500;
                 line-height: 120%;
             }
@@ -107,7 +107,7 @@ form {
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
         border-radius: 1.5625rem;
-        background: var(--Purple-1, #444DF2);
+        background: var(--purple-1);
         overflow: hidden;
     }
 
@@ -117,7 +117,7 @@ form {
     }
 
     ::ng-deep::ng-deep .mdc-button__label {
-        color: var(--White, #FFF);
+        color: var(--white);
         font-family: Nunito;
         font-size: 1.125rem;
         padding: 0;
