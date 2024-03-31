@@ -91,7 +91,7 @@ mat-checkbox {
 // TODO: change checkbox checked color
 
 ::ng-deep::ng-deep .mat-mdc-checkbox label {
-    color: var(--menu-color, #42526E);
+    color: var(--menu-color);
 
     /* Version 2/body */
     font-family: "Open Sans";
@@ -111,7 +111,7 @@ mat-checkbox {
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
         border-radius: 1.5625rem;
-        background: var(--Purple-1, #444DF2);
+        background: var(--purple-1);
         overflow: hidden;
     }
 
@@ -121,7 +121,7 @@ mat-checkbox {
     }
 
     ::ng-deep::ng-deep .mdc-button__label {
-        color: var(--White, #FFF);
+        color: var(--white);
         font-family: Nunito;
         font-size: 1.125rem;
         padding: 0;

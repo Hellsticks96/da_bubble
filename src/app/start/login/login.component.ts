@@ -2,11 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { StartComponent } from '../start.component';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +10,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   imports: [
             FormsModule,
             CommonModule,
-            MatCardModule, 
             MatButtonModule,
-            MatInputModule,
-            MatIconModule,
-            MatFormFieldModule,
+            StartComponent
           ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
