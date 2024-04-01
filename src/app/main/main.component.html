@@ -1,6 +1,17 @@
 <app-header></app-header>
 <main>
-    <app-conversations></app-conversations>
+    <mat-drawer-container class="menu-container">
+        <mat-drawer #drawer opened="true" class="menu-sidenav" mode="side">
+          <app-conversations></app-conversations>
+        </mat-drawer>
+    </mat-drawer-container>
+    <button class="menu-button" type="button" mat-button (click)="drawer.toggle(); showMenu = !showMenu">
+      @if(showMenu) {
+        Workspace-Menü schließen <img src="../../assets/img/icons/sidenav-close.svg">
+      } @else {
+        Workspace-Menü öffen <img src="../../assets/img/icons/sidenav-open.svg">
+      }
+    </button>
     <app-chat></app-chat>
     <app-thread></app-thread>
 </main>

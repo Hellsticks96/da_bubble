@@ -3,6 +3,7 @@ import { ConversationsComponent } from './conversations/conversations.component'
 import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ThreadComponent } from './thread/thread.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-main',
@@ -11,11 +12,14 @@ import { ThreadComponent } from './thread/thread.component';
     HeaderComponent,
     ConversationsComponent,
     ChatComponent,
-    ThreadComponent
+    ThreadComponent,
+    MatSidenavModule
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
+showMenu = true;
+
 
 }

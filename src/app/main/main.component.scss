@@ -10,7 +10,44 @@ main {
     padding: 0 1.25rem 1.5625rem 1.25rem;
 
     app-chat {
-        min-width: 60%;
-        width: 100%;
+        // min-width: 60%;
+        // width: 100%;
+    }
+}
+
+.menu-container {
+    width: fit-content;
+    overflow: unset;
+    border-radius: 1.875rem;
+}
+
+.menu-sidenav {
+    border-radius: 1.875rem;
+}
+
+.menu-button {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    position: absolute;
+    left: 0;
+    bottom: 0%;
+    z-index: 4;
+    border: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 120%;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+    border-radius: 0rem 0rem 1.875rem 1.875rem;
+    background: var(--White, #FFF);
+    box-shadow: -4px 4px 7px 0px rgba(0, 0, 0, 0.20);
+    padding: 0.875rem 1.4375rem;
+
+    >img {
+        transform: rotate(90deg);
+        width: 1rem;
+        height: 1rem;
+        padding: 0.5rem;
     }
 }
