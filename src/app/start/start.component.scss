@@ -3,9 +3,8 @@ main {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: calc(100vh - 4.6875rem - 3rem);
-    margin: 4.6875rem 4.6875rem 3rem 4.6875rem;
-    // TODO: change spaces
+    height: calc(100vh - 3rem - 3rem);
+    margin: 3rem;
 }
 
 .header {

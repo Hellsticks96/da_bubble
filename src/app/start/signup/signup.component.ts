@@ -6,6 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { StartComponent } from '../start.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
@@ -18,6 +19,11 @@ export class SignupComponent {
   hide: any;
   mailTest = false
   accountCreated = false;
+
+  constructor(public location: Location) {
+
+  }
+  
 
   onSubmit(ngForm: NgForm) {
     if (ngForm.submitted && ngForm.form.valid && !this.mailTest) {

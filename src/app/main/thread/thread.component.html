@@ -7,7 +7,9 @@
                 <span>Entwicklerteam</span>
             </div>
         </div>
-        <img src="../../../assets/img/icons/close.svg" alt="Close">
+        <button mat-icon-button>
+            <img src="../../../assets/img/icons/close.svg" alt="Send message">
+        </button>
     </header>
     <div class="chat">
         <!-- TODO: Add answers to thread amount -->
@@ -36,7 +38,7 @@
             </div>
         </div>
         <div class="chat-input">
-            <input type="text" placeholder="Nachricht an">
+            <textarea type="text" placeholder="Antworten..."></textarea>
             <div class="action-buttons">
                 <div class="button-wrapper">
                     <button mat-icon-button>
@@ -51,9 +53,10 @@
                     </button>
                 </div>
                 <button mat-icon-button>
-                    <span class="material-icons">send</span>
+                    <img src="../../../assets/img/icons/send-button.svg" alt="Send message">
                 </button>
             </div>
         </div>
+                <!-- TODO: add focus textarea on click -->
     </div>
 </main>
