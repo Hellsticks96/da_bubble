@@ -29,6 +29,28 @@ main {
     }
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    >div:not(.logo) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.625rem;
+
+        >p {
+            font-size: 1.125rem;
+        }
+
+        >a {
+            line-height: 120%;
+            padding: 0.625rem 0.9375rem;
+        }
+    }
+}
+
 .logo {
     display: inline-flex;
     align-items: center;
