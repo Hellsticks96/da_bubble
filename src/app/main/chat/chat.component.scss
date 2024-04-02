@@ -15,7 +15,7 @@
         box-shadow: 0rem 0.1rem 0.2rem rgba($color: #000000, $alpha: 0.2);
         border-radius: 2rem 2rem 0 0;
         min-height: 4rem;
-        
+
         button {
             display: flex;
             align-items: center;
@@ -57,71 +57,78 @@
             padding: 0.625rem 2.5rem;
             align-items: flex-start;
             gap: 1.25rem;
-        
+            position: relative;
+
+            &:hover {
+                .hoverMenu {
+                    display: inline-flex;
+                }
+            }
+
             >img {
                 width: 4.375rem;
                 height: 4.375rem;
                 border-radius: 50%;
             }
-        
-            >div:not(.message-info) {
+
+            >div:not(.message-info, .hoverMenu) {
                 display: flex;
                 flex-direction: column;
                 gap: 0.5rem;
-        
+
             }
         }
-        
+
         .message-info {
             display: flex;
             align-items: center;
             gap: 1.25rem;
-        
+
             >h5 {
                 font-size: 1.125rem;
             }
-        
+
             >span {
                 color: var(--text-gray);
                 font-size: 0.875rem;
             }
         }
-        
+
         .message-text {
             padding: 0.9375rem;
             align-self: stretch;
             border-radius: 0rem 1.25rem 1.25rem 1.25rem;
             background: var(--bg-color);
         }
-        
+
         .reaction {
             display: flex;
             gap: 0.5rem;
             align-items: center;
-        
+
             >button {
                 padding: 0.3125rem 0.625rem;
                 border-radius: 1.25rem;
                 border: 1px solid var(--light-purple-line);
                 background: var(--white);
                 box-shadow: unset;
-        
+
                 ::ng-deep::ng-deep .mdc-button__label {
                     display: flex;
                     align-items: center;
                     gap: 0.625rem;
-        
+
                     >img {
                         width: 1.5rem;
                         height: 1.5rem;
                     }
-        
+
                     >span {
                         font-size: 1rem;
                     }
                 }
             }
-        
+
             >img {
                 padding: 0.3125rem;
                 width: 1.5rem;
@@ -187,6 +194,66 @@
         img {
             height: 1.5rem;
             width: 1.5rem;
+        }
+    }
+}
+
+
+.hoverMenu {
+    top: -1.125rem;
+    right: 10%;
+    position: absolute;
+    display: none;
+    padding: 0.1875rem 0.9375rem 0.1875rem 1.25rem;
+    align-items: flex-start;
+    gap: 0.3125rem;
+    border-radius: 1.5625rem 1.5625rem 0rem 1.5625rem;
+    border: 1px solid var(--light-purple-line);
+    background: var(--white);
+
+    >button {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &:hover {
+        display: inline-flex;
+    }
+}
+
+::ng-deep::ng-deep .moreMenu {
+    display: inline-flex;
+    padding: 0.625rem 1.25rem;
+    width: unset;
+    min-width: unset !important;
+    max-width: unset !important;
+    height: unset;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 0.9375rem;
+    border-radius: 0rem 1.875rem 1.875rem 1.875rem !important;
+    box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.20) !important;
+
+    >div {
+        padding: 0;
+
+        >button {
+            display: flex;
+            padding: 0.625rem 1.25rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.9375rem;
+            border-radius: 6.25rem;
+
+            >span {
+                font-family: Nunito !important;
+                font-size: 1.25rem !important;
+                font-weight: 500 !important;
+            }
         }
     }
 }
