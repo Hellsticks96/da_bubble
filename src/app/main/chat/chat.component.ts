@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';

@@ -5,7 +5,7 @@
   font-family: nunito;
   box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
   width: 25rem;
-//   height: 13rem;
+  //   height: 13rem;
 
   > img {
     position: absolute;
@@ -52,5 +52,33 @@ Mat-dialog-actions {
     font-weight: 400;
     border-radius: 1.5625rem;
     background: var(--Purple-1, #444df2);
+  }
+}
+
+mat-autocomplete {
+  background-color: white;
+  border-radius: 0 1.8rem 1.8rem 1.8rem;
+}
+
+mat-option {
+  border-radius: 10px !important;
+  padding-top: 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px;
+  &:hover {
+    background-color: rgba(141, 117, 230, 0.2) !important;
+  }
+}
+
+.autocomplete-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 160px;
+  width: 160px;
+  img {
+    border-radius: 100%;
+    margin-right: 1rem;
   }
 }

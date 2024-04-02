@@ -5,7 +5,26 @@
   <mat-dialog-content>
     <mat-label># Entwicklerteam</mat-label>
     <mat-form-field appearance="outline">
-      <input #inputValue placeholder="Name eingeben" matInput />
+      <input
+        type="text"
+        [matAutocomplete]="auto"
+        [formControl]="nameControl"
+        #inputValue
+        placeholder="Name eingeben"
+        matInput
+      />
+      <mat-autocomplete class="custom-autocomplete" #auto="matAutocomplete">
+        <mat-option *ngFor="let message of filteredOptions | async" [value]="message.name">
+          <div class="autocomplete-icons" >
+            <img
+              [src]="getAvatarPath(message.avatar)"
+              width="35"
+              height="35"
+              alt="Avatar"/>
+            {{ message.name }}
+          </div>
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
   </mat-dialog-content>
 

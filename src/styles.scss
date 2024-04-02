@@ -75,3 +75,15 @@ a {
   bottom: 8rem;
   right: 12rem;
 }
+.mat-autocomplete-panel {
+  border-radius: 10px !important;
+}
+.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{
+  border-radius: 0 0.8rem 0.8rem  0.8rem!important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: auto;
+  padding: 1rem;
+}
