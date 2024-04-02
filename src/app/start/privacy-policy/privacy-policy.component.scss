@@ -1,0 +1,11 @@
+@import '../legal-notice/legal-notice.component.scss';
+
+app-start {
+    ::ng-deep::ng-deep .content {
+        width: calc(48.4375rem - 3.5rem - 3.5rem);
+        height: calc(41.8125rem - 3rem - 3rem);
+        overflow: auto;
+    }
+}
+
+// TODO: design scroll bar
