@@ -1,22 +1,27 @@
 <div class="start-screen"></div>
 <main>
-    <section class="header">
-        <div class="logo animate__slideInRight" (click)="this.router.navigateByUrl('')">
-            <img src="../../../assets/img/logo/icon.svg" class="">
-            <img src="../../../assets/img/logo/name.svg" alt="DABubble">
-        </div>
-        @if(this.router.url === '/login') {
-            <div>
-                <p>Neu bei DABubble?</p>
-                <a href="./signup">Konto erstellen</a>
-            </div>
-        }
-    </section>
-    <section class="content">
-        <ng-content></ng-content>
-    </section>
-    <section class="footer">
-        <a href="./legal-notice">Impressum</a>
-        <a href="./privacy-policy">Datenschutz</a>
-    </section>
+  <div class="start-screen"></div>
+  <div class="animation-logo">
+    <img src="../../../assets/img/logo/icon.svg" class="" />
+    <img src="../../../assets/img/logo/logo-white.png" alt="DABubble" />
+  </div>
+  <section class="header">
+    <div class="logo animate__slideInRight" (click)="this.router.navigateByUrl('')">
+      <img src="../../../assets/img/logo/icon.svg" class="" class="" />
+      <img src="../../../assets/img/logo/name.svg" alt="DABubble" />
+    </div>
+    @if(this.router.url === '/login') {
+    <div>
+      <p>Neu bei DABubble?</p>
+      <a href="./signup">Konto erstellen</a>
+    </div>
+    }
+  </section>
+  <section class="content">
+    <ng-content></ng-content>
+  </section>
+  <section class="footer">
+    <a href="./legal-notice">Impressum</a>
+    <a href="./privacy-policy">Datenschutz</a>
+  </section>
 </main>

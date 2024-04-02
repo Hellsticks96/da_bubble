@@ -1,0 +1,26 @@
+<section class="dialog-section">
+  <h2 mat-dialog-title>Leute Hinzufügen</h2>
+
+  <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="" />
+  <mat-dialog-content>
+    <mat-label># Entwicklerteam</mat-label>
+    <mat-form-field appearance="outline">
+      <input #inputValue placeholder="Name eingeben" matInput />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button
+      [ngStyle]="
+        inputValue.value
+          ? { 'background-color': 'var(--Purple-1, #444df2)' }
+          : { 'background-color': 'gray', cursor: 'not-allowed' }
+      "
+      [disabled]="!inputValue.value"
+      mat-flat-button
+      color="primary"
+    >
+      Hinzufügen
+    </button>
+  </mat-dialog-actions>
+</section>

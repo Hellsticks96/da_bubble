@@ -1,0 +1,57 @@
+.dialog-container {
+  padding: 2.2rem;
+  gap: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  font-family: nunito;
+  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
+
+  >img{
+    position: absolute;
+    height: 1.2rem;
+    width: 1.2rem;
+    right: 2.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 100%;
+    &:hover{
+        background-color: rgba(141, 117, 230, 0.2);
+    }
+  }
+}
+
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 !important;
+  cursor: pointer;
+
+  > mat-label {
+    color: black;
+    font-size: 1rem;
+    font-weight: 800;
+
+    > span {
+      color: gray;
+      font-weight: 500;
+    }
+  }
+}
+
+:host ::ng-deep .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 1.875rem;
+}
+
+Mat-dialog-actions {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+
+  > button {
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 1.5625rem;
+    background: var(--Purple-1, #444df2);
+  }
+}

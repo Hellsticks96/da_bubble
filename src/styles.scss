@@ -61,3 +61,17 @@ a {
   font-family: Figtree;
   font-size: 1.125rem;
 }
+
+.custom-dialog
+  .mdc-dialog__container
+  .mat-mdc-dialog-surface {
+  border-radius: 1.875rem;
+}
+
+.custom-dialog-br
+  .mdc-dialog__container
+  .mat-mdc-dialog-surface {
+  border-radius: 1.875rem 0 1.875rem 1.875rem;
+  bottom: 8rem;
+  right: 12rem;
+}
