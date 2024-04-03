@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule, MatDialog} from '@angular/material/dialog';
+import { DialogEditProfileComponent } from '../../dialog-edit-profile/dialog-edit-profile.component';
+
 
 @Component({
   selector: 'app-header',
@@ -9,11 +12,38 @@ import { MatExpansionModule } from '@angular/material/expansion';
   imports: [
     MatIconModule,
     MatButtonModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    DialogEditProfileComponent,
+
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  panelOpenState = false;
+  constructor(public dialog: MatDialog) { }
+
+  openDialog(event: MouseEvent): void {
+    // Sicherstellen, dass event.target tatsächlich ein Element ist.
+    let element = event.target as Element | null;
+  
+    if (element) {
+      // Casten zu HTMLElement, um Zugriff auf getBoundingClientRect zu gewährleisten.
+      let htmlElement = element as HTMLElement;
+      let boundingClientRect = htmlElement.getBoundingClientRect();
+      
+      // Berechnung der Position, um den Dialog unterhalb des Pfeils zu positionieren.
+      let dialogPosition = {
+        top: `${boundingClientRect.bottom + window.scrollY +15}px`, // Plus window.scrollY für absolute Positionierung auf der Seite
+        left: `${boundingClientRect.left + window.scrollX -200}px`, // Plus window.scrollX für absolute Positionierung auf der Seite
+      };
+  
+      this.dialog.open(DialogEditProfileComponent, {
+        width: '250px',
+        position: dialogPosition,
+      });
+    }
+  }
+  
+  
 }

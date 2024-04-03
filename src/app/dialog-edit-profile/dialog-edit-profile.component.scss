@@ -1,0 +1,28 @@
+section {
+    display: inline-flex;
+    padding: 1.875rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9375rem;
+
+    span {
+        cursor: pointer;
+        color: black;
+        display: flex;
+        padding: 0.625rem 2.8125rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6.25rem;
+        font-weight: bold;
+        font-size: 1.25rem;
+        
+        &:hover {
+            color: #535AF1;
+            background-color: #ECEEFE;
+        }
+    }
+}
+
+::ng-deep::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 1.875rem 0rem 1.875rem 1.875rem;
+}
