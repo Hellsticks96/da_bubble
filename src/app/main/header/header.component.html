@@ -16,7 +16,15 @@
             <img src="../../../assets/img/avatar/1.svg">
         </div>
         <button mat-icon-button>
-            <span class="material-icons">keyboard_arrow_down</span>
+            <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                    </mat-expansion-panel-header>
+                    <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+            </mat-accordion>
         </button>
     </div>
 </section>
