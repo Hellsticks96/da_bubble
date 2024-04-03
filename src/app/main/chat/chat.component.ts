@@ -6,6 +6,7 @@ import { MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { DialogAddMemberToChnlComponent } from '../../dialog-add-member-to-chnl/dialog-add-member-to-chnl.component';
 import {MatMenu, MatMenuModule, MatMenuTrigger} from '@angular/material/menu';
+import { DialogChannelInfoComponent } from '../../dialog-channel-info/dialog-channel-info.component';
 
 @Component({
   selector: 'app-chat',
@@ -68,6 +69,12 @@ export class ChatComponent {
 
   openDialogAddMembers(){
     this.dialog.open(DialogAddMemberToChnlComponent,{
+      panelClass:'custom-dialog-br',
+    })
+  }
+
+  openDialogChannelInfo(){
+    this.dialog.open(DialogChannelInfoComponent,{
       panelClass:'custom-dialog-br',
     })
   }
