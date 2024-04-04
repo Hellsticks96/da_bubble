@@ -7,20 +7,18 @@
   background: linear-gradient(1.46deg, #313ae6 1.22%, #797ef3 98.76%);
   z-index: 2;
   opacity: 1;
-  animation: fadeOut forwards;
-  animation-duration: 2s;
-  animation-delay: 3s;
+  animation: 500ms fadeOut 2500ms ease-out forwards;
 
 }
 
-@keyframes fadeOut{
-  from{
-    z-index: 2;
+@keyframes fadeOut {
+  from {
+    // z-index: 2;
     opacity: 1;
   }
 
-  to{
-    z-index: 0;
+  to {
+    // z-index: 0;
     opacity: 0;
   }
 }
@@ -46,27 +44,40 @@
   z-index: 99;
   position: absolute;
   top: 40%;
-  animation: slideUpLeft 2s forwards;
-  animation-delay: 2.5s;
+  animation: 500ms slideUpLeft 2500ms ease-out forwards;
   display: flex;
   opacity: 1;
   z-index: 2;
   align-items: center;
+  gap: 2.3125rem;
 
   >img:first-child {
-    width: 150px;
-    height: 150px;
-    animation: slideInRight;
-    animation-duration: 1s ;
+    width: 11.68613rem;
+    height: 11.5rem;
+    animation: 300ms slideInRight 500ms ease-out forwards;
     z-index: 1000;
+    transform: translateX(15.90625rem);
   }
 
-  >img:last-child {
-    height: 50px;
-    opacity: 0;
-    animation: slideinLeft forwards;
-    animation-duration: 1s ;
-    animation-delay: 1s;
+  >div {
+    overflow: hidden;
+
+    >img {
+      height: 4.5rem;
+      width: 29.5rem;
+      opacity: 0;
+      animation: 500ms slideinLeft 800ms ease-out forwards;
+    }
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(15.90625rem);
+  }
+
+  to {
+    transform: translateX(0);
   }
 }
 
@@ -81,7 +92,7 @@
     z-index: 2;
   }
 
-  75%{
+  75% {
     z-index: 2;
   }
 
@@ -97,17 +108,15 @@
 
 @keyframes slideinLeft {
   0% {
-    transform: translateX(-160px);
+    transform: translateX(-100%);
     opacity: 0;
   }
 
   100% {
-    transform: translateX(20px);
+    transform: translateX(0%);
     opacity: 1;
   }
 }
-
-// TODO: oder and anmelden button dont have blend in/out effect on animation
 
 main {
   display: flex;
