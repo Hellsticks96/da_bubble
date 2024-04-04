@@ -183,7 +183,7 @@
         .button-wrapper {
             display: flex;
             gap: 0.3125rem;
-
+            position: relative;
             .vector {
                 width: 0rem;
                 height: 2.5rem;
@@ -256,4 +256,11 @@
             }
         }
     }
+}
+
+.emoji-picker{
+    position: absolute;
+    z-index: 5;
+    left: 6rem;
+    bottom: 1rem;
 }

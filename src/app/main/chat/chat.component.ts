@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { DialogAddMemberToChnlComponent } from '../../dialog-add-member-to-chnl/dialog-add-member-to-chnl.component';
 import {MatMenu, MatMenuModule, MatMenuTrigger} from '@angular/material/menu';
 import { DialogChannelInfoComponent } from '../../dialog-channel-info/dialog-channel-info.component';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 
 @Component({
   selector: 'app-chat',
@@ -16,12 +17,14 @@ import { DialogChannelInfoComponent } from '../../dialog-channel-info/dialog-cha
     MatIconModule,
     CommonModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    PickerComponent
   ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
 })
 export class ChatComponent {
+  isPickerVisible = false; 
   messages = [
     {
       avatar: '4',
@@ -54,6 +57,14 @@ export class ChatComponent {
   ];
   constructor(public dialog: MatDialog){
 
+  }
+  addEmoji(event: any) {
+    console.log(event.emoji);
+  }
+  
+
+  togglePicker() {
+    this.isPickerVisible = !this.isPickerVisible; 
   }
   objectKeys(obj: object) {
     return Object.keys(obj);

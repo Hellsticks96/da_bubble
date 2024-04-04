@@ -1,10 +1,12 @@
-<div class="start-screen"></div>
+
 <main>
+  @if (this.router.url === '/login') {
   <div class="start-screen"></div>
   <div class="animation-logo">
     <img src="../../../assets/img/logo/icon.svg" class="" />
     <img src="../../../assets/img/logo/logo-white.png" alt="DABubble" />
   </div>
+  }
   <section class="header">
     <div class="logo animate__slideInRight" (click)="this.router.navigateByUrl('')">
       <img src="../../../assets/img/logo/icon.svg" class="" class="" />
