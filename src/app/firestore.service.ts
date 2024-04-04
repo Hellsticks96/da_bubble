@@ -2,30 +2,41 @@ import { Injectable, inject } from '@angular/core';
 import { list } from '@angular/fire/database';
 import { Firestore, collection, collectionData, onSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
   firestore: Firestore = inject(Firestore);
-  items$: Observable<any[]>;
+  // items$: Observable<any[]>;
   auth = getAuth();
   provider = new GoogleAuthProvider();
+  currentUser$: Observable<string | null>;
 
   constructor() {
-    const aCollection = collection(this.firestore, 'test');
-    this.items$ = collectionData(aCollection);
-
-    const test = onSnapshot(aCollection, (list) => {
-      list.forEach((item) => {
-        console.log(item.data());
+    const usersCollection = collection(this.firestore, 'user');
+    const channelsCollection = collection(this.firestore, 'channels');
+    this.currentUser$ = new Observable((observer) => {
+      onAuthStateChanged(this.auth, (user) => {
+        if (user) {
+          observer.next(user.uid);
+        } else {
+          observer.next(null);
+        }
       });
     });
+    // this.items$ = collectionData(aCollection);
+
+    // const test = onSnapshot(aCollection, (list) => {
+    //   list.forEach((item) => {
+    //     console.log(item.data());
+    //   });
+    // });
   }
 
   // Funktion zum Starten der Google-Anmeldung
-  signInWithGoogle = () => {
+  loginWithGoogle = () => {
     signInWithPopup(this.auth, this.provider)
       .then((result) => {
         // Dies gibt dir ein Google Access Token. Du kannst es verwenden, um auf Google APIs zuzugreifen.
@@ -61,12 +72,12 @@ export class FirestoreService {
       });
   };
 
-  signInWithEmailAndPassword = (email: string, password: string) => {
+  loginWithEmailAndPassword = (email: string, password: string) => {
     signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log('Anmeldung erfolgreich');
+        console.log('Anmeldung erfolgreich', user.uid);
         // ...
       })
       .catch((error) => {

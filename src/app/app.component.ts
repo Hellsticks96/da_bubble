@@ -22,6 +22,10 @@ export class AppComponent {
   title = 'DABubble';
 
   constructor(private firestore: FirestoreService) {
-    console.log(this.firestore.items$.subscribe());
+    this.firestore.currentUser$.subscribe(uid => {
+      console.log('Aktuelle Benutzer UID:', uid);
+      // Führen Sie hier Aktionen aus, die vom aktuellen Benutzerstatus abhängen
+    });
+    // TODO: does this have to be implemented in every component?
   }
 }

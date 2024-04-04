@@ -21,7 +21,9 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private firestore: FirestoreService) { }
+  constructor(private firestore: FirestoreService) { 
+
+  }
 
   login(): void {
     console.log(`Login attempt with username: ${this.email} and password: ${this.password}`);
@@ -29,11 +31,11 @@ export class LoginComponent {
   }
 
     // Google Anmeldung
-    async signInWithGoogle() {
-      return this.firestore.signInWithGoogle();
+    async loginWithGoogle() {
+      return this.firestore.loginWithGoogle();
     }
 
-    async signInWithEmailAndPassword() {
-      return this.firestore.signInWithEmailAndPassword(this.email, this.password);
+    async loginWithEmailAndPassword() {
+      return this.firestore.loginWithEmailAndPassword(this.email, this.password);
     }
 }
