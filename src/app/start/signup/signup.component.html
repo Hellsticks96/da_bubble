@@ -11,15 +11,15 @@
         </div>
         <form (ngSubmit)="onSubmit(accountForm)" #accountForm="ngForm">
             <div>
-                <input type="text" placeholder="Name und Nachname" id="name">
+                <input [(ngModel)]="name" type="text" placeholder="Name und Nachname" name="name" id="name" >
                 <img src="../../../assets/img/icons/person-gray.svg">
             </div>
             <div>
-                <input type="email" placeholder="beispielname@email.com" name="" id="email">
+                <input [(ngModel)]="email" type="email" placeholder="beispielname@email.com" name="email" id="email">
                 <img src="../../../assets/img/icons/mail-gray.svg">
             </div>
             <div>
-                <input type="password" placeholder="Passwort" name="" id="password">
+                <input [(ngModel)]="password" type="password" placeholder="Passwort" name="password"  id="password">
                 <img src="../../../assets/img/icons/lock-gray.svg">
             </div>
             <mat-checkbox class="checkbox">Ich stimme der <a href="">Datenschutzerklärung</a> zu.</mat-checkbox>

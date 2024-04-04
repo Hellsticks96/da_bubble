@@ -6,11 +6,11 @@
     <form>
         <div class="upper-container">
             <div>
-                <input type="email" placeholder="beispielname@email.com" id="email">
+                <input [(ngModel)]="email" name="email" type="email" placeholder="beispielname@email.com" id="email">
                 <img src="../../../assets/img/icons/mail-gray.svg">
             </div>
             <div>
-                <input type="password" placeholder="Passwort" id="password">
+                <input [(ngModel)]="password" name="password" type="password" placeholder="Passwort" id="password">
                 <img src="../../../assets/img/icons/lock-gray.svg">
             </div>
             <a href="./recovery">Passwort vergessen?</a>
@@ -20,12 +20,12 @@
             <div class="vector"></div>
         </div>
         <div class="lower-container">
-            <button mat-flat-button class="google">
+            <button mat-flat-button class="google" (click)="signInWithGoogle()">
                 <img src="../../../assets/img/icons/google.svg">
                 Anmelden mit Google
             </button>
             <div>
-                <button mat-flat-button class="submit">Anmelden</button>
+                <button mat-flat-button class="submit" (click)="signInWithEmailAndPassword()">Anmelden</button>
                 <button mat-stroked-button class="gast-login">Gäste-Login</button>
             </div>
         </div>

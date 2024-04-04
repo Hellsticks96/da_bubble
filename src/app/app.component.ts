@@ -8,6 +8,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { FirestoreService } from './firestore.service';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,12 @@ import {
   imports: [RouterOutlet,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  animations:[trigger,transition,animate,style]
+  animations: [trigger, transition, animate, style]
 })
 export class AppComponent {
   title = 'DABubble';
+
+  constructor(private firestore: FirestoreService) {
+    console.log(this.firestore.items$.subscribe());
+  }
 }
