@@ -12,13 +12,16 @@
 }
 
 @keyframes fadeOut {
-  from {
-    // z-index: 2;
+  0% {
     opacity: 1;
   }
 
-  to {
-    // z-index: 0;
+  99.99% {
+    z-index: 2;
+  }
+
+  100% {
+    z-index: 0;
     opacity: 0;
   }
 }
