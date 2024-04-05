@@ -28,6 +28,13 @@ export class FirestoreService {
         }
       });
     });
+    // this.items$ = collectionData(aCollection);
+
+    // const test = onSnapshot(aCollection, (list) => {
+    //   list.forEach((item) => {
+    //     console.log(item.data());
+    //   });
+    // });
   }
 
   getFirestore(): Firestore {
