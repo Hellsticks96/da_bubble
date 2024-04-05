@@ -41,10 +41,6 @@ export class FirestoreService {
     return this.firestore;
   }
 
-  getFirestore(): Firestore {
-    return this.firestore;
-  }
-
   // Funktion zum Starten der Google-Anmeldung
   loginWithGoogle = () => {
     signInWithPopup(this.auth, this.provider)
