@@ -3,6 +3,7 @@ import { list } from '@angular/fire/database';
 import { Firestore, collection, collectionData, onSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,11 @@ export class FirestoreService {
   auth = getAuth();
   provider = new GoogleAuthProvider();
   currentUser$: Observable<string | null>;
+  usersRef = collection(this.firestore, 'users');
+  channelsRef = collection(this.firestore, 'channels');
 
-  constructor() {
-    const usersCollection = collection(this.firestore, 'user');
-    const channelsCollection = collection(this.firestore, 'channels');
+
+  constructor(private router: Router) {
     this.currentUser$ = new Observable((observer) => {
       onAuthStateChanged(this.auth, (user) => {
         if (user) {
@@ -26,13 +28,10 @@ export class FirestoreService {
         }
       });
     });
-    // this.items$ = collectionData(aCollection);
+  }
 
-    // const test = onSnapshot(aCollection, (list) => {
-    //   list.forEach((item) => {
-    //     console.log(item.data());
-    //   });
-    // });
+  getFirestore(): Firestore {
+    return this.firestore;
   }
 
   // Funktion zum Starten der Google-Anmeldung
@@ -78,6 +77,7 @@ export class FirestoreService {
         // Signed in 
         const user = userCredential.user;
         console.log('Anmeldung erfolgreich', user.uid);
+        this.router.navigate(['/']);
         // ...
       })
       .catch((error) => {

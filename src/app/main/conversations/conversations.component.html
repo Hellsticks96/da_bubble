@@ -19,9 +19,9 @@
         </mat-expansion-panel-header>
 
         <div class="channel-list">
-            <div class="channel">
+            <div class="channel" *ngFor="let channel of channelsList">
                 <img src="../../../assets/img/icons/tag.svg">
-                <h3>Entwicklerteam</h3>
+                <h3>{{ channel.id }}</h3>
             </div>
             <div class="channel active">
                 <img src="../../../assets/img/icons/tag.svg">
@@ -42,16 +42,16 @@
                 </div>
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="contact" *ngFor="let contact of contacts">
+        <div class="contact" *ngFor="let user of usersList">
             <div>
-                <img src="../../../assets/img/avatar/{{ contact.avatar }}.svg">
-                @if(contact.online) {
+                <img src="../../../assets/img/avatar/{{ user.avatar }}.svg">
+                @if(user.online) {
                 <img src="../../../assets/img/icons/online.svg">
                 } @else {
                 <img src="../../../assets/img/icons/offline.svg">
                 }
             </div>
-            <span>{{ contact.name }}</span>
+            <span>{{ user.name }}</span>
         </div>
     </mat-expansion-panel>
 </main>

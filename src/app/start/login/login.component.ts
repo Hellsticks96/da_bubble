@@ -21,7 +21,7 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private firestore: FirestoreService) { 
+  constructor(private firestore: FirestoreService) {  
 
   }
 
