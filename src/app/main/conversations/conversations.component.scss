@@ -91,6 +91,30 @@ main {
         gap: 1.5625rem;
         padding: 0 0 0 1.5625rem;
     }
+
+    ::ng-deep::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        width: max-content;
+
+        >img {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        >h3 {
+            line-height: normal;
+            font-size: 1.125rem;
+            font-weight: 400;
+        }
+
+    }
+}
+
+mat-button-toggle-group {
+    border: 0;
 }
 
 ::ng-deep::ng-deep .mat-expansion-indicator {
@@ -108,25 +132,42 @@ main {
 
     .channel {
         display: flex;
-        padding: 0.25rem 1.25rem;
         align-items: center;
         gap: 0.625rem;
         border-radius: 1.25rem;
+        border: 0 !important;
+        overflow: hidden;
 
-        >h3 {
-            font-size: 1.125rem;
-            font-weight: 400;
+        ::ng-deep::ng-deep .mat-button-toggle-button {
+            padding: 0.25rem 1.25rem;
+        }
+
+        &:hover:not(.mat-button-toggle-appearance-standard.mat-button-toggle-checked) {
+
+
+
+            background-color: var(--bg-color);
+
+            img {
+                content: url(../../../assets/img/icons/tag-purple.svg) !important;
+            }
         }
     }
 
-    .active {
+    ::ng-deep::ng-deep .mat-button-toggle-focus-overlay {
+        background: none !important;
+    }
+
+
+
+    ::ng-deep::ng-deep .mat-button-toggle-appearance-standard.mat-button-toggle-checked {
         background: var(--bg-color);
 
-        >img {
+        img {
             content: url(../../../assets/img/icons/tag-purple-bold.svg);
         }
 
-        >h3 {
+        h3 {
             color: var(--purple-3);
             font-weight: 700;
         }
@@ -152,6 +193,10 @@ main {
 }
 
 .directmessages {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5625rem;
+
     ::ng-deep::ng-deep .mat-expansion-panel-body {
         display: flex;
         flex-direction: column;
@@ -161,38 +206,77 @@ main {
     }
 }
 
-.contact {
+.contact-list {
     display: flex;
-    padding: 0.25rem 1.25rem;
-    align-items: center;
-    gap: 0.9375rem;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8125rem;
 
-    >div {
-        height: 3.125rem;
-        position: relative;
+    ::ng-deep::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+        display: flex;
+        align-items: center;
+        gap: 0.9375rem;
+        padding: 0;
+        flex: 1;
 
-        >img:first-child {
-            width: 3.125rem;
+        >div {
             height: 3.125rem;
-            border-radius: 50%;
+            position: relative;
+
+            >img:first-child {
+                width: 3.125rem;
+                height: 3.125rem;
+                border-radius: 50%;
+            }
+
+            >img:last-child {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 0.875rem;
+                height: 0.875rem;
+            }
         }
 
-        >img:last-child {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            width: 0.875rem;
-            height: 0.875rem;
+        >span {
+            color: var(--black);
+            font-family: Nunito;
+            font-size: 1.125rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
         }
     }
 
-    >span {
-        color: var(--black);
-        font-family: Nunito;
-        font-size: 1.125rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+    ::ng-deep::ng-deep .mat-button-toggle-checked {
+        background-color: var(--bg-color);
+
+        ::ng-deep::ng-deep .mat-button-toggle-label-content > span {
+            color: var(--purple-3);
+            font-weight: 700;
+            width: min-content;
+        }
     }
 }
 
+// TODO: fix shifting bug
+
+.contact {
+    display: flex;
+    border-radius: 2.1875rem;
+    border: 0 !important;
+    overflow: hidden;
+    line-height: normal;
+
+    &:hover {
+        background-color: var(--bg-color);
+    }
+
+    ::ng-deep::ng-deep .mat-button-toggle-button {
+        padding: 0.25rem 1.25rem;
+    }
+
+    ::ng-deep::ng-deep .mat-button-toggle-focus-overlay {
+        background: none !important;
+    }
+}

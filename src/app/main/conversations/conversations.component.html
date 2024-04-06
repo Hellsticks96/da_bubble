@@ -15,19 +15,16 @@
                     <h3>Channels</h3>
                 </div>
                 <img (click)="openDialog()" src="../../../assets/img/icons/add.svg">
+                <!-- TODO: fix bug channels closing on openDialog -->
             </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <div class="channel-list">
-            <div class="channel" *ngFor="let channel of channelsList">
+        <mat-button-toggle-group vertical="true" hideSingleSelectionIndicator="true" class="channel-list">
+            <mat-button-toggle class="channel" value="{{ channel.id }}" *ngFor="let channel of channelsList">
                 <img src="../../../assets/img/icons/tag.svg">
                 <h3>{{ channel.id }}</h3>
-            </div>
-            <div class="channel active">
-                <img src="../../../assets/img/icons/tag.svg">
-                <h3>Office-Team</h3>
-            </div>
-        </div>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
         <div class="new-channel">
             <img src="../../../assets/img/icons/add_circle.svg">
             <span>Channel hinzufügen</span>
@@ -42,16 +39,18 @@
                 </div>
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="contact" *ngFor="let user of usersList">
-            <div>
-                <img src="../../../assets/img/avatar/{{ user.avatar }}.svg">
-                @if(user.online) {
-                <img src="../../../assets/img/icons/online.svg">
-                } @else {
-                <img src="../../../assets/img/icons/offline.svg">
-                }
-            </div>
-            <span>{{ user.name }}</span>
-        </div>
+        <mat-button-toggle-group class="contact-list" vertical="true" hideSingleSelectionIndicator="true">
+            <mat-button-toggle class="contact" *ngFor="let user of usersList">
+                <div>
+                    <img src="../../../assets/img/avatar/{{ user.avatar }}.svg">
+                    @if(user.online) {
+                    <img src="../../../assets/img/icons/online.svg">
+                    } @else {
+                    <img src="../../../assets/img/icons/offline.svg">
+                    }
+                </div>
+                <span>{{ user.name }}</span>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
     </mat-expansion-panel>
 </main>
