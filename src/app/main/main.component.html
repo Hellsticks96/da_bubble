@@ -5,7 +5,7 @@
           <app-conversations></app-conversations>
         </mat-drawer>
     </mat-drawer-container>
-    <button class="menu-button" type="button" mat-button (click)="drawer.toggle(); showMenu = !showMenu">
+    <button class="menu-button" type="button" [ngClass]="{'closed': !showMenu}" mat-button (click)="drawer.toggle(); showMenu = !showMenu">
       @if(showMenu) {
         Workspace-Menü schließen <img src="../../assets/img/icons/sidenav-close.svg">
       } @else {

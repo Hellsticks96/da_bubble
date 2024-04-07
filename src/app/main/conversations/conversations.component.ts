@@ -7,6 +7,7 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 import { DialogAddChannelComponent } from '../../dialog-add-channel/dialog-add-channel.component';
 import { FirestoreService } from '../../firestore.service';
 import { DocumentData, collection, doc, onSnapshot } from '@angular/fire/firestore';
@@ -22,6 +23,7 @@ import { UsersList } from '../../interfaces/users-list';
     CommonModule,
     MatDialogModule,
     DialogAddChannelComponent,
+    MatButtonModule
   ],
   templateUrl: './conversations.component.html',
   styleUrl: './conversations.component.scss',

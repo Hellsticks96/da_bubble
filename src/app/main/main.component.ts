@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ThreadComponent } from './thread/thread.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-main',
@@ -13,7 +14,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     ConversationsComponent,
     ChatComponent,
     ThreadComponent,
-    MatSidenavModule
+    MatSidenavModule,
+    NgClass
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'

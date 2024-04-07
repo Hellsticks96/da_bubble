@@ -14,6 +14,7 @@ main {
     align-items: center;
     justify-content: space-between;
     gap: 0.9375rem;
+    width: 100%;
 
     >.logo {
         display: flex;
@@ -47,8 +48,36 @@ main {
     }
 }
 
+.new-message {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    ::ng-deep::ng-deep span {
+        width: 2.5rem;
+        height: 2.5rem;
+
+        &::before {
+            background: none !important;
+        }
+    }
+
+    &:hover {
+        transition: 100ms ease-out;
+        background-color: var(--bg-color);
+
+        ::ng-deep::ng-deep img {
+            content: url(../../../assets/img/icons/edit_square-purple.svg);
+        }
+    }
+}
+
 .channels,
 .directmessages {
+    width: 100%;
     box-shadow: none !important;
 
     >mat-expansion-panel-header {
@@ -76,19 +105,80 @@ main {
                 padding: 0.1875rem;
             }
         }
+
+
+    }
+}
+
+.channels,
+.directmessages {
+    
+    mat-expansion-panel-header:hover {
+        background: none !important;
+
+        mat-panel-title>div>h3 {
+            color: var(--purple-3);
+        }
+
+        ::ng-deep::ng-deep .mat-expansion-indicator {
+            content: url(../../../assets/img/icons/arrow_drop_down-purple.svg);
+        }
+    }
+}
+
+.channels {
+    mat-expansion-panel-header:hover {
+        mat-panel-title>div>img {
+            content: url(../../../assets/img/icons/workspaces-purple.svg);
+        }
+    }
+}
+
+.directmessages {
+    mat-expansion-panel-header:hover {
+        mat-panel-title>div>img {
+            content: url(../../../assets/img/icons/account_circle-purple.svg);
+        }
+    }
+}
+
+.add {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.875rem;
+    height: 1.875rem;
+
+    ::ng-deep::ng-deep span {
+        width: 1.875rem;
+        height: 1.875rem;
+
+        &::before {
+            background: none !important;
+        }
+    }
+
+    &:hover {
+        transition: 100ms ease-out;
+        background-color: var(--bg-color);
+
+        ::ng-deep::ng-deep img {
+            content: url(../../../assets/img/icons/add-purple.svg);
+        }
     }
 }
 
 .channels {
     display: flex;
     flex-direction: column;
-    gap: 1.5625rem;
 
     ::ng-deep::ng-deep .mat-expansion-panel-body {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 1.5625rem;
+        margin-top: 1.5625rem;
         padding: 0 0 0 1.5625rem;
     }
 
@@ -125,7 +215,6 @@ mat-button-toggle-group {
 }
 
 .channel-list {
-
     display: flex;
     flex-direction: column;
     gap: 0.8125rem;
@@ -143,9 +232,7 @@ mat-button-toggle-group {
         }
 
         &:hover:not(.mat-button-toggle-appearance-standard.mat-button-toggle-checked) {
-
-
-
+            transition: 80ms ease-in;
             background-color: var(--bg-color);
 
             img {
@@ -190,18 +277,30 @@ mat-button-toggle-group {
         font-size: 1.125rem;
         line-height: normal;
     }
+
+    &:hover {
+        cursor: pointer;
+
+        >img {
+            content: url(../../../assets/img/icons/add_circle-purple.svg);
+        }
+
+        >span {
+            color: var(--purple-3);
+        }
+    }
 }
 
 .directmessages {
     display: flex;
     flex-direction: column;
-    gap: 1.5625rem;
 
     ::ng-deep::ng-deep .mat-expansion-panel-body {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 0.8125rem;
+        margin-top: 1.5625rem;
         padding: 0 0 0 1.5625rem;
     }
 }
@@ -251,7 +350,7 @@ mat-button-toggle-group {
     ::ng-deep::ng-deep .mat-button-toggle-checked {
         background-color: var(--bg-color);
 
-        ::ng-deep::ng-deep .mat-button-toggle-label-content > span {
+        ::ng-deep::ng-deep .mat-button-toggle-label-content>span {
             color: var(--purple-3);
             font-weight: 700;
             width: min-content;
@@ -259,7 +358,7 @@ mat-button-toggle-group {
     }
 }
 
-// TODO: fix shifting bug
+// TODO: fix shifting bug of longest name
 
 .contact {
     display: flex;
@@ -267,6 +366,7 @@ mat-button-toggle-group {
     border: 0 !important;
     overflow: hidden;
     line-height: normal;
+    transition: 80ms ease-in;
 
     &:hover {
         background-color: var(--bg-color);

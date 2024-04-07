@@ -5,7 +5,9 @@
             <img src="../../../assets/img/devspace/devspace.svg">
         </div>
         <h2>Devspace</h2>
-        <img src="../../../assets/img/icons/edit_square.svg">
+        <button class="new-message" mat-icon-button>
+            <img src="../../../assets/img/icons/edit_square.svg">
+        </button>
     </section>
     <mat-expansion-panel togglePosition="before" expanded="true" class="channels">
         <mat-expansion-panel-header>
@@ -14,8 +16,10 @@
                     <img src="../../../assets/img/icons/workspaces.svg">
                     <h3>Channels</h3>
                 </div>
-                <img (click)="openDialog()" src="../../../assets/img/icons/add.svg">
-                <!-- TODO: fix bug channels closing on openDialog -->
+                <button mat-icon-button class="add" (click)="openDialog()">
+                    <img src="../../../assets/img/icons/add.svg">
+                </button>
+                <!-- TODO: fix bug channels closing on openDialog (stopPropagation) -->
             </mat-panel-title>
         </mat-expansion-panel-header>
 
@@ -25,7 +29,7 @@
                 <h3>{{ channel.id }}</h3>
             </mat-button-toggle>
         </mat-button-toggle-group>
-        <div class="new-channel">
+        <div class="new-channel" (click)="openDialog()">
             <img src="../../../assets/img/icons/add_circle.svg">
             <span>Channel hinzufügen</span>
         </div>

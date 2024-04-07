@@ -50,4 +50,22 @@ main {
         height: 1rem;
         padding: 0.5rem;
     }
+
+    &:hover {
+        cursor: pointer;
+        font-weight: 700;
+        color: var(--purple-3);
+
+        >img {
+            content: url(../../assets/img/icons/sidenav-close-purple.svg);
+        }
+
+        // TODO: fix shifting bug
+    }
+}
+
+.closed:hover {
+    >img {
+        content: url(../../assets/img/icons/sidenav-open-purple.svg) !important;
+    }
 }
