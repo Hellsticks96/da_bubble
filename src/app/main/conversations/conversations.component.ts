@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { CommonModule } from '@angular/common';
@@ -13,6 +13,7 @@ import { FirestoreService } from '../../firestore.service';
 import { DocumentData, collection, doc, onSnapshot } from '@angular/fire/firestore';
 import { ChannelsList } from '../../interfaces/channels-list';
 import { UsersList } from '../../interfaces/users-list';
+import { ChatService } from '../chat/chat.service';
 
 @Component({
   selector: 'app-conversations',
@@ -29,6 +30,7 @@ import { UsersList } from '../../interfaces/users-list';
   styleUrl: './conversations.component.scss',
 })
 export class ConversationsComponent {
+
   contacts = [
     {
       avatar: '6',
@@ -66,7 +68,11 @@ export class ConversationsComponent {
   usersList: UsersList[] = [];
 
 
-  constructor(public dialog: MatDialog, private firestore: FirestoreService) {
+  constructor(
+    public dialog: MatDialog,
+    private firestore: FirestoreService,
+    public chatService: ChatService
+  ) {
     this.subChannelsList();
     this.subUsersList();
 

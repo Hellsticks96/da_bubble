@@ -24,7 +24,7 @@
         </mat-expansion-panel-header>
 
         <mat-button-toggle-group vertical="true" hideSingleSelectionIndicator="true" class="channel-list">
-            <mat-button-toggle class="channel" value="{{ channel.id }}" *ngFor="let channel of channelsList">
+            <mat-button-toggle (click)="chatService.openChannel(channel.id)" class="channel" value="{{ channel.id }}" *ngFor="let channel of channelsList">
                 <img src="../../../assets/img/icons/tag.svg">
                 <h3>{{ channel.id }}</h3>
             </mat-button-toggle>

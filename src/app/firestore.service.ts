@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { list } from '@angular/fire/database';
-import { Firestore, collection, collectionData, onSnapshot } from '@angular/fire/firestore';
+import { CollectionReference, DocumentData, Firestore, collection, collectionData, onSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { Router } from '@angular/router';
@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class FirestoreService {
+  doc(ref: CollectionReference<DocumentData, DocumentData>, id: string): import("@firebase/firestore").DocumentReference<unknown, import("@firebase/firestore").DocumentData> {
+    throw new Error('Method not implemented.');
+  }
   firestore: Firestore = inject(Firestore);
   // items$: Observable<any[]>;
   auth = getAuth();
