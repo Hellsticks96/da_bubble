@@ -5,10 +5,12 @@
             <span class="material-icons">keyboard_arrow_down</span>
         </button>
         <div class="participants-wrapper">
-            <img src="../../../assets/img/avatar/2.svg">
-            <img src="../../../assets/img/avatar/2.svg">
-            <img src="../../../assets/img/avatar/2.svg">
-            <h1>3</h1>
+            <button mat-icon-button (click)="openDialog($event)">
+                <img src="../../../assets/img/avatar/2.svg">
+                <img src="../../../assets/img/avatar/2.svg">
+                <img src="../../../assets/img/avatar/2.svg">
+                <h1>3</h1>
+            </button>
             <button mat-icon-button (click)="openDialogAddMembers()">
                 <span class="material-icons">person_add_alt</span>
             </button>
@@ -19,7 +21,7 @@
             <!-- TODO: Add answers to thread amount -->
             <div class="message" *ngFor="let message of messages">
                 <div class="hoverMenu">
-                    <button mat-icon-button>
+                    <button mat-icon-button >
                         <img src="../../../assets/img/icons/emoji-check.svg" alt="React">
                     </button>
                     <button mat-icon-button>
@@ -32,7 +34,7 @@
                         <img src="../../../assets/img/icons/3-dots.svg" alt="More">
                     </button>
                     <mat-menu class="moreMenu" #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="openDialogEditMessage(message.id)">
                             Nachricht bearbeiten
                         </button>
                     </mat-menu>
@@ -44,7 +46,7 @@
                         <h5>{{ message.name }}</h5>
                         <span>{{ message.time }}</span>
                     </div>
-                    <div class="message-text">{{ message.message }}</div>
+                    <div class="message-text" (click)="navigateToThread()">{{ message.message }}</div>
                     <div>
                         <div class="reaction">
                             @if(objectKeysLength(message.reactions) > 0) {
@@ -71,11 +73,11 @@
                     <div class="vector"></div>
                     <button mat-icon-button (click)="togglePicker()">
                         <img src="../../../assets/img/icons/sentiment_satisfied.svg" alt="Add emoji">
-                      </button>
-                      
-                      <div class="emoji-picker" *ngIf="isPickerVisible">
+                    </button>
+
+                    <div class="emoji-picker" *ngIf="isPickerVisible">
                         <emoji-mart (emojiClick)="addEmoji($event)"></emoji-mart>
-                      </div>
+                    </div>
                     <button mat-icon-button>
                         <img src="../../../assets/img/icons/alternate_email.svg" alt="Tag someone">
                     </button>

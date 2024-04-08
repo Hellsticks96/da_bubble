@@ -1,17 +1,19 @@
 :host {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 main {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 1.25rem;
     padding: 0 1.25rem 1.5625rem 1.25rem;
+    height: 100%;
 
     app-chat {
-        // min-width: 50%;
-        // width: 100%;
+         min-width: 50%;
+         width: 100%;
     }
 }
 
@@ -81,4 +83,10 @@ main {
     >img {
         content: url(../../assets/img/icons/sidenav-open-purple.svg) !important;
     }
+}
+
+.router-container{
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.5rem;
 }

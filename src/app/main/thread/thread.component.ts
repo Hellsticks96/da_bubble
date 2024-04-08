@@ -1,15 +1,19 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule,Router} from '@angular/router';
 
 @Component({
   selector: 'app-thread',
   standalone: true,
-  imports: [MatButtonModule, CommonModule],
+  imports: [MatButtonModule, CommonModule,RouterModule],
   templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss'
 })
 export class ThreadComponent {
+  constructor(public router : Router){
+
+  }
   messages = [
     {
       avatar: '4',

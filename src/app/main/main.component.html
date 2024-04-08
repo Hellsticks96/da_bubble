@@ -13,6 +13,10 @@
       }
       <!-- TODO: Border in closing animation is overflowing -->
     </button>
-    <app-chat></app-chat>
-    <app-thread></app-thread>
+    <div class="router-container">
+      <router-outlet name="chatOutlet"></router-outlet>
+      <router-outlet name="threadOutlet"></router-outlet>
+    </div>
+    
+    <!-- <app-chat></app-chat> -->
 </main>

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { StartComponent } from '../start.component';
 import { FirestoreService } from '../../firestore.service';
+import { Router,RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ import { FirestoreService } from '../../firestore.service';
             FormsModule,
             CommonModule,
             MatButtonModule,
-            StartComponent
+            StartComponent,
+            RouterModule
           ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -21,7 +23,7 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private firestore: FirestoreService) {  
+  constructor(private firestore: FirestoreService, private router : Router) {  
 
   }
 
