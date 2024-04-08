@@ -10,6 +10,10 @@ export class ChatService {
 
   // channels: Record<string, Map<string, JSON> > = {};
   channels: Record<string, Channel> = {};
+  currentChannel: Channel = {
+    members: []
+  };
+  currentChannelID = '';
 
   // messages = [
   //   {
@@ -54,7 +58,7 @@ export class ChatService {
     return onSnapshot(doc(ref, id), (docSnap) => {
       if (docSnap.exists()) {
 
-        if(!this.channels[id]) {
+        if (!this.channels[id]) {
           this.channels[id] = {
             members: [],
             messages: new Map()
@@ -65,11 +69,14 @@ export class ChatService {
           this.channels[id].members.push(member);
         });
 
-        Object.keys(docSnap.data()['messages']).forEach( key => {
+        Object.keys(docSnap.data()['messages']).forEach(key => {
           const message = docSnap.data()['messages'][key];
           this.channels[id].messages?.set(key, message);
         });
       }
+
+      this.currentChannel = this.channels[id];
+      this.currentChannelID = id;
     });
   }
 }

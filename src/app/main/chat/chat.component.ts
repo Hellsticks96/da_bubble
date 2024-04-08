@@ -64,7 +64,7 @@ export class ChatComponent {
     });
   }
 
-  openDialogEditMessage(id: number) {
+  openDialogEditMessage(id: string) {
     // const message = this.chatService.messages.find((message) => message.id === id);
     // if (message === undefined) throw new Error(`Couldn't find message with id ${id}`);
     // this.dialog.open(DialogEditMessageComponent, {
