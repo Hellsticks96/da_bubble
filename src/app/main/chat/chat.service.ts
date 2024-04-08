@@ -45,19 +45,31 @@ export class ChatService {
   //   }
   // ];
 
-  constructor(private firestore: FirestoreService) { 
+  constructor(private firestore: FirestoreService) {
 
   }
 
   openChannel(id: string) {
     let ref = this.firestore.channelsRef;
-    return onSnapshot(doc(ref, id), (doc) => {
-      // this.channels[id].members = []
-      console.log(doc)
-      // doc.forEach(element => {
-      //   console.log(element)
-      // })
-    })
-  }
+    return onSnapshot(doc(ref, id), (docSnap) => {
+      if (docSnap.exists()) {
 
+        if(!this.channels[id]) {
+          this.channels[id] = {
+            members: [],
+            messages: new Map()
+          };
+        }
+
+        docSnap.data()['members'].forEach((member: string) => {
+          this.channels[id].members.push(member);
+        });
+
+        Object.keys(docSnap.data()['messages']).forEach( key => {
+          const message = docSnap.data()['messages'][key];
+          this.channels[id].messages?.set(key, message);
+        });
+      }
+    });
+  }
 }
