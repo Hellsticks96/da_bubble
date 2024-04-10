@@ -4,6 +4,7 @@ import { CollectionReference, DocumentData, Firestore, collection, collectionDat
 import { Observable } from 'rxjs';
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { Router } from '@angular/router';
+import { signOut } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,8 @@ export class FirestoreService {
           observer.next(user.uid);
         } else {
           observer.next(null);
+          // No User logged in
+          this.router.navigate(['/login'])
         }
       });
     });
@@ -96,4 +99,13 @@ export class FirestoreService {
       });
   };
 
+  logout() {
+    signOut(this.auth).then(() => {
+      // Erfolgreich ausgeloggt
+      console.log("User erfolgreich ausgeloggt");
+    }).catch((error) => {
+      // Fehler beim Ausloggen
+      console.error("Fehler beim Ausloggen: ", error);
+    });
+  }
 }

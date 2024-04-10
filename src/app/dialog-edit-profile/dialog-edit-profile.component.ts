@@ -11,6 +11,7 @@ import {
 } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { DialogEditProfileEditProfileComponent } from '../dialog-edit-profile-edit-profile/dialog-edit-profile-edit-profile.component';
+import { FirestoreService } from '../firestore.service';
 
 @Component({
   selector: 'app-dialog-edit-profile',
@@ -30,11 +31,13 @@ import { DialogEditProfileEditProfileComponent } from '../dialog-edit-profile-ed
 export class DialogEditProfileComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogEditProfileComponent>,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public firestore: FirestoreService
   ) {}
 
-  onNoClick() {
+  logout() {
     this.dialogRef.close();
+    this.firestore.logout();
   }
 
   openDialog(event: MouseEvent): void {
