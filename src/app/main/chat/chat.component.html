@@ -20,7 +20,6 @@
         <div class="chat">
             <!-- TODO: Add answers to thread amount -->
             <div class="message" *ngFor="let message of chatService.currentChannel.messages | keyvalue">
-            <div class="message" *ngFor="let message of chatService.currentChannel.messages | keyvalue">
                 <div class="hoverMenu">
                     <button mat-icon-button >
                         <img src="../../../assets/img/icons/emoji-check.svg" alt="React">
@@ -37,33 +36,23 @@
                     <mat-menu class="moreMenu" #menu="matMenu">
                         <button mat-menu-item (click)="openDialogEditMessage(chatService.currentChannelID)">
                             <!-- <button mat-menu-item (click)="openDialogEditMessage(message.id)"> -->
-                        <button mat-menu-item (click)="openDialogEditMessage(chatService.currentChannelID)">
-                            <!-- <button mat-menu-item (click)="openDialogEditMessage(message.id)"> -->
                             Nachricht bearbeiten
                         </button>
                     </mat-menu>
                 </div>
                 <!-- TODO: only allowed to edit my own messages -->
                 <img src="../../../assets/img/avatar/{{ message.value.avatar }}.svg">
-                <img src="../../../assets/img/avatar/{{ message.value.avatar }}.svg">
                 <div>
                     <div class="message-info">
                         <h5>{{ message.value.name }}</h5>
                         <span>{{ message.value.time }}</span>
-                        <h5>{{ message.value.name }}</h5>
-                        <span>{{ message.value.time }}</span>
                     </div>
-                    <div class="message-text">{{ message.value.message }}</div>
                     <div class="message-text">{{ message.value.message }}</div>
                     <div>
                         <div class="reaction">
                             @if(message.value.reactions) {
                             @for(reaction of message.value.reactions | keyvalue; track reaction; let i = $index) {
-                            @if(message.value.reactions) {
-                            @for(reaction of message.value.reactions | keyvalue; track reaction; let i = $index) {
                             <button mat-raised-button>
-                                <img src="../../../assets/img/icons/emoji-{{ reaction.key }}.svg">
-                                <span>{{ reaction.value }}</span>
                                 <img src="../../../assets/img/icons/emoji-{{ reaction.key }}.svg">
                                 <span>{{ reaction.value }}</span>
                             </button>
