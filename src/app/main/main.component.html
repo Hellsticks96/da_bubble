@@ -14,9 +14,10 @@
       <!-- TODO: Border in closing animation is overflowing -->
     </button>
     <div class="router-container">
-      <router-outlet name="chatOutlet"></router-outlet>
-      <router-outlet name="threadOutlet"></router-outlet>
+      <app-chat (threadOpen)="toggleThread($event)"></app-chat>
+      @if (threadOpen) {
+        <app-thread (threadClose)="toggleThread($event)" ></app-thread>
+      }
+      
     </div>
-    
-    <!-- <app-chat></app-chat> -->
 </main>

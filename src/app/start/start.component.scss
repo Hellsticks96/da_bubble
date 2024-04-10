@@ -188,7 +188,8 @@ main {
   display: inline-flex;
   align-items: flex-start;
   gap: 1rem;
-
+  z-index: 1;
+  
   >a {
     padding: 0.625rem 0.9375rem;
   }

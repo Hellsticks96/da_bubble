@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { ConversationsComponent } from './conversations/conversations.component';
 import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgClass } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ThreadComponent } from './thread/thread.component';
@@ -24,7 +24,10 @@ import { ThreadComponent } from './thread/thread.component';
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
-showMenu = true;
+  threadOpen = false;
+  showMenu = true;
 
-
+  toggleThread(toggle : boolean){
+    this.threadOpen = toggle;
+  }
 }

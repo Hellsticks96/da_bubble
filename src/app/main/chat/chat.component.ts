@@ -1,10 +1,11 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { CommonModule } from '@angular/common';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { DialogAddMemberToChnlComponent } from '../../dialog-add-member-to-chnl/dialog-add-member-to-chnl.component';
+import { MatMenu, MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatMenu, MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { DialogChannelInfoComponent } from '../../dialog-channel-info/dialog-channel-info.component';
 import { DialogShowChannelMemberComponent } from '../../dialog-show-channel-member/dialog-show-channel-member.component';
@@ -12,6 +13,8 @@ import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { DialogEditMessageComponent } from '../../dialog-edit-message/dialog-edit-message.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from './chat.service';
+import { ActivatedRoute,Router } from '@angular/router';
+import { MainComponent } from '../main.component';
 
 @Component({
   selector: 'app-chat',
@@ -22,28 +25,35 @@ import { ChatService } from './chat.service';
     CommonModule,
     MatDialogModule,
     MatMenuModule,
-    PickerComponent
+    PickerComponent,
+    MainComponent
   ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
 })
 export class ChatComponent {
-
+  @Output()threadOpen = new EventEmitter<boolean>();
   isPickerVisible = false;
 
+  navigateToThread() {
+    this.threadOpen.emit(true);
+  }
+  
   constructor(
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    public chatService: ChatService
-  ) {
+    public chatService: ChatService){
+
   }
   addEmoji(event: any) {
     console.log(event.emoji);
   }
 
 
+
   togglePicker() {
+    this.isPickerVisible = !this.isPickerVisible;
     this.isPickerVisible = !this.isPickerVisible;
   }
   objectKeys(obj: object) {
@@ -51,6 +61,7 @@ export class ChatComponent {
   }
 
   objectValues(obj: object) {
+    return Object.values(obj);
     return Object.values(obj);
   }
 
@@ -74,13 +85,11 @@ export class ChatComponent {
   }
 
 
+
   openDialogChannelInfo() {
     this.dialog.open(DialogChannelInfoComponent, {
       panelClass: 'custom-dialog-br',
     });
-  }
-  navigateToThread() {
-    this.router.navigate(['/main', { outlets: { 'threadOutlet': ['thread'] } }]);
   }
 
   openDialogShowMembers() {
