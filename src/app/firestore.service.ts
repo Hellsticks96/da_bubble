@@ -29,7 +29,9 @@ export class FirestoreService {
         } else {
           observer.next(null);
           // No User logged in
-          this.router.navigate(['/login'])
+          if (this.router.url === '/') {
+            this.router.navigate(['/login'])
+          }
         }
       });
     });
@@ -83,19 +85,18 @@ export class FirestoreService {
       });
   };
 
-  loginWithEmailAndPassword = (email: string, password: string) => {
-    signInWithEmailAndPassword(this.auth, email, password)
+  loginWithEmailAndPassword = (email: string, password: string): Promise<string | null> => {
+    return signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
         console.log('Anmeldung erfolgreich', user.uid);
         this.router.navigate(['/']);
+        return null;
         // ...
       })
       .catch((error) => {
-        console.log('Anmeldung fehlgeschlagen');
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        return error.code;
       });
   };
 

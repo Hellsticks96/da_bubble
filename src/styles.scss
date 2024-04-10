@@ -54,6 +54,8 @@ body {
   --menu-color: #42526E;
   --text-gray: #686868;
   --online-green: #92C83E;
+  --error: #ED1E79;
+
   margin: 0;
   padding: 0;
   font-family: 'Nunito', 'Figtree', 'Open Sans';
@@ -90,4 +92,8 @@ a {
   flex-direction: column;
   width: auto;
   padding: 1rem;
+}
+
+.d-none {
+  display: none;
 }

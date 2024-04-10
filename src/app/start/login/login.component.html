@@ -8,10 +8,17 @@
             <div>
                 <input [(ngModel)]="email" name="email" type="email" placeholder="beispielname@email.com" id="email">
                 <img src="../../../assets/img/icons/mail-gray.svg">
+                @if (invalidEmail) {
+                <span>*Diese E-Mail-Adresse ist leider ungültig.</span>
+                }
             </div>
             <div>
                 <input [(ngModel)]="password" name="password" type="password" placeholder="Passwort" id="password">
                 <img src="../../../assets/img/icons/lock-gray.svg">
+                @if (invalidPasswordOrEmail) {
+                <span>Falsches Passwort oder E-Mail. Bitte noch einmal versuchen.</span>
+                }
+                <!-- TODO: change sentence to more understandable -->
             </div>
             <a href="./recovery">Passwort vergessen?</a>
         </div>
@@ -26,7 +33,7 @@
             </button>
             <div>
                 <button mat-flat-button class="submit" (click)="loginWithEmailAndPassword()">Anmelden</button>
-                <button [routerLink]="['/main']"  mat-stroked-button class="gast-login">Gäste-Login</button>
+                <button mat-stroked-button class="gast-login">Gäste-Login</button>
             </div>
         </div>
     </form>
