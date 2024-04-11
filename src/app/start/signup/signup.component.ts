@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -17,12 +17,16 @@ import { FirestoreService } from '../../firestore.service';
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
+  @Output() avatar = '';
   hide: any;
-  mailTest = false
   accountCreated = false;
-  name = '';
-  email = '';
-  password = '';
+  accountData = {
+    name: '',
+    email: '',
+    password: '',
+    privacyPolicy: false
+  }
+
 
   constructor(public location: Location, private firestore: FirestoreService) {
 
@@ -30,10 +34,10 @@ export class SignupComponent {
   
 
   onSubmit(ngForm: NgForm) {
-    if (ngForm.submitted && ngForm.form.valid && !this.mailTest) {
-      this.firestore.signUpWithEmailAndPassword(this.email, this.password);
+    if (ngForm.submitted && ngForm.form.valid && this.accountCreated) {
+      this.firestore.signUpWithEmailAndPassword(this.accountData.email, this.accountData.password);
+    } else if (ngForm.submitted && ngForm.form.valid) {
       this.accountCreated = true;
     }
   }
-
 }

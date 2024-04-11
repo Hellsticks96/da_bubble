@@ -79,25 +79,25 @@ form {
             left: 2rem;
             margin: auto 0;
         }
-
-        >span {
-            position: absolute;
-            left: 0;
-            top: calc(100% + 0.375rem);
-            animation: 100ms ease-in blendIn;
-            color: var(--error);
-            font-family: Nunito;
-            font-size: 0.875rem;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-        }
     }
 
     >a {
         line-height: 120%;
         padding: 0.3125rem 0.9375rem;
     }
+}
+
+.error {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 0.375rem);
+    animation: 100ms ease-in blendIn;
+    color: var(--error);
+    font-family: Nunito;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .middle-container {

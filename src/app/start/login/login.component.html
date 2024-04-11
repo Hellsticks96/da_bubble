@@ -9,14 +9,14 @@
                 <input [(ngModel)]="email" name="email" type="email" placeholder="beispielname@email.com" id="email">
                 <img src="../../../assets/img/icons/mail-gray.svg">
                 @if (invalidEmail) {
-                <span>*Diese E-Mail-Adresse ist leider ungültig.</span>
+                <span class="error">*Diese E-Mail-Adresse ist leider ungültig.</span>
                 }
             </div>
             <div>
                 <input [(ngModel)]="password" name="password" type="password" placeholder="Passwort" id="password">
                 <img src="../../../assets/img/icons/lock-gray.svg">
                 @if (invalidPasswordOrEmail) {
-                <span>Falsches Passwort oder E-Mail. Bitte noch einmal versuchen.</span>
+                <span class="error">Falsches Passwort oder E-Mail. Bitte noch einmal versuchen.</span>
                 }
                 <!-- TODO: change sentence to more understandable -->
             </div>
