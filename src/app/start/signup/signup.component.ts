@@ -26,7 +26,7 @@ export class SignupComponent {
     email: '',
     password: '',
     privacyPolicy: false
-  }
+  };
 
 
   constructor(
@@ -38,11 +38,17 @@ export class SignupComponent {
 
   createAccount(avatar: string) {
     this.accountData.avatar = avatar;
-    this.firestore.signUpWithEmailAndPassword(this.accountData.email, this.accountData.password);
-    this.router.navigate(['/']);
-    console.log(this.accountData)
+    this.firestore.signUpWithEmailAndPassword(this.accountData.email, this.accountData.password)
+      .then(uid => {
+        this.firestore.saveUser(this.accountData, uid);
+        this.router.navigate(['/']);
+      })
+      .catch(error => {
+        console.error('Fehler bei der Erstellung des Nutzers:', error);
+      });
+    console.log(this.accountData);
   }
-  
+
 
   onSubmit(ngForm: NgForm) {
     if (ngForm.submitted && ngForm.form.valid) {
