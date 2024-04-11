@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -8,6 +8,7 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { StartComponent } from '../start.component';
 import { Location } from '@angular/common';
 import { FirestoreService } from '../../firestore.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -17,10 +18,10 @@ import { FirestoreService } from '../../firestore.service';
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
-  @Output() avatar = '';
   hide: any;
-  accountCreated = false;
+  forwardToAvatar = false;
   accountData = {
+    avatar: '',
     name: '',
     email: '',
     password: '',
@@ -28,16 +29,24 @@ export class SignupComponent {
   }
 
 
-  constructor(public location: Location, private firestore: FirestoreService) {
+  constructor(
+    public location: Location,
+    private firestore: FirestoreService,
+    private router: Router
+  ) {
+  }
 
+  createAccount(avatar: string) {
+    this.accountData.avatar = avatar;
+    this.firestore.signUpWithEmailAndPassword(this.accountData.email, this.accountData.password);
+    this.router.navigate(['/']);
+    console.log(this.accountData)
   }
   
 
   onSubmit(ngForm: NgForm) {
-    if (ngForm.submitted && ngForm.form.valid && this.accountCreated) {
-      this.firestore.signUpWithEmailAndPassword(this.accountData.email, this.accountData.password);
-    } else if (ngForm.submitted && ngForm.form.valid) {
-      this.accountCreated = true;
+    if (ngForm.submitted && ngForm.form.valid) {
+      this.forwardToAvatar = true;
     }
   }
 }

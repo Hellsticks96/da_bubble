@@ -9,7 +9,7 @@
             <p>Aus der Liste wählen</p>
             <div class="defaultPics">
                 @for(number of [1,2,3,4,5,6]; track number) {
-                    <img src="../../../assets/img/avatar/{{ number }}.svg">
+                    <img (click)="selectAvatar(number.toString())" src="../../../assets/img/avatar/{{ number }}.svg">
                 }
             </div>
         </div>
@@ -19,6 +19,6 @@
         </div>
     </div>
     <div class="submit-wrapper">
-        <button mat-flat-button class="submit">Weiter</button>
+        <button (click)="submit()" mat-flat-button class="submit">Weiter</button>
     </div>
 </main>

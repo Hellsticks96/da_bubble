@@ -2,8 +2,8 @@
     <button class="goBack" mat-icon-button (click)="this.location.back()">
         <img src="../../../assets/img/icons/arrow_back.svg" alt="Go back">
     </button>
-    @if(accountCreated) {
-    <app-avatar [avatar]="this.avatar"></app-avatar>
+    @if(forwardToAvatar) {
+    <app-avatar (submitAvatar)="createAccount($event)"></app-avatar>
     } @else {
     <div class="description">
         <h1>Konto erstellen</h1>
