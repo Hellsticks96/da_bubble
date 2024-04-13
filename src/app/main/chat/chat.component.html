@@ -21,7 +21,7 @@
             <!-- TODO: Add answers to thread amount -->
             <div class="message" *ngFor="let message of chatService.currentChannel.messages | keyvalue">
                 <div class="hoverMenu">
-                    <button mat-icon-button>
+                    <button mat-icon-button></button>
                     <button mat-icon-button>
                         <img src="../../../assets/img/icons/emoji-check.svg" alt="React">
                     </button>
@@ -41,6 +41,7 @@
                         </button>
                     </mat-menu>
                 </div>
+                
                 <!-- TODO: only allowed to edit my own messages -->
                 <img src="../../../assets/img/avatar/{{ message.value.avatar }}.svg">
                 <div>
@@ -73,7 +74,6 @@
                     </div>
                 </div>
             </div>
-        </div>
             <div class="chat-input">
                 <textarea type="text" placeholder="Nachricht an #Entwicklerteam"></textarea>
                 <div class="action-buttons">
@@ -100,4 +100,5 @@
             </div>
             <!-- TODO: add focus textarea on click -->
         </div>
+    </div>
 </section>
