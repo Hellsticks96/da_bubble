@@ -1,28 +1,20 @@
 main {
-    display: inline-flex;
-    padding: 2rem 1.875rem;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5625rem;
-    flex-shrink: 0;
-    border-radius: 1.875rem;
-    background: var(--white);
+    padding: 2rem 0;
 }
 
 .workspace {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    padding: 0 1.5rem;
     gap: 0.9375rem;
-    width: 100%;
 
     >.logo {
         display: flex;
         position: relative;
         justify-content: center;
         align-items: center;
-        width: 3.75rem;
-        height: 3.75rem;
         border-radius: 1.875rem;
         overflow: hidden;
 
@@ -39,7 +31,6 @@ main {
     }
 
     >h2 {
-        flex: 1 0 0;
         padding-right: 1.25rem;
     }
 
@@ -77,38 +68,28 @@ main {
 
 .channels,
 .directmessages {
-    width: 100%;
     box-shadow: none !important;
 
     >mat-expansion-panel-header {
-        padding: 0.5rem 0;
-        height: unset;
-
+        padding-bottom: 1rem;
         mat-panel-title {
-
             display: flex;
             justify-content: space-between;
-            margin: 0;
-            width: 100%;
+                >div {
+                    display: flex;
+                    align-items: center;
 
-            >div {
-                display: flex;
-                gap: 0.625rem;
-                padding-right: 0.625rem;
-
-                >h3 {
-                    font-size: 1.25rem;
+                    img {
+                        padding-right: 0.5rem;
+                    }
                 }
             }
 
-            >img {
-                padding: 0.1875rem;
-            }
         }
 
 
     }
-}
+
 
 .channels,
 .directmessages {
@@ -170,23 +151,11 @@ main {
 }
 
 .channels {
-    display: flex;
-    flex-direction: column;
-
-    ::ng-deep::ng-deep .mat-expansion-panel-body {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5625rem;
-        margin-top: 1.5625rem;
-        padding: 0 0 0 1.5625rem;
-    }
 
     ::ng-deep::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
         padding: 0;
         display: flex;
         align-items: center;
-        gap: 0.625rem;
         width: max-content;
 
         >img {
@@ -217,7 +186,7 @@ mat-button-toggle-group {
 .channel-list {
     display: flex;
     flex-direction: column;
-    gap: 0.8125rem;
+    gap: 1.5rem;
 
     .channel {
         display: flex;
@@ -226,10 +195,6 @@ mat-button-toggle-group {
         border-radius: 1.25rem;
         border: 0 !important;
         overflow: hidden;
-
-        ::ng-deep::ng-deep .mat-button-toggle-button {
-            padding: 0.25rem 1.25rem;
-        }
 
         &:hover:not(.mat-button-toggle-appearance-standard.mat-button-toggle-checked) {
             transition: 80ms ease-in;
@@ -263,10 +228,8 @@ mat-button-toggle-group {
 
 .new-channel {
     display: flex;
-    padding: 0.25rem 0.625rem;
     align-items: center;
     gap: 0.625rem;
-    margin: 0 0 0 0.625rem;
 
     >img {
         width: 1.5rem;
@@ -294,26 +257,18 @@ mat-button-toggle-group {
 .directmessages {
     display: flex;
     flex-direction: column;
-
-    ::ng-deep::ng-deep .mat-expansion-panel-body {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8125rem;
-        margin-top: 1.5625rem;
-        padding: 0 0 0 1.5625rem;
-    }
 }
 
 .contact-list {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.8125rem;
+    gap: 1.5rem;
 
     ::ng-deep::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
         display: flex;
         align-items: center;
+        justify-content: flex-start;
         gap: 0.9375rem;
         padding: 0;
         flex: 1;
@@ -370,10 +325,6 @@ mat-button-toggle-group {
 
     &:hover {
         background-color: var(--bg-color);
-    }
-
-    ::ng-deep::ng-deep .mat-button-toggle-button {
-        padding: 0.25rem 1.25rem;
     }
 
     ::ng-deep::ng-deep .mat-button-toggle-focus-overlay {

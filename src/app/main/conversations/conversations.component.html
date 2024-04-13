@@ -28,11 +28,11 @@
                 <img src="../../../assets/img/icons/tag.svg">
                 <h3>{{ channel.id }}</h3>
             </mat-button-toggle>
+            <div class="new-channel" (click)="openDialog()">
+                <img src="../../../assets/img/icons/add_circle.svg">
+                <span>Channel hinzufügen</span>
+            </div>
         </mat-button-toggle-group>
-        <div class="new-channel" (click)="openDialog()">
-            <img src="../../../assets/img/icons/add_circle.svg">
-            <span>Channel hinzufügen</span>
-        </div>
     </mat-expansion-panel>
     <mat-expansion-panel togglePosition="before" expanded="true" class="directmessages">
         <mat-expansion-panel-header>

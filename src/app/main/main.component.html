@@ -2,7 +2,7 @@
 <main>
   <mat-drawer-container class="menu-container">
     <mat-drawer #drawer opened="true" class="menu-sidenav" mode="side">
-      <app-conversations (openDM)="setComponent($event)"></app-conversations>
+        <app-conversations (openDM)="setComponent($event)"></app-conversations>
     </mat-drawer>
   </mat-drawer-container>
   <button class="menu-button" type="button" [ngClass]="{'closed': !showMenu}" mat-button
