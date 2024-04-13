@@ -10,6 +10,8 @@ import {
 } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { DialogAddChannelAddMemberComponent } from '../dialog-add-channel-add-member/dialog-add-channel-add-member.component';
+import { collection, addDoc } from "firebase/firestore"; 
+import { FirestoreService } from '../firestore.service';
 
 @Component({
   selector: 'app-dialog-add-channel',
@@ -28,7 +30,8 @@ import { DialogAddChannelAddMemberComponent } from '../dialog-add-channel-add-me
 export class DialogAddChannelComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogAddChannelComponent>,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private firestore: FirestoreService
   ) {}
   channelName: string = '';
   channelDescription: string = '';
@@ -38,8 +41,8 @@ export class DialogAddChannelComponent {
   }
 
   createChannel(): void {
+    const ref = this.firestore.channelsRef;
     if (this.channelName && this.channelDescription) {
-      // Schließen Sie zuerst das aktuelle Dialogfeld
       this.dialogRef.close();
       
       // Öffnen Sie das neue Dialogfeld
