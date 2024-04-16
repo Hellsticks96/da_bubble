@@ -1,3 +1,7 @@
+:host {
+    max-width: 25%;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -6,6 +10,7 @@ main {
     border-radius: 2rem;
     background: var(--white);
     overflow: hidden;
+    width: 45rem;
 }
 
 header {
@@ -46,13 +51,19 @@ header {
     }
 }
 
-.chat {
-    padding: 1rem;
+.chat-body {
+    padding: 1rem;    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .chat{
+        overflow-y: scroll;
+    }
 }
 
 .message {
     display: flex;
-    padding: 0.625rem 2.5rem;
+    padding: 0 2.5rem;
     align-items: flex-start;
     gap: 1.25rem;
 

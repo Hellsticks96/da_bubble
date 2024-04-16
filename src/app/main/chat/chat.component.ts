@@ -11,8 +11,11 @@ import { DialogShowChannelMemberComponent } from '../../dialog-show-channel-memb
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { DialogEditMessageComponent } from '../../dialog-edit-message/dialog-edit-message.component';
 import { ChatService } from './chat.service';
-import { ActivatedRoute,Router } from '@angular/router';
 import { MainComponent } from '../main.component';
+import { Message } from '../../interfaces/message';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @Component({
   selector: 'app-chat',
@@ -24,13 +27,16 @@ import { MainComponent } from '../main.component';
     MatDialogModule,
     MatMenuModule,
     PickerComponent,
-    MainComponent
+    MainComponent,
+    FormsModule,
+    MatFormFieldModule
   ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
 })
 export class ChatComponent {
   @Output()threadOpen = new EventEmitter<boolean>();
+  messageText: string = '';
   isPickerVisible = false;
 
   navigateToThread() {
@@ -39,19 +45,14 @@ export class ChatComponent {
   
   constructor(
     public dialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute,
     public chatService: ChatService){
 
   }
   addEmoji(event: any) {
     console.log(event.emoji);
   }
-
-
-
+  
   togglePicker() {
-    this.isPickerVisible = !this.isPickerVisible;
     this.isPickerVisible = !this.isPickerVisible;
   }
   objectKeys(obj: object) {
@@ -59,7 +60,6 @@ export class ChatComponent {
   }
 
   objectValues(obj: object) {
-    return Object.values(obj);
     return Object.values(obj);
   }
 
@@ -115,5 +115,43 @@ export class ChatComponent {
     }
   }
 
+  showTooltip(key: string, value: number) {
+    const tooltip = document.getElementById('customTooltip');
+    if (tooltip) {
+      // Dynamisches Erstellen des HTML-Inhalts mit den übergebenen Parametern
+      const content = `<div> 
+                          <img src="../../../assets/img/icons/emoji-${key}.svg">
+                          <span>${value}</span> 
+                       </div>`;
+  
+      tooltip.innerHTML = content;
+      tooltip.style.display = 'block';
+      tooltip.style.left = `${+20}px`;
+    tooltip.style.top = `- 300px`
+    }
+  }
+  
+  
+  hideTooltip() {
+    const tooltip = document.getElementById('customTooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none'; // Tooltip verstecken
+    }
+  }
+  async send() {
+    console.log(this.messageText)
+    if (this.messageText.trim() !== '') {
+      const message: Message = {
+        avatar: '', // Hier könnten Sie Benutzerdaten hinzufügen
+        name: 'Benutzername',
+        time: new Date().toISOString(), // ISO String als eindeutigen Schlüssel
+        message: this.messageText,
+        reactions: new Map() // Leere Map für Reaktionen initialisieren
+      };
+
+      await this.chatService.sendMessage(this.chatService.currentChannelID, message);
+      this.messageText = ''; // Textfeld nach dem Senden leeren
+    }
+  }
 
 }

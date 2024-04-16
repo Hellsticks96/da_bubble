@@ -1,23 +1,34 @@
 <app-header></app-header>
 <main>
-    <mat-drawer-container class="menu-container">
-        <mat-drawer #drawer opened="true" class="menu-sidenav" mode="side">
-          <app-conversations></app-conversations>
-        </mat-drawer>
-    </mat-drawer-container>
-    <button class="menu-button" type="button" [ngClass]="{'closed': !showMenu}" mat-button (click)="drawer.toggle(); showMenu = !showMenu">
-      @if(showMenu) {
-        <span name="Workspace-Menü schließen ">Workspace-Menü schließen </span><img src="../../assets/img/icons/sidenav-close.svg">
-      } @else {
-        <span name="Workspace-Menü öffen ">Workspace-Menü öffen </span><img src="../../assets/img/icons/sidenav-open.svg">
+  <mat-drawer-container class="menu-container">
+    <mat-drawer #drawer opened="true" class="menu-sidenav" mode="side">
+      <app-conversations (user)="selectedUserForDM($event)" (openDM)="setComponent($event)"></app-conversations>
+    </mat-drawer>
+  </mat-drawer-container>
+  <button class="menu-button" type="button" [ngClass]="{'closed': !showMenu}" mat-button
+    (click)="drawer.toggle(); showMenu = !showMenu">
+    @if(showMenu) {
+    <span name="Workspace-Menü schließen ">Workspace-Menü schließen </span><img
+      src="../../assets/img/icons/sidenav-close.svg">
+    } @else {
+    <span name="Workspace-Menü öffen ">Workspace-Menü öffen </span><img src="../../assets/img/icons/sidenav-open.svg">
+    }
+    <!-- TODO: Border in closing animation is overflowing -->
+  </button>
+    @switch (OpenComponent) {
+
+    @default{
+      <app-welcome-screen></app-welcome-screen>
+     }
+
+     @case ('chat') {
+       <app-chat (threadOpen)="toggleThread($event)"></app-chat>
+    @if (threadOpen) {
+    <app-thread (threadClose)="toggleThread($event)"></app-thread>
       }
-      <!-- TODO: Border in closing animation is overflowing -->
-    </button>
-    <div class="router-container">
-      <app-chat (threadOpen)="toggleThread($event)"></app-chat>
-      @if (threadOpen) {
-        <app-thread (threadClose)="toggleThread($event)" ></app-thread>
-      }
-      
-    </div>
+     }
+     @case ('directMessage') {
+      <app-direct-message [sendedUser]="selectedUser"></app-direct-message>
+     }
+    }
 </main>

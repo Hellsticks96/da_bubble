@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FirestoreService } from '../../firestore.service';
-import { doc, onSnapshot } from '@angular/fire/firestore';
+import { doc, onSnapshot, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Channel } from '../../interfaces/channel';
+import { Message } from '../../interfaces/message';
+import { update } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
@@ -79,4 +81,30 @@ export class ChatService {
       this.currentChannelID = id;
     });
   }
-}
+
+  async sendMessage(channelId: string, message: Message) {
+    const channelRef = doc(this.firestore.firestore, `channels/${channelId}`);
+    const messageKey = `messages.${message.time}`; // Verwenden Sie Zeit als eindeutigen Schlüssel
+
+    // Konvertieren Sie die Map der Reaktionen in ein Objekt
+    const messageData = {
+      avatar: message.avatar,
+      name: message.name,
+      time: message.time,
+      message: message.message,
+      reactions: message.reactions ? this.mapToObject(message.reactions) : {}
+    };
+
+    // Setzen Sie das Nachrichtenobjekt in die Map ein
+    await setDoc(channelRef, {
+      [messageKey]: messageData
+    }, { merge: true }); // 'merge: true' sorgt dafür, dass vorhandene Daten nicht überschrieben werden
+  }
+
+ mapToObject(map: Map<string, number>): { [key: string]: number } {
+  const obj: { [key: string]: number } = {};
+  map.forEach((value, key) => {
+    obj[key] = value;
+  });
+  return obj;
+}}

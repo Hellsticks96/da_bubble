@@ -1,11 +1,8 @@
-:host {
-    flex: 1;
-}
-
 .chat-body {
     background-color: #fff;
     border-radius: 2rem;
-    height: 100%;
+    height: 98%;
+    width: 75vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -14,11 +11,20 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-direction: row;
         border-bottom: 1px solid var(--bg-color);
         padding: 2rem 2.5rem;
         box-shadow: 0rem 0.1rem 0.2rem rgba($color: #000000, $alpha: 0.2);
         border-radius: 2rem 2rem 0 0;
         min-height: 4rem;
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.94rem;
+            height: 3.5rem;
+        }
 
         button {
             display: flex;
@@ -30,32 +36,61 @@
             }
         }
 
-        .participants-wrapper {
+        >img:first-child {
+            width: 4.375rem;
+            height: 4.375rem;
+            border-radius: 50%;
+        }
+
+        >img:last-child {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 0.875rem;
+            height: 0.875rem;
+        }
+    }
+
+    .blank-info {
+        display: flex;
+        flex-direction: column;
+
+        div {
             display: flex;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-end;
+            gap: 0.94rem;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
 
             img {
-                border-radius: 100%;
-                height: calc(2.5rem - 4px);
-                width: calc(2.5rem - 4px);
-                border: 2px solid white;
-                background-color: var(--bg-color);
-                margin-left: -0.625rem;
+                width: 5rem;
+                height: 5rem;
+                border-radius: 50%;
             }
+        }
 
-            h1 {
-                margin-left: 0.625rem;
-                margin-right: 1.25rem;
+        button {
+            background-color: white;
+            border: none;
+            color: #535AF1;
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+            font-weight: 400;
+            font-size: 1.25rem;
+
+            &:hover {
+                font-weight: 700;
             }
         }
     }
 
-
     .chat-content {
-        padding: 1rem;
+        padding: 2rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        height: 100%;
 
         .message {
             display: flex;
@@ -183,9 +218,14 @@
         }
     }
 }
-.chat{
-    overflow-y: scroll;
-    padding: 1.5rem 1rem 0.75rem 0;
+
+.chat {
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 1.5rem;
 }
 
 .chat-input {
@@ -314,4 +354,76 @@
     z-index: 5;
     left: 6rem;
     bottom: 1rem;
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    gap: 1.5rem;
+
+    ::ng-deep::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.9375rem;
+        padding: 0;
+        flex: 1;
+
+        >div {
+            height: 3.125rem;
+            position: relative;
+
+            >img:first-child {
+                width: 3.125rem;
+                height: 3.125rem;
+                border-radius: 50%;
+            }
+
+            >img:last-child {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 0.875rem;
+                height: 0.875rem;
+            }
+        }
+
+        >span {
+            color: var(--black);
+            font-family: Nunito;
+            font-size: 1.125rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
+
+    ::ng-deep::ng-deep .mat-button-toggle-checked {
+        background-color: white !important;
+
+        ::ng-deep::ng-deep .mat-button-toggle-label-content>span {
+            color: var(--purple-3);
+            font-weight: 700;
+            width: min-content;
+        }
+    }
+}
+
+.contact {
+    display: flex;
+    border-radius: 2.1875rem;
+    border: 0 !important;
+    overflow: hidden;
+    line-height: normal;
+    transition: 80ms ease-in;
+    padding: 0.5rem;
+
+    &:hover {
+        background-color: var(--bg-color);
+    }
+
+    ::ng-deep::ng-deep .mat-button-toggle-focus-overlay {
+        background: none !important;
+    }
 }

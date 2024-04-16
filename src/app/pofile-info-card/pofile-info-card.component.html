@@ -1,0 +1,36 @@
+<section>
+    <div class="profile-section">
+        <span>Profil</span>
+        <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="" />
+    </div>
+    <div class="image-section">
+        <img src="./../../assets/img/avatar/{{data.avatar}}.svg" alt="" />
+    </div>
+    <div class="profile-active-section">
+        <h1>{{data.name}}</h1>
+        <div class="status">
+            @if (data.online) {
+            <img src="../../assets/img/icons/online.svg" alt="">
+            <span>Active</span>
+            }@else {
+            <img src="../../assets/img/icons/offline.svg" alt="">
+            <span>offline</span>
+            }
+        </div>
+
+    </div>
+    <div class="profile-mail-section">
+        <div class="profile-mail">
+            <img src="../../assets/img/icons/mail-gray.svg" alt="">
+            <span><b>E-Mail-Adresse</b></span>
+        </div>
+        <div>
+            <span>sofi.mue&#64;beispiel.de</span>
+        </div>
+    </div>
+    <mat-dialog-actions>
+        <button mat-flat-button color="primary">
+            <img src="../../assets/img/icons/mail-white.svg" alt="">
+            Nachricht</button>
+    </mat-dialog-actions>
+</section>

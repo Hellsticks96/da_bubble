@@ -11,32 +11,35 @@
             <img src="../../../assets/img/icons/close.svg" alt="Send message">
         </button>
     </header>
-    <div class="chat">
-        <!-- TODO: Add answers to thread amount -->
-        <div class="message" *ngFor="let message of messages">
-            <img src="../../../assets/img/avatar/{{ message.avatar }}.svg">
-            <div>
-                <div class="message-info">
-                    <h5>{{ message.name }}</h5>
-                    <span>{{ message.time }}</span>
-                </div>
-                <div class="message-text">{{ message.message }}</div>
+    <div class="chat-body">
+        
+        <div class="chat">
+            <div class="message" *ngFor="let message of messages">
+                <img src="../../../assets/img/avatar/{{ message.avatar }}.svg">
                 <div>
-                    <div class="reaction">
-                        @if(objectKeysLength(message.reactions) > 0) {
-                        @for(reaction of objectKeys(message.reactions); track reaction; let i = $index) {
-                        <button mat-raised-button>
-                            <img src="../../../assets/img/icons/emoji-{{ objectKeys(message.reactions)[i] }}.svg">
-                            <span>{{ objectValues(message.reactions)[i] }}</span>
-                        </button>
-                        }
-                        }
-                        <img src="../../../assets/img/icons/add_reaction.svg" alt="Add reaction">
+                    <div class="message-info">
+                        <h5>{{ message.name }}</h5>
+                        <span>{{ message.time }}</span>
                     </div>
-                    <img src="" alt="">
+                    <div class="message-text">{{ message.message }}</div>
+                    <div>
+                        <div class="reaction">
+                            @if(objectKeysLength(message.reactions) > 0) {
+                            @for(reaction of objectKeys(message.reactions); track reaction; let i = $index) {
+                            <button mat-raised-button>
+                                <img src="../../../assets/img/icons/emoji-{{ objectKeys(message.reactions)[i] }}.svg">
+                                <span>{{ objectValues(message.reactions)[i] }}</span>
+                            </button>
+                            }
+                            }
+                            <img src="../../../assets/img/icons/add_reaction.svg" alt="Add reaction">
+                        </div>
+                        <img src="" alt="">
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="chat-input">
             <textarea type="text" placeholder="Antworten..."></textarea>
             <div class="action-buttons">
@@ -57,6 +60,6 @@
                 </button>
             </div>
         </div>
-                <!-- TODO: add focus textarea on click -->
+        <!-- TODO: add focus textarea on click -->
     </div>
 </main>

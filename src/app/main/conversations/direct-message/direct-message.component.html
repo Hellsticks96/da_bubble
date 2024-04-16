@@ -1,24 +1,22 @@
 <section class="chat-body">
     <div class="chat-header">
-        <button mat-button (click)="openDialogChannelInfo()">
-            <h1># ChannelName</h1>
-            <span class="material-icons">keyboard_arrow_down</span>
-        </button>
-        <div class="participants-wrapper">
-            <button mat-icon-button (click)="openDialog($event)">
-                <img src="../../../assets/img/avatar/2.svg">
-                <img src="../../../assets/img/avatar/2.svg">
-                <img src="../../../assets/img/avatar/2.svg">
-                <h1>3</h1>
-            </button>
-            <button mat-icon-button (click)="openDialogAddMembers()">
-                <span class="material-icons">person_add_alt</span>
-            </button>
-        </div>
+        <mat-button-toggle-group class="contact-list" (click)="openProfileCard()" vertical="true" hideSingleSelectionIndicator="true">
+
+            <mat-button-toggle class="contact">
+                <div>
+                    <img src="../../../../assets/img/avatar/{{sendedUser.avatar}}.svg" alt="">
+                    @if(sendedUser.online) {
+                    <img src="../../../assets/img/icons/online.svg">
+                    } @else {
+                    <img src="../../../assets/img/icons/offline.svg">
+                    }
+                </div>
+                <h1>{{sendedUser.name}}</h1>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
     </div>
     <div class="chat-content">
-        <div class="chat">
-            <!-- TODO: Add answers to thread amount -->
+        <!-- <div class="chat">
             <div class="message" *ngFor="let message of chatService.currentChannel.messages | keyvalue">
                 <div class="hoverMenu">
                     <button mat-icon-button>
@@ -41,7 +39,6 @@
                 </div>
 
 
-                <!-- TODO: only allowed to edit my own messages -->
                 <img src="../../../assets/img/avatar/{{ message.value.avatar }}.svg">
                 <div>
                     <div class="message-info">
@@ -74,10 +71,21 @@
                 </div>
             </div>
 
-            <!-- TODO: add focus textarea on click -->
+        </div> -->
+        <div class="chat">
+            <div class="blank-info">
+                <div>
+                    <img src="../../../../assets/img/avatar/{{sendedUser.avatar}}.svg" alt="">
+                    <h1>{{sendedUser.name}}</h1>
+                </div>
+                <span>Diese Unterhaltung findet nur zwischen <button>&#64;{{sendedUser.name}}</button> und dir
+                    statt</span>
+
+            </div>
         </div>
+
         <div class="chat-input">
-            <textarea type="text" [(ngModel)]="messageText" placeholder="Nachricht an #Entwicklerteam"></textarea>
+            <textarea type="text" placeholder="Nachricht an #Entwicklerteam"></textarea>
             <div class="action-buttons">
                 <div class="button-wrapper">
                     <button mat-icon-button>
@@ -95,7 +103,7 @@
                         <img src="../../../assets/img/icons/alternate_email.svg" alt="Tag someone">
                     </button>
                 </div>
-                <button (click)="send()" mat-icon-button>
+                <button mat-icon-button>
                     <img src="../../../assets/img/icons/send-button.svg" alt="Send message">
                 </button>
             </div>

@@ -2,28 +2,17 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
 }
 
 main {
     display: flex;
-    justify-content: flex-start;
-    gap: 1.25rem;
+    gap: 1.5rem;
     padding: 0 1.25rem 1.5625rem 1.25rem;
     height: 100%;
-
-    app-chat {
-         min-width: 50%;
-         width: 100%;
-    }
 }
 
 .menu-container {
-    width: fit-content;
-    overflow: unset;
-    border-radius: 1.875rem;
-}
-
-.menu-sidenav {
     border-radius: 1.875rem;
 }
 
@@ -83,10 +72,4 @@ main {
     >img {
         content: url(../../assets/img/icons/sidenav-open-purple.svg) !important;
     }
-}
-
-.router-container{
-    display: flex;
-    justify-content: flex-start;
-    gap: 1.5rem;
 }
