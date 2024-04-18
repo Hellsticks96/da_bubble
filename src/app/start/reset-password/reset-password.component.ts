@@ -26,8 +26,7 @@ export class ResetPasswordComponent {
     this.resetPasswordForm = new FormGroup({
       newPassword: new FormControl('', [
         Validators.required,
-        Validators.minLength(6),
-        Validators.pattern('^[a-zA-Z0-9]+$')
+        Validators.pattern('^[^\\s]{6,}$') // Aktualisierte Regex für das Pattern
       ]),
       confirmNewPassword: new FormControl('', [Validators.required])
     }, { validators: this.passwordMatchValidator() });
