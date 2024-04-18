@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { FirestoreService } from '../../firestore.service';
-import { doc, onSnapshot, setDoc, updateDoc } from '@angular/fire/firestore';
+import { collection, doc, onSnapshot, orderBy, query, setDoc, where,serverTimestamp } from '@angular/fire/firestore';
 import { Channel } from '../../interfaces/channel';
 import { Message } from '../../interfaces/message';
 import { update } from '@angular/fire/database';
-
+import { v4 as uuidv4 } from 'uuid';
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-
   // channels: Record<string, Map<string, JSON> > = {};
   channels: Record<string, Channel> = {};
   currentChannel: Channel = {
@@ -52,53 +51,105 @@ export class ChatService {
   // ];
 
   constructor(private firestore: FirestoreService) {
-
+    
   }
 
+  // openChannel(id: string) {
+  //   let ref = this.firestore.channelsRef;
+    
+  //   return onSnapshot(doc(ref, id), (docSnap) => {
+  //     if (docSnap.exists()) {
+
+  //       if (!this.channels[id]) {
+  //         this.channels[id] = {
+  //           members: [],
+  //           messages: new Map()
+  //         };
+  //       }
+  //       docSnap.data()['members'].forEach((member: string) => {
+  //         if (!this.channels[id].members.includes(member)) { // Verhindert Duplikate
+  //           this.channels[id].members.push(member);
+  //         }
+  //       });
+
+  //       Object.keys(docSnap.data()['messages']).forEach(key => {
+  //         const message = docSnap.data()['messages'][key];
+  //         this.channels[id].messages?.set(key, message);
+  //       });
+  //     }
+
+  //     this.currentChannel = this.channels[id];
+  //     this.currentChannelID = id;
+  //   });
+  // }
+
   openChannel(id: string) {
-    let ref = this.firestore.channelsRef;
-    return onSnapshot(doc(ref, id), (docSnap) => {
-      if (docSnap.exists()) {
-
-        if (!this.channels[id]) {
-          this.channels[id] = {
-            members: [],
-            messages: new Map()
-          };
-        }
-
-        docSnap.data()['members'].forEach((member: string) => {
-          this.channels[id].members.push(member);
-        });
-
-        Object.keys(docSnap.data()['messages']).forEach(key => {
-          const message = docSnap.data()['messages'][key];
-          this.channels[id].messages?.set(key, message);
-        });
+    const channelRef = this.firestore.channelsRef;
+    const channelDocRef = doc(channelRef, id);
+    const messagesCollectionRef = collection(channelDocRef, 'messages');
+  
+    // Erstellen einer Abfrage mit Sortierung
+    const now = new Date().toISOString(); // Aktuelles Datum und Uhrzeit im ISO-String-Format
+    const messagesQuery = query(messagesCollectionRef,orderBy("time") // Sortiert die Nachrichten absteigend nach Zeit
+    );
+  
+    return onSnapshot(messagesQuery, (querySnapshot) => {
+      if (!this.channels[id]) {
+        this.channels[id] = {
+          members: [],
+          messages: new Map()
+        };
       }
-
+  
+      querySnapshot.forEach((doc) => {
+        const messageData = doc.data() as Message;
+        this.channels[id].messages?.set(doc.id, messageData); // Speichert jede Nachricht in der Map
+      });
+  
       this.currentChannel = this.channels[id];
       this.currentChannelID = id;
     });
   }
+    // Optional: Mitglieder des Kanals abrufen, wenn notwendig
+    // onSnapshot(doc(channelRef, id), (docSnap) => {
+    //   if (docSnap.exists() && docSnap.data().members) {
+    //     this.channels[id].members = docSnap.data().members;
+    //   }
+    // });
+  
+
+  // async sendMessage(channelId: string, message: Message) { //fügt eine message in dokument feld Map(messages) hinzu
+  //   const channelRef = doc(this.firestore.firestore, `channels/${channelId}`);
+  //   const messageKey = `messages.${uuidv4()}`; 
+
+  //   const messageData : Message = {
+  //     avatar: '2',// avatar: message.avatar,
+  //     name: message.name,
+  //     time: message.time,
+  //     message: message.message,
+  //     reactions: {}
+  //   };
+
+  //   const updates: { [key: string]: any } = {};
+  //   updates[messageKey] = messageData;
+  //   await updateDoc(channelRef, updates); 
+  // }
 
   async sendMessage(channelId: string, message: Message) {
-    const channelRef = doc(this.firestore.firestore, `channels/${channelId}`);
-    const messageKey = `messages.${message.time}`; // Verwenden Sie Zeit als eindeutigen Schlüssel
+    const channelRef = collection(this.firestore.firestore, `channels/${channelId}/messages`);
+    const timestamp = new Date().toISOString();
+    const newMessageRef = doc(channelRef, timestamp);
 
-    // Konvertieren Sie die Map der Reaktionen in ein Objekt
-    const messageData = {
-      avatar: message.avatar,
+    const messageData : Message = {
+      avatar: '2',// avatar: message.avatar,
       name: message.name,
       time: message.time,
       message: message.message,
-      reactions: message.reactions ? this.mapToObject(message.reactions) : {}
+      createdAt: serverTimestamp(),
+      reactions: {}
     };
-
-    // Setzen Sie das Nachrichtenobjekt in die Map ein
-    await setDoc(channelRef, {
-      [messageKey]: messageData
-    }, { merge: true }); // 'merge: true' sorgt dafür, dass vorhandene Daten nicht überschrieben werden
+    console.log(messageData)
+    await setDoc(newMessageRef, messageData); 
   }
 
  mapToObject(map: Map<string, number>): { [key: string]: number } {

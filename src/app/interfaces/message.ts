@@ -3,5 +3,6 @@ export interface Message {
     name: string,
     time: string,
     message: string,
-    reactions?: Map<string, number>
+    createdAt: any,
+    reactions?: { [key: string]: number } //Map<string, number>
 }

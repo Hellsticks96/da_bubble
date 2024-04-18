@@ -15,6 +15,7 @@ import { MainComponent } from '../main.component';
 import { Message } from '../../interfaces/message';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { serverTimestamp } from '@angular/fire/firestore';
 
 
 @Component({
@@ -143,10 +144,11 @@ export class ChatComponent {
     if (this.messageText.trim() !== '') {
       const message: Message = {
         avatar: '', // Hier könnten Sie Benutzerdaten hinzufügen
-        name: 'Benutzername',
+        name: 'B',
         time: new Date().toISOString(), // ISO String als eindeutigen Schlüssel
         message: this.messageText,
-        reactions: new Map() // Leere Map für Reaktionen initialisieren
+        createdAt: serverTimestamp(),
+        reactions: {} // Leere Map für Reaktionen initialisieren
       };
 
       await this.chatService.sendMessage(this.chatService.currentChannelID, message);

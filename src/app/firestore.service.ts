@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { list } from '@angular/fire/database';
 import { CollectionReference, DocumentData, Firestore, collection, collectionData, doc, onSnapshot, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 import { Router } from '@angular/router';
 import { signOut } from '@angular/fire/auth';
 import { User } from './interfaces/user';
@@ -87,7 +87,7 @@ export class FirestoreService {
         });
     });
   }
-  
+
 
   loginWithEmailAndPassword = (email: string, password: string): Promise<string | null> => {
     return signInWithEmailAndPassword(this.auth, email, password)
@@ -117,7 +117,26 @@ export class FirestoreService {
   async saveUser(item: User, uid: string) {
     await setDoc(doc(this.getFirestore(), 'users', uid), {
       avatar: item.avatar,
-      name: item.name
+      name: item.name,
+      email: item.email,
     });
+  }
+
+  resetPassword(email: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      sendPasswordResetEmail(this.auth, email)
+        .then(() => {
+          console.log("Passwort-Reset-E-Mail gesendet.");
+          resolve();
+        })
+        .catch((error) => {
+          console.error("Fehler beim Senden der Passwort-Reset-E-Mail: ", error);
+          reject(error);
+        });
+    });
+  }
+
+  confirmPasswordReset(code: string, newPassword: string): Promise<void> {
+    return confirmPasswordReset(this.auth, code, newPassword);
   }
 }
