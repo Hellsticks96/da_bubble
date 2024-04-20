@@ -15,6 +15,7 @@ export class CurrentuserService {
   currentUser: UsersList = {
     id: '',
     name: '',
+    email: '',
     avatar: '',
     online: false
   }
@@ -42,6 +43,7 @@ export class CurrentuserService {
     return {
       id: id || '',
       name: obj.name || '',
+      email: obj.email || '',
       avatar: obj.avatar || '',
       online: obj.online || false
     }
