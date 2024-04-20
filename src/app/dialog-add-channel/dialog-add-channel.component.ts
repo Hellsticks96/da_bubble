@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { DialogAddChannelAddMemberComponent } from '../dialog-add-channel-add-member/dialog-add-channel-add-member.component';
 import { collection, addDoc } from "firebase/firestore"; 
 import { FirestoreService } from '../firestore.service';
+import { doc, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dialog-add-channel',
@@ -35,14 +36,18 @@ export class DialogAddChannelComponent {
   ) {}
   channelName: string = '';
   channelDescription: string = '';
+  channelRef = collection(this.firestore.firestore, "channels");
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  createChannel(): void {
-    const ref = this.firestore.channelsRef;
+  async createChannel(): Promise<void> {
+    console.log(this.channelRef)
     if (this.channelName && this.channelDescription) {
+      await addDoc(this.channelRef,{
+        id: this.channelName
+      })
       this.dialogRef.close();
       
       // Öffnen Sie das neue Dialogfeld

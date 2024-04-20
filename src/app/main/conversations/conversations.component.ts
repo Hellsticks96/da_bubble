@@ -102,7 +102,7 @@ export class ConversationsComponent {
   setChannelsListObj(obj: any, id: string): ChannelsList {
     return {
       id: id || '',
-      members: obj.members || [''],
+      channelData: obj.channelData || null,
     }
   }
 
