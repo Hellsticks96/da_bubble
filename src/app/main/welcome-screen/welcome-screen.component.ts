@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CurrentuserService } from '../currentuser.service';
+import { CurrentuserService } from '../../currentuser.service';
 
 @Component({
   selector: 'app-welcome-screen',
@@ -9,8 +9,8 @@ import { CurrentuserService } from '../currentuser.service';
   styleUrl: './welcome-screen.component.scss'
 })
 export class WelcomeScreenComponent {
-  constructor(private currentUser : CurrentuserService){
-    console.log(currentUser.isLoggedIn)
+  constructor(private currentUser: CurrentuserService) {
+    console.log(currentUser.isLoggedIn);
   }
 
 }

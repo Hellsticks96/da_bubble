@@ -97,3 +97,23 @@ a {
 .d-none {
   display: none;
 }
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+	width: 6px; /* vertical scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+	background: black;
+	border-radius: 1.875rem;
+	border: 0;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background: var(--purple-3);
+}
+/* Chrome, Edge, Safari */

@@ -1,6 +1,6 @@
 <app-header></app-header>
 <main>
-  <mat-drawer-container class="menu-container">
+  <mat-drawer-container class="menu-container" autosize>
     <mat-drawer #drawer opened="true" class="menu-sidenav" mode="side">
       <app-conversations (user)="selectedUserForDM($event)" (openDM)="setComponent($event)"></app-conversations>
     </mat-drawer>

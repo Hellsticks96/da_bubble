@@ -6,7 +6,7 @@ import { NgClass } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ThreadComponent } from './thread/thread.component';
 import { ChatComponent } from './chat/chat.component';
-import { WelcomeScreenComponent } from '../welcome-screen/welcome-screen.component';
+import { WelcomeScreenComponent } from './welcome-screen/welcome-screen.component';
 import { DirectMessageComponent } from './conversations/direct-message/direct-message.component';
 import { UsersList } from '../../app/interfaces/users-list';
 
@@ -30,8 +30,8 @@ import { UsersList } from '../../app/interfaces/users-list';
 })
 export class MainComponent {
   threadOpen = false;
-  showMenu = true;
-  OpenComponent : 'directMessage' | 'newChannel' | 'chat'  | string = '';
+  showMenu = false;
+  OpenComponent: 'directMessage' | 'newChannel' | 'chat' | string = '';
   selectedUser: UsersList = {
     id: '',
     name: '',
@@ -39,17 +39,17 @@ export class MainComponent {
     email: '',
     online: false
   };
-  
 
-  toggleThread(toggle : boolean){
+
+  toggleThread(toggle: boolean) {
     this.threadOpen = toggle;
   }
 
-  setComponent(componentName : string){
+  setComponent(componentName: string) {
     this.OpenComponent = componentName;
   }
-  selectedUserForDM(user : UsersList){
+  selectedUserForDM(user: UsersList) {
     this.selectedUser = user;
-    console.log(this.selectedUser)
+    console.log(this.selectedUser);
   }
 }
