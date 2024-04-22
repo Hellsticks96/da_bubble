@@ -33,6 +33,14 @@ section {
         display:flex;
         align-items: center;
         justify-content: space-between;
+
+        >span {
+            color: #535AF1;
+
+            &:hover{
+               font-size: 1.1rem;
+            }
+        }
     }
 
     .profile-active-section{

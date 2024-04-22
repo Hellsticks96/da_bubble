@@ -39,6 +39,7 @@ export class DialogEditProfileEditProfileComponent{
   currentUser: UsersList = {
     id: '',
     name: '',
+    email: '',
     avatar: '',
     online: false
   };
@@ -76,6 +77,7 @@ export class DialogEditProfileEditProfileComponent{
         id: id || '',
         name: obj.name || '',
         avatar: obj.avatar || '',
+        email: obj.email || '',
         online: obj.online || false
       }
     }

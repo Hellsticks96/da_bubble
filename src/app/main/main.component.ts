@@ -36,6 +36,7 @@ export class MainComponent {
     id: '',
     name: '',
     avatar: '',
+    email: '',
     online: false
   };
   

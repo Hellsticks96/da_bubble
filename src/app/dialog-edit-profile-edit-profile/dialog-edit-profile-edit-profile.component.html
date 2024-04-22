@@ -4,7 +4,7 @@
         <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="" />
     </div>
     <div class="image-section">
-       <img src="./../../assets/img/avatar/1.svg" alt="" />    
+       <img src="./../../assets/img/avatar/{{ currentUser.avatar }}.svg" alt="" />    
     </div>
     <div class="profile-name-section">
         <h1>{{ currentUser.name }}</h1>
@@ -19,7 +19,7 @@
             <span>E-Mail Adresse</span>
         </div>
         <div>
-            <span>sofi.mue&#64;beispiel.de</span>
+            <span>{{ currentUser.email }}</span>
         </div>
     </div>
 </section>

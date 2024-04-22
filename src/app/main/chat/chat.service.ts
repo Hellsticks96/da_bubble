@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { FirestoreService } from '../../firestore.service';
-import { collection, doc, onSnapshot, orderBy, query, setDoc, where,serverTimestamp } from '@angular/fire/firestore';
+import { collection, doc, onSnapshot, orderBy, query, setDoc, where, serverTimestamp } from '@angular/fire/firestore';
 import { Channel } from '../../interfaces/channel';
 import { Message } from '../../interfaces/message';
 import { update } from '@angular/fire/database';
 import { v4 as uuidv4 } from 'uuid';
+import { CurrentuserService } from '../../currentuser.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,7 @@ export class ChatService {
     members: []
   };
   currentChannelID = '';
-
+  
   // messages = [
   //   {
   //     id: 1,
@@ -50,13 +51,14 @@ export class ChatService {
   //   }
   // ];
 
-  constructor(private firestore: FirestoreService) {
-    
+  constructor(private firestore: FirestoreService, public currentUser : CurrentuserService) {
+
+
   }
 
   // openChannel(id: string) {
   //   let ref = this.firestore.channelsRef;
-    
+
   //   return onSnapshot(doc(ref, id), (docSnap) => {
   //     if (docSnap.exists()) {
 
@@ -87,12 +89,11 @@ export class ChatService {
     const channelRef = this.firestore.channelsRef;
     const channelDocRef = doc(channelRef, id);
     const messagesCollectionRef = collection(channelDocRef, 'messages');
-  
+
     // Erstellen einer Abfrage mit Sortierung
-    const now = new Date().toISOString(); // Aktuelles Datum und Uhrzeit im ISO-String-Format
-    const messagesQuery = query(messagesCollectionRef,orderBy("time") // Sortiert die Nachrichten absteigend nach Zeit
+    const messagesQuery = query(messagesCollectionRef, orderBy("time") // Sortiert die Nachrichten absteigend nach Zeit
     );
-  
+
     return onSnapshot(messagesQuery, (querySnapshot) => {
       if (!this.channels[id]) {
         this.channels[id] = {
@@ -100,23 +101,24 @@ export class ChatService {
           messages: new Map()
         };
       }
-  
+
       querySnapshot.forEach((doc) => {
         const messageData = doc.data() as Message;
         this.channels[id].messages?.set(doc.id, messageData); // Speichert jede Nachricht in der Map
       });
-  
+
+      onSnapshot(doc(channelRef, id), (docSnap) => {
+        if (docSnap.exists() && docSnap.data()['members']) {
+          this.channels[id].members = docSnap.data()['members'];
+        }
+      });
+
       this.currentChannel = this.channels[id];
       this.currentChannelID = id;
     });
   }
-    // Optional: Mitglieder des Kanals abrufen, wenn notwendig
-    // onSnapshot(doc(channelRef, id), (docSnap) => {
-    //   if (docSnap.exists() && docSnap.data().members) {
-    //     this.channels[id].members = docSnap.data().members;
-    //   }
-    // });
-  
+
+
 
   // async sendMessage(channelId: string, message: Message) { //fügt eine message in dokument feld Map(messages) hinzu
   //   const channelRef = doc(this.firestore.firestore, `channels/${channelId}`);
@@ -140,22 +142,23 @@ export class ChatService {
     const timestamp = new Date().toISOString();
     const newMessageRef = doc(channelRef, timestamp);
 
-    const messageData : Message = {
-      avatar: '2',// avatar: message.avatar,
-      name: message.name,
+    const messageData: Message = {
+      avatar: this.currentUser.currentUser.avatar,// avatar: message.avatar,
+      name: this.currentUser.currentUser.name,
       time: message.time,
       message: message.message,
       createdAt: serverTimestamp(),
       reactions: {}
     };
     console.log(messageData)
-    await setDoc(newMessageRef, messageData); 
+    await setDoc(newMessageRef, messageData);
   }
 
- mapToObject(map: Map<string, number>): { [key: string]: number } {
-  const obj: { [key: string]: number } = {};
-  map.forEach((value, key) => {
-    obj[key] = value;
-  });
-  return obj;
-}}
+  mapToObject(map: Map<string, number>): { [key: string]: number } {
+    const obj: { [key: string]: number } = {};
+    map.forEach((value, key) => {
+      obj[key] = value;
+    });
+    return obj;
+  }
+}

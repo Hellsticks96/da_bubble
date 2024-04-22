@@ -7,6 +7,7 @@ import { DialogEditProfileComponent } from '../../dialog-edit-profile/dialog-edi
 import { FirestoreService } from '../../firestore.service';
 import { DocumentData, doc, onSnapshot } from '@angular/fire/firestore';
 import { UsersList } from '../../interfaces/users-list';
+import { CurrentuserService } from '../../currentuser.service';
 
 
 @Component({
@@ -18,27 +19,16 @@ import { UsersList } from '../../interfaces/users-list';
     MatExpansionModule,
     MatDialogModule,
     DialogEditProfileComponent,
-
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  currentUserUid: string | null = '';
-  currentUser: UsersList = {
-    id: '',
-    name: '',
-    avatar: '',
-    online: false
-  };
+  
 
-
-  constructor(public dialog: MatDialog, private firestore: FirestoreService) {
-    this.firestore.currentUser$.subscribe(uid => {
-      this.currentUserUid = uid;
-      this.subCurrentUser();
-      // Führen Sie hier Aktionen aus, die vom aktuellen Benutzerstatus abhängen
-    });
+  constructor(public dialog: MatDialog, public currentuser: CurrentuserService) {
+    
+    console.log(currentuser)
   }
 
   openDialog(event: MouseEvent): void {
@@ -63,25 +53,6 @@ export class HeaderComponent {
     }
   }
 
-  subCurrentUser() {
-    let firestore = this.firestore.getFirestore();
-    let ref;
-    if (this.currentUserUid) {
-      ref = doc(firestore, 'users', this.currentUserUid);
-      return onSnapshot(ref, (doc) => {
-        this.currentUser = this.setCurrentUserObj(doc.data(), doc.id);
-      });
-    } else {
-      return console.log('invalid user uid');
-    }
-  }
+  
 
-  setCurrentUserObj(obj: any, id: string): UsersList {
-    return {
-      id: id || '',
-      name: obj.name || '',
-      avatar: obj.avatar || '',
-      online: obj.online || false
-    }
-  }
 }
