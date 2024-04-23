@@ -13,7 +13,11 @@
             <span class="online-status">
                 <img src="../../../assets/img/icons/is-online.svg">
             </span>
-            <img src="../../../assets/img/avatar/{{ currentuser.currentUser.avatar}}.svg">
+            @if (currentuser.currentUser.avatar.length > 1) {
+                <img src="{{ currentuser.currentUser.avatar }}">
+            } @else {
+                <img src="../../../assets/img/avatar/{{ currentuser.currentUser.avatar}}.svg">
+            }
         </div>
         <button (click)="openDialog($event)" mat-icon-button>
             <span class="material-icons">keyboard_arrow_down</span>

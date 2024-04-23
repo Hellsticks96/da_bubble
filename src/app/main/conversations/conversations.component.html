@@ -49,7 +49,11 @@
             <mat-button-toggle-group class="contact-list" vertical="true" hideSingleSelectionIndicator="true">
                 <mat-button-toggle class="contact" (click)="openDirectMessage(user)" (click)="openComponent('directMessage')" *ngFor="let user of usersList">
                     <div>
-                        <img src="../../../assets/img/avatar/{{ user.avatar }}.svg">
+                        @if (user.avatar.length > 1) {
+                            <img src="{{ user.avatar }}">
+                        } @else {
+                            <img src="../../../assets/img/avatar/{{ user.avatar }}.svg">
+                        }
                         @if(user.online) {
                         <img src="../../../assets/img/icons/online.svg">
                         } @else {

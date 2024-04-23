@@ -4,7 +4,11 @@
 
             <mat-button-toggle class="contact">
                 <div>
-                    <img src="../../../../assets/img/avatar/{{sendedUser.avatar}}.svg" alt="">
+                    @if (sendedUser.avatar.length > 1) {
+                        <img src="{{ sendedUser.avatar }}">
+                    } @else {
+                        <img src="../../../../assets/img/avatar/{{sendedUser.avatar}}.svg" alt="">   
+                    }
                     @if(sendedUser.online) {
                     <img src="../../../assets/img/icons/online.svg">
                     } @else {
@@ -75,7 +79,11 @@
         <div class="chat">
             <div class="blank-info">
                 <div>
-                    <img src="../../../../assets/img/avatar/{{sendedUser.avatar}}.svg" alt="">
+                    @if (sendedUser.avatar.length > 1) {
+                        <img src="{{ sendedUser.avatar }}">
+                    } @else {
+                        <img src="../../../../assets/img/avatar/{{sendedUser.avatar}}.svg" alt=""> 
+                    }
                     <h1>{{sendedUser.name}}</h1>
                 </div>
                 <span>Diese Unterhaltung findet nur zwischen <button>&#64;{{sendedUser.name}}</button> und dir
