@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CurrentuserService } from '../../currentuser.service';
 
 @Component({
   selector: 'app-welcome-screen',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './welcome-screen.component.scss'
 })
 export class WelcomeScreenComponent {
+  constructor(private currentUser: CurrentuserService) {
+    
+  }
 
 }

@@ -5,6 +5,15 @@
     width: 100%;
 }
 
+app-chat {
+    flex: 1;
+}
+
+mat-drawer-container {
+    width: max-content;
+    overflow: hidden;
+}
+
 main {
     display: flex;
     gap: 1.5rem;

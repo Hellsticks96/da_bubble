@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { StartComponent } from '../start.component';
 import { FirestoreService } from '../../firestore.service';
 import { Router, RouterModule } from '@angular/router';
+import { CurrentuserService } from '../../currentuser.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { Router, RouterModule } from '@angular/router';
     CommonModule,
     MatButtonModule,
     StartComponent,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -26,7 +27,6 @@ export class LoginComponent {
   invalidPasswordOrEmail = false;
 
   constructor(private firestore: FirestoreService, private router: Router) {
-
   }
 
   // Google Anmeldung

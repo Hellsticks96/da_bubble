@@ -42,7 +42,11 @@
 
 
                 <!-- TODO: only allowed to edit my own messages -->
-                <img src="../../../assets/img/avatar/{{ message.value.avatar }}.svg">
+                @if (message.value.avatar.length > 1) {
+                    <img src="{{ message.value.avatar }}">
+                } @else {
+                    <img src="../../../assets/img/avatar/{{ message.value.avatar }}.svg">
+                }
                 <div>
                     <div class="message-info">
                         <h5>{{ message.value.name }}</h5>

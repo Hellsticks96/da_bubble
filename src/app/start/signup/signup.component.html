@@ -32,7 +32,7 @@
         </div>
         <div>
             <input #password="ngModel" [(ngModel)]="accountData.password" type="password" placeholder="Passwort"
-                name="password" id="password" pattern="^.{6,}$" required>
+                name="password" id="password" pattern="^\S{6,}$" required>
             <img src="../../../assets/img/icons/lock-gray.svg">
 
             @if (!password.valid && (accountForm.submitted || password.touched)) {

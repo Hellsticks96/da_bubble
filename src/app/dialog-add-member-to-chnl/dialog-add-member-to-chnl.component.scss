@@ -82,3 +82,7 @@ mat-option {
     margin-right: 1rem;
   }
 }
+
+::ng-deep::ng-deep.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{
+  justify-content: flex-start;
+}

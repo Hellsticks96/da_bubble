@@ -4,7 +4,11 @@
         <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="" />
     </div>
     <div class="image-section">
-        <img src="./../../assets/img/avatar/{{data.avatar}}.svg" alt="" />
+        @if (data.avatar.length > 1) {
+            <img src="{{ data.avatar }}">
+        } @else {
+            <img src="./../../assets/img/avatar/{{data.avatar}}.svg" alt="" />  
+        }
     </div>
     <div class="profile-active-section">
         <h1>{{data.name}}</h1>

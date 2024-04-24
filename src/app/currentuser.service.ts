@@ -12,6 +12,7 @@ import { UsersList } from './interfaces/users-list';
 
 export class CurrentuserService {
   currentUserUid: string | null = '';
+  isLoggedIn :boolean = false;
   currentUser: UsersList = {
     id: '',
     name: '',
@@ -30,12 +31,16 @@ export class CurrentuserService {
     let firestore = this.firestore.getFirestore();
     let ref;
     if (this.currentUserUid) {
+      this.isLoggedIn = true;
       ref = doc(firestore, 'users', this.currentUserUid);
       return onSnapshot(ref, (doc) => {
         this.currentUser = this.setCurrentUserObj(doc.data(), doc.id);
+        console.log(this.currentUser)
       });
     } else {
+      this.isLoggedIn = false;
       return console.log('invalid user uid');
+      
     }
   }
 

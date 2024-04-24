@@ -15,7 +15,11 @@
         
         <div class="chat">
             <div class="message" *ngFor="let message of messages">
-                <img src="../../../assets/img/avatar/{{ message.avatar }}.svg">
+                @if (message.avatar.length > 1) {
+                    <img src="{{ message.avatar }}">
+                } @else {
+                    <img src="../../../assets/img/avatar/{{ message.avatar }}.svg">
+                }
                 <div>
                     <div class="message-info">
                         <h5>{{ message.name }}</h5>

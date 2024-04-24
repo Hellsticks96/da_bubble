@@ -4,7 +4,7 @@ import { CollectionReference, DocumentData, Firestore, collection, collectionDat
 import { Observable } from 'rxjs';
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 import { Router } from '@angular/router';
-import { signOut } from '@angular/fire/auth';
+import { getRedirectResult, signInWithRedirect, signOut } from '@angular/fire/auth';
 import { User } from './interfaces/user';
 
 @Injectable({
@@ -15,7 +15,6 @@ export class FirestoreService {
     throw new Error('Method not implemented.');
   }
   firestore: Firestore = inject(Firestore);
-  // items$: Observable<any[]>;
   auth = getAuth();
   provider = new GoogleAuthProvider();
   currentUser$: Observable<string | null>;
@@ -27,6 +26,10 @@ export class FirestoreService {
       onAuthStateChanged(this.auth, (user) => {
         if (user) {
           observer.next(user.uid);
+          if (this.router.url === '/login' || '/signup' || '/recovery' || '/reset-password') {
+            this.handleGoogleRedirectResult();
+            this.router.navigate(['/'])
+          }
         } else {
           observer.next(null);
           // No User logged in
@@ -36,14 +39,8 @@ export class FirestoreService {
         }
       });
     });
-    // this.items$ = collectionData(aCollection);
-
-    // const test = onSnapshot(aCollection, (list) => {
-    //   list.forEach((item) => {
-    //     console.log(item.data());
-    //   });
-    // });
   }
+  
 
   getFirestore(): Firestore {
     return this.firestore;
@@ -51,24 +48,27 @@ export class FirestoreService {
 
   // Funktion zum Starten der Google-Anmeldung
   loginWithGoogle = () => {
-    signInWithPopup(this.auth, this.provider)
-      .then((result) => {
-        // Dies gibt dir ein Google Access Token. Du kannst es verwenden, um auf Google APIs zuzugreifen.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        if (!credential) throw new Error('Invalid Credential');
-        const token = credential.accessToken;
-        // Die angemeldete Benutzerinformationen.
-        const user = result.user;
-        // Weiteren Code hier einfügen, z.B. Weiterleitung oder Nutzerprofil aktualisieren
-      }).catch((error) => {
-        // Fehlerbehandlung
+    signInWithRedirect(this.auth, this.provider);
+  };
+
+  handleGoogleRedirectResult = () => {
+    getRedirectResult(this.auth)
+      .then(async (result) => {
+        if (result) {
+          const user = result.user;
+
+          await this.saveUser({
+            avatar: user.photoURL || '',
+            name: user.displayName || '',
+            email: user.email || ''
+          }, user.uid);
+        }
+        await this.router.navigate(['/']);
+      })
+      .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // Der E-Mail des Benutzers, der sich anzumelden versucht hat
-        const email = error.email;
-        // Der AuthCredential-Typ, der fehlgeschlagen ist.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
+        console.error("Fehler nach der Umleitung: ", errorCode, errorMessage);
       });
   };
 

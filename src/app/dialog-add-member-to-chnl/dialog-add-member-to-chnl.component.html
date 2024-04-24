@@ -13,8 +13,8 @@
         placeholder="Name eingeben"
         matInput
       />
-      <mat-autocomplete class="custom-autocomplete" #auto="matAutocomplete">
-        <mat-option *ngFor="let message of filteredOptions | async" [value]="message.name">
+      <mat-autocomplete class="custom-autocomplete" #auto="matAutocomplete" >
+        <mat-option *ngFor="let message of filteredOptions | async" [value]="message.name" >
           <div class="autocomplete-icons" >
             <img
               [src]="getAvatarPath(message.avatar)"

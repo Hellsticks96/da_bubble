@@ -24,20 +24,11 @@ import { CurrentuserService } from '../../currentuser.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  currentUserUid: string | null = '';
-  currentUser: UsersList = {
-    id: '',
-    name: '',
-    avatar: '',
-    email: '',
-    online: false
-  };
-
+  
 
   constructor(public dialog: MatDialog, public currentuser: CurrentuserService) {
-    this.currentUserUid = currentuser.currentUserUid;
-    this.currentUser = currentuser.currentUser;
-    console.log(this.currentUser,this.currentUserUid)
+    
+    console.log(currentuser)
   }
 
   openDialog(event: MouseEvent): void {
@@ -61,5 +52,7 @@ export class HeaderComponent {
       });
     }
   }
+
+  
 
 }
