@@ -34,24 +34,27 @@ export class DialogAddChannelComponent {
     public dialog: MatDialog,
     private firestore: FirestoreService
   ) {}
+  dataBase = this.firestore.getFirestore();
   channelName: string = '';
   channelDescription: string = '';
-  channelRef = collection(this.firestore.firestore, "channels");
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   async createChannel(): Promise<void> {
-    console.log(this.channelRef)
     if (this.channelName && this.channelDescription) {
-      await addDoc(this.channelRef,{
-        id: this.channelName
+      await setDoc(doc(this.dataBase, "channels", this.channelName), {
+        description: this.channelDescription,
+        members: [],
       })
       this.dialogRef.close();
       
       // Öffnen Sie das neue Dialogfeld
       this.dialog.open(DialogAddChannelAddMemberComponent, {
+        data : {
+          channelId: this.channelName
+        }
       });
     } else {
       // Optional: Benutzer darüber informieren, dass beide Felder ausgefüllt sein müssen

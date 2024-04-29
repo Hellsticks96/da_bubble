@@ -14,7 +14,8 @@ export class ChatService {
   // channels: Record<string, Map<string, JSON> > = {};
   channels: Record<string, Channel> = {};
   currentChannel: Channel = {
-    members: []
+    members: [],
+    description: ""
   };
   currentChannelID = '';
   usersList: UsersList[] = [];
@@ -53,7 +54,7 @@ export class ChatService {
   //   }
   // ];
 
-  constructor(private firestore: FirestoreService, public currentUser : CurrentuserService) {
+  constructor(public firestore: FirestoreService, public currentUser : CurrentuserService) {
     this.subUsersList();
 
   }
@@ -100,6 +101,7 @@ export class ChatService {
       if (!this.channels[id]) {
         this.channels[id] = {
           members: [],
+          description: "",
           messages: new Map()
         };
       }

@@ -16,6 +16,7 @@ import { Message } from '../../interfaces/message';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { serverTimestamp } from '@angular/fire/firestore';
+import { Channel } from '../../interfaces/channel';
 
 
 @Component({
@@ -39,6 +40,8 @@ export class ChatComponent {
   @Output()threadOpen = new EventEmitter<boolean>();
   messageText: string = '';
   isPickerVisible = false;
+  public currentChannel!: Channel;
+
 
   navigateToThread() {
     this.threadOpen.emit(true);
