@@ -6,6 +6,7 @@ import { Message } from '../../interfaces/message';
 import { update } from '@angular/fire/database';
 import { v4 as uuidv4 } from 'uuid';
 import { CurrentuserService } from '../../currentuser.service';
+import { UsersList } from '../../interfaces/users-list';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,9 +14,11 @@ export class ChatService {
   // channels: Record<string, Map<string, JSON> > = {};
   channels: Record<string, Channel> = {};
   currentChannel: Channel = {
-    members: []
+    members: [],
+    description: ""
   };
   currentChannelID = '';
+  usersList: UsersList[] = [];
   
   // messages = [
   //   {
@@ -51,8 +54,8 @@ export class ChatService {
   //   }
   // ];
 
-  constructor(private firestore: FirestoreService, public currentUser : CurrentuserService) {
-
+  constructor(public firestore: FirestoreService, public currentUser : CurrentuserService) {
+    this.subUsersList();
 
   }
 
@@ -98,6 +101,7 @@ export class ChatService {
       if (!this.channels[id]) {
         this.channels[id] = {
           members: [],
+          description: "",
           messages: new Map()
         };
       }
@@ -118,25 +122,6 @@ export class ChatService {
     });
   }
 
-
-
-  // async sendMessage(channelId: string, message: Message) { //fügt eine message in dokument feld Map(messages) hinzu
-  //   const channelRef = doc(this.firestore.firestore, `channels/${channelId}`);
-  //   const messageKey = `messages.${uuidv4()}`; 
-
-  //   const messageData : Message = {
-  //     avatar: '2',// avatar: message.avatar,
-  //     name: message.name,
-  //     time: message.time,
-  //     message: message.message,
-  //     reactions: {}
-  //   };
-
-  //   const updates: { [key: string]: any } = {};
-  //   updates[messageKey] = messageData;
-  //   await updateDoc(channelRef, updates); 
-  // }
-
   async sendMessage(channelId: string, message: Message) {
     const channelRef = collection(this.firestore.firestore, `channels/${channelId}/messages`);
     const timestamp = new Date().toISOString();
@@ -154,11 +139,25 @@ export class ChatService {
     await setDoc(newMessageRef, messageData);
   }
 
-  mapToObject(map: Map<string, number>): { [key: string]: number } {
-    const obj: { [key: string]: number } = {};
-    map.forEach((value, key) => {
-      obj[key] = value;
-    });
-    return obj;
+  subUsersList() {
+    let ref = this.firestore.usersRef;
+    return onSnapshot(ref, (list) => {
+      this.usersList = [];
+      list.forEach(element => {
+        if (element.id !== this.currentUser.currentUserUid) {
+          this.usersList.push(this.setUsersListObj(element.data(), element.id))
+        }
+      })
+    })
+  }
+
+  setUsersListObj(obj: any, id: string): UsersList {
+    return {
+      id: id || '',
+      name: obj.name || '',
+      avatar: obj.avatar || '',
+      email: obj.email || '',
+      online: obj.online || false
+    }
   }
 }

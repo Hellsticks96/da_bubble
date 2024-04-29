@@ -77,6 +77,10 @@ main {
     }
 }
 
+app-direct-message{
+    width: 80%;
+}
+
 .closed:hover {
     >img {
         content: url(../../assets/img/icons/sidenav-open-purple.svg) !important;

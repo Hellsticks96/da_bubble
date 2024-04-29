@@ -16,6 +16,7 @@ import { Message } from '../../interfaces/message';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { serverTimestamp } from '@angular/fire/firestore';
+import { Channel } from '../../interfaces/channel';
 
 
 @Component({
@@ -39,6 +40,8 @@ export class ChatComponent {
   @Output()threadOpen = new EventEmitter<boolean>();
   messageText: string = '';
   isPickerVisible = false;
+  public currentChannel!: Channel;
+
 
   navigateToThread() {
     this.threadOpen.emit(true);
@@ -140,15 +143,14 @@ export class ChatComponent {
     }
   }
   async send() {
-    console.log(this.messageText)
     if (this.messageText.trim() !== '') {
       const message: Message = {
-        avatar: '', // Hier könnten Sie Benutzerdaten hinzufügen
-        name: 'B',
-        time: new Date().toISOString(), // ISO String als eindeutigen Schlüssel
+        avatar: '', 
+        name: '', // wird im chat.service übernommen 
+        time: new Date().toISOString(), 
         message: this.messageText,
         createdAt: serverTimestamp(),
-        reactions: {} // Leere Map für Reaktionen initialisieren
+        reactions: {} 
       };
 
       await this.chatService.sendMessage(this.chatService.currentChannelID, message);

@@ -1,4 +1,6 @@
+import { Channel } from "./channel";
+
 export interface ChannelsList {
     id: string;
-    members: string[]
+    channelData: Channel
 }

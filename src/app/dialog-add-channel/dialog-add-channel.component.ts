@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { DialogAddChannelAddMemberComponent } from '../dialog-add-channel-add-member/dialog-add-channel-add-member.component';
 import { collection, addDoc } from "firebase/firestore"; 
 import { FirestoreService } from '../firestore.service';
+import { doc, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dialog-add-channel',
@@ -33,6 +34,7 @@ export class DialogAddChannelComponent {
     public dialog: MatDialog,
     private firestore: FirestoreService
   ) {}
+  dataBase = this.firestore.getFirestore();
   channelName: string = '';
   channelDescription: string = '';
 
@@ -40,13 +42,19 @@ export class DialogAddChannelComponent {
     this.dialogRef.close();
   }
 
-  createChannel(): void {
-    const ref = this.firestore.channelsRef;
+  async createChannel(): Promise<void> {
     if (this.channelName && this.channelDescription) {
+      await setDoc(doc(this.dataBase, "channels", this.channelName), {
+        description: this.channelDescription,
+        members: [],
+      })
       this.dialogRef.close();
       
       // Öffnen Sie das neue Dialogfeld
       this.dialog.open(DialogAddChannelAddMemberComponent, {
+        data : {
+          channelId: this.channelName
+        }
       });
     } else {
       // Optional: Benutzer darüber informieren, dass beide Felder ausgefüllt sein müssen

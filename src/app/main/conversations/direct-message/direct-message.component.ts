@@ -9,20 +9,26 @@ import { CommonModule } from '@angular/common';
 import { ConversationsComponent } from '../conversations.component';
 import { UsersList } from '../../../interfaces/users-list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-
+import { serverTimestamp } from '@angular/fire/firestore';
 import { PofileInfoCardComponent } from '../../../pofile-info-card/pofile-info-card.component';
 import { DialogAddMemberToChnlComponent } from '../../../dialog-add-member-to-chnl/dialog-add-member-to-chnl.component';
+import { FormsModule } from '@angular/forms';
+import { Message } from '../../../interfaces/message';
+import { DirectmessageService } from './directmessage.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-direct-message',
   standalone: true,
-  imports: [ChatComponent, PickerComponent, 
+  imports: [ChatComponent, PickerComponent,
     MatButtonModule,
     MatIconModule,
     CommonModule,
     MatDialogModule,
     ConversationsComponent,
     MatButtonToggleModule,
+    FormsModule,
+    MatMenuModule,
   ],
 
   templateUrl: './direct-message.component.html',
@@ -30,13 +36,17 @@ import { DialogAddMemberToChnlComponent } from '../../../dialog-add-member-to-ch
 })
 export class DirectMessageComponent {
   isPickerVisible = false;
+  messageText: string = '';
   @Input() sendedUser!: UsersList;
   
-  constructor(public dialog: MatDialog,) {
+  constructor(public dialog: MatDialog, public DMSerivce : DirectmessageService) {
+
   }
   ngOnInit() {
-    console.log("Received sendedUser on init:", this.sendedUser);
   }
+  objectKeys(obj: any): string[] {
+    return Object.keys(obj);
+}
 
   togglePicker() {
     this.isPickerVisible = !this.isPickerVisible;
@@ -50,10 +60,27 @@ export class DirectMessageComponent {
     });
   }
 
-  openProfileCard(){
-    this.dialog.open(PofileInfoCardComponent,{
+  openProfileCard() {
+    this.dialog.open(PofileInfoCardComponent, {
       data: this.sendedUser
     })
 
-  
-  }}
+
+  }
+  async send() {
+    if (this.messageText.trim() !== '') {
+      const message: Message = {
+        avatar: '', 
+        name: '', // wird im chat.service übernommen 
+        time: new Date().toISOString(), 
+        message: this.messageText,
+        createdAt: serverTimestamp(),
+        reactions: {} 
+      };
+
+      await this.DMSerivce.sendMessage(this.sendedUser.id, message);
+      this.messageText = ''; // Textfeld nach dem Senden leeren
+    }
+
+  }
+}

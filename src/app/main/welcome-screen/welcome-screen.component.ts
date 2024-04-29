@@ -10,7 +10,7 @@ import { CurrentuserService } from '../../currentuser.service';
 })
 export class WelcomeScreenComponent {
   constructor(private currentUser: CurrentuserService) {
-    console.log(currentUser.isLoggedIn);
+    
   }
 
 }

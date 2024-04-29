@@ -12,6 +12,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ChatService } from '../main/chat/chat.service';
+import { UsersList } from '../interfaces/users-list';
 
 interface Message {
   avatar: string;
@@ -39,7 +41,7 @@ interface Message {
 })
 export class DialogAddMemberToChnlComponent implements OnInit {
   nameControl = new FormControl();
-  filteredOptions!: Observable<Message[]>; // Typ zu Message[] geändert
+  filteredOptions!: Observable<UsersList[]>; // Typ zu Message[] geändert
   
   messages: Message[] = [
     {
@@ -70,7 +72,9 @@ export class DialogAddMemberToChnlComponent implements OnInit {
     },
   ];
 
-  constructor(public dialogRef: MatDialogRef<DialogAddMemberToChnlComponent>, public dialog: MatDialog) {}
+  constructor(public dialogRef: MatDialogRef<DialogAddMemberToChnlComponent>, 
+    public dialog: MatDialog,
+  public chatService:ChatService) {}
 
   ngOnInit() {
     this.filteredOptions = this.nameControl.valueChanges.pipe(
@@ -79,9 +83,9 @@ export class DialogAddMemberToChnlComponent implements OnInit {
     );
   }
 
-  private _filter(value: string): Message[] {
+  private _filter(value: string): UsersList[] {
     const filterValue = value.toLowerCase();
-    return this.messages.filter(option => option.name.toLowerCase().includes(filterValue));
+    return this.chatService.usersList.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   getAvatarPath(avatarNumber: string): string {

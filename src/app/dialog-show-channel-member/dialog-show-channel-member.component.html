@@ -4,21 +4,18 @@
         <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="" />
     </div>
     <div class="dialog-content">
-        <div class="channel-member">
-            <img src="./../../assets/img/avatar/1.svg" alt="" />
-            <h4>Frederick Beck (du)</h4>
+        @for (user of chatService.usersList; track $index) {
+            @if ($index < 3) {
+                <div class="channel-member">
+            <img src="./../../assets/img/avatar/{{user.avatar}}.svg" alt="" />
+            <h4>{{user.name}}</h4>
         </div>
-        <div class="channel-member">
-            <img src="./../../assets/img/avatar/2.svg" alt="" />
-            <h4>Sofia Müller</h4>
-        </div>
-        <div class="channel-member">
-            <img src="./../../assets/img/avatar/3.svg" alt="" />
-            <h4>Noah Braun</h4>
-        </div>
-        <div class="dialog-add-member">
-            <span class="material-icons" (click)="openDialogAddMembers()">person_add_alt</span>
-            <p>Mitglieder hinzufügen</p>
-        </div>
+            }
+        }
+        <span> Es sind noch {{chatService.usersList.length - 3}} Mitglieder in dem Channel</span>
+    </div>
+    <div class="dialog-add-member">
+        <span class="material-icons" (click)="openDialogAddMembers()">person_add_alt</span>
+        <p>Mitglieder hinzufügen</p>
     </div>
 </section>

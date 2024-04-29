@@ -1,6 +1,8 @@
 import { Message } from "./message";
+import { UsersList } from "./users-list";
 
 export interface Channel {
-    members: string[],
+    description: string,
+    members: UsersList[],
     messages?: Map<string, Message>
 }
