@@ -28,7 +28,7 @@
             @if (!email.valid && (accountForm.submitted || email.touched)) {
             <span class="error">Diese E-Mail-Adresse ist leider ungültig.</span>
             }
-
+            <!-- TODO: Error if email already exists -->
         </div>
         <div>
             <input #password="ngModel" [(ngModel)]="accountData.password" type="password" placeholder="Passwort"

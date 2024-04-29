@@ -188,7 +188,6 @@ mat-button-toggle-group {
 }
 
 mat-button-toggle {
-    padding: 0.25rem 1.25rem;
     width: fit-content;
 }
 
@@ -226,7 +225,9 @@ mat-button-toggle {
         background: none !important;
     }
 
-
+    ::ng-deep::ng-deep .mat-button-toggle-button {
+        padding: 0.25rem 1.25rem;
+    }
 
     ::ng-deep::ng-deep .mat-button-toggle-appearance-standard.mat-button-toggle-checked {
         background: var(--bg-color);
@@ -348,6 +349,10 @@ mat-button-toggle {
 
     ::ng-deep::ng-deep .mat-button-toggle-focus-overlay {
         background: none !important;
+    }
+
+    ::ng-deep::ng-deep .mat-button-toggle-button {
+        padding: 0.25rem 1.25rem;
     }
 }
 
