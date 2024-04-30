@@ -77,7 +77,7 @@ export class ConversationsComponent {
     private firestore: FirestoreService,
     public chatService: ChatService,
     public DMservice: DirectmessageService,
-    private currentUser : CurrentuserService
+    private currentUser : CurrentuserService,
   ) {
     this.subChannelsList();
     

@@ -1,54 +1,28 @@
 <section class="dialog-container">
   <div class="dialog-title-container">
     <h2 mat-dialog-title>Leute hinzufügen</h2>
-    <img
-      (click)="onNoClick()"
-      src="./../../assets/img/icons/close.svg"
-      alt=""
-    />
+    <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="" />
   </div>
   <div class="dialog-content-container">
     <mat-radio-group aria-label="Select an option" [(ngModel)]="selectedOption">
-      <mat-radio-button value="1" (click)="addAllOfficeMembers()"
-        >Alle Mitglieder von OfficeTeam hinzufügen</mat-radio-button
-      >
+      <mat-radio-button value="1" (click)="addAllOfficeMembers()">Alle Mitglieder von OfficeTeam
+        hinzufügen</mat-radio-button>
       <mat-radio-button value="2">Bestimmte Leute hinzufügen</mat-radio-button>
       <mat-form-field appearance="outline" *ngIf="selectedOption === '2'">
         <mat-chip-grid #chipList>
-          <mat-chip-row
-            *ngFor="let user of addedMembers"
-            [removable]="removable"
-          >
+          <mat-chip-row *ngFor="let user of addedMembers" [removable]="removable">
             {{ user.name }}
-            <mat-icon matChipRemove *ngIf="removable" (click)="removeUser(user)"
-              >cancel</mat-icon
-            >
+            <mat-icon matChipRemove *ngIf="removable" (click)="removeUser(user)">cancel</mat-icon>
           </mat-chip-row>
-          <input
-            type="text"
-            [matAutocomplete]="auto"
-            [formControl]="nameControl"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            #inputValue
-            placeholder="Namen eingeben"
-            id="userInput"
-            matInput
-          />
+          <input type="text" [matAutocomplete]="auto" [formControl]="nameControl" [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" #inputValue placeholder="Namen eingeben" id="userInput"
+            matInput />
         </mat-chip-grid>
         <mat-autocomplete class="custom-autocomplete" #auto="matAutocomplete">
-          <mat-option
-            *ngFor="let message of filteredOptions | async"
-            [value]="message.name"
-            (click)="addSingleUser(message.name)"
-          >
+          <mat-option *ngFor="let message of filteredOptions | async" [value]="message.name"
+            (click)="addSingleUser(message.name)">
             <div class="autocomplete-icons">
-              <img
-                [src]="getAvatarPath(message.avatar)"
-                width="35"
-                height="35"
-                alt="Avatar"
-              />
+              <img [src]="getAvatarPath(message.avatar)" width="35" height="35" alt="Avatar" />
               {{ message.name }}
             </div>
           </mat-option>

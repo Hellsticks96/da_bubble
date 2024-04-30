@@ -5,22 +5,19 @@
   <mat-dialog-content>
     <mat-label># Entwicklerteam</mat-label>
     <mat-form-field appearance="outline">
-      <input
-        type="text"
-        [matAutocomplete]="auto"
-        [formControl]="nameControl"
-        #inputValue
-        placeholder="Name eingeben"
-        matInput
-      />
-      <mat-autocomplete class="custom-autocomplete" #auto="matAutocomplete" >
-        <mat-option *ngFor="let message of filteredOptions | async" [value]="message.name" >
-          <div class="autocomplete-icons" >
-            <img
-              [src]="getAvatarPath(message.avatar)"
-              width="35"
-              height="35"
-              alt="Avatar"/>
+      <mat-chip-grid #chipList>
+        <mat-chip-row *ngFor="let user of addedMembers" [removable]="removable">
+          {{ user.name }}
+          <mat-icon matChipRemove *ngIf="removable" (click)="removeUser(user)">cancel</mat-icon>
+        </mat-chip-row>
+        <input type="text" [matAutocomplete]="auto" [formControl]="nameControl" [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" #inputValue placeholder="Name eingeben" matInput />
+      </mat-chip-grid>
+      <mat-autocomplete class="custom-autocomplete" #auto="matAutocomplete">
+        <mat-option *ngFor="let message of filteredOptions | async" [value]="message.name"
+          (click)="addSingleUser(message.name)">
+          <div class="autocomplete-icons">
+            <img [src]="getAvatarPath(message.avatar)" width="35" height="35" alt="Avatar" />
             {{ message.name }}
           </div>
         </mat-option>
@@ -28,18 +25,11 @@
     </mat-form-field>
   </mat-dialog-content>
 
+
   <mat-dialog-actions>
     <button
-      [ngStyle]="
-        inputValue.value
-          ? { 'background-color': 'var(--Purple-1, #444df2)' }
-          : { 'background-color': 'gray', cursor: 'not-allowed' }
-      "
-      [disabled]="!inputValue.value"
-      mat-flat-button
-      color="primary"
-    >
-      Hinzufügen
+      [ngStyle]=" inputValue.value? { 'background-color': 'var(--Purple-1, #444df2)' } : { 'background-color': 'gray', cursor: 'not-allowed' } "
+      [disabled]="!inputValue.value" mat-flat-button color="primary"> Hinzufügen
     </button>
   </mat-dialog-actions>
 </section>

@@ -8,13 +8,15 @@ import {
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatAutocomplete, MatAutocompleteModule, MatOption } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { map, startWith } from 'rxjs/operators';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { ChatService } from '../main/chat/chat.service';
 import { UsersList } from '../interfaces/users-list';
-
+import { MatChipGrid,MatChipsModule} from '@angular/material/chips';
+import { MatIcon } from '@angular/material/icon';
 interface Message {
   avatar: string;
   name: string;
@@ -35,14 +37,21 @@ interface Message {
     MatDialogActions,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatChipGrid,
+    MatChipsModule,
+    MatOption,
+    MatIcon,
+    MatAutocomplete
   ],
   templateUrl: './dialog-add-member-to-chnl.component.html',
   styleUrls: ['./dialog-add-member-to-chnl.component.scss'], // Achtung: 'styleUrl' zu 'styleUrls' geändert und als Array definiert
 })
 export class DialogAddMemberToChnlComponent implements OnInit {
   nameControl = new FormControl();
+  addedMembers: UsersList[] = [];
   filteredOptions!: Observable<UsersList[]>; // Typ zu Message[] geändert
-  
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
   messages: Message[] = [
     {
       avatar: '4',
@@ -72,9 +81,11 @@ export class DialogAddMemberToChnlComponent implements OnInit {
     },
   ];
 
-  constructor(public dialogRef: MatDialogRef<DialogAddMemberToChnlComponent>, 
+  constructor(public dialogRef: MatDialogRef<DialogAddMemberToChnlComponent>,
     public dialog: MatDialog,
-  public chatService:ChatService) {}
+    public chatService: ChatService) {
+    
+  }
 
   ngOnInit() {
     this.filteredOptions = this.nameControl.valueChanges.pipe(
@@ -88,6 +99,7 @@ export class DialogAddMemberToChnlComponent implements OnInit {
     return this.chatService.usersList.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
+
   getAvatarPath(avatarNumber: string): string {
     return `./../../assets/img/avatar/${avatarNumber}.svg`;
   }
@@ -95,4 +107,16 @@ export class DialogAddMemberToChnlComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  public addSingleUser(userName: string){
+    for (const user of this.chatService.usersList){
+      if (user.name === userName && this.addedMembers.indexOf(user) === -1) this.addedMembers.push(user)
+    }
+  }
+  public removeUser(user: UsersList){
+    const userIndex = this.addedMembers.indexOf(user);
+    if (userIndex === -1) throw new Error(`No user with id ${user.id} found`)
+    this.addedMembers.splice(userIndex, 1)
+  }
+
 }

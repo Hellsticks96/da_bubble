@@ -9,6 +9,7 @@ import { ChatComponent } from './chat/chat.component';
 import { WelcomeScreenComponent } from './welcome-screen/welcome-screen.component';
 import { DirectMessageComponent } from './conversations/direct-message/direct-message.component';
 import { UsersList } from '../../app/interfaces/users-list';
+import { NewMessageComponent } from './new-message/new-message.component';
 
 @Component({
   selector: 'app-main',
@@ -23,7 +24,8 @@ import { UsersList } from '../../app/interfaces/users-list';
     RouterOutlet,
     ChatComponent,
     WelcomeScreenComponent,
-    DirectMessageComponent
+    DirectMessageComponent,
+    NewMessageComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
@@ -31,7 +33,7 @@ import { UsersList } from '../../app/interfaces/users-list';
 export class MainComponent {
   threadOpen = false;
   showMenu = false;
-  OpenComponent: 'directMessage' | 'newChannel' | 'chat' | string = '';
+  OpenComponent: 'directMessage' | 'newMessage' | 'chat' | string = '';
   selectedUser: UsersList = {
     id: '',
     name: '',

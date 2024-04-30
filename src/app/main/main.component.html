@@ -22,13 +22,16 @@
      }
 
      @case ('chat') {
-       <app-chat (threadOpen)="toggleThread($event)"></app-chat>
+       <app-chat  (threadOpen)="toggleThread($event)"></app-chat>
     @if (threadOpen) {
     <app-thread (threadClose)="toggleThread($event)"></app-thread>
       }
      }
      @case ('directMessage') {
       <app-direct-message [sendedUser]="selectedUser"></app-direct-message>
+     }
+     @case ('newMessage') {
+      <app-new-message ></app-new-message>
      }
     }
 </main>

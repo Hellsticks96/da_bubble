@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { FirestoreService } from '../../firestore.service';
 import { collection, doc, onSnapshot, orderBy, query, setDoc, where, serverTimestamp } from '@angular/fire/firestore';
 import { Channel } from '../../interfaces/channel';
