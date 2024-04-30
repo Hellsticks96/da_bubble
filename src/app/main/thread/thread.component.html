@@ -8,7 +8,7 @@
             </div>
         </div>
         <button (click)="closeThread()" mat-icon-button>
-            <img src="../../../assets/img/icons/close.svg" alt="Send message">
+            <img src="../../../assets/img/icons/close.svg">
         </button>
     </header>
     <div class="chat-body">
@@ -38,30 +38,30 @@
                             }
                             <img src="../../../assets/img/icons/add_reaction.svg" alt="Add reaction">
                         </div>
-                        <img src="" alt="">
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="chat-input">
-            <textarea type="text" placeholder="Antworten..."></textarea>
-            <div class="action-buttons">
-                <div class="button-wrapper">
+        <div class="input-container">
+            <div class="chat-input">
+                <textarea type="text" placeholder="Antworten..."></textarea>
+                <div class="action-buttons">
+                    <div class="button-wrapper">
+                        <button mat-icon-button>
+                            <img src="../../../assets/img/icons/add-gray.svg" alt="Add image">
+                        </button>
+                        <div class="vector"></div>
+                        <button mat-icon-button>
+                            <img src="../../../assets/img/icons/sentiment_satisfied.svg" alt="Add emoji">
+                        </button>
+                        <button mat-icon-button>
+                            <img src="../../../assets/img/icons/alternate_email.svg" alt="Tag someone">
+                        </button>
+                    </div>
                     <button mat-icon-button>
-                        <img src="../../../assets/img/icons/add-gray.svg" alt="Add image">
-                    </button>
-                    <div class="vector"></div>
-                    <button mat-icon-button>
-                        <img src="../../../assets/img/icons/sentiment_satisfied.svg" alt="Add emoji">
-                    </button>
-                    <button mat-icon-button>
-                        <img src="../../../assets/img/icons/alternate_email.svg" alt="Tag someone">
+                        <img src="../../../assets/img/icons/send-button.svg" alt="Send message">
                     </button>
                 </div>
-                <button mat-icon-button>
-                    <img src="../../../assets/img/icons/send-button.svg" alt="Send message">
-                </button>
             </div>
         </div>
         <!-- TODO: add focus textarea on click -->

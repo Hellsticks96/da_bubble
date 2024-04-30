@@ -12,17 +12,14 @@ app-chat {
 mat-drawer-container {
     width: max-content;
     overflow: hidden;
+    border-radius: 1.875rem;
 }
 
 main {
     display: flex;
     gap: 1.5rem;
     padding: 0 1.25rem 1.5625rem 1.25rem;
-    height: 100%;
-}
-
-.menu-container {
-    border-radius: 1.875rem;
+    height: calc(100% - 1.5625rem);
 }
 
 .menu-button {

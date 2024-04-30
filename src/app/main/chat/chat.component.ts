@@ -1,6 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewChild, input } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,15 +35,23 @@ import { Channel } from '../../interfaces/channel';
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
 })
-export class ChatComponent {
+export class ChatComponent implements AfterViewInit, AfterViewChecked {
   @Output()threadOpen = new EventEmitter<boolean>();
+  @ViewChild('chatContainer') private chatContainer!: ElementRef;
   messageText: string = '';
   isPickerVisible = false;
   public currentChannel!: Channel;
 
+  ngAfterViewInit() {
+    this.scrollToBottom()
+  }
 
-  navigateToThread() {
-    this.threadOpen.emit(true);
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  toggleThread() {
+    this.threadOpen.emit(!this.threadOpen);
   }
   
   constructor(
@@ -154,8 +161,17 @@ export class ChatComponent {
       };
 
       await this.chatService.sendMessage(this.chatService.currentChannelID, message);
+      await this.scrollToBottom();
       this.messageText = ''; // Textfeld nach dem Senden leeren
     }
   }
 
+  async scrollToBottom(): Promise<void> {
+    try {
+      this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.error('Error scrolling to bottom:', err);
+    }
+  }
+  // TODO: optimize scroll to bottom (only after sending a message and when opening the chat)
 }

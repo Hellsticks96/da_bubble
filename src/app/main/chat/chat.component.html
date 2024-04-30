@@ -1,23 +1,26 @@
 <section class="chat-body">
     <div class="chat-header">
         <button mat-button (click)="openDialogChannelInfo()">
-            <h1># ChannelName</h1>
-            <span class="material-icons">keyboard_arrow_down</span>
+            <img src="../../../assets/img/icons/chat-tag.svg">
+            <h1>Entwicklerteam</h1>
+            <img src="../../../assets/img/icons/keyboard_arrow_down.svg">
         </button>
         <div class="participants-wrapper">
             <button mat-icon-button (click)="openDialog($event)">
-                <img src="../../../assets/img/avatar/2.svg">
-                <img src="../../../assets/img/avatar/2.svg">
-                <img src="../../../assets/img/avatar/2.svg">
+                <div>
+                    <img src="../../../assets/img/avatar/2.svg">
+                    <img src="../../../assets/img/avatar/2.svg">
+                    <img src="../../../assets/img/avatar/2.svg">
+                </div>
                 <h1>3</h1>
             </button>
             <button mat-icon-button (click)="openDialogAddMembers()">
-                <span class="material-icons">person_add_alt</span>
+                <img src="../../../assets/img/icons/person-add.svg">
             </button>
         </div>
     </div>
     <div class="chat-content">
-        <div class="chat">
+        <div class="chat" #chatContainer>
             <!-- TODO: Add answers to thread amount -->
             <div class="message" *ngFor="let message of chatService.currentChannel.messages | keyvalue">
                 <div class="hoverMenu">
@@ -27,7 +30,7 @@
                     <button mat-icon-button>
                         <img src="../../../assets/img/icons/emoji-hands-up.svg" alt="React">
                     </button>
-                    <button (click)="navigateToThread()" mat-icon-button>
+                    <button (click)="toggleThread();" mat-icon-button>
                         <img src="../../../assets/img/icons/comment.svg" alt="Comment">
                     </button>
                     <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -80,28 +83,30 @@
 
             <!-- TODO: add focus textarea on click -->
         </div>
-        <div class="chat-input">
-            <textarea type="text" [(ngModel)]="messageText" placeholder="Nachricht an #Entwicklerteam"></textarea>
-            <div class="action-buttons">
-                <div class="button-wrapper">
-                    <button mat-icon-button>
-                        <img src="../../../assets/img/icons/add-gray.svg" alt="Add image">
-                    </button>
-                    <div class="vector"></div>
-                    <button mat-icon-button (click)="togglePicker()">
-                        <img src="../../../assets/img/icons/sentiment_satisfied.svg" alt="Add emoji">
-                    </button>
-
-                    <div class="emoji-picker" *ngIf="isPickerVisible">
-                        <emoji-mart (emojiClick)="addEmoji($event)"></emoji-mart>
+        <div class="input-container">
+            <div class="chat-input">
+                <textarea type="text" [(ngModel)]="messageText" placeholder="Nachricht an #Entwicklerteam"></textarea>
+                <div class="action-buttons">
+                    <div class="button-wrapper">
+                        <button mat-icon-button>
+                            <img src="../../../assets/img/icons/add-gray.svg" alt="Add image">
+                        </button>
+                        <div class="vector"></div>
+                        <button mat-icon-button (click)="togglePicker()">
+                            <img src="../../../assets/img/icons/sentiment_satisfied.svg" alt="Add emoji">
+                        </button>
+    
+                        <div class="emoji-picker" *ngIf="isPickerVisible">
+                            <emoji-mart (emojiClick)="addEmoji($event)"></emoji-mart>
+                        </div>
+                        <button mat-icon-button>
+                            <img src="../../../assets/img/icons/alternate_email.svg" alt="Tag someone">
+                        </button>
                     </div>
-                    <button mat-icon-button>
-                        <img src="../../../assets/img/icons/alternate_email.svg" alt="Tag someone">
+                    <button (click)="send()" mat-icon-button>
+                        <img src="../../../assets/img/icons/send-button.svg" alt="Send message">
                     </button>
                 </div>
-                <button (click)="send()" mat-icon-button>
-                    <img src="../../../assets/img/icons/send-button.svg" alt="Send message">
-                </button>
             </div>
         </div>
     </div>

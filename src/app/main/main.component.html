@@ -1,12 +1,12 @@
 <app-header></app-header>
 <main>
-  <mat-drawer-container class="menu-container" autosize>
-    <mat-drawer #drawer opened="true" class="menu-sidenav" mode="side">
+  <mat-drawer-container autosize>
+    <mat-drawer #conversationsDrawer opened="true" mode="side">
       <app-conversations (user)="selectedUserForDM($event)" (openDM)="setComponent($event)"></app-conversations>
     </mat-drawer>
   </mat-drawer-container>
   <button class="menu-button" type="button" [ngClass]="{'closed': !showMenu}" mat-button
-    (click)="drawer.toggle(); showMenu = !showMenu">
+    (click)="conversationsDrawer.toggle(); showMenu = !showMenu">
     @if(showMenu) {
     <span name="Workspace-Menü schließen ">Workspace-Menü schließen </span><img
       src="../../assets/img/icons/sidenav-close.svg">
@@ -22,14 +22,18 @@
      }
 
      @case ('chat') {
-       <app-chat  (threadOpen)="toggleThread($event)"></app-chat>
-    @if (threadOpen) {
-    <app-thread (threadClose)="toggleThread($event)"></app-thread>
-      }
+      <app-chat (threadDrawer)="threadDrawer" (threadOpen)="openThread()"></app-chat>
+      <mat-drawer-container autosize>
+        <mat-drawer #threadDrawer opened="false" mode="side">
+          <app-thread (threadClose)="closeThread()"></app-thread>
+        </mat-drawer>
+      </mat-drawer-container>
      }
+
      @case ('directMessage') {
       <app-direct-message [sendedUser]="selectedUser"></app-direct-message>
      }
+
      @case ('newMessage') {
       <app-new-message ></app-new-message>
      }
