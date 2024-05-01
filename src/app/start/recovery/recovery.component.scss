@@ -85,6 +85,18 @@ form {
                 font-weight: 500;
                 line-height: 120%;
             }
+
+            &:hover {
+                outline: 1px solid var(--light-purple-line);
+            }
+
+            &:focus {
+                outline: 1px solid var(--purple-3);
+
+                &+img {
+                    filter: brightness(0%);
+                }
+            }
         }
 
         >img {
@@ -104,11 +116,13 @@ form {
     width: min-content;
     padding: 0 1.5625rem;
     height: 3.0625rem;
+    transition: 100ms ease-out;
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
         border-radius: 1.5625rem;
         background: var(--purple-1);
         overflow: hidden;
+        transition: 100ms ease-out;
     }
 
     ::ng-deep::ng-deep .mat-mdc-button-ripple {
@@ -125,5 +139,16 @@ form {
         font-weight: 700;
         line-height: normal;
         white-space: nowrap;
+    }
+
+    &:hover {
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            background-color: var(--purple-2);
+
+            &::before {
+                opacity: 0;
+            }
+        }
     }
 }

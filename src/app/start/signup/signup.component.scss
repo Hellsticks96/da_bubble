@@ -62,6 +62,18 @@ form {
                 font-weight: 500;
                 line-height: 120%;
             }
+
+            &:hover {
+                outline: 1px solid var(--light-purple-line);
+            }
+
+            &:focus {
+                outline: 1px solid var(--purple-3);
+
+                &+img {
+                    filter: brightness(0%);
+                }
+            }
         }
 
         >img {
@@ -91,9 +103,40 @@ form {
 
 mat-checkbox {
     margin-top: -0.5rem;
+    height: 2rem;
+
+    ::ng-deep::ng-deep .mat-internal-form-field {
+        height: 2rem;
+        display: flex;
+        gap: 0.5rem;
+    }
 
     ::ng-deep::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
         border-color: var(--purple-2);
+    }
+
+    ::ng-deep::ng-deep .mdc-checkbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    ::ng-deep::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:focus:checked~.mdc-checkbox__background,
+    ::ng-deep::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
+        border-color: var(--purple-1); 
+        background-color: var(--purple-1); 
+    }
+
+    ::ng-deep::ng-deep .mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mdc-checkbox__ripple {
+        background-color: var(--bg-color);
+    }
+
+    ::ng-deep::ng-deep .mat-ripple {
+        display: none;
+    }
+
+    ::ng-deep::ng-deep .mdc-checkbox__ripple {
+        background-color: var(--bg-color);
     }
 
     a {
@@ -115,17 +158,18 @@ mat-checkbox {
     /* 1.2rem */
 }
 
-
 .submit {
     align-self: flex-end;
     width: min-content;
     padding: 0 1.5625rem;
     height: 3.0625rem;
+    transition: 100ms ease-out;
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
         border-radius: 1.5625rem;
         background: var(--purple-1);
         overflow: hidden;
+        transition: 100ms ease-out;
     }
 
     ::ng-deep::ng-deep .mat-mdc-button-ripple {
@@ -141,6 +185,17 @@ mat-checkbox {
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+    }
+
+    &:hover {
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            background-color: var(--purple-2);
+
+            &::before {
+                opacity: 0;
+            }
+        }
     }
 }
 

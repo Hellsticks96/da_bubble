@@ -111,13 +111,17 @@ h2 {
 }
 
 .submit {
+    align-self: flex-end;
+    width: min-content;
     padding: 0 1.5625rem;
     height: 3.0625rem;
+    transition: 100ms ease-out;
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
         border-radius: 1.5625rem;
         background: var(--purple-1);
         overflow: hidden;
+        transition: 100ms ease-out;
     }
 
     ::ng-deep::ng-deep .mat-mdc-button-ripple {
@@ -134,6 +138,17 @@ h2 {
         font-weight: 700;
         line-height: normal;
     }
+
+    &:hover {
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            background-color: var(--purple-2);
+
+            &::before {
+                opacity: 0;
+            }
+        }
+    }
 }
 
 .uploadPic {
@@ -142,10 +157,12 @@ h2 {
     padding: 0 1.5625rem;
     border: 1px solid var(--purple-2) !important;
     border-radius: 1.5625rem;
+    transition: 100ms ease-out;
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
         border-radius: 1.5625rem;
         overflow: hidden;
+        transition: 100ms ease-out;
     }
 
     ::ng-deep::ng-deep .mat-mdc-button-ripple {
@@ -162,6 +179,23 @@ h2 {
         padding: 0;
         font-weight: 700;
         line-height: normal;
+        transition: 100ms ease-out;
+    }
+    
+    &:hover {
+        border-color: var(--purple-3);
+
+        ::ng-deep::ng-deep .mdc-button__label {
+            color: var(--white);
+        }
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            background-color: var(--purple-3);
+
+            &::before {
+                opacity: 0;
+            }
+        }
     }
 }
 
