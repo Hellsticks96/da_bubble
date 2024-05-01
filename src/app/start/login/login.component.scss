@@ -68,6 +68,14 @@ form {
                 font-weight: 500;
                 line-height: 120%;
             }
+
+            &:focus {
+                outline: 1px solid var(--purple-3);
+
+                &+img {
+                    filter: brightness(0%);
+                }
+            }
         }
 
         >img {
@@ -80,10 +88,47 @@ form {
             margin: auto 0;
         }
     }
+}
 
-    >a {
+.forgot-pw {
+    padding: 0.3125rem 0.9375rem;
+    border-radius: 1.875rem;
+    transition: 100ms ease-out;
+
+
+    ::ng-deep::ng-deep .mdc-button__label {
+        color: var(--purple-2);
+        font-family: Figtree;
+        font-size: 1.125rem;
+        font-weight: 400;
         line-height: 120%;
-        padding: 0.3125rem 0.9375rem;
+        transition: 100ms ease-out;
+
+        /* 1.35rem */
+    }
+
+    ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+        transition: 100ms ease-out;
+
+    }
+
+    ::ng-deep::ng-deep .mat-mdc-button-touch-target {
+        height: 100%;
+    }
+
+    &:hover {
+        ::ng-deep::ng-deep .mdc-button__label {
+            color: var(--purple-1);
+            font-weight: 500;
+        }
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            background-color: var(--bg-color);
+
+            &::before {
+                opacity: 0;
+            }
+        }
     }
 }
 
@@ -140,6 +185,9 @@ form {
     width: 100%;
     padding: 0 2rem;
     height: 3.75rem;
+    border: 1px solid transparent;
+    border-radius: 6.25rem;
+    transition: 100ms ease-out;
 
     >img {
         width: 2.375rem;
@@ -150,6 +198,7 @@ form {
         border-radius: 6.25rem;
         background: var(--bg-color);
         overflow: hidden;
+        transition: 100ms ease-out;
     }
 
     ::ng-deep::ng-deep .mat-mdc-button-ripple {
@@ -165,6 +214,23 @@ form {
         color: var(--purple-1);
         font-size: 1.125rem;
         font-weight: 400;
+        transition: 100ms ease-out;
+    }
+
+    &:hover {
+        border-color: var(--purple-1);
+
+        ::ng-deep::ng-deep .mdc-button__label {
+            color: var(--purple-1);
+            font-weight: 700;
+        }
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+
+            &::before {
+                opacity: 0;
+            }
+        }
     }
 }
 
@@ -173,11 +239,13 @@ form {
     width: min-content;
     padding: 0 1.5625rem;
     height: 3.0625rem;
+    transition: 100ms ease-out;
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
         border-radius: 1.5625rem;
         background: var(--purple-1);
         overflow: hidden;
+        transition: 100ms ease-out;
     }
 
     ::ng-deep::ng-deep .mat-mdc-button-ripple {
@@ -194,6 +262,17 @@ form {
         font-weight: 700;
         line-height: normal;
     }
+
+    &:hover {
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            background-color: var(--purple-2);
+
+            &::before {
+                opacity: 0;
+            }
+        }
+    }
 }
 
 .gast-login {
@@ -202,10 +281,12 @@ form {
     padding: 0 1.5625rem;
     border: 1px solid var(--purple-2) !important;
     border-radius: 1.5625rem;
+    transition: 100ms ease-out;
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
         border-radius: 1.5625rem;
         overflow: hidden;
+        transition: 100ms ease-out;
     }
 
     ::ng-deep::ng-deep .mat-mdc-button-ripple {
@@ -222,6 +303,23 @@ form {
         padding: 0;
         font-weight: 700;
         line-height: normal;
+        transition: 100ms ease-out;
+    }
+    
+    &:hover {
+        border-color: var(--purple-3);
+
+        ::ng-deep::ng-deep .mdc-button__label {
+            color: var(--white);
+        }
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            background-color: var(--purple-3);
+
+            &::before {
+                opacity: 0;
+            }
+        }
     }
 }
 

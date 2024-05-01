@@ -17,7 +17,9 @@
     @if (this.router.url === '/login') {
     <div>
       <p>Neu bei DABubble?</p>
-      <a href="./signup">Konto erstellen</a>
+      <button mat-stroked-button (click)="this.router.navigate(['/signup'])" class="secondary-button">
+        Konto erstellen
+      </button>
     </div>
     }
 
@@ -26,7 +28,11 @@
     <ng-content></ng-content>
   </section>
   <section class="footer">
-    <a href="./legal-notice">Impressum</a>
-    <a href="./privacy-policy">Datenschutz</a>
+    <button mat-stroked-button (click)="this.router.navigate(['/legal-notice'])" class="secondary-button">
+      Impressum
+    </button>
+    <button mat-stroked-button (click)="this.router.navigate(['/privacy-policy'])" class="secondary-button">
+      Datenschutz
+    </button>
   </section>
 </main>

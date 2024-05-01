@@ -26,7 +26,7 @@ export class LoginComponent {
   invalidEmail = false;
   invalidPasswordOrEmail = false;
 
-  constructor(private firestore: FirestoreService, private router: Router) {
+  constructor(private firestore: FirestoreService, public router: Router) {
   }
 
   // Google Anmeldung
