@@ -47,28 +47,6 @@ header {
             }
         }
     }
-
-    >button {
-        padding: 0.5rem;
-        width: 2.5rem;
-        height: 2.5rem;
-
-        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple,
-        ::ng-deep::ng-deep .mat-mdc-button-touch-target,
-        ::ng-deep::ng-deep .mat-mdc-focus-indicator,
-        ::ng-deep::ng-deep .mat-ripple {
-            width: 2.5rem;
-            height: 2.5rem;
-        }
-
-        &:hover {
-            background-color: var(--bg-color);
-
-            >img {
-                content: url(../../../assets/img/icons/close-purple.svg);
-            }
-        }
-    }
 }
 
 .chat-body {

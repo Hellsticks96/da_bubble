@@ -72,7 +72,7 @@ export class DialogAddChannelAddMemberComponent implements OnInit {
   dataBase = getFirestore();
 
 
-  onNoClick(): void {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 

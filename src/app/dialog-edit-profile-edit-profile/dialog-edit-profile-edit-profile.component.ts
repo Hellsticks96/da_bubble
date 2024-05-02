@@ -55,7 +55,7 @@ export class DialogEditProfileEditProfileComponent{
       });
     }
 
-    onNoClick() {
+    closeDialog() {
       this.dialogRef.close();
     }
 

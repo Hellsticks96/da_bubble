@@ -18,14 +18,13 @@ export class DialogShowChannelMemberComponent {
     public chatService : ChatService,
     public dialog: MatDialog) {}
 
-  onNoClick() {
+  closeDialog() {
     this.dialogRef.close();
   }
 
   openDialogAddMembers() {
-    this.dialogRef.close();
     this.dialog.open(DialogAddMemberToChnlComponent, {
-      panelClass: 'custom-dialog-br',
+      panelClass: 'custom-dialog-mid',
     });
   }
 }

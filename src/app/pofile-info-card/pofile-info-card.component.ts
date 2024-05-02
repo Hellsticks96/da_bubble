@@ -17,7 +17,7 @@ export class PofileInfoCardComponent {
 constructor(@Inject(MAT_DIALOG_DATA) public data: UsersList, public dialogRef: MatDialogRef<PofileInfoCardComponent>,){
   
 }
-  onNoClick(){
+  closeDialog(){
     this.dialogRef.close();
   }
 }

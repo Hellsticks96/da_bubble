@@ -37,8 +37,9 @@ export class DialogAddChannelComponent {
   dataBase = this.firestore.getFirestore();
   channelName: string = '';
   channelDescription: string = '';
+  invalidName = true;
 
-  onNoClick(): void {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 

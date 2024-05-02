@@ -1,7 +1,9 @@
 <section class="dialog-container">
   <div class="dialog-title-container">
     <h2 mat-dialog-title>Leute hinzufügen</h2>
-    <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="" />
+    <button class="closeButton" (click)="closeDialog()" mat-icon-button>
+      <img src="../../../assets/img/icons/close.svg">
+    </button>
   </div>
   <div class="dialog-content-container">
     <mat-radio-group aria-label="Select an option" [(ngModel)]="selectedOption">

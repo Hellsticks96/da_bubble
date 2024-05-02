@@ -1,23 +1,31 @@
 <section class="dialog-container">
-  <h2 mat-dialog-title>Channel erstellen</h2>
+  <div>
+    <h2 mat-dialog-title>Channel erstellen</h2>
+    <button class="closeButton" (click)="closeDialog()" mat-icon-button>
+      <img src="../../../assets/img/icons/close.svg">
+    </button>
+  </div>
   <span>Channels dienen deinem Team zur Kommunikation. Am besten sollten Sie
-      themebezogen sein <br />#marketing zum Beispiel.</span>
-      
-      <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="">
-      <mat-dialog-content>
-        <mat-label>Channel-Name</mat-label>
-        <mat-form-field appearance="outline">
-          <input placeholder="# z.B Kooperationsprojekte" matInput [(ngModel)]="channelName"/>
-        </mat-form-field>
-      
-        <mat-label>Beschreibung <span>(optional)</span></mat-label>
-        <mat-form-field appearance="outline">
-            <input placeholder="Dein Text hier" matInput [(ngModel)]="channelDescription"/>
-          </mat-form-field>
-      </mat-dialog-content>
-      
-      
-      <mat-dialog-actions>
-        <button mat-flat-button color="primary" (click)="createChannel()">Erstellen</button>
-      </mat-dialog-actions>
+    themebezogen sein #marketing zum Beispiel.</span>
+  <div class="inputContainer">
+    <h3>Channel-Name</h3>
+    <div>
+      <input [(ngModel)]="channelName" placeholder="z.B. Kooperationsprojekte">
+      <img src="../../assets/img/icons/tag-gray.svg">
+      @if (invalidName) {
+      <span class="error">Bitte keine Leerzeichen.</span>
+      }
+    </div>
+  </div>
+  <div class="inputContainer second">
+    <h3>Beschreibung <span>(optional)</span></h3>
+    <div>
+      <input [(ngModel)]="channelDescription" placeholder="Dein Text hier">
+    </div>
+  </div>
+
+
+  <mat-dialog-actions>
+    <button mat-flat-button (click)="createChannel()">Erstellen</button>
+  </mat-dialog-actions>
 </section>

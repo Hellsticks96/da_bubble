@@ -1,13 +1,15 @@
 <section>
     <div class="profile-section">
         <span>Profil</span>
-        <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="" />
+        <button class="closeButton" (click)="closeDialog()" mat-icon-button>
+            <img src="../../../assets/img/icons/close.svg">
+        </button>
     </div>
     <div class="image-section">
         @if (data.avatar.length > 1) {
             <img src="{{ data.avatar }}">
         } @else {
-            <img src="./../../assets/img/avatar/{{data.avatar}}.svg" alt="" />  
+            <img src="./../../assets/img/avatar/{{data.avatar}}.svg" alt="" />
         }
     </div>
     <div class="profile-active-section">
@@ -29,7 +31,7 @@
             <span><b>E-Mail-Adresse</b></span>
         </div>
         <div>
-            <span>sofi.mue&#64;beispiel.de</span>
+            <span>{{data.email}}</span>
         </div>
     </div>
     <mat-dialog-actions>

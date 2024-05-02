@@ -7,17 +7,9 @@
   width: 25rem;
   //   height: 13rem;
 
-  > img {
-    position: absolute;
-    height: 1.2rem;
-    width: 1.2rem;
-    right: 1.5rem;
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 100%;
-    &:hover {
-      background-color: rgba(141, 117, 230, 0.2);
-    }
+  >div {
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -26,13 +18,15 @@ mat-dialog-content {
   flex-direction: column;
   gap: 1rem;
   padding: 0 !important;
-  > mat-label {
+
+  >mat-label {
     color: #797EF3;
     font-size: 1rem;
     font-weight: 800;
     padding-top: 0.5rem;
     padding-top: 0.5rem;
-    > span {
+
+    >span {
       color: gray;
       font-weight: 500;
     }
@@ -42,12 +36,14 @@ mat-dialog-content {
 :host ::ng-deep .mdc-text-field--outlined {
   --mdc-outlined-text-field-container-shape: 1.875rem;
 }
+
 Mat-dialog-actions {
   display: flex;
   width: 100%;
   justify-content: flex-end;
   padding: 0;
-  > button {
+
+  >button {
     font-size: 1rem;
     font-weight: 400;
     border-radius: 1.5625rem;
@@ -66,6 +62,7 @@ mat-option {
   display: flex !important;
   align-items: center !important;
   gap: 5px;
+
   &:hover {
     background-color: rgba(141, 117, 230, 0.2) !important;
   }
@@ -77,12 +74,13 @@ mat-option {
   justify-content: center;
   max-width: 160px;
   width: 160px;
+
   img {
     border-radius: 100%;
     margin-right: 1rem;
   }
 }
 
-::ng-deep::ng-deep.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{
+::ng-deep::ng-deep.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel {
   justify-content: flex-start;
 }

@@ -1,7 +1,9 @@
 <section>
     <div class="profile-section">
         <span>Profil</span>
-        <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="" />
+        <button class="closeButton" (click)="closeDialog()" mat-icon-button>
+            <img src="../../../assets/img/icons/close.svg">
+        </button>
     </div>
     <div class="image-section">
         @if (currentUser.avatar.length > 1) {

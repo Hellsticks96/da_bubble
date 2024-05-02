@@ -104,7 +104,7 @@ export class DialogAddMemberToChnlComponent implements OnInit {
     return `./../../assets/img/avatar/${avatarNumber}.svg`;
   }
 
-  onNoClick(): void {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 

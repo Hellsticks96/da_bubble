@@ -81,6 +81,14 @@ a {
   border-radius: 10px !important;
 }
 
+.custom-dialog-mid {
+  border-radius: 1.875rem !important;
+  overflow: hidden;
+}
+
+.mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before {
+  background-color: unset !important; }
+
 .cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel {
   border-radius: 0 0.8rem 0.8rem 0.8rem !important;
   display: flex;
@@ -113,6 +121,28 @@ a {
 
 *::-webkit-scrollbar-thumb:hover {
   background: var(--purple-3);
+}
+
+button.closeButton  {
+  padding: 0.5rem !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+
+  ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple,
+  ::ng-deep::ng-deep .mat-mdc-button-touch-target,
+  ::ng-deep::ng-deep .mat-mdc-focus-indicator,
+  ::ng-deep::ng-deep .mat-ripple {
+      width: 2.5rem !important;
+      height: 2.5rem !important;
+  }
+
+  &:hover {
+      background-color: var(--bg-color) !important;
+
+      >img {
+          content: url(./assets/img/icons/close-purple.svg) !important;
+      }
+  }
 }
 
 /* Chrome, Edge, Safari */

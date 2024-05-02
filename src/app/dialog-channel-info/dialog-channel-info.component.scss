@@ -1,11 +1,11 @@
 main {
     display: flex;
-    width: 54.5rem;
     padding: 2.5rem;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     gap: 1.25rem;
+    width: 50vw;
 
     background: var(--white);
     box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.20);
@@ -17,10 +17,9 @@ main {
 
 .title {
     display: flex;
-    padding: 0.125rem 0.0625rem;
     align-items: center;
     justify-content: space-between;
-    width: calc(100% - 0.0625rem - 0.0625rem);
+    width: 100%;
 
     >div {
         display: flex;
@@ -31,14 +30,12 @@ main {
             height: 1.875rem;
         }
     }
-
-
 }
 
 .name-box,
 .description-box {
     display: flex;
-    width: calc(100% - 1.25rem);
+    width: calc(100% - 1.25rem - 1.25rem);
     padding: 1.25rem;
     flex-direction: column;
     justify-content: center;
@@ -58,10 +55,20 @@ main {
         font-size: 1.125rem;
     }
 
-    span {
-        color: var(--purple-3);
-        font-size: 1.125rem;
-        font-weight: 600;
+    >div {
+
+        >span {
+            color: var(--purple-3);
+            font-size: 1.125rem;
+            font-weight: 600;
+            transition: 150ms ease-in;
+    
+            &:hover {
+                color: var(--Purple-1, #444DF2);
+                font-weight: 700; 
+                cursor: pointer;
+            }
+        }
     }
 
     >div:last-child {
@@ -99,6 +106,7 @@ main {
     >span {
         font-size: 1.5rem;
         font-weight: 400;
+        color: var(--purple-3);
     }
 }
 
@@ -107,11 +115,13 @@ main {
     width: max-content;
     padding: 0 1.5625rem;
     height: 3.0625rem;
+    transition: 100ms ease-out;
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
         border-radius: 1.5625rem;
         background: var(--purple-1);
         overflow: hidden;
+        transition: 100ms ease-out;
     }
 
     ::ng-deep::ng-deep .mat-mdc-button-ripple {
@@ -127,5 +137,16 @@ main {
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+    }
+
+    &:hover {
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            background-color: var(--purple-2);
+
+            &::before {
+                opacity: 0;
+            }
+        }
     }
 }

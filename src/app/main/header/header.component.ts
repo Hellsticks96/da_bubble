@@ -43,7 +43,7 @@ export class HeaderComponent {
       // Berechnung der Position, um den Dialog unterhalb des Pfeils zu positionieren.
       let dialogPosition = {
         top: `${boundingClientRect.bottom + window.scrollY + 31}px`, // Plus window.scrollY für absolute Positionierung auf der Seite
-        right: `${window.scrollX + 20}px`, // Plus window.scrollX für absolute Positionierung auf der Seite
+        right: `${window.innerWidth - boundingClientRect.left - boundingClientRect.width + window.scrollX}px`
       };
 
       this.dialog.open(DialogEditProfileComponent, {
