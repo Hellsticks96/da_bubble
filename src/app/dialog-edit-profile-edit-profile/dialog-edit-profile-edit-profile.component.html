@@ -10,20 +10,20 @@
             <img src="./../../assets/img/avatar/{{ currentUser.avatar }}.svg"/>    
         }
     </div>
-    <div class="profile-name-section">
-        <h1>{{ currentUser.name }}</h1>
-        <span>Bearbeiten</span>
-    </div>
-    <div class="profile-active-section">
-       <span>{{ currentUser.online }}</span> 
+    <div class="profile-name-container">
+        <div class="profile-name-section">
+            <h1>{{ currentUser.name }}</h1>
+            <span>Bearbeiten</span>
+        </div>
+        <span><img src="../../assets/img/icons/online-1.svg">Aktiv</span>
     </div>
     <div class="profile-mail-section">
         <div class="profile-mail">
-            <img src="../../assets/img/icons/mail-gray.svg" alt="">
+            <img src="../../assets/img/icons/mail-black.svg" alt="">
             <span>E-Mail Adresse</span>
         </div>
         <div>
-            <span>{{ currentUser.email }}</span>
+            <a href="mailto:{{ currentUser.email }}">{{ currentUser.email }}</a>
         </div>
     </div>
 </section>

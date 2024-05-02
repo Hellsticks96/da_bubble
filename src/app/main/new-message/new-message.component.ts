@@ -6,7 +6,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
-import { DirectmessageService } from '../conversations/direct-message/directmessage.service';
+import { DirectmessageService } from '../chat/direct-message/directmessage.service';
 
 @Component({
   selector: 'app-new-message',
@@ -28,7 +28,7 @@ export class NewMessageComponent {
   isPickerVisible = false;
 
 
-  constructor( public DMSerivce : DirectmessageService){
+  constructor(public DMSerivce: DirectmessageService) {
 
   }
   togglePicker() {
@@ -39,5 +39,5 @@ export class NewMessageComponent {
   }
   objectKeys(obj: any): string[] {
     return Object.keys(obj);
-}
+  }
 }

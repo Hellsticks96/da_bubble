@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { ChatComponent } from '../../chat/chat.component';
+import { ChatComponent } from '../chat.component';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogChannelInfoComponent } from '../../../dialog-channel-info/dialog-channel-info.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { ConversationsComponent } from '../conversations.component';
+import { ConversationsComponent } from '../../conversations/conversations.component';
 import { UsersList } from '../../../interfaces/users-list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { serverTimestamp } from '@angular/fire/firestore';
@@ -38,15 +38,15 @@ export class DirectMessageComponent {
   isPickerVisible = false;
   messageText: string = '';
   @Input() sendedUser!: UsersList;
-  
-  constructor(public dialog: MatDialog, public DMSerivce : DirectmessageService) {
+
+  constructor(public dialog: MatDialog, public DMSerivce: DirectmessageService) {
 
   }
   ngOnInit() {
   }
   objectKeys(obj: any): string[] {
     return Object.keys(obj);
-}
+  }
 
   togglePicker() {
     this.isPickerVisible = !this.isPickerVisible;
@@ -63,19 +63,19 @@ export class DirectMessageComponent {
   openProfileCard() {
     this.dialog.open(PofileInfoCardComponent, {
       data: this.sendedUser
-    })
+    });
 
 
   }
   async send() {
     if (this.messageText.trim() !== '') {
       const message: Message = {
-        avatar: '', 
+        avatar: '',
         name: '', // wird im chat.service übernommen 
-        time: new Date().toISOString(), 
+        time: new Date().toISOString(),
         message: this.messageText,
         createdAt: serverTimestamp(),
-        reactions: {} 
+        reactions: {}
       };
 
       await this.DMSerivce.sendMessage(this.sendedUser.id, message);

@@ -51,12 +51,11 @@ export class DialogEditProfileComponent {
       
       // Berechnung der Position, um den Dialog unterhalb des Pfeils zu positionieren.
       let dialogPosition = {
-        top: `${boundingClientRect.bottom + window.scrollY -78}px`, // Plus window.scrollY für absolute Positionierung auf der Seite
-        left: `${boundingClientRect.left + window.scrollX -250}px`, // Plus window.scrollX für absolute Positionierung auf der Seite
+        top: `${boundingClientRect.top + window.scrollY - 30}px`, // Plus window.scrollY für absolute Positionierung auf der Seite
+        right: `${window.scrollX + 20}px`, // Plus window.scrollX für absolute Positionierung auf der Seite
       };
   
       this.dialog.open(DialogEditProfileEditProfileComponent, {
-        width: '450px',
         position: dialogPosition,
       });
     }

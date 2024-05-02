@@ -1,7 +1,7 @@
 .chat-body {
     background-color: #fff;
     border-radius: 2rem;
-    height: 85vh;
+    height: calc(100vh - 8.75rem);
     // width: 75vw;
     display: flex;
     flex-direction: column;

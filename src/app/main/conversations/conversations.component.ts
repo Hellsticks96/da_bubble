@@ -7,14 +7,14 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { DialogAddChannelComponent } from '../../dialog-add-channel/dialog-add-channel.component';
 import { FirestoreService } from '../../firestore.service';
 import { DocumentData, collection, doc, onSnapshot } from '@angular/fire/firestore';
 import { ChannelsList } from '../../interfaces/channels-list';
 import { UsersList } from '../../interfaces/users-list';
 import { ChatService } from '../chat/chat.service';
-import { DirectmessageService } from './direct-message/directmessage.service';
+import { DirectmessageService } from '../chat/direct-message/directmessage.service';
 import { CurrentuserService } from '../../currentuser.service';
 
 @Component({
@@ -34,7 +34,7 @@ import { CurrentuserService } from '../../currentuser.service';
 export class ConversationsComponent {
   @Output() openDM = new EventEmitter<string>();
   @Output() user = new EventEmitter<UsersList>();
-  
+
   contacts = [
     {
       avatar: '6',
@@ -77,10 +77,10 @@ export class ConversationsComponent {
     private firestore: FirestoreService,
     public chatService: ChatService,
     public DMservice: DirectmessageService,
-    private currentUser : CurrentuserService,
+    private currentUser: CurrentuserService,
   ) {
     this.subChannelsList();
-    
+
   }
 
   subChannelsList() {
@@ -88,16 +88,16 @@ export class ConversationsComponent {
     return onSnapshot(ref, (list) => {
       this.channelsList = [];
       list.forEach(element => {
-        this.channelsList.push(this.setChannelsListObj(element.data(), element.id))
-      })
-    })
+        this.channelsList.push(this.setChannelsListObj(element.data(), element.id));
+      });
+    });
   }
 
   setChannelsListObj(obj: any, id: string): ChannelsList {
     return {
       id: id || '',
       channelData: obj.channelData || null,
-    }
+    };
   }
 
   openDialog() {
@@ -105,13 +105,13 @@ export class ConversationsComponent {
       panelClass: 'custom-dialog'
     });
   }
-  openComponent(componentName : string,  ){
-    this.openDM.emit(componentName)
-    
+  openComponent(componentName: string,) {
+    this.openDM.emit(componentName);
+
   }
 
-  openDirectMessage(user : UsersList){
-    this.user.emit(user)
+  openDirectMessage(user: UsersList) {
+    this.user.emit(user);
   }
 }
 

@@ -55,6 +55,7 @@ html {
   --text-gray: #686868;
   --online-green: #92C83E;
   --error: #ED1E79;
+  --link: #1381FF;
 
   margin: 0;
   padding: 0;
@@ -74,8 +75,6 @@ a {
 
 .custom-dialog-br .mdc-dialog__container .mat-mdc-dialog-surface {
   border-radius: 1.875rem 0 1.875rem 1.875rem;
-  bottom: 8rem;
-  right: 12rem;
 }
 
 .mat-autocomplete-panel {

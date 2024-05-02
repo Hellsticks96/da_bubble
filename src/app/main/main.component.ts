@@ -7,7 +7,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { ThreadComponent } from './thread/thread.component';
 import { ChatComponent } from './chat/chat.component';
 import { WelcomeScreenComponent } from './welcome-screen/welcome-screen.component';
-import { DirectMessageComponent } from './conversations/direct-message/direct-message.component';
+import { DirectMessageComponent } from './chat/direct-message/direct-message.component';
 import { UsersList } from '../../app/interfaces/users-list';
 import { NewMessageComponent } from './new-message/new-message.component';
 
@@ -44,11 +44,11 @@ export class MainComponent {
   };
 
   openThread() {
-      this.threadDrawer.open()
+    this.threadDrawer.open();
   }
 
   closeThread() {
-    this.threadDrawer.close()
+    this.threadDrawer.close();
   }
 
   setComponent(componentName: string) {
