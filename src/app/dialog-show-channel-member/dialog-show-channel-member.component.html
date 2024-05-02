@@ -1,21 +1,26 @@
 <section class="dialog-wrapper">
     <div class="dialog-header">
-        <h3>Channel-Mitglieder</h3>
-        <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg" alt="" />
+        <h3>Mitglieder</h3>
+        <img (click)="onNoClick()" src="./../../assets/img/icons/close.svg">
     </div>
-    <div class="dialog-content">
-        @for (user of chatService.usersList; track $index) {
-            @if ($index < 3) {
+    <main>
+        <div class="dialog-content">
+            @for (user of chatService.usersList; track $index) {
                 <div class="channel-member">
-            <img src="./../../assets/img/avatar/{{user.avatar}}.svg" alt="" />
-            <h4>{{user.name}}</h4>
-        </div>
+                    <div class="avatar">
+                        <img src="../../assets/img/avatar/{{user.avatar}}.svg">
+                        <img src="../../assets/img/icons/offline.svg">
+                        <!-- TODO: update status -->
+                    </div>
+                    <h4>{{user.name}}</h4>
+                </div>
             }
-        }
-        <span> Es sind noch {{chatService.usersList.length - 3}} Mitglieder in dem Channel</span>
-    </div>
-    <div class="dialog-add-member">
-        <span class="material-icons" (click)="openDialogAddMembers()">person_add_alt</span>
-        <p>Mitglieder hinzufügen</p>
-    </div>
+        </div>
+        <div class="dialog-add-member">
+            <button mat-icon-button (click)="openDialogAddMembers()">
+                <img src="../../../assets/img/icons/person-add.svg">
+            </button>
+            <p>Mitglieder hinzufügen</p>
+        </div>
+    </main>
 </section>
