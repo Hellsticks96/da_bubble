@@ -68,24 +68,22 @@ a {
   font-size: 1.125rem;
 }
 
-.custom-dialog
-  .mdc-dialog__container
-  .mat-mdc-dialog-surface {
+.custom-dialog .mdc-dialog__container .mat-mdc-dialog-surface {
   border-radius: 1.875rem;
 }
 
-.custom-dialog-br
-  .mdc-dialog__container
-  .mat-mdc-dialog-surface {
+.custom-dialog-br .mdc-dialog__container .mat-mdc-dialog-surface {
   border-radius: 1.875rem 0 1.875rem 1.875rem;
   bottom: 8rem;
   right: 12rem;
 }
+
 .mat-autocomplete-panel {
   border-radius: 10px !important;
 }
-.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{
-  border-radius: 0 0.8rem 0.8rem  0.8rem!important;
+
+.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel {
+  border-radius: 0 0.8rem 0.8rem 0.8rem !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,20 +98,22 @@ a {
 
 /* Chrome, Edge, Safari */
 *::-webkit-scrollbar {
-	width: 6px; /* vertical scrollbar */
+  width: 6px;
+  /* vertical scrollbar */
 }
 
 *::-webkit-scrollbar-track {
-	background: transparent;
+  background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-	background: black;
-	border-radius: 1.875rem;
-	border: 0;
+  background: black;
+  border-radius: 1.875rem;
+  border: 0;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-	background: var(--purple-3);
+  background: var(--purple-3);
 }
+
 /* Chrome, Edge, Safari */
