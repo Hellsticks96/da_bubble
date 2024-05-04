@@ -58,6 +58,13 @@ section {
             color: var(--purple-3);
             font-size: 1.125rem;
             font-weight: 600;
+            transition: 150ms ease-in;
+    
+            &:hover {
+                color: var(--Purple-1, #444DF2);
+                font-weight: 700; 
+                cursor: pointer;
+            }
         }
     }
 
