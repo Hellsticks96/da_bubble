@@ -20,7 +20,7 @@
                 }
                 <!-- TODO: change sentence to more understandable -->
             </div>
-            <button mat-flat-button (click)="this.router.navigate(['/recovery'])" class="forgot-pw">
+            <button mat-flat-button type="button" (click)="this.router.navigate(['/recovery'])" class="forgot-pw">
                 Passwort vergessen?
             </button>
         </div>
@@ -34,7 +34,7 @@
                 Anmelden mit Google
             </button>
             <div>
-                <button mat-flat-button class="submit" (click)="loginWithEmailAndPassword()">Anmelden</button>
+                <button mat-flat-button class="submit" type="submit" (click)="loginWithEmailAndPassword()">Anmelden</button>
                 <button mat-stroked-button class="gast-login">Gäste-Login</button>
             </div>
         </div>

@@ -43,6 +43,9 @@ export class DialogEditProfileEditProfileComponent{
     avatar: '',
     online: false
   };
+  name = '';
+  email = '';
+  editing = false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditProfileEditProfileComponent>,
@@ -54,6 +57,33 @@ export class DialogEditProfileEditProfileComponent{
         // Führen Sie hier Aktionen aus, die vom aktuellen Benutzerstatus abhängen
       });
     }
+
+    editProfile() {
+      this.name = this.currentUser.name;
+      this.email = this.currentUser.email;
+      this.editing = true;
+    }
+
+    cancel() {
+      this.editing = false;
+      this.name = this.currentUser.name;
+      this.email = this.currentUser.email;
+    }
+
+    save() {
+      this.firestore.updateEmail(this.email)
+        .then(() => {
+          return this.firestore.updateUser(this.name, this.email, this.currentUser.avatar);
+        })
+        .then(() => {
+          console.log('User updated successfully');
+          this.editing = false;
+        })
+        .catch(error => {
+          console.error('Error updating email or user data:', error);
+        });
+    }
+    
 
     closeDialog() {
       this.dialogRef.close();

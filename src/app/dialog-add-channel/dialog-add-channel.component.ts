@@ -10,7 +10,7 @@ import {
 } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { DialogAddChannelAddMemberComponent } from '../dialog-add-channel-add-member/dialog-add-channel-add-member.component';
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc } from "firebase/firestore";
 import { FirestoreService } from '../firestore.service';
 import { doc, setDoc } from '@angular/fire/firestore';
 
@@ -43,23 +43,23 @@ export class DialogAddChannelComponent {
     this.dialogRef.close();
   }
 
-  async createChannel(): Promise<void> {
-    if (this.channelName && this.channelDescription) {
-      await setDoc(doc(this.dataBase, "channels", this.channelName), {
-        description: this.channelDescription,
-        members: [],
-      })
+  nameValid() {
+    return this.channelName.indexOf(' ') == -1;
+  }
+
+  async forwardDialog(): Promise<void> {
+    if (this.nameValid()) {
       this.dialogRef.close();
-      
+
       // Öffnen Sie das neue Dialogfeld
       this.dialog.open(DialogAddChannelAddMemberComponent, {
-        data : {
-          channelId: this.channelName
+        data: {
+          channelId: this.channelName,
+          channelDescription: this.channelDescription
         }
       });
     } else {
-      // Optional: Benutzer darüber informieren, dass beide Felder ausgefüllt sein müssen
-      console.log("Bitte füllen Sie beide Felder aus");
+        this.invalidName = true;
     }
   }
 }

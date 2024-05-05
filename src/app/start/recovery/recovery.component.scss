@@ -73,7 +73,7 @@ form {
             padding: 1.125rem 2rem 1.125rem 5.375rem;
             border-radius: 6.25rem;
             background: var(--bg-color);
-            color: var(--text-gray);
+            color: var(--black);
             font-size: 1.125rem;
             font-weight: 500;
             line-height: 120%;
@@ -139,6 +139,7 @@ form {
         font-weight: 700;
         line-height: normal;
         white-space: nowrap;
+        letter-spacing: normal;
     }
 
     &:hover {

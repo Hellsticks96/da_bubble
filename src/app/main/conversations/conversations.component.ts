@@ -74,7 +74,7 @@ export class ConversationsComponent {
 
   constructor(
     public dialog: MatDialog,
-    private firestore: FirestoreService,
+    public firestore: FirestoreService,
     public chatService: ChatService,
     public DMservice: DirectmessageService,
     private currentUser: CurrentuserService,
@@ -101,6 +101,7 @@ export class ConversationsComponent {
   }
 
   openDialog() {
+    console.log(this.firestore.currentUser$)
     this.dialog.open(DialogAddChannelComponent, {
       panelClass: 'custom-dialog'
     });

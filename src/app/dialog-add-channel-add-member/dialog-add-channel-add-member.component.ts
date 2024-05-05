@@ -16,7 +16,7 @@ import { MatIcon } from '@angular/material/icon';
 import { ChatService } from '../main/chat/chat.service';
 import { UsersList } from '../interfaces/users-list';
 import { FirestoreService } from '../firestore.service';
-import { doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { doc, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { getFirestore } from '@firebase/firestore';
 import { Channel } from '../interfaces/channel';
 import { MatAutocomplete, MatAutocompleteModule, MatAutocompleteSelectedEvent, MatOption } from '@angular/material/autocomplete';
@@ -56,46 +56,40 @@ export class DialogAddChannelAddMemberComponent {
   nameInput!: ElementRef<HTMLInputElement>;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: {channelId: string},
+    @Inject(MAT_DIALOG_DATA) private data: {channelId: string, channelDescription: string},
     public dialogRef: MatDialogRef<DialogAddChannelAddMemberComponent>,
     public dialog: MatDialog,
     public chatService: ChatService
   ) {
     this.filteredMembers = this.userCtrl.valueChanges.pipe(
       startWith(''),
-      map((value: string | null) => (value ? this._filter(value) : this.chatService.currentChannel.members.slice())),
+      map((value: string | null) => (value ? this._filter(value) : this.chatService.usersList.slice())),
     );
   }
 
   dataBase = getFirestore();
 
-  public async addSelectedUsers(){
-    await updateDoc(doc(this.dataBase, "channels", `${this.data.channelId}`),{
-      members: this.addedMembers
+
+
+  public async createChannel(){
+    let members: UsersList[];
+
+    if (this.selectedOption === '2') {
+      members = this.addedMembers;
+    } else {
+      members = this.chatService.usersList;
+    }
+
+    await setDoc(doc(this.dataBase, "channels", this.data.channelId), {
+      description: this.data.channelDescription,
+      members: members,
     })
     this.dialog.closeAll()
   }
 
-  public async addAllOfficeMembers(){
-    this.addedMembers = this.chatService.usersList
-  }
-
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-    console.log(value)
-    
-        // Add our member
-    for (let user of this.chatService.currentChannel.members){
-      if (user.name === value && this.addedMembers.indexOf(user) === -1) {
-      this.addedMembers.push(user);
-      }
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
-
-    this.userCtrl.setValue(null);
-  }
+  // public async addAllOfficeMembers(){
+  //   this.addedMembers = this.chatService.usersList
+  // }
 
   remove(user: UsersList): void {
     const index = this.addedMembers.indexOf(user);
@@ -109,7 +103,7 @@ export class DialogAddChannelAddMemberComponent {
     const value = (event.option.viewValue || '').trim();
     
         // Add our member
-    for (let user of this.chatService.currentChannel.members){
+    for (let user of this.chatService.usersList){
       if (user.name === value && this.addedMembers.indexOf(user) === -1) {
       this.addedMembers.push(user);
       }
@@ -122,7 +116,7 @@ export class DialogAddChannelAddMemberComponent {
   private _filter(value: string): UsersList[] {
     const filterValue = value.toLowerCase();
 
-    return this.chatService.currentChannel.members.filter(user => user.name.toLowerCase().includes(filterValue));
+    return this.chatService.usersList.filter(user => user.name.toLowerCase().includes(filterValue));
   }
 
   closeDialog(): void {

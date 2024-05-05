@@ -7,10 +7,14 @@
     </div>
     <main>
         <div class="dialog-content">
-            @for (user of chatService.usersList; track $index) {
+            @for (user of chatService.currentChannel.members; track $index) {
                 <div class="channel-member">
                     <div class="avatar">
-                        <img src="../../assets/img/avatar/{{user.avatar}}.svg">
+                        @if (user.avatar.length > 1) {
+                            <img src="{{ user.avatar }}">
+                        } @else {
+                            <img src="../../assets/img/avatar/{{ user.avatar}}.svg">
+                        }
                         <img src="../../assets/img/icons/offline.svg">
                         <!-- TODO: update status -->
                     </div>

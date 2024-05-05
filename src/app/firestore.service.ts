@@ -4,8 +4,9 @@ import { CollectionReference, DocumentData, Firestore, collection, collectionDat
 import { Observable } from 'rxjs';
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 import { Router } from '@angular/router';
-import { getRedirectResult, signInWithRedirect, signOut } from '@angular/fire/auth';
+import { getRedirectResult, signInWithRedirect, signOut, updateEmail } from '@angular/fire/auth';
 import { User } from './interfaces/user';
+import { CurrentuserService } from './currentuser.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class FirestoreService {
   auth = getAuth();
   provider = new GoogleAuthProvider();
   currentUser$: Observable<string | null>;
+  currentUserID = '';
   usersRef = collection(this.firestore, 'users');
   channelsRef = collection(this.firestore, 'channels');
 
@@ -26,6 +28,7 @@ export class FirestoreService {
       onAuthStateChanged(this.auth, (user) => {
         if (user) {
           observer.next(user.uid);
+          this.currentUserID = user.uid
           if (this.router.url === '/login' || '/signup' || '/recovery' || '/reset-password') {
             this.handleGoogleRedirectResult();
             this.router.navigate(['/'])
@@ -139,4 +142,31 @@ export class FirestoreService {
   confirmPasswordReset(code: string, newPassword: string): Promise<void> {
     return confirmPasswordReset(this.auth, code, newPassword);
   }
+
+  async updateEmail(newEmail: string): Promise<void> {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user) {
+      try {
+        await updateEmail(user, newEmail);
+        console.log('Email successfully updated!');
+
+      } catch (error) {
+        console.error('Error updating email:', error);
+        throw error;
+      }
+    } else {
+      throw new Error('No user logged in!');
+    }
+  }
+
+  async updateUser(name: string, email: string, avatar: string) {
+    const user = {
+      avatar: avatar,
+      name: name,
+      email: email,
+    }
+
+    this.saveUser(user, this.currentUserID);
+  }  
 }

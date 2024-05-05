@@ -144,9 +144,10 @@ export class ChatService {
     return onSnapshot(ref, (list) => {
       this.usersList = [];
       list.forEach(element => {
-        if (element.id !== this.currentUser.currentUserUid) {
-          this.usersList.push(this.setUsersListObj(element.data(), element.id))
-        }
+        this.usersList.push(this.setUsersListObj(element.data(), element.id))
+        // if (element.id !== this.currentUser.currentUserUid) {
+        //   this.usersList.push(this.setUsersListObj(element.data(), element.id))
+        // }
       })
     })
   }

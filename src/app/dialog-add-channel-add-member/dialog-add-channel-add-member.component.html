@@ -7,7 +7,7 @@
   </div>
   <div class="dialog-content-container">
     <mat-radio-group [(ngModel)]="selectedOption">
-      <mat-radio-button value="1" (click)="addAllOfficeMembers()">Alle Mitglieder hinzufügen</mat-radio-button>
+      <mat-radio-button value="1">Alle Mitglieder hinzufügen</mat-radio-button>
       <mat-radio-button value="2">Bestimmte Leute hinzufügen</mat-radio-button>
       <mat-form-field *ngIf="selectedOption === '2'">
         <mat-chip-grid #chipGrid>
@@ -27,8 +27,7 @@
         </mat-chip-grid>
         <input placeholder="Name eingeben" #nameInput [formControl]="userCtrl"
           [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="add($event)"/>
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
           @for (user of filteredMembers | async; track user) {
             @if (addedMembers.indexOf(user) == -1) {
@@ -46,5 +45,5 @@
       </mat-form-field>
     </mat-radio-group>
   </div>
-  <button mat-flat-button class="submit" (click)="addSelectedUsers()">Erstellen</button>
+  <button mat-flat-button class="submit" (click)="createChannel()">Erstellen</button>
 </section>

@@ -11,14 +11,15 @@ import {
 import { MatAutocomplete, MatAutocompleteModule, MatAutocompleteSelectedEvent, MatOption } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { map, startWith } from 'rxjs/operators';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { ChatService } from '../main/chat/chat.service';
 import { UsersList } from '../interfaces/users-list';
-import { MatChipGrid,MatChipInputEvent,MatChipsModule} from '@angular/material/chips';
+import { MatChipGrid, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
 import { DialogChannelInfoComponent } from '../dialog-channel-info/dialog-channel-info.component';
 import { User } from '../interfaces/user';
+import { doc, getFirestore, updateDoc } from '@angular/fire/firestore';
 interface Message {
   avatar: string;
   name: string;
@@ -58,7 +59,7 @@ export class DialogAddMemberToChnlComponent {
 
   @ViewChild('nameInput')
   nameInput!: ElementRef<HTMLInputElement>;
-
+  dataBase = getFirestore();
   // announcer = inject(LiveAnnouncer);
 
   constructor(
@@ -67,25 +68,30 @@ export class DialogAddMemberToChnlComponent {
   ) {
     this.filteredMembers = this.userCtrl.valueChanges.pipe(
       startWith(''),
-      map((value: string | null) => (value ? this._filter(value) : this.chatService.currentChannel.members.slice())),
+      map((value: string | null) => value ? this._filter(value) : this.getAvailableUsers()),
     );
   }
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-    console.log(value)
-    
-        // Add our member
-    for (let user of this.chatService.currentChannel.members){
-      if (user.name === value && this.addedMembers.indexOf(user) === -1) {
-      this.addedMembers.push(user);
-      }
+  public async addSelectedUsers() {
+    const members = this.chatService.currentChannel.members;
+
+    for (let index = 0; index < this.addedMembers.length; index++) {
+      const element = this.addedMembers[index];
+      members.push(element);
     }
 
-    // Clear the input value
-    event.chipInput!.clear();
+    await updateDoc(doc(this.dataBase, "channels", `${this.chatService.currentChannelID}`), {
+      members: members
+    });
+    this.closeDialog();
+  }
 
-    this.userCtrl.setValue(null);
+  getAvailableUsers(): UsersList[] {
+    // Erstellen Sie ein Set mit den IDs der aktuellen Mitglieder für eine effiziente Überprüfung
+    const memberIds = new Set(this.chatService.currentChannel.members.map(member => member.id));
+
+    // Filtern Sie die gesamte Benutzerliste, um nur die Benutzer zu erhalten, die nicht Mitglieder sind
+    return this.chatService.usersList.filter(user => !memberIds.has(user.id));
   }
 
   remove(user: UsersList): void {
@@ -97,12 +103,15 @@ export class DialogAddMemberToChnlComponent {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
+    console.log(this.chatService.usersList);
+    console.log(this.chatService.currentChannel.members);
+    console.log(this.getAvailableUsers());
     const value = (event.option.viewValue || '').trim();
-    
-        // Add our member
-    for (let user of this.chatService.currentChannel.members){
+
+    // Add our member
+    for (let user of this.getAvailableUsers()) {
       if (user.name === value && this.addedMembers.indexOf(user) === -1) {
-      this.addedMembers.push(user);
+        this.addedMembers.push(user);
       }
     }
 
@@ -113,7 +122,7 @@ export class DialogAddMemberToChnlComponent {
   private _filter(value: string): UsersList[] {
     const filterValue = value.toLowerCase();
 
-    return this.chatService.currentChannel.members.filter(user => user.name.toLowerCase().includes(filterValue));
+    return this.getAvailableUsers().filter(user => user.name.toLowerCase().includes(filterValue));
   }
 
   closeDialog(): void {

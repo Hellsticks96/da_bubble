@@ -1,6 +1,11 @@
 <section>
     <div class="profile-section">
-        <span>Profil</span>
+        @if (!editing) {
+            <span>Profil</span>
+        } @else {
+            <span>Dein Profil bearbeiten</span>
+        }
+
         <button class="closeButton" (click)="closeDialog()" mat-icon-button>
             <img src="../../../assets/img/icons/close.svg">
         </button>
@@ -12,20 +17,44 @@
             <img src="./../../assets/img/avatar/{{ currentUser.avatar }}.svg"/>    
         }
     </div>
-    <div class="profile-name-container">
-        <div class="profile-name-section">
-            <h1>{{ currentUser.name }}</h1>
-            <span>Bearbeiten</span>
+    @if (!editing) {
+        <div class="profile-name-container">
+            <div class="profile-name-section">
+                <h1>{{ currentUser.name }}</h1>
+                <span (click)="editProfile()">Bearbeiten</span>
+            </div>
+            <span><img src="../../assets/img/icons/online-1.svg">Aktiv</span>
         </div>
-        <span><img src="../../assets/img/icons/online-1.svg">Aktiv</span>
-    </div>
-    <div class="profile-mail-section">
-        <div class="profile-mail">
-            <img src="../../assets/img/icons/mail-black.svg" alt="">
-            <span>E-Mail Adresse</span>
+        <div class="profile-mail-section">
+            <div class="profile-mail">
+                <img src="../../assets/img/icons/mail-black.svg" alt="">
+                <span>E-Mail Adresse</span>
+            </div>
+            <div>
+                <a href="mailto:{{ currentUser.email }}">{{ currentUser.email }}</a>
+            </div>
         </div>
-        <div>
-            <a href="mailto:{{ currentUser.email }}">{{ currentUser.email }}</a>
+    } @else {
+        <div class="editing-container">
+            <div class="edit-name">
+                <div>
+                    <img src="../../assets/img/icons/account_circle.svg">
+                    <h2>Vollständiger Name</h2>
+                </div>
+                <input [(ngModel)]="name" value="{{ this.name }}" placeholder="Dein Name hier">
+            </div>
+            <div class="edit-email">
+                <div>
+                    <img src="../../assets/img/icons/mail-black.svg">
+                    <h2>E-Mail-Adresse</h2>
+                </div>
+                <input [(ngModel)]="email" value="{{ this.email }}" placeholder="Deine E-Mail hier">
+            </div>
         </div>
-    </div>
+        <div class="button-container">
+            <button mat-stroked-button class="cancel" (click)="cancel()">Abbrechen</button>
+            <button mat-flat-button class="submit" (click)="save()">Speichern</button>
+        </div>
+        <!-- TODO: Error for false email and for relogin to change -->
+    }
 </section>

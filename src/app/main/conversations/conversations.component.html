@@ -47,21 +47,26 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-button-toggle-group class="contact-list" vertical="true" hideSingleSelectionIndicator="true">
-                <mat-button-toggle class="contact" (click)="openDirectMessage(user)" (click)="openComponent('directMessage')" (click)="DMservice.getMessages(user.id)" *ngFor="let user of chatService.usersList">
-                    <div>
-                        @if (user.avatar.length > 1) {
-                            <img src="{{ user.avatar }}">
-                        } @else {
-                            <img src="../../../assets/img/avatar/{{ user.avatar }}.svg">
-                        }
-                        @if(user.online) {
-                        <img src="../../../assets/img/icons/online.svg">
-                        } @else {
-                        <img src="../../../assets/img/icons/offline.svg">
-                        }
-                    </div>
-                    <span>{{ user.name }}</span>
-                </mat-button-toggle>
+                @for (user of chatService.usersList; track user) {
+                    @if (this.firestore.currentUserID !== this.user.id) {
+                        <mat-button-toggle class="contact" (click)="openDirectMessage(user)" (click)="openComponent('directMessage')" (click)="DMservice.getMessages(user.id)">
+                            <div>
+                                @if (user.avatar.length > 1) {
+                                    <img src="{{ user.avatar }}">
+                                } @else {
+                                    <img src="../../../assets/img/avatar/{{ user.avatar }}.svg">
+                                }
+                                @if(user.online) {
+                                <img src="../../../assets/img/icons/online.svg">
+                                } @else {
+                                <img src="../../../assets/img/icons/offline.svg">
+                                }
+                            </div>
+                            <span>{{ user.name }}</span>
+                        </mat-button-toggle>
+                    } @else {
+                    }
+                }
             </mat-button-toggle-group>
         </mat-expansion-panel>
     </div>

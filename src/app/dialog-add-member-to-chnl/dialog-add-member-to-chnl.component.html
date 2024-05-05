@@ -26,8 +26,8 @@
     </mat-chip-grid>
     <input placeholder="Name eingeben" #nameInput [formControl]="userCtrl"
       [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      (matChipInputTokenEnd)="add($event)"/>
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
+      <!-- (matChipInputTokenEnd)="add($event)" -->
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
       @for (user of filteredMembers | async; track user) {
         @if (addedMembers.indexOf(user) == -1) {
@@ -44,7 +44,7 @@
     </mat-autocomplete>
   </mat-form-field>
 
-    <button mat-flat-button class="submit">Hinzufügen</button>
+    <button mat-flat-button class="submit" (click)="addSelectedUsers()">Hinzufügen</button>
   <!-- <mat-dialog-actions>
     <button
       [ngStyle]=" inputValue.value? { 'background-color': 'var(--Purple-1, #444df2)' } : { 'background-color': 'gray', cursor: 'not-allowed' } "
