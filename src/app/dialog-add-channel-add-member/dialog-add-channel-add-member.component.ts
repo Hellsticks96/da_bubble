@@ -69,9 +69,6 @@ export class DialogAddChannelAddMemberComponent {
 
   dataBase = getFirestore();
 
-  dataBase = getFirestore();
-
-
   public async createChannel(){
     let members: UsersList[];
 
