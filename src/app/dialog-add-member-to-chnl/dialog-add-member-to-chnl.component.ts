@@ -54,7 +54,7 @@ export class DialogAddMemberToChnlComponent {
   filteredMembers: Observable<UsersList[]>;
   // fruits: string[] = ['Lemon'];
   addedMembers: UsersList[] = [];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+  // allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
   @ViewChild('nameInput')
   nameInput!: ElementRef<HTMLInputElement>;
@@ -120,74 +120,3 @@ export class DialogAddMemberToChnlComponent {
     this.dialogRef.close();
   }
 }
-
-  //   getAvatarPath(avatarNumber: string): string {
-  //   return `./../../assets/img/avatar/${avatarNumber}.svg`;
-  // }
-
-
-  // nameControl = new FormControl();
-  // 
-  // filteredOptions!: Observable<UsersList[]>; // Typ zu Message[] geändert
-  // removable = true;
-  // separatorKeysCodes: number[] = [ENTER, COMMA];
-  // messages: Message[] = [
-  //   {
-  //     avatar: '4',
-  //     name: 'Noah Braun',
-  //     time: '14:25 Uhr',
-  //     message: 'Welche Version ist aktuell von Angular?',
-  //     reactions: {},
-  //   },
-  //   {
-  //     avatar: '5',
-  //     name: 'Sofia Müller',
-  //     time: '14:30 Uhr',
-  //     message: 'Ich habe die gleiche Frage. Ich habe gegoogelt und es scheint, dass die aktuelle Version Angular 13 ist. Vielleicht weiß Frederik, ob es wahr ist.',
-  //     reactions: {
-  //       nerd: 1,
-  //     },
-  //   },
-  //   {
-  //     avatar: '6',
-  //     name: 'Frederik Beck',
-  //     time: '15:06 Uhr',
-  //     message: 'Ja das ist es.',
-  //     reactions: {
-  //       'hands-up': 1,
-  //       nerd: 3,
-  //     },
-  //   },
-  // ];
-
-  // constructor(public dialogRef: MatDialogRef<DialogAddMemberToChnlComponent>,
-  //   public dialog: MatDialog,
-  //   public chatService: ChatService) {
-    
-  // }
-
-  // ngOnInit() {
-  //   this.filteredOptions = this.nameControl.valueChanges.pipe(
-  //     startWith(''),
-  //     map(value => this._filter(value))
-  //   );
-  // }
-
-  // private _filter(value: string): UsersList[] {
-  //   const filterValue = value.toLowerCase();
-  //   return this.chatService.usersList.filter(option => option.name.toLowerCase().includes(filterValue));
-  // }
-
-
-
-
-  // public addSingleUser(userName: string){
-  //   for (const user of this.chatService.usersList){
-  //     if (user.name === userName && this.addedMembers.indexOf(user) === -1) this.addedMembers.push(user)
-  //   }
-  // }
-  // public removeUser(user: UsersList){
-  //   const userIndex = this.addedMembers.indexOf(user);
-  //   if (userIndex === -1) throw new Error(`No user with id ${user.id} found`)
-  //   this.addedMembers.splice(userIndex, 1)
-  // }

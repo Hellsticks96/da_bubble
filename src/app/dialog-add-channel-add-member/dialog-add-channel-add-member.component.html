@@ -6,37 +6,45 @@
     </button>
   </div>
   <div class="dialog-content-container">
-    <mat-radio-group aria-label="Select an option" [(ngModel)]="selectedOption">
-      <mat-radio-button value="1" (click)="addAllOfficeMembers()">Alle Mitglieder von OfficeTeam
-        hinzufügen</mat-radio-button>
+    <mat-radio-group [(ngModel)]="selectedOption">
+      <mat-radio-button value="1" (click)="addAllOfficeMembers()">Alle Mitglieder hinzufügen</mat-radio-button>
       <mat-radio-button value="2">Bestimmte Leute hinzufügen</mat-radio-button>
-      <mat-form-field appearance="outline" *ngIf="selectedOption === '2'">
-        <mat-chip-grid #chipList>
-          <mat-chip-row *ngFor="let user of addedMembers" [removable]="removable">
-            {{ user.name }}
-            <mat-icon matChipRemove *ngIf="removable" (click)="removeUser(user)">cancel</mat-icon>
-          </mat-chip-row>
-          <input type="text" [matAutocomplete]="auto" [formControl]="nameControl" [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" #inputValue placeholder="Namen eingeben" id="userInput"
-            matInput />
+      <mat-form-field *ngIf="selectedOption === '2'">
+        <mat-chip-grid #chipGrid>
+          @for (user of addedMembers; track user) {
+            <mat-chip-row (removed)="remove(user)">
+            @if (user.avatar.length > 1) {
+              <img src="{{ user.avatar }}">
+          } @else {
+              <img src="../../assets/img/avatar/{{ user.avatar}}.svg">
+          }
+            <h6>{{ user.name }}</h6>
+            <button class="closeButton" matChipRemove mat-icon-button>
+                <img src="../../assets/img/icons/close.svg">
+            </button>
+            </mat-chip-row>
+          }
         </mat-chip-grid>
-        <mat-autocomplete class="custom-autocomplete" #auto="matAutocomplete">
-          <mat-option *ngFor="let message of filteredOptions | async" [value]="message.name"
-            (click)="addSingleUser(message.name)">
-            <div class="autocomplete-icons">
-              <img [src]="getAvatarPath(message.avatar)" width="35" height="35" alt="Avatar" />
-              {{ message.name }}
-            </div>
-          </mat-option>
+        <input placeholder="Name eingeben" #nameInput [formControl]="userCtrl"
+          [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)"/>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          @for (user of filteredMembers | async; track user) {
+            @if (addedMembers.indexOf(user) == -1) {
+              <mat-option [value]="user.name">
+                @if (user.avatar.length > 1) {
+                  <img src="{{ user.avatar }}">
+              } @else {
+                  <img src="../../assets/img/avatar/{{ user.avatar}}.svg">
+              }
+                <h3>{{user.name}}</h3>
+              </mat-option>
+            }
+          }
         </mat-autocomplete>
       </mat-form-field>
     </mat-radio-group>
   </div>
-  <div>
-    <mat-dialog-actions>
-      <button mat-flat-button color="primary" (click)="addSelectedUsers()">
-        Erstellen
-      </button>
-    </mat-dialog-actions>
-  </div>
+  <button mat-flat-button class="submit" (click)="addSelectedUsers()">Erstellen</button>
 </section>

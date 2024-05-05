@@ -1,93 +1,139 @@
 section {
     display: inline-flex;
-    padding: 2rem;
+    padding: 2.5rem;
     flex-direction: column;
     align-items: center;
     gap: 2.8125rem;
-    width: 20rem;
+    width: 25rem;
+}
 
-    .profile-section{
-        width: 100%;
+.profile-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+}
+
+.image-section {
+    height: 12.5rem;
+
+    img {
+        width: 12.5rem;
+        height: 12.5rem;
+        border-radius: 50%;
+    }
+}
+
+.profile-active-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9375rem;
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .status {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 0.9375rem;
 
-        span {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        img{
-            cursor: pointer;
-        }
-    }
-
-    .image-section{
-        img{
-            width: 10rem;
-            height: 10rem;
-            border-radius: 100%;
-        }
-    }
-
-    // .profile-name-section{
-    //     width: 100%;
-    //     display:flex;
-    //     align-items: center;
-    //     justify-content: space-between;
-    // }
-
-    .profile-active-section{
-        width: 100%;
-        display:flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.9rem;
-    }
-    .status{
-        display: flex;
-        gap: 0.5rem;
-    }
-
-    .profile-mail-section{
-        width: 100%;
-        display:flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 1rem;
-        
-        .profile-mail{
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
+        >img {
+            width: 1rem;
+            height: 1rem;
         }
 
-        :last-child{
-            span{
-                padding-left: 2.9rem;
-            }
+        >span {
+            font-size: 1.25rem;
         }
     }
 }
 
-mat-dialog-actions {
-    button{
-        background-color: #444DF2;
-        border-radius: 3.125rem;
-        font-size: 1rem;
-        font-weight: 600;
+.profile-mail-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.9375rem;
+
+    .profile-mail {
         display: flex;
         align-items: center;
-        &:hover{
-            background-color: #767cf3;
+        gap: 1.25rem;
+
+        >span {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+    }
+
+    a {
+        padding-left: 3.125rem;
+        color: var(--link);
+        font-family: Nunito;
+        font-size: 1.125rem;
+        font-weight: 500;
+        line-height: 120%;
+        /* 1.35rem */
+    }
+}
+
+
+.submit {
+    width: min-content;
+    padding: 0 1.5625rem;
+    height: 3.0625rem;
+    transition: 100ms ease-out;
+
+    ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+        border-radius: 1.5625rem;
+        background: var(--purple-1);
+        overflow: hidden;
+        transition: 100ms ease-out;
+    }
+
+    ::ng-deep::ng-deep .mat-mdc-button-ripple {
+        border-radius: 1.5625rem;
+        overflow: hidden;
+    }
+
+    ::ng-deep::ng-deep .mdc-button__label {
+        display: flex;
+        gap: 0.625rem;
+        align-items: center;
+        color: var(--white);
+        font-family: Nunito;
+        font-size: 1.125rem;
+        padding: 0;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+
+        >img {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+
+    &:hover {
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            background-color: var(--purple-2);
+
+            &::before {
+                opacity: 0;
+            }
         }
     }
 }
 
 ::ng-deep::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
     border-radius: 1.875rem;
-}
-::ng-deep::ng-deep .mdc-button__label{
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
 }

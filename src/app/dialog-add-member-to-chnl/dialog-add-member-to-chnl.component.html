@@ -8,7 +8,7 @@
     </div>
     <span><img src="../../assets/img/icons/tag-purple-2.svg"> Entwicklerteam</span>
   </header>
-  <mat-form-field class="example-chip-list">
+  <mat-form-field>
     <mat-chip-grid #chipGrid>
       @for (user of addedMembers; track user) {
         <mat-chip-row (removed)="remove(user)">

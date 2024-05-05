@@ -33,7 +33,7 @@ export class DialogAddChannelComponent {
     public dialogRef: MatDialogRef<DialogAddChannelComponent>,
     public dialog: MatDialog,
     private firestore: FirestoreService
-  ) {}
+  ) { }
   dataBase = this.firestore.getFirestore();
   channelName: string = '';
   channelDescription: string = '';
