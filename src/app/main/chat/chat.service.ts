@@ -14,12 +14,15 @@ export class ChatService {
   // channels: Record<string, Map<string, JSON> > = {};
   channels: Record<string, Channel> = {};
   currentChannel: Channel = {
-    members: [],
-    description: ""
+    name: '',
+    description: "",
+    creator: '',
+    members: []
+
   };
   currentChannelID = '';
   usersList: UsersList[] = [];
-  
+
   // messages = [
   //   {
   //     id: 1,
@@ -54,39 +57,10 @@ export class ChatService {
   //   }
   // ];
 
-  constructor(public firestore: FirestoreService, public currentUser : CurrentuserService) {
+  constructor(public firestore: FirestoreService, public currentUser: CurrentuserService) {
     this.subUsersList();
 
   }
-
-  // openChannel(id: string) {
-  //   let ref = this.firestore.channelsRef;
-
-  //   return onSnapshot(doc(ref, id), (docSnap) => {
-  //     if (docSnap.exists()) {
-
-  //       if (!this.channels[id]) {
-  //         this.channels[id] = {
-  //           members: [],
-  //           messages: new Map()
-  //         };
-  //       }
-  //       docSnap.data()['members'].forEach((member: string) => {
-  //         if (!this.channels[id].members.includes(member)) { // Verhindert Duplikate
-  //           this.channels[id].members.push(member);
-  //         }
-  //       });
-
-  //       Object.keys(docSnap.data()['messages']).forEach(key => {
-  //         const message = docSnap.data()['messages'][key];
-  //         this.channels[id].messages?.set(key, message);
-  //       });
-  //     }
-
-  //     this.currentChannel = this.channels[id];
-  //     this.currentChannelID = id;
-  //   });
-  // }
 
   openChannel(id: string) {
     const channelRef = this.firestore.channelsRef;
@@ -100,8 +74,10 @@ export class ChatService {
     return onSnapshot(messagesQuery, (querySnapshot) => {
       if (!this.channels[id]) {
         this.channels[id] = {
-          members: [],
+          name: '',
           description: "",
+          creator: '',
+          members: [],
           messages: new Map()
         };
       }
@@ -112,8 +88,17 @@ export class ChatService {
       });
 
       onSnapshot(doc(channelRef, id), (docSnap) => {
-        if (docSnap.exists() && docSnap.data()['members']) {
-          this.channels[id].members = docSnap.data()['members'];
+        if (docSnap.exists()) {
+          this.channels[id].name = docSnap.data()['name'];
+          this.channels[id].creator = docSnap.data()['creator'];
+
+          if (docSnap.data()['members']) {
+            this.channels[id].members = docSnap.data()['members'];
+          }
+
+          if (docSnap.data()['description']) {
+            this.channels[id].description = docSnap.data()['description'];
+          }
         }
       });
 
@@ -135,7 +120,7 @@ export class ChatService {
       createdAt: serverTimestamp(),
       reactions: {}
     };
-    console.log(messageData)
+    console.log(messageData);
     await setDoc(newMessageRef, messageData);
   }
 
@@ -144,12 +129,12 @@ export class ChatService {
     return onSnapshot(ref, (list) => {
       this.usersList = [];
       list.forEach(element => {
-        this.usersList.push(this.setUsersListObj(element.data(), element.id))
+        this.usersList.push(this.setUsersListObj(element.data(), element.id));
         // if (element.id !== this.currentUser.currentUserUid) {
         //   this.usersList.push(this.setUsersListObj(element.data(), element.id))
         // }
-      })
-    })
+      });
+    });
   }
 
   setUsersListObj(obj: any, id: string): UsersList {
@@ -159,6 +144,6 @@ export class ChatService {
       avatar: obj.avatar || '',
       email: obj.email || '',
       online: obj.online || false
-    }
+    };
   }
 }

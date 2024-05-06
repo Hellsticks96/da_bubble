@@ -48,13 +48,13 @@ export class DialogAddChannelComponent {
   }
 
   async forwardDialog(): Promise<void> {
-    if (this.nameValid()) {
+    if (this.nameValid() && this.channelName) {
       this.dialogRef.close();
 
       // Öffnen Sie das neue Dialogfeld
       this.dialog.open(DialogAddChannelAddMemberComponent, {
         data: {
-          channelId: this.channelName,
+          channelName: this.channelName,
           channelDescription: this.channelDescription
         }
       });

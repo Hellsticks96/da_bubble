@@ -16,12 +16,13 @@ import { MatIcon } from '@angular/material/icon';
 import { ChatService } from '../main/chat/chat.service';
 import { UsersList } from '../interfaces/users-list';
 import { FirestoreService } from '../firestore.service';
-import { doc, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { getFirestore } from '@firebase/firestore';
 import { Channel } from '../interfaces/channel';
 import { MatAutocomplete, MatAutocompleteModule, MatAutocompleteSelectedEvent, MatOption } from '@angular/material/autocomplete';
 import { Observable, map, startWith } from 'rxjs';
 import {MatChip, MatChipGrid, MatChipInputEvent, MatChipListbox, MatChipSet, MatChipsModule} from '@angular/material/chips';
+import { CurrentuserService } from '../currentuser.service';
 
 
 @Component({
@@ -56,10 +57,11 @@ export class DialogAddChannelAddMemberComponent {
   nameInput!: ElementRef<HTMLInputElement>;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: {channelId: string, channelDescription: string},
+    @Inject(MAT_DIALOG_DATA) private data: {channelName: string, channelDescription: string},
     public dialogRef: MatDialogRef<DialogAddChannelAddMemberComponent>,
     public dialog: MatDialog,
-    public chatService: ChatService
+    public chatService: ChatService,
+    private currentUser: CurrentuserService
   ) {
     this.filteredMembers = this.userCtrl.valueChanges.pipe(
       startWith(''),
@@ -78,8 +80,10 @@ export class DialogAddChannelAddMemberComponent {
       members = this.chatService.usersList;
     }
 
-    await setDoc(doc(this.dataBase, "channels", this.data.channelId), {
+    await addDoc(collection(this.dataBase, "channels"), {
+      name: this.data.channelName,
       description: this.data.channelDescription,
+      creator: this.currentUser.currentUser.name,
       members: members,
     })
     this.dialog.closeAll()

@@ -2,34 +2,66 @@
     <section class="title">
         <div>
             <img src="../../assets/img/icons/tag-black.svg">
-            <h1>Entwicklerteam</h1>
+            <h1>{{ chatService.currentChannel.name }}</h1>
         </div>
         <button class="closeButton" (click)="closeDialog()" mat-icon-button>
             <img src="../../../assets/img/icons/close.svg">
         </button>
     </section>
-    <section class="name-box">
-        <div>
-            <h6>Channel-Name</h6>
-            <span>Bearbeiten</span>
-        </div>
-        <div>
-            <img src="../../assets/img/icons/tag-black.svg">
-            <p>Entwicklerteam</p>
-        </div>
-    </section>
-    <section class="description-box">
-        <div>
-            <h6>Beschreibung</h6>
-            <span>Bearbeiten</span>
-        </div>
-        <div>
-            <p>Dieser Channel ist für alles rund um #dfsdf vorgesehen. Hier kannst du zusammen mit deinem Team Meetings
-                abhalten, Dokumente teilen und Entscheidungen treffen.</p>
-            <div></div>
-            <h6>Erstellt von</h6>
-        </div>
-        <span>Noah Braun</span>
-    </section>
-    <button mat-flat-button class="leave">Channel verlassen</button>
+    @if (!editingName) {
+        <section class="name-box">
+            <div>
+                <h6>Channel-Name</h6>
+                <span (click)="editName()">Bearbeiten</span>
+            </div>
+            <div>
+                <img src="../../assets/img/icons/tag-black.svg">
+                <p>{{ chatService.currentChannel.name }}</p>
+            </div>
+        </section>
+    } @else {
+        <section class="name-box edit-name">
+            <div>
+                <h6>Channel-Name</h6>
+                <span (click)="saveName()">Speichern</span>
+            </div>
+            <div class="inputDiv">
+                <input [(ngModel)]="name" value="{{ this.name }}" placeholder="z.B. Kooperationsprojekte">
+                <img src="../../assets/img/icons/tag-black.svg">
+                @if (invalidName) {
+                    <span class="error">Bitte keine Leerzeichen.</span>
+                    }
+            </div>
+        </section>
+    }
+
+    @if (!editingDescription) {
+        <section class="description-box">
+            <div>
+                <h6>Beschreibung</h6>
+                <span (click)="editDescription()">Bearbeiten</span>
+            </div>
+            <div>
+                <p>{{ chatService.currentChannel.description }}</p>
+                <div></div>
+                <h6>Erstellt von</h6>
+            </div>
+            <span>{{ chatService.currentChannel.creator }}</span>
+        </section>
+    } @else {
+        <section class="description-box">
+            <div>
+                <h6>Beschreibung</h6>
+                <span (click)="saveDescription()">Speichern</span>
+            </div>
+            <div class="inputDiv noIcon">
+                <input [(ngModel)]="description" value="{{ this.description }}" placeholder="Dein Text hier">
+                <div></div>
+                <h6>Erstellt von</h6>
+            </div>
+            <span>{{ chatService.currentChannel.creator }}</span>
+        </section>
+    }
+
+    <button (click)="leaveChannel()" mat-flat-button class="leave">Channel verlassen</button>
 </main>

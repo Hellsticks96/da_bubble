@@ -29,7 +29,7 @@
             <mat-button-toggle-group vertical="true" (click)="openComponent('chat')" hideSingleSelectionIndicator="true" class="channel-list">
                 <mat-button-toggle (click)="chatService.openChannel(channel.id)" class="channel" value="{{ channel.id }}" *ngFor="let channel of channelsList">
                     <img src="../../../assets/img/icons/tag.svg">
-                    <h3>{{ channel.id }}</h3>
+                    <h3>{{ channel.channelData.name }}</h3>
                 </mat-button-toggle>
                 <div class="new-channel" (click)="openDialog()">
                     <img src="../../../assets/img/icons/add_circle.svg">

@@ -46,6 +46,9 @@ export class DialogEditProfileEditProfileComponent{
   name = '';
   email = '';
   editing = false;
+  reloginError = false;
+  emailError = false;
+  nameError = false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditProfileEditProfileComponent>,
@@ -71,6 +74,18 @@ export class DialogEditProfileEditProfileComponent{
     }
 
     save() {
+      if (!this.name) {
+        this.nameError = true;
+      } else if (!this.email) {
+        this.emailError = true;
+      } else {
+        this.nameError = false;
+        this.emailError = false;
+        this.updateUser()
+      }
+    }
+
+    updateUser() {
       this.firestore.updateEmail(this.email)
         .then(() => {
           return this.firestore.updateUser(this.name, this.email, this.currentUser.avatar);
@@ -78,9 +93,23 @@ export class DialogEditProfileEditProfileComponent{
         .then(() => {
           console.log('User updated successfully');
           this.editing = false;
+          this.reloginError = false;
+          this.emailError = false;
         })
         .catch(error => {
-          console.error('Error updating email or user data:', error);
+          switch (error.code) {
+            case 'auth/requires-recent-login':
+              this.emailError = false;
+              this.reloginError = true;
+              break;
+            case 'auth/invalid-email':
+              this.reloginError = false;
+              this.emailError = true;
+              break;
+            default:
+              console.log('An unexpected error occurred.');
+              break;
+          }
         });
     }
     

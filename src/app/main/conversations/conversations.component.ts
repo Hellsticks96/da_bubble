@@ -96,7 +96,7 @@ export class ConversationsComponent {
   setChannelsListObj(obj: any, id: string): ChannelsList {
     return {
       id: id || '',
-      channelData: obj.channelData || null,
+      channelData: obj || null,
     };
   }
 

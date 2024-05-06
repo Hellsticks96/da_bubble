@@ -50,6 +50,13 @@
                 </div>
                 <input [(ngModel)]="email" value="{{ this.email }}" placeholder="Deine E-Mail hier">
             </div>
+            @if (emailError) {
+                <span class="error">E-Mail-Adresse ist ungültig.</span>
+            } @else if (reloginError) {
+                <span class="error">Bitte nochmal einloggen.</span>
+            } @else if (nameError) {
+                <span class="error">Name ist erforderlich.</span>
+            }
         </div>
         <div class="button-container">
             <button mat-stroked-button class="cancel" (click)="cancel()">Abbrechen</button>
