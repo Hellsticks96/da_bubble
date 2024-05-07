@@ -22,6 +22,8 @@ export class ChatService {
   };
   currentChannelID = '';
   usersList: UsersList[] = [];
+  openComponent: 'directMessage' | 'newMessage' | 'chat' | string = '';
+
 
   // messages = [
   //   {
@@ -145,5 +147,9 @@ export class ChatService {
       email: obj.email || '',
       online: obj.online || false
     };
+  }
+
+  setComponent(componentName: string) {
+    this.openComponent = componentName;
   }
 }

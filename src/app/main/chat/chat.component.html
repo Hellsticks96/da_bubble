@@ -2,17 +2,21 @@
     <div class="chat-header">
         <button mat-button (click)="openDialogChannelInfo()">
             <img src="../../../assets/img/icons/chat-tag.svg">
-            <h1>Entwicklerteam</h1>
+            <h1>{{ chatService.currentChannel.name }}</h1>
             <img src="../../../assets/img/icons/keyboard_arrow_down.svg">
         </button>
         <div class="participants-wrapper">
             <button mat-icon-button (click)="openDialog($event)">
                 <div>
-                    <img src="../../../assets/img/avatar/2.svg">
-                    <img src="../../../assets/img/avatar/2.svg">
-                    <img src="../../../assets/img/avatar/2.svg">
+                    @for (i of [0, 1, 2]; track i) {
+                        @if (chatService.currentChannel.members[i].avatar.length > 1) {
+                            <img src="{{ chatService.currentChannel.members[i].avatar }}">
+                        } @else {
+                            <img src="../../../assets/img/avatar/{{ chatService.currentChannel.members[i].avatar}}.svg">
+                        }
+                    }
                 </div>
-                <h1>3</h1>
+                <h1>{{ chatService.currentChannel.members.length }}</h1>
             </button>
             <button mat-icon-button (click)="openDialogAddMembers($event)">
                 <img src="../../../assets/img/icons/person-add.svg">

@@ -2,7 +2,7 @@
 <main>
   <mat-drawer-container autosize>
     <mat-drawer #conversationsDrawer opened="true" mode="side">
-      <app-conversations (user)="selectedUserForDM($event)" (openDM)="setComponent($event)"></app-conversations>
+      <app-conversations (user)="selectedUserForDM($event)" (openDM)="chatService.setComponent($event)"></app-conversations>
     </mat-drawer>
   </mat-drawer-container>
   <button class="menu-button" type="button" [ngClass]="{'closed': !showMenu}" mat-button
@@ -13,9 +13,8 @@
     } @else {
     <span name="Workspace-Menü öffen ">Workspace-Menü öffen </span><img src="../../assets/img/icons/sidenav-open.svg">
     }
-    <!-- TODO: Border in closing animation is overflowing -->
   </button>
-    @switch (OpenComponent) {
+    @switch (chatService.openComponent) {
 
     @default{
       <app-welcome-screen></app-welcome-screen>

@@ -19,19 +19,22 @@
                         <img src="../../../assets/img/icons/workspaces.svg">
                         <h3>Channels</h3>
                     </div>
-                    <button mat-icon-button class="add" (click)="openDialog()">
+                    <button mat-icon-button class="add" (click)="openDialog($event)">
                         <img src="../../../assets/img/icons/add.svg">
                     </button>
-                    <!-- TODO: fix bug channels closing on openDialog (stopPropagation) -->
                 </mat-panel-title>
             </mat-expansion-panel-header>
     
-            <mat-button-toggle-group vertical="true" (click)="openComponent('chat')" hideSingleSelectionIndicator="true" class="channel-list">
-                <mat-button-toggle (click)="chatService.openChannel(channel.id)" class="channel" value="{{ channel.id }}" *ngFor="let channel of channelsList">
-                    <img src="../../../assets/img/icons/tag.svg">
-                    <h3>{{ channel.channelData.name }}</h3>
-                </mat-button-toggle>
-                <div class="new-channel" (click)="openDialog()">
+            <mat-button-toggle-group [value]="selectedChannel" vertical="true" (click)="openComponent('chat')" hideSingleSelectionIndicator="true" class="channel-list">
+                @for (channel of channelsList; track channel) {
+                    @if (memberOfChannel(channel)) {
+                        <mat-button-toggle (click)="openChannel(channel.id)" [value]="channel.id" class="channel" value="{{ channel.id }}">
+                            <img src="../../../assets/img/icons/tag.svg">
+                            <h3>{{ channel.channelData.name }}</h3>
+                        </mat-button-toggle>
+                    }
+                }
+                <div class="new-channel" (click)="openDialog($event)">
                     <img src="../../../assets/img/icons/add_circle.svg">
                     <span>Channel hinzufügen</span>
                 </div>
@@ -46,10 +49,10 @@
                     </div>
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <mat-button-toggle-group class="contact-list" vertical="true" hideSingleSelectionIndicator="true">
+            <mat-button-toggle-group class="contact-list" [value]="selectedDirectmessage" vertical="true" hideSingleSelectionIndicator="true">
                 @for (user of chatService.usersList; track user) {
                     @if (this.firestore.currentUserID !== this.user.id) {
-                        <mat-button-toggle class="contact" (click)="openDirectMessage(user)" (click)="openComponent('directMessage')" (click)="DMservice.getMessages(user.id)">
+                        <mat-button-toggle class="contact" (click)="openDirectMessage(user)" [value]="user.id" (click)="openComponent('directMessage')" (click)="DMservice.getMessages(user.id)">
                             <div>
                                 @if (user.avatar.length > 1) {
                                     <img src="{{ user.avatar }}">

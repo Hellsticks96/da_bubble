@@ -10,6 +10,7 @@ import { WelcomeScreenComponent } from './welcome-screen/welcome-screen.componen
 import { DirectMessageComponent } from './chat/direct-message/direct-message.component';
 import { UsersList } from '../../app/interfaces/users-list';
 import { NewMessageComponent } from './new-message/new-message.component';
+import { ChatService } from './chat/chat.service';
 
 @Component({
   selector: 'app-main',
@@ -34,7 +35,6 @@ export class MainComponent {
   threadOpen = false;
   showMenu = false;
   @ViewChild('threadDrawer') public threadDrawer!: MatSidenav;
-  OpenComponent: 'directMessage' | 'newMessage' | 'chat' | string = '';
   selectedUser: UsersList = {
     id: '',
     name: '',
@@ -42,6 +42,10 @@ export class MainComponent {
     email: '',
     online: false
   };
+
+  constructor(public chatService: ChatService) {
+    
+  }
 
   openThread() {
     this.threadDrawer.open();
@@ -51,9 +55,6 @@ export class MainComponent {
     this.threadDrawer.close();
   }
 
-  setComponent(componentName: string) {
-    this.OpenComponent = componentName;
-  }
   selectedUserForDM(user: UsersList) {
     this.selectedUser = user;
     console.log(this.selectedUser);

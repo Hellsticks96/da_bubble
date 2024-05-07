@@ -35,6 +35,7 @@ export class DialogChannelInfoComponent {
       members: updatedMembers
     });
 
+    this.chatService.setComponent('');
     this.closeDialog();
   }
 
