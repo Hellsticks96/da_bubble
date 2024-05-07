@@ -6,8 +6,12 @@
 }
 
 app-chat,
-app-welcome-screen {
+app-welcome-screen,
+app-direct-message,
+app-new-message {
     flex: 1;
+    overflow: hidden;
+    border-radius: 1.875rem;
 }
 
 mat-drawer-container {
@@ -73,10 +77,6 @@ main {
             color: var(--purple-3);
         }
     }
-}
-
-app-direct-message, app-new-message{
-    width: 80%;
 }
 
 .closed:hover {
