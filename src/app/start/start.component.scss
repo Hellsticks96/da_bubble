@@ -244,6 +244,12 @@ main {
 }
 
 .content {
+  width: calc(37.875rem - 3.3125rem - 3.3125rem);	
+  height: calc(41.8125rem - 2.5rem - 2.5rem);	
+  padding: 2.5rem 3.3125rem;	
+  flex-shrink: 0;	
+  border-radius: 1.875rem;	
+  background: var(--white);
   position: relative;
   flex-shrink: 0;
   border-radius: 1.875rem;
@@ -276,7 +282,9 @@ main {
   }
 
   .content {
-    width: unset;
+    width: calc(92.5vw - 1.25rem - 1.25rem);
+    height: unset;
+    padding: 2.1875rem 1.25rem;
   }
 
   .header {
@@ -308,6 +316,7 @@ main {
   .footer {
     display: none;
   }
+  // TODO: no legal notice & privacy policy wrong?
 
   .secondary-button {
     border: 1px solid var(--purple-2) !important;

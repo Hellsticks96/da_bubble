@@ -47,3 +47,37 @@ font-style: normal;
 font-weight: 700;
 line-height: 120%; /* 2.4rem */
 }
+
+// Media Queries
+
+@media (max-width: 431px) {
+    app-start {
+        ::ng-deep::ng-deep .content {
+            width: calc(92.5vw - 1.25rem - 1.25rem);
+            height: unset;
+            padding: 2.1875rem 1.25rem;
+            gap: 1.5rem;
+
+            >div {
+                gap: 0.75rem;
+            }
+        }
+    }
+
+    .goBack {
+        left: 0;
+        top: 0;
+    }
+
+    h1 {
+        font-size: 2rem;
+    } 
+    
+    p {
+        font-size: 1.0625rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+}

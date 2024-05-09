@@ -29,6 +29,7 @@ h1 {
     color: var(--purple-1);
     font-size: 2.875rem;
     line-height: 120%;
+    text-align: center;
 }
 
 .description {
@@ -47,9 +48,8 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 0.8125rem;
     gap: 2.5rem;
-    width: calc(100% - 0.8125rem - 0.8125rem );
+    width: 100%;
 
     >p {
         color: var(--text-gray);
@@ -59,6 +59,7 @@ form {
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
+        text-align: center;
         /* 1.5rem */
     }
 
@@ -152,4 +153,37 @@ form {
             }
         }
     }
+}
+
+// Media Queries
+
+@media (max-width: 431px) {
+    app-start {
+        ::ng-deep::ng-deep .content {
+            width: calc(92.5vw - 1.25rem - 1.25rem);
+            height: unset;
+            padding: 2.1875rem 1.25rem;
+            gap: 1.5625rem;
+        }
+    }    
+
+    .goBack {
+        top: 2.1875rem;
+        left: 1.25rem;
+    }
+
+    .description {
+        gap: 0.75rem;
+        
+        >p {
+            font-size: 1.0625rem;
+        }
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin: 0 2.5rem;
+    }
+
+
 }
