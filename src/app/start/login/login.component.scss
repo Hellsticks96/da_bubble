@@ -98,6 +98,7 @@ form {
     padding: 0.3125rem 0.9375rem;
     border-radius: 1.875rem;
     transition: 100ms ease-out;
+    height: unset;
 
 
     ::ng-deep::ng-deep .mdc-button__label {
@@ -107,6 +108,7 @@ form {
         font-weight: 400;
         line-height: 120%;
         transition: 100ms ease-out;
+        letter-spacing: normal;
 
         /* 1.35rem */
     }
@@ -219,6 +221,7 @@ form {
         font-size: 1.125rem;
         font-weight: 400;
         transition: 100ms ease-out;
+        letter-spacing: normal;
     }
 
     &:hover {
@@ -311,7 +314,7 @@ form {
         transition: 100ms ease-out;
         letter-spacing: normal;
     }
-    
+
     &:hover {
         border-color: var(--purple-3);
 
@@ -336,5 +339,80 @@ form {
 
     to {
         opacity: 1;
+    }
+}
+
+// Media Queries
+
+@media (max-width: 431px) {
+    app-start {
+        ::ng-deep::ng-deep .content {
+            width: calc(92.5vw - 1.25rem - 1.25rem);
+            height: unset;
+            padding: 2.1875rem 1.25rem;
+            gap: 1.25rem;
+        }
+    }
+
+    .description {
+        gap: 0.9375rem;
+
+        >h1 {
+            font-size: 2rem;
+        }
+
+        >p {
+            font-size: 1.0625rem;
+        }
+    }
+
+    .upper-container {
+        gap: 1.25rem;
+
+        >div:first-child {
+            margin-bottom: 0.625rem;
+        }
+
+        >div {
+            >input {
+                padding: 0.8125rem 2rem 0.8125rem 5.375rem;
+            }
+        }
+    }
+
+    .forgot-pw {
+        ::ng-deep::ng-deep .mdc-button__label {
+            font-size: 1.0625rem;
+            letter-spacing: normal;
+        }
+    }
+
+    form {
+        gap: 1.25rem;
+    }
+
+    .middle-container {
+        margin-bottom: unset;
+
+        >span {
+            font-size: 1.0625rem;
+        }
+    }
+
+    .google {
+        height: 3.125rem;
+
+        ::ng-deep::ng-deep .mdc-button__label {
+            font-size: 1.0625rem;
+            letter-spacing: normal;
+        }
+    }
+
+    .lower-container {
+        gap: 1.25rem;
+
+        >div {
+            gap: 1.25rem;
+        }
     }
 }

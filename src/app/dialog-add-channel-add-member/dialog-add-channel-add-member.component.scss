@@ -41,6 +41,7 @@ mat-radio-button {
         color: var(--Black, #000);
         font-size: 1.125rem;
         line-height: normal;
+        letter-spacing: normal;
     }
 
     &:hover:not(.mat-mdc-radio-checked) {
@@ -116,6 +117,7 @@ mat-chip-row {
             white-space: break-spaces;
             text-align: start;
             max-width: 11vw;
+            letter-spacing: normal;
         }
     }
 
