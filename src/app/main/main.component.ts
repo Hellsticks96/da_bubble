@@ -11,6 +11,7 @@ import { DirectMessageComponent } from './chat/direct-message/direct-message.com
 import { UsersList } from '../../app/interfaces/users-list';
 import { NewMessageComponent } from './new-message/new-message.component';
 import { ChatService } from './chat/chat.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-main',
@@ -26,7 +27,8 @@ import { ChatService } from './chat/chat.service';
     ChatComponent,
     WelcomeScreenComponent,
     DirectMessageComponent,
-    NewMessageComponent
+    NewMessageComponent,
+    MatButtonModule
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
@@ -45,6 +47,11 @@ export class MainComponent {
 
   constructor(public chatService: ChatService) {
     
+  }
+
+  openComponent(componentName: string,) {
+    this.chatService.setComponent(componentName);
+
   }
 
   openThread() {

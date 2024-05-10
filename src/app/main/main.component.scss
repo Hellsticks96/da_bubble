@@ -79,8 +79,94 @@ main {
     }
 }
 
+.new-dm {
+    position: fixed;
+    right: 1rem;
+    bottom: 2.25rem;
+    padding: 1rem;
+    width: 3.75rem;
+    height: 3.75rem;
+    transition: 100ms ease-out;
+    border-radius: 50%;
+
+    ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+        border-radius: 50%;
+        background: var(--purple-1);
+        overflow: hidden;
+        transition: 100ms ease-out;
+    }
+
+    ::ng-deep::ng-deep .mat-mdc-button-ripple {
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    ::ng-deep::ng-deep .mdc-button__label {
+        color: var(--white);
+        font-family: Nunito;
+        font-size: 1.125rem;
+        padding: 0;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: normal;
+
+        >img {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+
+    &:hover {
+
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            background-color: var(--purple-2);
+
+            &::before {
+                opacity: 0;
+            }
+        }
+    }
+}
+
 .closed:hover {
     >img {
         content: url(../../assets/img/icons/sidenav-open-purple.svg) !important;
+    }
+}
+
+.mobile {
+    display: none;
+}
+
+
+
+// Media Queries
+
+@media (max-width: 431px) {
+    :host {
+        gap: 1.5625rem;
+        background-color: var(--white);
+        min-height: 100vh;
+    }
+
+    .mobile {
+        display: unset;
+    }
+
+    main {
+        display: none;
+    }
+
+    app-conversations {
+        margin-top: 11.6625rem;
+    }
+
+    app-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 3;
     }
 }

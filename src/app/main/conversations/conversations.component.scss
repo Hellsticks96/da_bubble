@@ -79,23 +79,25 @@ main {
 
     >mat-expansion-panel-header {
         padding: 0 0 1rem 0;
+
         mat-panel-title {
             display: flex;
             justify-content: space-between;
-                >div {
-                    display: flex;
-                    align-items: center;
 
-                    img {
-                        padding-right: 0.5rem;
-                    }
+            >div {
+                display: flex;
+                align-items: center;
+
+                img {
+                    padding-right: 0.5rem;
                 }
             }
-
         }
 
-
     }
+
+
+}
 
 
 .channels,
@@ -106,7 +108,7 @@ main {
             font-size: 1.25rem;
         }
     }
-    
+
     mat-expansion-panel-header:hover {
         background: none !important;
 
@@ -369,5 +371,39 @@ mat-button-toggle {
 }
 
 ::ng-deep::ng-deep .mat-expansion-panel-body {
-    padding: 0 0 16px 24px !important;
+    padding: 0 0 1rem 1.5rem !important;
+}
+
+// Media Queries
+
+@media (max-width: 431px) {
+    .workspace {
+        display: none;
+    }
+
+    main {
+        padding: 0 2.25rem 2.25rem 2.25rem;
+        height: auto;
+    }
+
+    .container {
+        padding: 0;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        gap: 0.875rem;
+    }
+
+    .channels,
+    .directmessages {
+
+        >mat-expansion-panel-header {
+            height: 2.875rem;
+
+            mat-panel-title {
+                margin: 0;
+
+            }
+        }
+    }
 }
