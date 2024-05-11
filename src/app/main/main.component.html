@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header [mobileOpen]="mobileOpen" (mobileClose)="mobileGoBack()"></app-header>
 <main>
   <mat-drawer-container autosize>
     <mat-drawer #conversationsDrawer opened="true" mode="side">
@@ -38,6 +38,14 @@
      }
     }
 </main>
-<app-conversations class="mobile">
-</app-conversations>
-<button mat-flat-button class="new-dm mobile" type="submit" (click)="openComponent('newMessage')"><img src="../../assets/img/icons/edit_square-white.svg"></button>
+
+@switch (mobileOpen) {
+  @default {
+    <app-conversations (mobileOpen)="openMobileComponent($event)" class="mobile">
+    </app-conversations>
+    <button mat-flat-button class="new-dm mobile" type="submit" (click)="openComponent('newMessage')"><img src="../../assets/img/icons/edit_square-white.svg"></button>
+  } @case ('chat') {
+    <app-chat></app-chat>
+  }
+}
+

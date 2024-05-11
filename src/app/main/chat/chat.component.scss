@@ -55,8 +55,9 @@
             gap: 0.625rem;
 
             >img:first-child {
-                height: 100%;
-                width: 100%;
+                height: 1.4375rem;
+                width: 1.375rem;
+                padding: 0.3125rem;
             }
 
             >h1 {
@@ -66,6 +67,7 @@
                 font-style: normal;
                 font-weight: 700;
                 line-height: normal;
+                white-space: nowrap;
             }
 
             >img:last-child {
@@ -459,4 +461,83 @@
     z-index: 5;
     left: 6rem;
     bottom: 1rem;
+}
+
+// Media Queries
+
+@media (max-width: 431px) {
+
+    .chat-body {
+        margin-top: 3.4375rem;
+        height: calc(100vh - 5rem);
+    }
+
+    .chat-header {
+        border-radius: 0;
+        padding: 0.625rem 1rem;
+        height: 2.5rem;
+
+        >button {
+            padding: 0.125rem 0rem;
+            height: 2.13671875rem;
+
+            ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple,
+            ::ng-deep::ng-deep .mat-mdc-button-touch-target,
+            ::ng-deep::ng-deep .mat-mdc-focus-indicator,
+            ::ng-deep::ng-deep .mat-ripple {
+                height: 2.13671875rem;
+            }
+
+            ::ng-deep::ng-deep .mdc-button__label {
+                gap: 0.3125rem;
+
+                >img:first-child {
+                    width: 1rem;
+                    height: 1.0625rem;
+                    padding: 0.3125rem 0.5rem;
+                }
+
+                >h1 {
+                    font-size: 1.25rem;
+                }
+            }
+        }
+    }
+
+    .participants-wrapper {
+        >button:first-child {
+            display: none;
+        }
+
+        button:last-child {
+            width: 2.125rem;
+            height: 2.125rem;
+            padding: 0.5rem;
+            background-color: var(--bg-color);
+
+            ::ng-deep::ng-deep .mat-mdc-button-touch-target {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            img {
+                width: 1.125rem;
+                height: 1.125rem;
+            }
+        }
+    }
+
+    .chat-content {
+        height: calc(100% - 3.386875rem);
+    }
+
+    .message {
+        padding: 0.625rem 1rem;
+        gap: 1rem;
+
+        >img {
+            width: 3.125rem;
+            height: 3.125rem;
+        }
+    }
 }

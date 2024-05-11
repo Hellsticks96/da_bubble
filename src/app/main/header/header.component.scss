@@ -131,6 +131,49 @@ h1 {
     }
 }
 
+.d-none {
+    display: none !important;
+}
+
+.devspace {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 3.125rem;
+    height: 3.125rem;
+
+    >img:first-child {
+        width: 3.125rem;
+        height: 3.125rem;
+    }
+
+    >img:last-child {
+        position: absolute;
+        width: 1.8rem;
+        height: 1.20875rem;
+    }
+}
+
+.mobile-header-open {
+    display: flex;
+    gap: 0.125rem;
+    align-items: center;
+
+    >img:first-child {
+        width: 1.5625rem;
+        height: 1.5625rem;
+    }
+
+    >img:last-child {
+        margin-left: 0.5rem;
+        width: 5.03581rem;
+        height: 1.13875rem;
+    }
+}
+
 // Media Queries
 
 @media (max-width: 431px) {

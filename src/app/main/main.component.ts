@@ -28,7 +28,8 @@ import { MatButtonModule } from '@angular/material/button';
     WelcomeScreenComponent,
     DirectMessageComponent,
     NewMessageComponent,
-    MatButtonModule
+    MatButtonModule,
+    NgClass
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
@@ -44,9 +45,18 @@ export class MainComponent {
     email: '',
     online: false
   };
+  mobileOpen = '';
 
   constructor(public chatService: ChatService) {
     
+  }
+
+  mobileGoBack() {
+    this.mobileOpen = '';
+  }
+
+  openMobileComponent(string: string) {
+    this.mobileOpen = string;
   }
 
   openComponent(componentName: string,) {

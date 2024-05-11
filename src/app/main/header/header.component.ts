@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -8,6 +8,7 @@ import { FirestoreService } from '../../firestore.service';
 import { DocumentData, doc, onSnapshot } from '@angular/fire/firestore';
 import { UsersList } from '../../interfaces/users-list';
 import { CurrentuserService } from '../../currentuser.service';
+import { NgClass } from '@angular/common';
 
 
 @Component({
@@ -19,15 +20,16 @@ import { CurrentuserService } from '../../currentuser.service';
     MatExpansionModule,
     MatDialogModule,
     DialogEditProfileComponent,
+    NgClass
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  
+@Input() mobileOpen = '';
+@Output() mobileClose = new EventEmitter<string>();
 
   constructor(public dialog: MatDialog, public currentuser: CurrentuserService) {
-    
     console.log(currentuser)
   }
 
@@ -52,6 +54,8 @@ export class HeaderComponent {
     }
   }
 
-  
-
+  mobileGoBack() {
+    this.mobileClose.emit('');
+    this.mobileOpen = '';
+  }
 }

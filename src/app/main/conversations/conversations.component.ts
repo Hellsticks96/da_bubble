@@ -34,11 +34,13 @@ import { CurrentuserService } from '../../currentuser.service';
 export class ConversationsComponent {
   @Output() openDM = new EventEmitter<string>();
   @Output() user = new EventEmitter<UsersList>();
+  @Output() mobileOpen = new EventEmitter<string>();
   
   channelsList: ChannelsList[] = [];
   usersList: UsersList[] = [];
   selectedChannel = '';
   selectedDirectmessage = '';
+
 
 
 
@@ -91,6 +93,9 @@ export class ConversationsComponent {
     this.selectedChannel = channelId;
     this.selectedDirectmessage = '';
     this.chatService.openChannel(channelId);
+    if (window.matchMedia('(max-width: 431px)').matches) {
+      this.mobileOpen.emit('chat');
+    }
   }
 
   openDirectMessage(user: UsersList) {

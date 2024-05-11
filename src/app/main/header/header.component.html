@@ -1,8 +1,19 @@
 <section class="header-content">
-    <div class="logo">
-        <img src="../../../assets/img/logo/icon.svg">
-        <img src="../../../assets/img/logo/name.svg">
-    </div>
+    @if (mobileOpen === 'chat' || mobileOpen === 'thread') {
+        <div class="mobile-header-open" (click)="mobileGoBack()">
+            <img src="../../../assets/img/icons/keyboard_arrow_left.svg">
+            <div class="devspace">
+                <img src="../../../assets/img/devspace/background.png">
+                <img src="../../../assets/img/devspace/devspace.svg">
+            </div>
+            <img src="../../../assets/img/devspace/name.svg">
+        </div>
+    } @else {
+        <div class="logo">
+            <img src="../../../assets/img/logo/icon.svg">
+            <img src="../../../assets/img/logo/name.svg">
+        </div>
+    }
     <div class="searchbar-wrapper">
         <input placeholder="Code learning durchsuchen">
         <span class="material-icons">search</span>
@@ -24,7 +35,8 @@
         </button>
     </div>
 </section>
-<div class="searchbar-wrapper mobile">
+<div [ngClass]="{'d-none': mobileOpen === 'chat' || mobileOpen === 'thread'}"
+class="searchbar-wrapper mobile">
     <input placeholder="Gehe zu...">
     <img src="../../../assets/img/icons/search.svg">
 </div>
