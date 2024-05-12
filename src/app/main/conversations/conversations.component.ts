@@ -86,7 +86,6 @@ export class ConversationsComponent {
 
   openComponent(componentName: string,) {
     this.openDM.emit(componentName);
-
   }
 
   openChannel(channelId: string) {
@@ -102,6 +101,9 @@ export class ConversationsComponent {
     this.selectedDirectmessage = user.id;
     this.selectedChannel = '';
     this.user.emit(user);
+    if (window.matchMedia('(max-width: 431px)').matches) {
+      this.mobileOpen.emit('directmessage');
+    }
   }
 }
 

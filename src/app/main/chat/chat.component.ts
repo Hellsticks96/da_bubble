@@ -37,6 +37,7 @@ import { Channel } from '../../interfaces/channel';
 })
 export class ChatComponent implements AfterViewInit, AfterViewChecked {
   @Output() threadOpen = new EventEmitter<boolean>();
+  @Output() mobileOpen = new EventEmitter<string>();
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
   messageText: string = '';
   isPickerVisible = false;
@@ -52,6 +53,9 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
 
   toggleThread() {
     this.threadOpen.emit(!this.threadOpen);
+    if (window.matchMedia('(max-width: 431px)').matches) {
+      this.mobileOpen.emit('thread');
+    }
   }
 
   constructor(
@@ -183,6 +187,14 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
       this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
     } catch (err) {
       console.error('Error scrolling to bottom:', err);
+    }
+  }
+
+  emptyChannel() {
+    if (this.chatService.currentChannel.messages) {
+      return this.chatService.currentChannel.messages?.size === 0;
+    } else {
+      return false;
     }
   }
   // TODO: optimize scroll to bottom (only after sending a message and when opening the chat)

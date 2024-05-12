@@ -157,4 +157,11 @@ main {
     main {
         display: none;
     }
+
+    app-chat,
+    app-welcome-screen,
+    app-direct-message,
+    app-new-message {
+        border-radius: 0;
+    }
 }

@@ -232,3 +232,40 @@ header {
 .input-container {
     padding: 0.5rem 1rem 1rem 1rem;
 }
+
+// Media Queries
+
+@media (max-width: 431px) {
+    :host {
+        max-width: unset;
+    }
+
+    main {
+        margin-top: 3.4375rem;
+        height: calc(100vh - 5rem);
+    }
+
+    header {
+        padding: 0.625rem 1rem;
+
+        >div {
+            >h1 {
+                font-size: 1.25rem;
+            }
+        }
+    }
+
+    .chat-body {
+        height: calc(100% - 3.75rem);
+    }
+
+    .message {
+        padding: 0.625rem 1rem;
+        gap: 1rem;
+
+        >img {
+            width: 3.125rem;
+            height: 3.125rem;
+        }
+    }
+}

@@ -24,6 +24,7 @@
         </div>
     </div>
     <div class="chat-content">
+        @if (!emptyChannel()) {
         <div class="chat" #chatContainer>
             <!-- TODO: Add answers to thread amount -->
             <div class="message" *ngFor="let message of chatService.currentChannel.messages | keyvalue">
@@ -87,9 +88,23 @@
 
             <!-- TODO: add focus textarea on click -->
         </div>
+        } @else {
+        <div class="blank-chat">
+            <div class="blank-info">
+                <div>
+                    <img src="../../../assets/img/icons/chat-tag.svg">
+                    <h1>{{chatService.currentChannel.name}}</h1>
+                </div>
+                <span>
+                    <button>&#64;{{chatService.currentChannel.creator}}</button>
+                    hat diesen Channel neu erstellt und das ist der Anfang des Channels.
+                </span>
+            </div>
+        </div>
+        }
         <div class="input-container">
             <div class="chat-input">
-                <textarea type="text" [(ngModel)]="messageText" placeholder="Nachricht an #Entwicklerteam"></textarea>
+                <textarea type="text" [(ngModel)]="messageText" placeholder="Nachricht an #{{chatService.currentChannel.name}}"></textarea>
                 <div class="action-buttons">
                     <div class="button-wrapper">
                         <button mat-icon-button>

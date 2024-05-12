@@ -1,5 +1,5 @@
 <section class="header-content">
-    @if (mobileOpen === 'chat' || mobileOpen === 'thread') {
+    @if (mobileOpen === 'chat' || mobileOpen === 'thread' || mobileOpen === 'directmessage' || mobileOpen === 'newMessage') {
         <div class="mobile-header-open" (click)="mobileGoBack()">
             <img src="../../../assets/img/icons/keyboard_arrow_left.svg">
             <div class="devspace">
@@ -35,7 +35,7 @@
         </button>
     </div>
 </section>
-<div [ngClass]="{'d-none': mobileOpen === 'chat' || mobileOpen === 'thread'}"
+<div [ngClass]="{'d-none': mobileOpen === 'chat' || mobileOpen === 'thread' || mobileOpen === 'directmessage' || mobileOpen === 'newMessage'}"
 class="searchbar-wrapper mobile">
     <input placeholder="Gehe zu...">
     <img src="../../../assets/img/icons/search.svg">

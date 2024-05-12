@@ -49,10 +49,10 @@
                     </div>
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <mat-button-toggle-group class="contact-list" [value]="selectedDirectmessage" vertical="true" hideSingleSelectionIndicator="true">
+            <mat-button-toggle-group class="contact-list" [value]="selectedDirectmessage" (click)="openComponent('directMessage');" vertical="true" hideSingleSelectionIndicator="true">
                 @for (user of chatService.usersList; track user) {
                     @if (this.firestore.currentUserID !== this.user.id) {
-                        <mat-button-toggle class="contact" (click)="openDirectMessage(user)" [value]="user.id" (click)="openComponent('directMessage')" (click)="DMservice.getMessages(user.id)">
+                        <mat-button-toggle class="contact" (click)="DMservice.getMessages(user.id); openDirectMessage(user);" [value]="user.id">
                             <div>
                                 @if (user.avatar.length > 1) {
                                     <img src="{{ user.avatar }}">
