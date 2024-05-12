@@ -23,7 +23,7 @@
         <section class="name-box edit-name">
             <div>
                 <h6>Channel-Name</h6>
-                <span (click)="saveName()">Speichern</span>
+                <span (click)="saveName()" class="save">Speichern</span>
             </div>
             <div class="inputDiv">
                 <input [(ngModel)]="name" value="{{ this.name }}" placeholder="z.B. Kooperationsprojekte">
@@ -52,7 +52,7 @@
         <section class="description-box">
             <div>
                 <h6>Beschreibung</h6>
-                <span (click)="saveDescription()">Speichern</span>
+                <span (click)="saveDescription()" class="save">Speichern</span>
             </div>
             <div class="inputDiv noIcon">
                 <input [(ngModel)]="description" value="{{ this.description }}" placeholder="Dein Text hier">
@@ -62,6 +62,8 @@
             <span>{{ chatService.currentChannel.creator }}</span>
         </section>
     }
+
+    <app-dialog-show-channel-member class="members-box"></app-dialog-show-channel-member>
 
     <button (click)="leaveChannel()" mat-flat-button class="leave">Channel verlassen</button>
 </main>

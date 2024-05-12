@@ -146,3 +146,15 @@ button.closeButton  {
 }
 
 /* Chrome, Edge, Safari */
+
+// Media Queries
+
+@media (max-width: 431px) {
+  .cdk-overlay-pane.mat-mdc-dialog-panel {
+    max-width: unset !important;
+  }
+
+  .custom-dialog .mdc-dialog__container .mat-mdc-dialog-surface {
+    border-radius: 0;
+  }
+}

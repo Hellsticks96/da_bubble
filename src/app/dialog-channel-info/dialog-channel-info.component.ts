@@ -5,13 +5,14 @@ import { ChatService } from '../main/chat/chat.service';
 import { FormsModule } from '@angular/forms';
 import { doc, getFirestore, updateDoc } from '@angular/fire/firestore';
 import { CurrentuserService } from '../currentuser.service';
+import { DialogShowChannelMemberComponent } from "../dialog-show-channel-member/dialog-show-channel-member.component";
 
 @Component({
-  selector: 'app-dialog-channel-info',
-  standalone: true,
-  imports: [ MatButtonModule, FormsModule ],
-  templateUrl: './dialog-channel-info.component.html',
-  styleUrl: './dialog-channel-info.component.scss'
+    selector: 'app-dialog-channel-info',
+    standalone: true,
+    templateUrl: './dialog-channel-info.component.html',
+    styleUrl: './dialog-channel-info.component.scss',
+    imports: [MatButtonModule, FormsModule, DialogShowChannelMemberComponent]
 })
 export class DialogChannelInfoComponent {
   editingName = false;

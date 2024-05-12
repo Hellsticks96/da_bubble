@@ -276,3 +276,26 @@ button.closeButton {
     filter: unset !important;
   }
 }
+
+// Media Queries
+
+@media (max-width: 431px) {
+  .dialog-section {
+    padding: 1.875rem 1rem;
+    width: calc(92.5vw - 1rem - 1rem);
+  }
+
+  header {
+    >span {
+      display: none;
+    }
+  }
+
+  mat-chip-row {
+    ::ng-deep::ng-deep .mdc-evolution-chip__text-label {
+      >h6 {
+        max-width: 39.5vw;
+      }
+    }
+  }
+}

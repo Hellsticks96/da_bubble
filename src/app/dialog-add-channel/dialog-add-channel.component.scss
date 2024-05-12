@@ -155,3 +155,43 @@ Mat-dialog-actions {
   font-weight: 400;
   line-height: normal;
 }
+
+// Media Queries 
+
+@media (max-width: 431px) {
+  .dialog-container {
+    padding: 2.5rem 1.25rem;
+    width: calc(100vw - 1.25rem - 1.25rem);
+    height: calc(100vh - 2.5rem - 2.5rem);
+    gap: 1.5625rem;
+
+    >span {
+      font-size: 1.0625rem;
+    }
+  }
+
+  .inputContainer {
+    div {
+      >input {
+        padding: 1.125rem 1.25rem 1.125rem 3.625rem;
+        width: calc(100% - 1.25rem - 3.625rem);
+        border-radius: 2.5rem;
+      }
+
+      >img {
+        width: 1.4375rem;
+        height: 1.4375rem;
+        left: 1.25rem;
+      }
+    }
+  }
+
+  .second {
+    div {
+      >input {
+        padding: 1.125rem 1.25rem;
+        width: calc(100% - 1.25rem - 1.25rem);
+      }
+    }
+  }
+}

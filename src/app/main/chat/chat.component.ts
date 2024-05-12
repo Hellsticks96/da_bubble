@@ -88,11 +88,20 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
     if (element) {
       let htmlElement = element as HTMLElement;
       let boundingClientRect = htmlElement.getBoundingClientRect();
+      let dialogPosition;
 
-      let dialogPosition = {
-        top: `${boundingClientRect.bottom + window.scrollY + 13.75}px`,
-        right: `${window.innerWidth - boundingClientRect.left - boundingClientRect.width + window.scrollX}px`
-      };
+      if (window.matchMedia('(max-width: 431px)').matches) {
+        dialogPosition = {
+          top: `${boundingClientRect.bottom + window.scrollY + 10}px`,
+        };
+      } else {
+        dialogPosition = {
+          top: `${boundingClientRect.bottom + window.scrollY + 13.75}px`,
+          right: `${window.innerWidth - boundingClientRect.left - boundingClientRect.width + window.scrollX}px`
+        };
+      }
+
+
 
       this.dialog.open(DialogAddMemberToChnlComponent, { // Ersetzen Sie DialogSomeComponent durch Ihre tatsächliche Dialogkomponente
         position: dialogPosition,

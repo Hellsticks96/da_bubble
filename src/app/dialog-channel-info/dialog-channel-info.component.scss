@@ -62,10 +62,10 @@ main {
             font-size: 1.125rem;
             font-weight: 600;
             transition: 150ms ease-in;
-    
+
             &:hover {
                 color: var(--Purple-1, #444DF2);
-                font-weight: 700; 
+                font-weight: 700;
                 cursor: pointer;
             }
         }
@@ -174,7 +174,7 @@ main {
     align-self: flex-end;
     width: max-content;
     padding: 0 1.5625rem;
-    height: 3.0625rem;
+    min-height: 3.0625rem;
     transition: 100ms ease-out;
 
     ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
@@ -222,4 +222,153 @@ main {
     font-style: normal;
     font-weight: 400 !important;
     line-height: normal;
+}
+
+.members-box {
+    display: none;
+    width: calc(100% - 1rem - 1rem);
+    margin: 0 1rem;
+
+    ::ng-deep::ng-deep section {
+        padding: 1.25rem 1rem;
+        width: calc(100% - 1rem - 1rem);
+        border-radius: 1.25rem;
+        border: 1px solid var(--light-purple-line);
+        background: var(--white);
+        align-items: flex-start;
+
+        .dialog-header {
+            >button {
+                display: none;
+            }
+        }
+
+        main {
+            width: 100%;
+
+            .dialog-content {
+                overflow: unset;
+                max-height: unset;
+            }
+
+            .channel-member {
+                >h4 {
+                    max-width: unset;
+                }
+            }
+
+            .dialog-add-member {
+                >button {
+                    background-color: var(--bg-color);
+                }
+            }
+        }
+    }
+}
+
+// Media Queries
+
+@media (max-width: 431px) {
+    main {
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow-y: auto;
+        justify-content: flex-start;
+    }
+
+    ::ng-deep::ng-deep .custom-dialog-br .mdc-dialog__container .mat-mdc-dialog-surface {
+        border-radius: 0;
+    }
+
+    .title {
+        padding: 2.5rem 1rem 0.625rem 1rem;
+        width: calc(100% - 1rem - 1rem);
+        box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+
+        >div {
+            >img {
+                width: 1.5625rem;
+                height: 1.5625rem;
+            }
+
+            >h1 {
+                font-size: 1.25rem;
+            }
+        }
+    }
+
+    .name-box {
+        margin: 0 1rem;
+        width: calc(100% - 1.25rem - 1.25rem - 1rem - 1rem - 2px);
+
+        >div {
+            >span {
+                content: url(../../assets/img/icons/edit.svg);
+                width: 1.5rem;
+                height: 1.5rem;
+                padding: 0.1875rem;
+                border-radius: 50%;
+                background: var(--bg-color);
+            }
+
+            .save {
+                content: url(../../assets/img/icons/check_circle.svg)
+            }
+        }
+    }
+
+    .description-box {
+        margin: 0 1rem;
+        width: calc(100% - 1.25rem - 1.25rem - 1rem - 1rem - 2px);
+
+        >span {
+            font-size: 1.25rem;
+        }
+
+        >div {
+            >span {
+                content: url(../../assets/img/icons/edit.svg);
+                width: 1.5rem;
+                height: 1.5rem;
+                padding: 0.1875rem;
+                border-radius: 50%;
+                background: var(--bg-color);
+            }
+
+            .save {
+                content: url(../../assets/img/icons/check_circle.svg)
+            }
+        }
+    }
+
+    .members-box {
+        display: flex;
+    }
+
+    .leave {
+        margin: 0 1rem 1.25rem 0;
+    }
+
+    .inputDiv {
+        >input {
+            padding: 1.125rem 1.25rem 1.125rem 3.625rem;
+            width: calc(100% - 1.25rem - 3.625rem);
+            border-radius: 2.5rem;
+        }
+
+        >img {
+            width: 1.4375rem;
+            height: 1.4375rem;
+            left: 1.25rem;
+        }
+    }
+
+    .noIcon {
+        >input {
+            padding: 1.125rem 1.25rem;
+            width: calc(100% - 1.25rem - 1.25rem);
+        }
+    }
+
 }
