@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { CommonModule } from '@angular/common';
@@ -32,14 +32,9 @@ import { CurrentuserService } from '../../currentuser.service';
   styleUrl: './conversations.component.scss',
 })
 export class ConversationsComponent {
-  @Output() openDM = new EventEmitter<string>();
-  @Output() user = new EventEmitter<UsersList>();
-  @Output() mobileOpen = new EventEmitter<string>();
   
   channelsList: ChannelsList[] = [];
   usersList: UsersList[] = [];
-  selectedChannel = '';
-  selectedDirectmessage = '';
 
 
 
@@ -82,28 +77,6 @@ export class ConversationsComponent {
     this.dialog.open(DialogAddChannelComponent, {
       panelClass: 'custom-dialog'
     });
-  }
-
-  openComponent(componentName: string,) {
-    this.openDM.emit(componentName);
-  }
-
-  openChannel(channelId: string) {
-    this.selectedChannel = channelId;
-    this.selectedDirectmessage = '';
-    this.chatService.openChannel(channelId);
-    if (window.matchMedia('(max-width: 431px)').matches) {
-      this.mobileOpen.emit('chat');
-    }
-  }
-
-  openDirectMessage(user: UsersList) {
-    this.selectedDirectmessage = user.id;
-    this.selectedChannel = '';
-    this.user.emit(user);
-    if (window.matchMedia('(max-width: 431px)').matches) {
-      this.mobileOpen.emit('directmessage');
-    }
   }
 }
 

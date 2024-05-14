@@ -7,6 +7,7 @@ import { update } from '@angular/fire/database';
 import { v4 as uuidv4 } from 'uuid';
 import { CurrentuserService } from '../../currentuser.service';
 import { UsersList } from '../../interfaces/users-list';
+import { ChannelsList } from '../../interfaces/channels-list';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,12 +19,21 @@ export class ChatService {
     description: "",
     creator: '',
     members: []
-
   };
+  channelsList: ChannelsList[] = [];
   currentChannelID = '';
   usersList: UsersList[] = [];
   openComponent: 'directMessage' | 'newMessage' | 'chat' | string = '';
-
+  selectedChannel = '';
+  selectedDirectmessage = '';
+  mobileOpen = '';
+  selectedUser: UsersList = {
+    id: '',
+    name: '',
+    avatar: '',
+    email: '',
+    online: false
+  };
 
   // messages = [
   //   {
@@ -61,10 +71,46 @@ export class ChatService {
 
   constructor(public firestore: FirestoreService, public currentUser: CurrentuserService) {
     this.subUsersList();
+    this.subChannelsList();
 
   }
 
-  openChannel(id: string) {
+  subChannelsList() {
+    let ref = this.firestore.channelsRef;
+    return onSnapshot(ref, (list) => {
+      this.channelsList = [];
+      list.forEach(element => {
+        this.channelsList.push(this.setChannelsListObj(element.data(), element.id));
+      });
+    });
+  }
+
+  setChannelsListObj(obj: any, id: string): ChannelsList {
+    return {
+      id: id || '',
+      channelData: obj || null,
+    };
+  }
+
+  openChannel(channelId: string) {
+    this.selectedChannel = channelId;
+    this.selectedDirectmessage = '';
+    this.loadChannel(channelId);
+    if (window.matchMedia('(max-width: 431px)').matches) {
+      this.mobileOpen = 'chat';
+    }
+  }
+
+  openDirectMessage(user: UsersList) {
+    this.selectedDirectmessage = user.id;
+    this.selectedChannel = '';
+    this.selectedUser = user;
+    if (window.matchMedia('(max-width: 431px)').matches) {
+      this.mobileOpen = 'directmessage';
+    }
+  }
+
+  loadChannel(id: string) {
     const channelRef = this.firestore.channelsRef;
     const channelDocRef = doc(channelRef, id);
     const messagesCollectionRef = collection(channelDocRef, 'messages');

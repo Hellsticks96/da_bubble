@@ -38,25 +38,17 @@ export class MainComponent {
   threadOpen = false;
   showMenu = false;
   @ViewChild('threadDrawer') public threadDrawer!: MatSidenav;
-  selectedUser: UsersList = {
-    id: '',
-    name: '',
-    avatar: '',
-    email: '',
-    online: false
-  };
-  mobileOpen = '';
 
   constructor(public chatService: ChatService) {
     
   }
 
   mobileGoBack() {
-    this.mobileOpen = '';
+    this.chatService.mobileOpen = '';
   }
 
   openMobileComponent(string: string) {
-    this.mobileOpen = string;
+    this.chatService.mobileOpen = string;
   }
 
   openComponent(componentName: string,) {
@@ -70,10 +62,5 @@ export class MainComponent {
 
   closeThread() {
     this.threadDrawer.close();
-  }
-
-  selectedUserForDM(user: UsersList) {
-    this.selectedUser = user;
-    console.log(this.selectedUser);
   }
 }

@@ -5,18 +5,18 @@
 
             <mat-button-toggle class="contact">
                 <div>
-                    @if (sendedUser.avatar.length > 1) {
-                        <img src="{{ sendedUser.avatar }}">
+                    @if (chatService.selectedUser.avatar.length > 1) {
+                        <img src="{{ chatService.selectedUser.avatar }}">
                     } @else {
-                        <img src="../../../../assets/img/avatar/{{sendedUser.avatar}}.svg" alt="">   
+                        <img src="../../../../assets/img/avatar/{{chatService.selectedUser.avatar}}.svg" alt="">   
                     }
-                    @if(sendedUser.online) {
+                    @if(chatService.selectedUser.online) {
                     <img src="../../../assets/img/icons/online.svg">
                     } @else {
                     <img src="../../../assets/img/icons/offline.svg">
                     }
                 </div>
-                <h1>{{sendedUser.name}}</h1>
+                <h1>{{chatService.selectedUser.name}}</h1>
             </mat-button-toggle>
         </mat-button-toggle-group>
         <!-- TODO: dont use toggle group and button toggle - brings more problems (hover etc.) -->
@@ -88,14 +88,14 @@
         <div class="blank-chat">
             <div class="blank-info">
                 <div>
-                    @if (sendedUser.avatar.length > 1) {
-                        <img src="{{ sendedUser.avatar }}">
+                    @if (chatService.selectedUser.avatar.length > 1) {
+                        <img src="{{ chatService.selectedUser.avatar }}">
                     } @else {
-                        <img src="../../../../assets/img/avatar/{{sendedUser.avatar}}.svg" alt=""> 
+                        <img src="../../../../assets/img/avatar/{{chatService.selectedUser.avatar}}.svg" alt=""> 
                     }
-                    <h1>{{sendedUser.name}}</h1>
+                    <h1>{{chatService.selectedUser.name}}</h1>
                 </div>
-                <span>Diese Unterhaltung findet nur zwischen <button>&#64;{{sendedUser.name}}</button> und dir statt.</span>
+                <span>Diese Unterhaltung findet nur zwischen <button>&#64;{{chatService.selectedUser.name}}</button> und dir statt.</span>
 
             </div>
         </div>
@@ -104,7 +104,7 @@
 
         <div class="input-container">
             <div class="chat-input">
-                <textarea type="text" [(ngModel)]="messageText" placeholder="Nachricht an {{sendedUser.name}}"></textarea>
+                <textarea type="text" [(ngModel)]="messageText" placeholder="Nachricht an {{chatService.selectedUser.name}}"></textarea>
                 <div class="action-buttons">
                     <div class="button-wrapper">
                         <button mat-icon-button>

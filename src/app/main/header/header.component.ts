@@ -9,6 +9,7 @@ import { DocumentData, doc, onSnapshot } from '@angular/fire/firestore';
 import { UsersList } from '../../interfaces/users-list';
 import { CurrentuserService } from '../../currentuser.service';
 import { NgClass } from '@angular/common';
+import { ChatService } from '../chat/chat.service';
 
 
 @Component({
@@ -26,10 +27,8 @@ import { NgClass } from '@angular/common';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-@Input() mobileOpen = '';
-@Output() mobileClose = new EventEmitter<string>();
 
-  constructor(public dialog: MatDialog, public currentuser: CurrentuserService) {
+  constructor(public dialog: MatDialog, public currentuser: CurrentuserService, private chatService: ChatService) {
     console.log(currentuser)
   }
 
@@ -54,8 +53,13 @@ export class HeaderComponent {
     }
   }
 
+  isMobileOpen(string: string) {
+    return this.chatService.mobileOpen === string;
+  }
+
   mobileGoBack() {
-    this.mobileClose.emit('');
-    this.mobileOpen = '';
+    this.chatService.mobileOpen = '';
+    this.chatService.selectedChannel = '';
+    this.chatService.selectedDirectmessage = '';
   }
 }

@@ -31,7 +31,7 @@
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
       @for (user of filteredMembers | async; track user) {
         @if (addedMembers.indexOf(user) == -1) {
-          <mat-option [value]="user.name">
+          <mat-option [value]="user.id">
             @if (user.avatar.length > 1) {
               <img src="{{ user.avatar }}">
           } @else {

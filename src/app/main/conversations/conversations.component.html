@@ -7,7 +7,7 @@
             </div>
             <h2>Devspace</h2>
         </div>
-        <button (click)="openComponent('newMessage')" class="new-message" mat-icon-button>
+        <button (click)="chatService.setComponent('newMessage'); chatService.selectedChannel = ''; chatService.selectedDirectmessage = '';" class="new-message" mat-icon-button>
             <img src="../../../assets/img/icons/edit_square.svg">
         </button>
     </section>
@@ -25,10 +25,10 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
     
-            <mat-button-toggle-group [value]="selectedChannel" vertical="true" (click)="openComponent('chat')" hideSingleSelectionIndicator="true" class="channel-list">
+            <mat-button-toggle-group [value]="chatService.selectedChannel" vertical="true" hideSingleSelectionIndicator="true" class="channel-list">
                 @for (channel of channelsList; track channel) {
                     @if (memberOfChannel(channel)) {
-                        <mat-button-toggle (click)="openChannel(channel.id)" [value]="channel.id" class="channel" value="{{ channel.id }}">
+                        <mat-button-toggle (click)="chatService.openChannel(channel.id); chatService.setComponent('chat')" [value]="channel.id" class="channel" value="{{ channel.id }}">
                             <img src="../../../assets/img/icons/tag.svg">
                             <h3>{{ channel.channelData.name }}</h3>
                         </mat-button-toggle>
@@ -49,10 +49,10 @@
                     </div>
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <mat-button-toggle-group class="contact-list" [value]="selectedDirectmessage" (click)="openComponent('directMessage');" vertical="true" hideSingleSelectionIndicator="true">
+            <mat-button-toggle-group class="contact-list" [value]="chatService.selectedDirectmessage" vertical="true" hideSingleSelectionIndicator="true">
                 @for (user of chatService.usersList; track user) {
                     @if (this.firestore.currentUserID !== this.user.id) {
-                        <mat-button-toggle class="contact" (click)="DMservice.getMessages(user.id); openDirectMessage(user);" [value]="user.id">
+                        <mat-button-toggle class="contact" (click)="chatService.setComponent('directMessage'); DMservice.getMessages(user.id); chatService.openDirectMessage(user);" [value]="user.id">
                             <div>
                                 @if (user.avatar.length > 1) {
                                     <img src="{{ user.avatar }}">

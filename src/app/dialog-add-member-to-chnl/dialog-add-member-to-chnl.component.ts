@@ -106,11 +106,11 @@ export class DialogAddMemberToChnlComponent {
     console.log(this.chatService.usersList);
     console.log(this.chatService.currentChannel.members);
     console.log(this.getAvailableUsers());
-    const value = (event.option.viewValue || '').trim();
+    const value = (event.option.value || '').trim();
 
     // Add our member
     for (let user of this.getAvailableUsers()) {
-      if (user.name === value && this.addedMembers.indexOf(user) === -1) {
+      if (user.id === value && this.addedMembers.indexOf(user) === -1) {
         this.addedMembers.push(user);
       }
     }

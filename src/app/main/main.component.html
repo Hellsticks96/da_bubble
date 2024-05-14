@@ -1,8 +1,8 @@
-<app-header [mobileOpen]="mobileOpen" (mobileClose)="mobileGoBack()"></app-header>
+<app-header></app-header>
 <main>
   <mat-drawer-container autosize>
     <mat-drawer #conversationsDrawer opened="true" mode="side">
-      <app-conversations (user)="selectedUserForDM($event)" (openDM)="chatService.setComponent($event)"></app-conversations>
+      <app-conversations></app-conversations>
     </mat-drawer>
   </mat-drawer-container>
   <button class="menu-button" type="button" [ngClass]="{'closed': !showMenu}"
@@ -30,18 +30,18 @@
      }
 
      @case ('directMessage') {
-      <app-direct-message [sendedUser]="selectedUser"></app-direct-message>
+      <app-direct-message></app-direct-message>
      }
 
      @case ('newMessage') {
-      <app-new-message ></app-new-message>
+      <app-new-message></app-new-message>
      }
     }
 </main>
 
-@switch (mobileOpen) {
+@switch (chatService.mobileOpen) {
   @default {
-    <app-conversations (mobileOpen)="openMobileComponent($event)" (user)="selectedUserForDM($event)" (openDM)="chatService.setComponent($event)" class="mobile">
+    <app-conversations class="mobile">
     </app-conversations>
     <button mat-flat-button class="new-dm mobile" type="submit" (click)="openMobileComponent('newMessage')"><img src="../../assets/img/icons/edit_square-white.svg"></button>
   } @case ('chat') {
@@ -49,7 +49,7 @@
   } @case ('thread') {
     <app-thread (mobileOpen)="openMobileComponent($event)"></app-thread>
   } @case ('directmessage') {
-    <app-direct-message [sendedUser]="selectedUser"></app-direct-message>
+    <app-direct-message></app-direct-message>
   } @case ('newMessage') {
     <app-new-message></app-new-message>
   }

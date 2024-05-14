@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { Message } from '../../../interfaces/message';
 import { DirectmessageService } from './directmessage.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-direct-message',
@@ -37,9 +38,10 @@ import { MatMenuModule } from '@angular/material/menu';
 export class DirectMessageComponent {
   isPickerVisible = false;
   messageText: string = '';
-  @Input() sendedUser!: UsersList;
 
-  constructor(public dialog: MatDialog, public DMSerivce: DirectmessageService) {
+  constructor(public dialog: MatDialog, public DMSerivce: DirectmessageService,
+    public chatService: ChatService
+  ) {
 
   }
   ngOnInit() {
@@ -62,7 +64,7 @@ export class DirectMessageComponent {
 
   openProfileCard() {
     this.dialog.open(PofileInfoCardComponent, {
-      data: this.sendedUser
+      data: this.chatService.selectedUser
     });
 
 
@@ -78,7 +80,7 @@ export class DirectMessageComponent {
         reactions: {}
       };
 
-      await this.DMSerivce.sendMessage(this.sendedUser.id, message);
+      await this.DMSerivce.sendMessage(this.chatService.selectedUser.id, message);
       this.messageText = ''; // Textfeld nach dem Senden leeren
     }
 

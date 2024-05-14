@@ -80,13 +80,14 @@ export class DialogAddChannelAddMemberComponent {
       members = this.chatService.usersList;
     }
 
-    await addDoc(collection(this.dataBase, "channels"), {
+    const newChannel = await addDoc(collection(this.dataBase, "channels"), {
       name: this.data.channelName,
       description: this.data.channelDescription,
       creator: this.currentUser.currentUser.name,
       members: members,
     })
     this.dialog.closeAll()
+    this.showChannel(newChannel.id);
   }
 
   // public async addAllOfficeMembers(){
@@ -119,6 +120,13 @@ export class DialogAddChannelAddMemberComponent {
     const filterValue = value.toLowerCase();
 
     return this.chatService.usersList.filter(user => user.name.toLowerCase().includes(filterValue));
+  }
+
+  showChannel(id: string) {
+    this.chatService.openChannel(id);
+    this.chatService.setComponent('chat');
+    this.chatService.selectedChannel = id;
+    this.chatService.selectedDirectmessage = '';
   }
 
   closeDialog(): void {
