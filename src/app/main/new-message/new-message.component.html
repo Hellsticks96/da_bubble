@@ -1,30 +1,8 @@
 <section class="chat-body">
     <div class="chat-header">
-        <h1>Neue Nachricht</h1>
-        <mat-dialog-content>
-            <mat-form-field appearance="outline">
-              <mat-chip-grid #chipList>
-                <mat-chip-row *ngFor="let user of addedMembers" [removable]="removable">
-                  {{ user.name }}
-                  <mat-icon matChipRemove *ngIf="removable" (click)="removeUser(user)">cancel</mat-icon>
-                </mat-chip-row>
-                <input type="text" [(ngModel)]="startsWith"  (keyup)="finishInput()" [matAutocomplete]="auto" [formControl]="nameControl" [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" #inputValue placeholder="An: #channel, oder @jemand oder E-Mail Adresse" matInput />
-              </mat-chip-grid>
-              <mat-autocomplete class="custom-autocomplete" #auto="matAutocomplete">
-                @if (finished) {<mat-option *ngFor="let message of filteredOptions | async" [value]="message.name"
-                  (click)="addSingleUser(message.name)" >
-                  <div class="autocomplete-icons">
-                    <img [src]="getAvatarPath(message.avatar)" width="35" height="35" alt="Avatar" />
-                    {{ message.name }}
-                  </div>
-                </mat-option>}
-                
-              </mat-autocomplete>
-            </mat-form-field>
-          </mat-dialog-content>
+                <h1>Neue Nachricht</h1>
+                <input placeholder="An: #channel, oder @jemand oder E-Mail Adresse">
     </div>
-
     <div class="chat-content">
         <!-- @if (DMSerivce.messages && objectKeys(DMSerivce.messages).length > 0) { -->
         <div class="chat">
@@ -82,7 +60,7 @@
 
         <div class="input-container">
             <div class="chat-input">
-                <textarea type="text" [(ngModel)]="messageText"  placeholder="Starte eine neue Nachricht"></textarea>
+                <textarea type="text" [(ngModel)]="messageText" placeholder="Starte eine neue Nachricht"></textarea>
                 <div class="action-buttons">
                     <div class="button-wrapper">
                         <button mat-icon-button>

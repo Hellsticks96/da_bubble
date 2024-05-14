@@ -52,7 +52,7 @@ export class ConversationsComponent {
     private currentUser: CurrentuserService,
   ) {
     this.subChannelsList();
-    
+
   }
 
   memberOfChannel(channel: ChannelsList) {
