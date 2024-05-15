@@ -51,5 +51,13 @@ export class LoginComponent {
     });
   }
 
-
+  loginAsGuest() {
+    this.firestore.loginAsGuest().then(() => {
+      console.log('Gast-Anmeldung erfolgreich');
+      // Navigiere zum entsprechenden Bereich der App
+    }).catch(error => {
+      console.error('Fehler bei der Gast-Anmeldung', error);
+    });
+  }
+  
 }

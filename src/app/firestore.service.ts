@@ -169,4 +169,11 @@ export class FirestoreService {
 
     this.saveUser(user, this.currentUserID);
   }  
+
+  loginAsGuest() {
+    const guestEmail = 'guest@guest.guest';
+    const guestPassword = 'guest1';  // Ersetze dies durch das tatsächliche Passwort
+  
+    return this.loginWithEmailAndPassword(guestEmail, guestPassword);
+  }
 }
