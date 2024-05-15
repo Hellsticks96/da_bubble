@@ -2,6 +2,7 @@ import { CommonModule} from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule,Router} from '@angular/router';
+import { ChatService } from '../chat/chat.service';
 
 @Component({
   selector: 'app-thread',
@@ -12,14 +13,13 @@ import { RouterModule,Router} from '@angular/router';
 })
 export class ThreadComponent {
   @Output() threadClose = new EventEmitter<boolean>();
-  @Output() mobileOpen = new EventEmitter<string>();
 
-  constructor(){ }
+  constructor(private chatService: ChatService){ }
 
   closeThread(){
     this.threadClose.emit(false);
     if (window.matchMedia('(max-width: 431px)').matches) {
-      this.mobileOpen.emit('chat');
+      this.chatService.mobileOpen = 'chat';
     }
   }
   messages = [

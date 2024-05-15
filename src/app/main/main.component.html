@@ -45,9 +45,9 @@
     </app-conversations>
     <button mat-flat-button class="new-dm mobile" type="submit" (click)="openMobileComponent('newMessage')"><img src="../../assets/img/icons/edit_square-white.svg"></button>
   } @case ('chat') {
-    <app-chat (mobileOpen)="openMobileComponent($event)"></app-chat>
+    <app-chat></app-chat>
   } @case ('thread') {
-    <app-thread (mobileOpen)="openMobileComponent($event)"></app-thread>
+    <app-thread></app-thread>
   } @case ('directmessage') {
     <app-direct-message></app-direct-message>
   } @case ('newMessage') {

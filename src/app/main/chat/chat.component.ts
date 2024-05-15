@@ -37,7 +37,6 @@ import { Channel } from '../../interfaces/channel';
 })
 export class ChatComponent implements AfterViewInit, AfterViewChecked {
   @Output() threadOpen = new EventEmitter<boolean>();
-  @Output() mobileOpen = new EventEmitter<string>();
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
   messageText: string = '';
   isPickerVisible = false;
@@ -54,7 +53,7 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
   toggleThread() {
     this.threadOpen.emit(!this.threadOpen);
     if (window.matchMedia('(max-width: 431px)').matches) {
-      this.mobileOpen.emit('thread');
+      this.chatService.mobileOpen = 'thread';
     }
   }
 

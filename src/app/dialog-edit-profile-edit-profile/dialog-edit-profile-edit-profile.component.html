@@ -21,7 +21,9 @@
         <div class="profile-name-container">
             <div class="profile-name-section">
                 <h1>{{ currentUser.name }}</h1>
-                <span (click)="editProfile()">Bearbeiten</span>
+                @if (currentUserUid !== 'xQldBXiCgWV8DuTwBPbyQTnyAIH2') {
+                    <span (click)="editProfile()">Bearbeiten</span>
+                }
             </div>
             <span><img src="../../assets/img/icons/online-1.svg">Aktiv</span>
         </div>
