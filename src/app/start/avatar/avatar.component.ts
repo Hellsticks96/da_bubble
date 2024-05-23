@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class AvatarComponent {
   avatar = '';
   error = false;
-  accountCreated = true;
+  accountCreated = false;
   @Output() submitAvatar = new EventEmitter<string>();
 
   constructor(private router: Router){
@@ -28,6 +28,10 @@ export class AvatarComponent {
 
   submit() {
     if(this.avatar !== '') {
+      this.accountCreated = true;
+      setTimeout(() => {
+        this.submitAvatar.emit(this.avatar)
+      }, 2500);
       this.accountCreated = true;
       setTimeout(() => {
         this.submitAvatar.emit(this.avatar)

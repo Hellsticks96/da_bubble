@@ -1,4 +1,4 @@
-<section class="chat-body">
+<section class="chat-body" (click)="closePicker($event)">
     <div class="chat-header">
         <button mat-button (click)="openDialogChannelInfo()">
             <img src="../../../assets/img/icons/chat-tag.svg">
@@ -111,14 +111,14 @@
                             <img src="../../../assets/img/icons/add-gray.svg" alt="Add image">
                         </button>
                         <div class="vector"></div>
-                        <button mat-icon-button (click)="togglePicker()">
+                        <button mat-icon-button (click)="togglePicker(); $event.stopPropagation()">
                             <img src="../../../assets/img/icons/sentiment_satisfied.svg" alt="Add emoji">
                         </button>
     
-                        <div class="emoji-picker" *ngIf="isPickerVisible">
+                        <div class="emoji-picker" *ngIf="isPickerVisible" (click)="$event.stopPropagation()">
                             <emoji-mart (emojiClick)="addEmoji($event)"></emoji-mart>
                         </div>
-                        <button mat-icon-button>
+                        <button mat-icon-button (click)="$event.stopPropagation()">
                             <img src="../../../assets/img/icons/alternate_email.svg" alt="Tag someone">
                         </button>
                     </div>

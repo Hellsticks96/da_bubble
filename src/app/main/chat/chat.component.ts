@@ -63,11 +63,16 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
 
   }
   addEmoji(event: any) {
-    console.log(event.emoji);
+    this.messageText += event.emoji.native;
   }
 
   togglePicker() {
     this.isPickerVisible = !this.isPickerVisible;
+  }
+  closePicker(event: Event){
+    if (this.isPickerVisible) {
+      this.isPickerVisible = false;
+    }
   }
   objectKeys(obj: object) {
     return Object.keys(obj);
