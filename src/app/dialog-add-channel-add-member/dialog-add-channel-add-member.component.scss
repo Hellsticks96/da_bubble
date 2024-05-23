@@ -334,3 +334,36 @@ Mat-dialog-actions {
         background: var(--Purple-1, #444df2);
     }
 }
+
+// Media Queries
+
+@media (max-width: 431px) {
+    section {
+        padding: 2.5rem 1.25rem !important;
+        width: unset !important;
+    }
+
+    ::ng-deep::ng-deep .mat-mdc-autocomplete-panel-above div.mat-mdc-autocomplete-panel {
+        display: flex !important;
+        padding: 1.25rem 1.3125rem !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: unset !important;
+        gap: 0.9375rem;
+        border-radius: 1.875rem 1.875rem 1.875rem 0rem !important;
+    }
+
+    mat-option {
+        h3 {
+            max-width: calc(100vw - 14.25rem);
+        }
+    }
+
+    mat-chip-row {
+        ::ng-deep::ng-deep .mdc-evolution-chip__text-label {
+            >h6 {
+                max-width: calc(100vw - 12.875rem);
+            }
+        }
+    }
+}

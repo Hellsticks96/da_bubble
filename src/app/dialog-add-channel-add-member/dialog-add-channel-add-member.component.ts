@@ -1,34 +1,26 @@
 import { CommonModule } from '@angular/common';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormControlDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogActions,
-  MatDialogContent,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIcon } from '@angular/material/icon';
 import { ChatService } from '../main/chat/chat.service';
 import { UsersList } from '../interfaces/users-list';
 import { FirestoreService } from '../firestore.service';
-import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
-import { getFirestore } from '@firebase/firestore';
-import { Channel } from '../interfaces/channel';
+import { addDoc, collection, getFirestore } from '@angular/fire/firestore';
 import { MatAutocomplete, MatAutocompleteModule, MatAutocompleteSelectedEvent, MatOption } from '@angular/material/autocomplete';
 import { Observable, map, startWith } from 'rxjs';
-import {MatChip, MatChipGrid, MatChipInputEvent, MatChipListbox, MatChipSet, MatChipsModule} from '@angular/material/chips';
+import { MatChip, MatChipGrid, MatChipInputEvent, MatChipListbox, MatChipSet, MatChipsModule } from '@angular/material/chips';
 import { CurrentuserService } from '../currentuser.service';
-
 
 @Component({
   selector: 'app-dialog-add-channel-add-member',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     FormsModule,
     MatInputModule,
     MatButtonModule,
@@ -41,11 +33,14 @@ import { CurrentuserService } from '../currentuser.service';
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatChipsModule,
-    MatChipGrid,],
+    MatChipGrid
+  ],
   templateUrl: './dialog-add-channel-add-member.component.html',
-  styleUrl: './dialog-add-channel-add-member.component.scss'
+  styleUrls: ['./dialog-add-channel-add-member.component.scss']
 })
 export class DialogAddChannelAddMemberComponent {
+  @Input() bottomsheetData?: { channelName: string, channelDescription: string };
+  @Output() closeSheet = new EventEmitter<void>();
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl('');
   filteredMembers: Observable<UsersList[]>;
@@ -56,22 +51,31 @@ export class DialogAddChannelAddMemberComponent {
   @ViewChild('nameInput')
   nameInput!: ElementRef<HTMLInputElement>;
 
+  dataBase = getFirestore();
+
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: {channelName: string, channelDescription: string},
-    public dialogRef: MatDialogRef<DialogAddChannelAddMemberComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) private dialogData: { channelName: string, channelDescription: string },
+    @Optional() public dialogRef: MatDialogRef<DialogAddChannelAddMemberComponent>,
     public dialog: MatDialog,
     public chatService: ChatService,
     private currentUser: CurrentuserService
   ) {
+    console.log(this.data)
     this.filteredMembers = this.userCtrl.valueChanges.pipe(
       startWith(''),
-      map((value: string | null) => (value ? this._filter(value) : this.chatService.usersList.slice())),
+      map((value: string | null) => (value ? this._filter(value) : this.chatService.usersList.slice()))
     );
   }
 
-  dataBase = getFirestore();
+  get data() {
+    return this.bottomsheetData || this.dialogData;
+  }
 
-  public async createChannel(){
+  public async createChannel() {
+    if (!this.data) {
+      throw new Error('No data provided for channel creation');
+    }
+
     let members: UsersList[];
 
     if (this.selectedOption === '2') {
@@ -80,19 +84,16 @@ export class DialogAddChannelAddMemberComponent {
       members = this.chatService.usersList;
     }
 
-    const newChannel = await addDoc(collection(this.dataBase, "channels"), {
+    const newChannel = await addDoc(collection(this.dataBase, 'channels'), {
       name: this.data.channelName,
       description: this.data.channelDescription,
       creator: this.currentUser.currentUser.name,
-      members: members,
-    })
-    this.dialog.closeAll()
+      members: members
+    });
+    this.closeSheet.emit();
+    this.dialog.closeAll();
     this.showChannel(newChannel.id);
   }
-
-  // public async addAllOfficeMembers(){
-  //   this.addedMembers = this.chatService.usersList
-  // }
 
   remove(user: UsersList): void {
     const index = this.addedMembers.indexOf(user);
@@ -104,11 +105,10 @@ export class DialogAddChannelAddMemberComponent {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     const value = (event.option.viewValue || '').trim();
-    
-        // Add our member
-    for (let user of this.chatService.usersList){
+
+    for (let user of this.chatService.usersList) {
       if (user.name === value && this.addedMembers.indexOf(user) === -1) {
-      this.addedMembers.push(user);
+        this.addedMembers.push(user);
       }
     }
 
@@ -130,6 +130,10 @@ export class DialogAddChannelAddMemberComponent {
   }
 
   closeDialog(): void {
-    this.dialogRef.close();
+    if (window.matchMedia('(max-width: 431px)').matches) {
+      this.closeSheet.emit();
+    } else {
+      this.dialogRef.close();
+    }
   }
 }

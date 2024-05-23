@@ -275,3 +275,27 @@ input {
     font-weight: 400;
     line-height: normal;
 }
+
+// Media Queries
+
+@media (max-width: 431px) {
+    section {
+        padding: 2.5rem 1.25rem;
+        width: calc(92.5vw - 1.25rem - 1.25rem);
+    }
+
+    ::ng-deep::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+        border-radius: 1.875rem;
+    }
+
+    .profile-name-section {
+        >span {
+            content: url(../../assets/img/icons/edit.svg);
+            width: 1.5rem;
+            height: 1.5rem;
+            padding: 0.1875rem;
+            border-radius: 50%;
+            background: var(--bg-color);
+        }
+    }
+}

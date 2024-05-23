@@ -13,6 +13,8 @@ import { DialogAddChannelAddMemberComponent } from '../dialog-add-channel-add-me
 import { collection, addDoc } from "firebase/firestore";
 import { FirestoreService } from '../firestore.service';
 import { doc, setDoc } from '@angular/fire/firestore';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { BottomsheetAddMemberNewChannelComponent } from '../bottomsheet-add-member-new-channel/bottomsheet-add-member-new-channel.component';
 
 @Component({
   selector: 'app-dialog-add-channel',
@@ -32,7 +34,8 @@ export class DialogAddChannelComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogAddChannelComponent>,
     public dialog: MatDialog,
-    private firestore: FirestoreService
+    private firestore: FirestoreService,
+    private _bottomSheet: MatBottomSheet
   ) { }
   dataBase = this.firestore.getFirestore();
   channelName: string = '';
@@ -49,17 +52,30 @@ export class DialogAddChannelComponent {
 
   async forwardDialog(): Promise<void> {
     if (this.nameValid() && this.channelName) {
-      this.dialogRef.close();
+      if (window.matchMedia('(max-width: 431px)').matches) {
+        this.openBottomSheet();
+      } else {
+        this.dialogRef.close();
 
-      // Öffnen Sie das neue Dialogfeld
-      this.dialog.open(DialogAddChannelAddMemberComponent, {
-        data: {
-          channelName: this.channelName,
-          channelDescription: this.channelDescription
-        }
-      });
+        // Öffnen Sie das neue Dialogfeld
+        this.dialog.open(DialogAddChannelAddMemberComponent, {
+          data: {
+            channelName: this.channelName,
+            channelDescription: this.channelDescription
+          }
+        });
+      }
     } else {
         this.invalidName = true;
     }
+  }
+
+  openBottomSheet(): void {
+    this._bottomSheet.open(BottomsheetAddMemberNewChannelComponent, {
+      data: {
+        channelName: this.channelName,
+        channelDescription: this.channelDescription
+      }
+    });
   }
 }

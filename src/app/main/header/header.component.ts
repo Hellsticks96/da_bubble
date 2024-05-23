@@ -10,6 +10,12 @@ import { UsersList } from '../../interfaces/users-list';
 import { CurrentuserService } from '../../currentuser.service';
 import { NgClass } from '@angular/common';
 import { ChatService } from '../chat/chat.service';
+import {
+  MatBottomSheet,
+  MatBottomSheetModule,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
+import { BottomsheetProfileMenuComponent } from '../../bottomsheet-profile-menu/bottomsheet-profile-menu.component';
 
 
 @Component({
@@ -21,14 +27,19 @@ import { ChatService } from '../chat/chat.service';
     MatExpansionModule,
     MatDialogModule,
     DialogEditProfileComponent,
-    NgClass
+    NgClass,
+    MatBottomSheetModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
 
-  constructor(public dialog: MatDialog, public currentuser: CurrentuserService, private chatService: ChatService) {
+  constructor(
+    public dialog: MatDialog,
+    public currentuser: CurrentuserService,
+    private chatService: ChatService,
+    private _bottomSheet: MatBottomSheet) {
     console.log(currentuser)
   }
 
@@ -61,5 +72,15 @@ export class HeaderComponent {
     this.chatService.mobileOpen = '';
     this.chatService.selectedChannel = '';
     this.chatService.selectedDirectmessage = '';
+  }
+
+  mobileMenu() {
+    if (window.matchMedia('(max-width: 431px)').matches) {
+      this.openBottomSheet();
+    }
+  }
+
+  openBottomSheet(): void {
+    this._bottomSheet.open(BottomsheetProfileMenuComponent);
   }
 }

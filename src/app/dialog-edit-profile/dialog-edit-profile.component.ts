@@ -43,7 +43,6 @@ export class DialogEditProfileComponent {
   openDialog(event: MouseEvent): void {
     // Sicherstellen, dass event.target tatsächlich ein Element ist.
     let element = event.target as Element | null;
-    this.dialogRef.close();
     if (element) {
       // Casten zu HTMLElement, um Zugriff auf getBoundingClientRect zu gewährleisten.
       let htmlElement = element as HTMLElement;

@@ -18,7 +18,7 @@
         <input placeholder="Code learning durchsuchen">
         <span class="material-icons">search</span>
     </div>
-    <div class="profile-info">
+    <div class="profile-info" (click)="mobileMenu()">
         <h1>{{ currentuser.currentUser.name }}</h1>
         <div class="avatar-wrapper">
             <span class="online-status">
