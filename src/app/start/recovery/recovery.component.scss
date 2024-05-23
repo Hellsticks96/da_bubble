@@ -155,6 +155,49 @@ form {
     }
 }
 
+.mail-sent-slider {
+    display: inline-flex;
+    padding: 2.125rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1.75rem;
+    color: white;
+    border-radius: 1.875rem 1.875rem 0rem 1.875rem;
+    background: var(--Purple-1, #444DF2);
+    opacity: 0;
+    transform: translateX(100%) translateY(50px);
+    animation: slide-in 0.5s forwards;
+    animation-delay: 1s;
+
+    >img {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    >h2 {
+        animation: fade-in 1s forwards;
+        animation-delay: 1.5s;
+
+    }
+}
+
+@keyframes slide-in {
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateY(50px);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 // Media Queries
 
 @media (max-width: 431px) {
@@ -165,7 +208,7 @@ form {
             padding: 2.1875rem 1.25rem;
             gap: 1.5625rem;
         }
-    }    
+    }
 
     .goBack {
         top: 2.1875rem;
@@ -174,7 +217,7 @@ form {
 
     .description {
         gap: 0.75rem;
-        
+
         >p {
             font-size: 1.0625rem;
         }

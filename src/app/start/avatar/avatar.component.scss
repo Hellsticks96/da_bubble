@@ -213,6 +213,49 @@ h2 {
     font-weight: 400;
     line-height: normal;
 }
+@keyframes slide-in {
+    100% {
+        opacity: 1;
+        transform: translateX(20px);
+    }
+}
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.account-created-slider{
+    display: inline-flex;
+    padding: 2.125rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1.75rem;
+    color: white;
+    border-radius: 1.875rem 1.875rem 0rem 1.875rem;
+    background: var(--Purple-1, #444DF2);
+    opacity: 0;
+    transform: translateX(100%) ;
+    animation: slide-in 0.5s forwards;
+    animation-delay: 1s;
+    position: absolute;
+    z-index: 100;
+
+    >img {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    >h2 {
+        animation: fade-in 1s forwards;
+        animation-delay: 1.5s;
+
+    }
+}
 
 // Media Queries 
 

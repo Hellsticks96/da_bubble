@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 import { ChatService } from '../main/chat/chat.service';
 import { UsersList } from '../interfaces/users-list';
 import { MatChipGrid, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { MatIcon } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { DialogChannelInfoComponent } from '../dialog-channel-info/dialog-channel-info.component';
 import { User } from '../interfaces/user';
 import { doc, getFirestore, updateDoc } from '@angular/fire/firestore';
@@ -44,6 +44,7 @@ interface Message {
     MatChipsModule,
     MatOption,
     MatIcon,
+    MatIconModule,
     MatAutocomplete
   ],
   templateUrl: './dialog-add-member-to-chnl.component.html',

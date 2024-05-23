@@ -17,14 +17,16 @@ import { Router } from '@angular/router';
 })
 export class RecoveryComponent {
   email: string = '';
-
+  emailSent = false;
   constructor(public location: Location, private firestoreService: FirestoreService, private router: Router) {}
 
   sendResetEmail() {
     this.firestoreService.resetPassword(this.email)
       .then(() => {
-        alert("E-Mail zum Zurücksetzen des Passworts wurde gesendet. Bitte überprüfen Sie Ihr E-Mail-Postfach.");
-        this.router.navigate(['/']); // Navigiert zur Startseite
+        this.emailSent = true;
+        setTimeout(() => {
+          this.router.navigate(['/']); 
+        }, 3000) 
       })
       .catch(error => {
         alert("Fehler beim Senden der E-Mail: " + error.message);

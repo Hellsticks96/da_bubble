@@ -15,4 +15,14 @@
             Sie Ihr Passwort ändern können.</p>
         <button mat-flat-button class="submit" type="submit">E-Mail senden</button>
     </form>
+
+    @if (emailSent) {
+        <div class="mail-sent-slider">
+        <img src="../../../assets/img/icons/send-white.svg" alt="">
+        <h2>E-Mail gesendet</h2>
+    </div>
+    }
+    
+
+
 </app-start>

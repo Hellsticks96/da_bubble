@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 export class SignupComponent {
   hide: any;
   forwardToAvatar = false;
+  accountCreated = false;
   accountData = {
     avatar: '',
     name: '',
@@ -41,7 +42,6 @@ export class SignupComponent {
     this.firestore.signUpWithEmailAndPassword(this.accountData.email, this.accountData.password)
       .then(uid => {
         this.firestore.saveUser(this.accountData, uid);
-        this.router.navigate(['/']);
       })
       .catch(error => {
         console.error('Fehler bei der Erstellung des Nutzers:', error);

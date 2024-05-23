@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule, } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { DirectmessageService } from '../chat/direct-message/directmessage.service';
@@ -39,6 +39,7 @@ import { UsersList } from '../../interfaces/users-list';
 })
 export class NewMessageComponent {
   messageText: string = '';
+  startsWith: string = '';
   isPickerVisible = false;
   formCtrl = new FormControl('');
   filteredOptions: Observable<NewMessageOption[]>;
