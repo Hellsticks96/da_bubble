@@ -129,6 +129,8 @@ export class DirectMessageComponent {
     const options: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
     return date.toLocaleTimeString('de-DE', options);
 
+  }
+
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault(); // Verhindert den Zeilenumbruch
