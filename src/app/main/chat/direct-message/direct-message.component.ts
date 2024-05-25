@@ -17,6 +17,7 @@ import { Message } from '../../../interfaces/message';
 import { DirectmessageService } from './directmessage.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { ChatService } from '../chat.service';
+import { CurrentuserService } from '../../../currentuser.service';
 
 @Component({
   selector: 'app-direct-message',
@@ -40,7 +41,7 @@ export class DirectMessageComponent {
   messageText: string = '';
 
   constructor(public dialog: MatDialog, public DMSerivce: DirectmessageService,
-    public chatService: ChatService
+    public chatService: ChatService, public currentUser: CurrentuserService
   ) {
 
   }
@@ -72,6 +73,7 @@ export class DirectMessageComponent {
   async send() {
     if (this.messageText.trim() !== '') {
       const message: Message = {
+        id: '',
         avatar: '',
         name: '', // wird im chat.service übernommen 
         time: new Date().toISOString(),
@@ -84,5 +86,47 @@ export class DirectMessageComponent {
       this.messageText = ''; // Textfeld nach dem Senden leeren
     }
 
+  }
+
+  isLater(newMessageTime: string, index: string): boolean {
+    const previousMessage = this.DMSerivce.messages[index];
+
+    if (!previousMessage) {
+      return false;
+    }
+
+    const previousMessageTime = previousMessage.time;
+
+    const previousMessageDate = new Date(previousMessageTime).setHours(0, 0, 0, 0);
+    const newMessageDate = new Date(newMessageTime).setHours(0, 0, 0, 0);
+
+    return newMessageDate > previousMessageDate;
+  }
+
+  dayDate(timestamp: string): string {
+    const date = new Date(timestamp);
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+    const dateToCompare = new Date(date).setHours(0, 0, 0, 0);
+
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+
+    if (dateToCompare === today.getTime()) {
+      return "Heute";
+    } else if (dateToCompare === yesterday.getTime()) {
+      return "Gestern";
+    }
+
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long' };
+    return date.toLocaleDateString('de-DE', options);
+  }
+
+  dayTime(timestamp: string): string {
+    const date = new Date(timestamp);
+
+    const options: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+    return date.toLocaleTimeString('de-DE', options);
   }
 }

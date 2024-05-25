@@ -18,11 +18,13 @@ export class DirectmessageService {
 
   async sendMessage(sendedUserID: string, message: Message) {
     this.sendedUserID = sendedUserID
-    const timestamp = new Date().toISOString();
-    const channelRef = collection(this.firestore.firestore, `users/${this.currentUser.currentUser.id}/${sendedUserID}/`);
-    const newMessageRef = doc(channelRef, timestamp);
+    const userRef = collection(this.firestore.firestore, `users/${this.currentUser.currentUser.id}/${sendedUserID}/`);
+    const messagesSnapshot = await getDocs(userRef);
+    const messageCount = messagesSnapshot.size;
+    const newMessageRef = doc(userRef, messageCount.toString());
     
     const newMessage: Message = {
+      id: this.currentUser.currentUser.id,
       avatar: this.currentUser.currentUser.avatar,// avatar: message.avatar,
       name: this.currentUser.currentUser.name,
       time: message.time,

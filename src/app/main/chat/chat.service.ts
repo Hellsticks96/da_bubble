@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { FirestoreService } from '../../firestore.service';
-import { collection, doc, onSnapshot, orderBy, query, setDoc, where, serverTimestamp } from '@angular/fire/firestore';
+import { collection, doc, onSnapshot, orderBy, query, setDoc, where, serverTimestamp, getDocs } from '@angular/fire/firestore';
 import { Channel } from '../../interfaces/channel';
 import { Message } from '../../interfaces/message';
 import { update } from '@angular/fire/database';
@@ -157,10 +157,12 @@ export class ChatService {
 
   async sendMessage(channelId: string, message: Message) {
     const channelRef = collection(this.firestore.firestore, `channels/${channelId}/messages`);
-    const timestamp = new Date().toISOString();
-    const newMessageRef = doc(channelRef, timestamp);
+    const messagesSnapshot = await getDocs(channelRef);
+    const messageCount = messagesSnapshot.size;
+    const newMessageRef = doc(channelRef, messageCount.toString());
 
     const messageData: Message = {
+      id: this.currentUser.currentUser.id,
       avatar: this.currentUser.currentUser.avatar,// avatar: message.avatar,
       name: this.currentUser.currentUser.name,
       time: message.time,

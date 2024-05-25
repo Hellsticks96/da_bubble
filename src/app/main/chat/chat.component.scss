@@ -14,7 +14,7 @@
     padding: 1.5625rem 2.8125rem;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
     border-radius: 2rem 2rem 0 0;
-    z-index: 1;
+    z-index: 3;
 
     >button {
         padding: 0.375rem 0.625rem;
@@ -182,10 +182,17 @@
     align-items: flex-start;
     gap: 1.25rem;
     position: relative;
+    transition: 80ms ease-in;
 
     &:hover {
+        background-color: var(--bg-color);
+
         .hoverMenu {
             display: inline-flex;
+        }
+
+        .message-text {
+            background-color: var(--white);
         }
     }
 
@@ -221,8 +228,69 @@
 .message-text {
     padding: 0.9375rem;
     align-self: stretch;
-    border-radius: 0rem 1.25rem 1.25rem 1.25rem;
+    border-radius: 0rem 1.875rem 1.875rem 1.875rem;
     background: var(--bg-color);
+    transition: 80ms ease-in;
+}
+
+.my-message {
+    flex-direction: row-reverse;
+
+    .message-info {
+        flex-direction: row-reverse;
+    }
+
+    .message-text {
+        border-radius: 1.875rem 0rem 1.875rem 1.875rem;
+        background-color: var(--purple-2);
+        color: var(--white);
+
+    }
+
+    .reaction {
+        flex-direction: row-reverse;
+    }
+
+    .hoverMenu {
+        left: 10%;
+        right: unset;
+
+        >.moreButton {
+            display: flex;
+        }
+    }
+
+    &:hover {
+        .message-text {
+            background-color: var(--purple-2);
+        }
+    }
+}
+
+.day-date {
+    padding: 1.25rem 2.1875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    h2 {
+        padding: 0.3125rem 0.9375rem;
+        border-radius: 1.875rem;
+        border: 1px solid var(--light-purple-line);
+        background: var(--white);
+        font-size: 1.125rem;
+        font-weight: 400;
+        width: max-content;
+        z-index: 1;
+    }
+
+    .vector {
+        height: 1px;
+        width: calc(100% - 2.1875rem - 2.1875rem);
+        background-color: var(--light-purple-line);
+        position: absolute;
+    }
 }
 
 .reaction {
@@ -415,6 +483,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    >.moreButton {
+        display: none;
     }
 
     &:hover {

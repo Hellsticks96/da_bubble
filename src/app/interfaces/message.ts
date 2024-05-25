@@ -1,4 +1,5 @@
 export interface Message {
+    id: string,
     avatar: string,
     name: string,
     time: string,

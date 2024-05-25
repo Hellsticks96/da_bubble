@@ -24,64 +24,73 @@
     <div class="chat-content">
         @if (DMSerivce.messages && objectKeys(DMSerivce.messages).length > 0) {
         <div class="chat">
-            <div class="message" *ngFor="let message of DMSerivce.messages| keyvalue">
-                <div class="hoverMenu">
-                    <button mat-icon-button>
-                        <img src="../../../assets/img/icons/emoji-check.svg" alt="React">
-                    </button>
-                    <button mat-icon-button>
-                        <img src="../../../assets/img/icons/emoji-hands-up.svg" alt="React">
-                    </button>
-                    <!-- <button (click)="navigateToThread()" mat-icon-button>
-                        <img src="../../../assets/img/icons/comment.svg" alt="Comment">
-                    </button> -->
-                    <button mat-icon-button [matMenuTriggerFor]="menu">
-                        <img src="../../../assets/img/icons/3-dots.svg" alt="More">
-                    </button>
-                    <mat-menu class="moreMenu" #menu="matMenu">
-                        <button mat-menu-item> <!--(click)="openDialogEditMessage(chatService.currentChannelID)" -->
-                            Nachricht bearbeiten
-                        </button>
-                    </mat-menu>
-                </div>
-
-
-                @if (message.value.avatar.length > 1) {
-                    <img src="{{ message.value.avatar }}">
-                } @else {
-                    <img src="../../../assets/img/avatar/{{ message.value.avatar }}.svg">
+            @for (message of DMSerivce.messages| keyvalue; track message; let  i = $index) {
+                @if (i == 0 || isLater(message.value.time, (i - 1).toString())) {
+                    <div class="day-date">
+                        <h2>{{ dayDate(message.value.time) }}</h2>
+                        <div class="vector"></div>
+                    </div>
                 }
-
-                <div>
-                    <div class="message-info">
-                        <h5>{{ message.value.name }}</h5>
-                        <span>{{ message.value.time }}</span>
+                <div class="message" [ngClass]="{'my-message': message.value.id === this.currentUser.currentUser.id}">
+                    <div class="hoverMenu">
+                        <button mat-icon-button>
+                            <img src="../../../assets/img/icons/emoji-check.svg" alt="React">
+                        </button>
+                        <button mat-icon-button>
+                            <img src="../../../assets/img/icons/emoji-hands-up.svg" alt="React">
+                        </button>
+                        <!-- <button (click)="navigateToThread()" mat-icon-button>
+                            <img src="../../../assets/img/icons/comment.svg" alt="Comment">
+                        </button> -->
+                        <button mat-icon-button class="moreButton" [matMenuTriggerFor]="menu">
+                            <img src="../../../assets/img/icons/3-dots.svg" alt="More">
+                        </button>
+                        <mat-menu class="moreMenu" #menu="matMenu">
+                            <button mat-menu-item> <!--(click)="openDialogEditMessage(chatService.currentChannelID)" -->
+                                Nachricht bearbeiten
+                            </button>
+                        </mat-menu>
                     </div>
-                    <div class="message-text">
-                        {{ message.value.message }}
-                    </div>
+    
+    
+                    @if (message.value.avatar.length > 1) {
+                        <img src="{{ message.value.avatar }}">
+                    } @else {
+                        <img src="../../../assets/img/avatar/{{ message.value.avatar }}.svg">
+                    }
+    
                     <div>
-                        <div class="reaction">
-                            @if(message.value.reactions) {
-                            @for(reaction of message.value.reactions | keyvalue; track reaction; let i = $index) {
-                            <div class="reaction-wrapper">
-                                <div class="reaction-tooltip">
-                                    <img src="../../../assets/img/icons/emoji-{{ reaction.key }}.svg">
-                                    <span>Name, Name</span>
-                                    <p>hat reagiert</p>
+                        <div class="message-info">
+                            <h5>{{ message.value.name }}</h5>
+                            <span>{{ dayTime(message.value.time) }} Uhr</span>
+                        </div>
+                        <div class="message-text">
+                            {{ message.value.message }}
+                        </div>
+                        <div>
+                            <div class="reaction">
+                                @if(message.value.reactions) {
+                                @for(reaction of message.value.reactions | keyvalue; track reaction; let i = $index) {
+                                <div class="reaction-wrapper">
+                                    <div class="reaction-tooltip">
+                                        <img src="../../../assets/img/icons/emoji-{{ reaction.key }}.svg">
+                                        <span>Name, Name</span>
+                                        <p>hat reagiert</p>
+                                    </div>
+                                    <button mat-raised-button>
+                                        <img src="../../../assets/img/icons/emoji-{{ reaction.key }}.svg">
+                                        <span>{{ reaction.value }}</span>
+                                    </button>
                                 </div>
-                                <button mat-raised-button>
-                                    <img src="../../../assets/img/icons/emoji-{{ reaction.key }}.svg">
-                                    <span>{{ reaction.value }}</span>
-                                </button>
+                                }
+                                }
+                                <img src="../../../assets/img/icons/add_reaction.svg" alt="Add reaction">
                             </div>
-                            }
-                            }
-                            <img src="../../../assets/img/icons/add_reaction.svg" alt="Add reaction">
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+
 
         </div>
         }@else {
