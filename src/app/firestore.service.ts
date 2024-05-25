@@ -1,55 +1,68 @@
 import { Injectable, inject } from '@angular/core';
-import { list } from '@angular/fire/database';
-import { CollectionReference, DocumentData, Firestore, collection, collectionData, doc, onSnapshot, setDoc } from '@angular/fire/firestore';
+import { Firestore, collection, doc, setDoc, onSnapshot, getFirestore, CollectionReference, DocumentData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 import { Router } from '@angular/router';
 import { getRedirectResult, signInWithRedirect, signOut, updateEmail } from '@angular/fire/auth';
 import { User } from './interfaces/user';
-import { CurrentuserService } from './currentuser.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
-  doc(ref: CollectionReference<DocumentData, DocumentData>, id: string): import("@firebase/firestore").DocumentReference<unknown, import("@firebase/firestore").DocumentData> {
-    throw new Error('Method not implemented.');
-  }
   firestore: Firestore = inject(Firestore);
   auth = getAuth();
   provider = new GoogleAuthProvider();
   currentUser$: Observable<string | null>;
   currentUserID = '';
-  usersRef = collection(this.firestore, 'users');
-  channelsRef = collection(this.firestore, 'channels');
+  usersRef: CollectionReference<DocumentData>;
+  channelsRef: CollectionReference<DocumentData>;
 
   constructor(private router: Router) {
+    this.usersRef = collection(this.firestore, 'users');
+    this.channelsRef = collection(this.firestore, 'channels');
+
     this.currentUser$ = new Observable((observer) => {
       onAuthStateChanged(this.auth, (user) => {
         if (user) {
           observer.next(user.uid);
-          this.currentUserID = user.uid
-          if (this.router.url === '/login' || '/signup' || '/recovery' || '/reset-password') {
+          this.currentUserID = user.uid;
+          this.updateUserStatus(user.uid, true); // User ist online
+          if (this.router.url === '/login' || this.router.url === '/signup' || this.router.url === '/recovery' || this.router.url === '/reset-password') {
             this.handleGoogleRedirectResult();
-            this.router.navigate(['/'])
+            this.router.navigate(['/']);
           }
         } else {
           observer.next(null);
-          // No User logged in
+          this.updateUserStatus(this.currentUserID, false); // User ist offline
           if (this.router.url === '/') {
-            this.router.navigate(['/login'])
+            this.router.navigate(['/login']);
           }
         }
       });
     });
+
+        // Event listener für das Schließen des Fensters oder Tabs
+        window.addEventListener('beforeunload', this.setOfflineStatus);
+        window.addEventListener('unload', this.setOfflineStatus);
   }
-  
+
+  private setOfflineStatus = () => {
+    if (this.currentUserID) {
+      this.updateUserStatus(this.currentUserID, false);
+    }
+  }
+
+  private updateUserStatus(userId: string | undefined, status: boolean) {
+    if (userId) {
+      setDoc(doc(this.usersRef, userId), { online: status }, { merge: true });
+    }
+  }
 
   getFirestore(): Firestore {
     return this.firestore;
   }
 
-  // Funktion zum Starten der Google-Anmeldung
   loginWithGoogle = () => {
     signInWithRedirect(this.auth, this.provider);
   };
@@ -79,28 +92,22 @@ export class FirestoreService {
     return new Promise((resolve, reject) => {
       createUserWithEmailAndPassword(this.auth, email, password)
         .then((userCredential) => {
-          // Signed up 
           const user = userCredential.user;
-          resolve(user.uid); // Rückgabe der Nutzer-UID
+          resolve(user.uid);
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          reject(error); // Rückgabe des Fehlers
+          reject(error);
         });
     });
   }
 
-
   loginWithEmailAndPassword = (email: string, password: string): Promise<string | null> => {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
-        // Signed in 
         const user = userCredential.user;
         console.log('Anmeldung erfolgreich', user.uid);
         this.router.navigate(['/']);
         return null;
-        // ...
       })
       .catch((error) => {
         return error.code;
@@ -109,34 +116,29 @@ export class FirestoreService {
 
   logout() {
     signOut(this.auth).then(() => {
-      // Erfolgreich ausgeloggt
       console.log("User erfolgreich ausgeloggt");
     }).catch((error) => {
-      // Fehler beim Ausloggen
       console.error("Fehler beim Ausloggen: ", error);
     });
   }
 
   async saveUser(item: User, uid: string) {
-    await setDoc(doc(this.getFirestore(), 'users', uid), {
+    await setDoc(doc(this.usersRef, uid), {
       avatar: item.avatar,
       name: item.name,
       email: item.email,
-    });
+    }, { merge: true });
   }
 
   resetPassword(email: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      sendPasswordResetEmail(this.auth, email)
-        .then(() => {
-          console.log("Passwort-Reset-E-Mail gesendet.");
-          resolve();
-        })
-        .catch((error) => {
-          console.error("Fehler beim Senden der Passwort-Reset-E-Mail: ", error);
-          reject(error);
-        });
-    });
+    return sendPasswordResetEmail(this.auth, email)
+      .then(() => {
+        console.log("Passwort-Reset-E-Mail gesendet.");
+      })
+      .catch((error) => {
+        console.error("Fehler beim Senden der Passwort-Reset-E-Mail: ", error);
+        throw error;
+      });
   }
 
   confirmPasswordReset(code: string, newPassword: string): Promise<void> {
@@ -144,13 +146,11 @@ export class FirestoreService {
   }
 
   async updateEmail(newEmail: string): Promise<void> {
-    const auth = getAuth();
-    const user = auth.currentUser;
+    const user = this.auth.currentUser;
     if (user) {
       try {
         await updateEmail(user, newEmail);
         console.log('Email successfully updated!');
-
       } catch (error) {
         console.error('Error updating email:', error);
         throw error;
@@ -165,15 +165,14 @@ export class FirestoreService {
       avatar: avatar,
       name: name,
       email: email,
-    }
+    };
 
     this.saveUser(user, this.currentUserID);
-  }  
+  }
 
   loginAsGuest() {
     const guestEmail = 'guest@guest.guest';
-    const guestPassword = 'guest1';  // Ersetze dies durch das tatsächliche Passwort
-  
+    const guestPassword = 'guest1';
     return this.loginWithEmailAndPassword(guestEmail, guestPassword);
   }
 }

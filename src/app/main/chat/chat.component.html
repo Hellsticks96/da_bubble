@@ -113,7 +113,7 @@
         }
         <div class="input-container">
             <div class="chat-input">
-                <textarea type="text" [(ngModel)]="messageText" placeholder="Nachricht an #{{chatService.currentChannel.name}}"></textarea>
+                <textarea type="text" (keydown)="onKeydown($event)" [(ngModel)]="messageText" placeholder="Nachricht an #{{chatService.currentChannel.name}}"></textarea>
                 <div class="action-buttons">
                     <div class="button-wrapper">
                         <button mat-icon-button>
