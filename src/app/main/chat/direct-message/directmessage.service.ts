@@ -21,7 +21,7 @@ export class DirectmessageService {
     const userRef = collection(this.firestore.firestore, `users/${this.currentUser.currentUser.id}/${sendedUserID}/`);
     const messagesSnapshot = await getDocs(userRef);
     const messageCount = messagesSnapshot.size;
-    const newMessageRef = doc(userRef, messageCount.toString());
+    const newMessageRef = doc(userRef, this.padNumber(messageCount, 4));
     
     const newMessage: Message = {
       id: this.currentUser.currentUser.id,
@@ -38,7 +38,12 @@ export class DirectmessageService {
     } catch (error) {
       console.error("Failed to send message:", error);
     }
+  }
 
+  padNumber(num: number, size: number) {
+    let s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
   }
 
   getMessages(id: string) {

@@ -34,7 +34,7 @@
             <a href="mailto:{{ data.email }}">{{ data.email }}</a>
         </div>
     </div>
-    <button mat-flat-button class="submit">
+    <button mat-flat-button class="submit" (click)="openDM(data)">
         <img src="../../assets/img/icons/mode_comment.svg">
         Nachricht</button>
 </section>

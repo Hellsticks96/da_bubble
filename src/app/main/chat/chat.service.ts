@@ -159,7 +159,7 @@ export class ChatService {
     const channelRef = collection(this.firestore.firestore, `channels/${channelId}/messages`);
     const messagesSnapshot = await getDocs(channelRef);
     const messageCount = messagesSnapshot.size;
-    const newMessageRef = doc(channelRef, messageCount.toString());
+    const newMessageRef = doc(channelRef, this.padNumber(messageCount, 4));
 
     const messageData: Message = {
       id: this.currentUser.currentUser.id,
@@ -172,6 +172,12 @@ export class ChatService {
     };
     console.log(messageData);
     await setDoc(newMessageRef, messageData);
+  }
+
+  padNumber(num: number, size: number) {
+    let s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
   }
 
   subUsersList() {
