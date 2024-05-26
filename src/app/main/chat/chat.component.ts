@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { Channel } from '../../interfaces/channel';
 import { CurrentuserService } from '../../currentuser.service';
+import { ImageService } from '../../image.service';
 
 
 @Component({
@@ -46,7 +47,8 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
   constructor(
     public dialog: MatDialog,
     public chatService: ChatService,
-    public currentUser: CurrentuserService) { }
+    public currentUser: CurrentuserService,
+    public imageService: ImageService) { }
 
   ngAfterViewInit() {
     this.scrollToBottom();
@@ -54,6 +56,10 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     this.scrollToBottom();
+  }
+
+  log(){
+    console.log(this.imageService.storage)
   }
 
   toggleThread() {

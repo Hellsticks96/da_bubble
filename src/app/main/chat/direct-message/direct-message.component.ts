@@ -18,6 +18,7 @@ import { DirectmessageService } from './directmessage.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { ChatService } from '../chat.service';
 import { CurrentuserService } from '../../../currentuser.service';
+import { ImageService } from '../../../image.service';
 
 @Component({
   selector: 'app-direct-message',
@@ -30,7 +31,7 @@ import { CurrentuserService } from '../../../currentuser.service';
     ConversationsComponent,
     MatButtonToggleModule,
     FormsModule,
-    MatMenuModule,
+    MatMenuModule
   ],
 
   templateUrl: './direct-message.component.html',
@@ -41,7 +42,8 @@ export class DirectMessageComponent {
   messageText: string = '';
 
   constructor(public dialog: MatDialog, public DMSerivce: DirectmessageService,
-    public chatService: ChatService, public currentUser: CurrentuserService
+    public chatService: ChatService, public currentUser: CurrentuserService,
+    public imageService: ImageService
   ) {
 
   }
@@ -51,6 +53,9 @@ export class DirectMessageComponent {
     return Object.keys(obj);
   }
 
+  log(){
+    console.log(this.imageService.storage)
+  }
   togglePicker() {
     this.isPickerVisible = !this.isPickerVisible;
   }
