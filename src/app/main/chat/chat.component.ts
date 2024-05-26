@@ -23,6 +23,7 @@ import { UsersList } from '../../interfaces/users-list';
 import { MatInputModule } from '@angular/material/input';
 import { HighlightMentionsPipe } from '../../pipes/highlist-mentions.pipe';
 import { PofileInfoCardComponent } from '../../pofile-info-card/pofile-info-card.component';
+import { ImageService } from '../../image.service';
 
 
 @Component({
@@ -66,7 +67,8 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
   constructor(
     public dialog: MatDialog,
     public chatService: ChatService,
-    public currentUser: CurrentuserService) {
+    public currentUser: CurrentuserService,
+    public imageService: ImageService) {
     this.filteredMembers = this.formCtrl.valueChanges.pipe(
       startWith(''),
       map((value: string | null) => value ? this._filter(value) : [])
@@ -104,6 +106,8 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
     } else {
       console.log('Benutzer nicht gefunden');
     }
+  log(){
+    console.log(this.imageService.storage)
   }
 
   toggleThread() {
