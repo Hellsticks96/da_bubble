@@ -106,8 +106,10 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
     } else {
       console.log('Benutzer nicht gefunden');
     }
-  log(){
-    console.log(this.imageService.storage)
+  }
+
+  log() {
+    console.log(this.imageService.storage);
   }
 
   toggleThread() {
@@ -340,8 +342,8 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
 
   mentionUser(value: string): boolean {
     const atIndex = value.lastIndexOf('@');
-    if (atIndex === -1) return false; 
-  
+    if (atIndex === -1) return false;
+
     const charAfterAt = value.charAt(atIndex + 1);
     return charAfterAt !== ' ';
   }
