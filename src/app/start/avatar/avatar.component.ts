@@ -31,11 +31,7 @@ export class AvatarComponent {
       this.accountCreated = true;
       setTimeout(() => {
         this.submitAvatar.emit(this.avatar)
-      }, 2500);
-      this.accountCreated = true;
-      setTimeout(() => {
-        this.submitAvatar.emit(this.avatar)
-      }, 2500);
+      }, 1500);
     } else {
       this.error = true;
     }

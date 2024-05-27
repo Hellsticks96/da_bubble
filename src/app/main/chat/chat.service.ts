@@ -96,7 +96,7 @@ export class ChatService {
     this.selectedChannel = channelId;
     this.selectedDirectmessage = '';
     this.loadChannel(channelId);
-    if (window.matchMedia('(max-width: 431px)').matches) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
       this.mobileOpen = 'chat';
     }
   }
@@ -105,7 +105,7 @@ export class ChatService {
     this.selectedDirectmessage = user.id;
     this.selectedChannel = '';
     this.selectedUser = user;
-    if (window.matchMedia('(max-width: 431px)').matches) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
       this.mobileOpen = 'directmessage';
     }
   }

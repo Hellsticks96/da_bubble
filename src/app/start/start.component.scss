@@ -8,7 +8,6 @@
   z-index: 2;
   opacity: 1;
   animation: 500ms fadeOut 2500ms ease-out forwards;
-
 }
 
 @keyframes fadeOut {
@@ -260,7 +259,7 @@ main {
 
 // Media Queries
 
-@media (max-width: 431px) {
+@media (max-width: 768px) {
   .animation-logo {
     gap: 0.8rem;
     animation: 500ms slideUpMobile 2500ms ease-out forwards;

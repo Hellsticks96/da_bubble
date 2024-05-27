@@ -114,7 +114,7 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
 
   toggleThread() {
     this.threadOpen.emit(!this.threadOpen);
-    if (window.matchMedia('(max-width: 431px)').matches) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
       this.chatService.mobileOpen = 'thread';
     }
   }
@@ -151,7 +151,7 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
       let boundingClientRect = htmlElement.getBoundingClientRect();
       let dialogPosition;
 
-      if (window.matchMedia('(max-width: 431px)').matches) {
+      if (window.matchMedia('(max-width: 768px)').matches) {
         dialogPosition = {
           top: `${boundingClientRect.bottom + window.scrollY + 10}px`,
         };

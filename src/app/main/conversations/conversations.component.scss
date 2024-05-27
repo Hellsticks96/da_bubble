@@ -342,8 +342,6 @@ mat-button-toggle {
     }
 }
 
-// TODO: fix shifting bug of longest name
-
 .contact {
     display: flex;
     border-radius: 2.1875rem;
@@ -376,7 +374,7 @@ mat-button-toggle {
 
 // Media Queries
 
-@media (max-width: 431px) {
+@media (max-width: 768px) {
     .workspace {
         display: none;
     }

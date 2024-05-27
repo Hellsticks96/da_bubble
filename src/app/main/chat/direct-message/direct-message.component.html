@@ -19,7 +19,6 @@
                 <h1>{{chatService.selectedUser.name}}</h1>
             </mat-button-toggle>
         </mat-button-toggle-group>
-        <!-- TODO: dont use toggle group and button toggle - brings more problems (hover etc.) -->
     </div>
     <div class="chat-content">
         @if (DMSerivce.messages && objectKeys(DMSerivce.messages).length > 0) {
@@ -104,7 +103,7 @@
                     }
                     <h1>{{chatService.selectedUser.name}}</h1>
                 </div>
-                <span>Diese Unterhaltung findet nur zwischen <button>&#64;{{chatService.selectedUser.name}}</button> und dir statt.</span>
+                <span>Diese Unterhaltung findet nur zwischen <button (click)="openProfileCard()">&#64;{{chatService.selectedUser.name}}</button> und dir statt.</span>
 
             </div>
         </div>

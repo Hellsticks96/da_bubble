@@ -156,51 +156,47 @@ form {
 }
 
 .mail-sent-slider {
+    position: fixed;
+    right: 5vw;
+    bottom: 5vh;
     display: inline-flex;
-    padding: 2.125rem;
+    padding: 1.5625rem;
     justify-content: center;
     align-items: center;
     gap: 1.75rem;
-    color: white;
     border-radius: 1.875rem 1.875rem 0rem 1.875rem;
-    background: var(--Purple-1, #444DF2);
+    background: var(--purple-1);
     opacity: 0;
-    transform: translateX(100%) translateY(50px);
+    transform: translateX(100%);
     animation: slide-in 0.5s forwards;
-    animation-delay: 1s;
+    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.20);
 
     >img {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 1.25rem;
+        height: 1.25rem;
     }
 
     >h2 {
-        animation: fade-in 1s forwards;
-        animation-delay: 1.5s;
-
+        color: var(--white);
+        font-size: 1.125rem;
     }
 }
 
 @keyframes slide-in {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
     100% {
         opacity: 1;
-        transform: translateX(0) translateY(50px);
-    }
-}
-
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
+        transform: translateX(0);
     }
 }
 
 // Media Queries
 
-@media (max-width: 431px) {
+@media (max-width: 768px) {
     app-start {
         ::ng-deep::ng-deep .content {
             width: calc(92.5vw - 1.25rem - 1.25rem);

@@ -4,8 +4,8 @@ app-start {
         flex-direction: column;
         align-items: center;
         width: calc(37.875rem - 3.3125rem - 3.3125rem);
-        height: calc(48.0625rem - 3.125rem - 3.125rem);
-        padding: 3.125rem 3.3125rem;
+        height: unset;
+        padding: 2.5rem 3.3125rem;
         gap: 2.875rem;
     }
 }
@@ -33,7 +33,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.8125rem;
+    gap: 1rem;
     width: 100%;
 }
 
@@ -99,6 +99,7 @@ form {
     border-radius: 1.875rem;
     transition: 100ms ease-out;
     height: unset;
+    margin-top: -1.5rem;
 
 
     ::ng-deep::ng-deep .mdc-button__label {
@@ -156,7 +157,6 @@ form {
     align-items: center;
     justify-content: center;
     position: relative;
-    margin-bottom: 0.8125rem;
     width: 100%;
 
     >span {
@@ -344,7 +344,13 @@ form {
 
 // Media Queries
 
-@media (max-width: 431px) {
+@media (max-width: 1300px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
     app-start {
         ::ng-deep::ng-deep .content {
             width: calc(92.5vw - 1.25rem - 1.25rem);
@@ -381,6 +387,8 @@ form {
     }
 
     .forgot-pw {
+        margin-top: unset;
+
         ::ng-deep::ng-deep .mdc-button__label {
             font-size: 1.0625rem;
             letter-spacing: normal;

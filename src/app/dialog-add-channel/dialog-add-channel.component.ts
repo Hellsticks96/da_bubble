@@ -52,7 +52,7 @@ export class DialogAddChannelComponent {
 
   async forwardDialog(): Promise<void> {
     if (this.nameValid() && this.channelName) {
-      if (window.matchMedia('(max-width: 431px)').matches) {
+      if (window.matchMedia('(max-width: 768px)').matches) {
         this.openBottomSheet();
       } else {
         this.dialogRef.close();

@@ -23,7 +23,7 @@
 }
 
 .searchbar-wrapper {
-    width: 50%;
+    width: 40%;
     position: relative;
     display: flex;
     align-items: center;
@@ -98,6 +98,8 @@
 
 h1 {
     font-size: 2rem;
+    max-width: 15rem;
+    text-align: center;
 }
 
 .custom-dialog-class {
@@ -176,7 +178,7 @@ h1 {
 
 // Media Queries
 
-@media (max-width: 431px) {
+@media (max-width: 768px) {
     .mobile {
         display: flex;
     }

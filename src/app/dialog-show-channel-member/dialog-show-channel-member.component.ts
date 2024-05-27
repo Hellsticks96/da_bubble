@@ -4,6 +4,8 @@ import { ChatService } from '../main/chat/chat.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogAddMemberToChnlComponent } from '../dialog-add-member-to-chnl/dialog-add-member-to-chnl.component';
+import { PofileInfoCardComponent } from '../pofile-info-card/pofile-info-card.component';
+import { UsersList } from '../interfaces/users-list';
 @Component({
   selector: 'app-dialog-show-channel-member',
   standalone: true,
@@ -25,6 +27,12 @@ export class DialogShowChannelMemberComponent {
   openDialogAddMembers() {
     this.dialog.open(DialogAddMemberToChnlComponent, {
       panelClass: 'custom-dialog-mid',
+    });
+  }
+
+  openProfileCard(user: UsersList) {
+    this.dialog.open(PofileInfoCardComponent, {
+      data: user
     });
   }
 }

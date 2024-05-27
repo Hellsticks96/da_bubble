@@ -75,7 +75,7 @@ export class HeaderComponent {
   }
 
   mobileMenu() {
-    if (window.matchMedia('(max-width: 431px)').matches) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
       this.openBottomSheet();
     }
   }

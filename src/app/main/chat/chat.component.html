@@ -55,8 +55,6 @@
                         </mat-menu>
                     </div>
     
-    
-                    <!-- TODO: only allowed to edit my own messages -->
                     @if (message.value.avatar.length > 1) {
                         <img src="{{ message.value.avatar }}">
                     } @else {
@@ -105,7 +103,7 @@
                     <h1>{{chatService.currentChannel.name}}</h1>
                 </div>
                 <span>
-                    <button>&#64;{{chatService.currentChannel.creator}}</button>
+                    <button (click)="openProfileCard(chatService.currentChannel.creator)">&#64;{{chatService.currentChannel.creator}}</button>
                     hat diesen Channel neu erstellt und das ist der Anfang des Channels.
                 </span>
             </div>

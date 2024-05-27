@@ -122,7 +122,7 @@ export class NewMessageComponent {
     this.chatService.selectedChannel = channelId;
     this.chatService.selectedDirectmessage = '';
     this.chatService.openChannel(channelId);
-    if (window.matchMedia('(max-width: 431px)').matches) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
       this.chatService.mobileOpen = 'chat';
     }
   }
@@ -136,7 +136,7 @@ export class NewMessageComponent {
       this.chatService.selectedUser = selectedUser;
     }
 
-    if (window.matchMedia('(max-width: 431px)').matches) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
       this.chatService.mobileOpen = 'directmessage';
     }
   }
