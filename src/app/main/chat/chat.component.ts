@@ -276,8 +276,14 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
     }
   }
 
-  isLater(newMessageTime: string, index: string): boolean {
-    const previousMessage = this.chatService.currentChannel.messages?.get(index);
+  padNumber(num: number, size: number) {
+    let s = num + '';
+    while (s.length < size) s = '0' + s;
+    return s;
+  }
+
+  isLater(newMessageTime: string, index: number): boolean {
+    const previousMessage = this.chatService.currentChannel.messages?.get(this.padNumber(index, 4));
 
     if (!previousMessage) {
       return false;

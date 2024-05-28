@@ -5,24 +5,29 @@ import { serverTimestamp } from '@angular/fire/database';
 import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, setDoc } from '@angular/fire/firestore';
 import { Message } from '../../../interfaces/message';
 import { timestamp } from 'rxjs';
+import { ChatService } from '../chat.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DirectmessageService {
-  sendedUserID! :string;
+  sendedUserID!: string;
   messages: Record<string, Message> = {};
-  constructor(public currentUser: CurrentuserService, private firestore: FirestoreService) {
-
-  }
+  allMessages: { [userId: string]: { [messageId: string]: any } } = {};
+  
+  constructor(
+    public currentUser: CurrentuserService,
+    private firestore: FirestoreService,
+    private chat: ChatService
+  ) { }
 
   async sendMessage(sendedUserID: string, message: Message) {
-    this.sendedUserID = sendedUserID
+    this.sendedUserID = sendedUserID;
     const userRef = collection(this.firestore.firestore, `users/${this.currentUser.currentUser.id}/${sendedUserID}/`);
     const messagesSnapshot = await getDocs(userRef);
     const messageCount = messagesSnapshot.size;
     const newMessageRef = doc(userRef, this.padNumber(messageCount, 4));
-    
+
     const newMessage: Message = {
       id: this.currentUser.currentUser.id,
       avatar: this.currentUser.currentUser.avatar,// avatar: message.avatar,
@@ -33,7 +38,7 @@ export class DirectmessageService {
       reactions: {}
     };
     try {
-      await setDoc(newMessageRef, newMessage,{ merge: true });
+      await setDoc(newMessageRef, newMessage, { merge: true });
 
     } catch (error) {
       console.error("Failed to send message:", error);
@@ -41,7 +46,7 @@ export class DirectmessageService {
   }
 
   padNumber(num: number, size: number) {
-    let s = num+"";
+    let s = num + "";
     while (s.length < size) s = "0" + s;
     return s;
   }
@@ -59,9 +64,35 @@ export class DirectmessageService {
         const messageData = doc.data() as Message;
         this.messages[doc.id] = messageData;
       });
-      
-      console.log(this.messages)
-      
+
+      console.log(this.messages);
+
+    });
+  }
+
+  getAllMessages() {
+    this.allMessages = {};
+
+    this.chat.usersList.forEach((user) => {
+      const potentialCollectionRef = collection(this.firestore.firestore, `users/${this.currentUser.currentUser.id}/${user.id}`);
+      const messagesQuery = query(potentialCollectionRef, orderBy("time"));
+
+      onSnapshot(messagesQuery, (messagesSnapshot) => {
+        if (!messagesSnapshot.empty) {
+          if (!this.allMessages[user.id]) {
+            this.allMessages[user.id] = {};
+          }
+
+          messagesSnapshot.forEach((messageDoc) => {
+            const messageData = messageDoc.data() as Message;
+
+            this.allMessages[user.id][messageDoc.id] = {
+              ...messageData,
+              id: messageDoc.id
+            };
+          });
+        };
+      });
     });
   }
 }

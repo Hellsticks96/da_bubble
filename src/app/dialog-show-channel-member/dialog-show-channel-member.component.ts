@@ -35,4 +35,9 @@ export class DialogShowChannelMemberComponent {
       data: user
     });
   }
+  
+  isOnline(userId: string): boolean {
+    const user = this.chatService.usersList.find(user => user.id === userId);
+    return user ? user.online : false;
+  }
 }

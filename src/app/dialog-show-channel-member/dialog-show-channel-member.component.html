@@ -15,7 +15,11 @@
                         } @else {
                             <img src="../../assets/img/avatar/{{ user.avatar}}.svg">
                         }
-                        <img src="../../assets/img/icons/offline.svg">
+                        @if(isOnline(user.id)) {
+                            <img src="../../../assets/img/icons/online.svg">
+                        } @else {
+                            <img src="../../../assets/img/icons/offline.svg">
+                        }
                     </div>
                     <h4>{{user.name}}</h4>
                 </div>

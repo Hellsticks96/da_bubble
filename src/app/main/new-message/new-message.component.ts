@@ -48,7 +48,6 @@ export class NewMessageComponent {
 
   @ViewChild('nameInput')
   nameInput!: ElementRef<HTMLInputElement>;
-  dataBase = getFirestore();
 
   constructor(
     public DMSerivce: DirectmessageService,

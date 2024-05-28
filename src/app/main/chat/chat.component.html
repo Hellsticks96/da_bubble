@@ -28,7 +28,7 @@
         <div class="chat" #chatContainer>
             <!-- TODO: Add answers to thread amount -->
             @for (message of chatService.currentChannel.messages | keyvalue; track message; let  i = $index) {
-                @if (i == 0 || isLater(message.value.time, (i - 1).toString())) {
+                @if (i == 0 || isLater(message.value.time, i - 1)) {
                     <div class="day-date">
                         <h2>{{ dayDate(message.value.time) }}</h2>
                         <div class="vector"></div>
