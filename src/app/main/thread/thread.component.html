@@ -12,14 +12,12 @@
         </button>
     </header>
     <div class="chat-body">
-        
         <div class="chat">
             <div class="message" *ngFor="let message of messages">
-                @if (message.avatar.length > 1) {
-                    <img src="{{ message.avatar }}">
-                } @else {
+                <img *ngIf="message.avatar.length > 1; else defaultAvatar" [src]="message.avatar">
+                <ng-template #defaultAvatar>
                     <img src="../../../assets/img/avatar/{{ message.avatar }}.svg">
-                }
+                </ng-template>
                 <div>
                     <div class="message-info">
                         <h5>{{ message.name }}</h5>
@@ -28,14 +26,14 @@
                     <div class="message-text">{{ message.message }}</div>
                     <div>
                         <div class="reaction">
-                            @if(objectKeysLength(message.reactions) > 0) {
-                            @for(reaction of objectKeys(message.reactions); track reaction; let i = $index) {
-                            <button mat-raised-button>
-                                <img src="../../../assets/img/icons/emoji-{{ objectKeys(message.reactions)[i] }}.svg">
-                                <span>{{ objectValues(message.reactions)[i] }}</span>
-                            </button>
-                            }
-                            }
+                            <ng-container *ngIf="objectKeysLength(message.reactions || {}) > 0">
+                                <ng-container *ngFor="let reaction of objectKeys(message.reactions || {}); let i = index">
+                                    <button mat-raised-button>
+                                        <img src="../../../assets/img/icons/emoji-{{ objectKeys(message.reactions || {})[i] }}.svg">
+                                        <span>{{ objectValues(message.reactions || {})[i] }}</span>
+                                    </button>
+                                </ng-container>
+                            </ng-container>
                             <img src="../../../assets/img/icons/add_reaction.svg" alt="Add reaction">
                         </div>
                     </div>
@@ -44,21 +42,21 @@
         </div>
         <div class="input-container">
             <div class="chat-input">
-                <textarea type="text" placeholder="Antworten..."></textarea>
+                <textarea type="text" (keydown)="onKeydown($event)" [(ngModel)]="messageText" placeholder="Antworten..."></textarea>
                 <div class="action-buttons">
                     <div class="button-wrapper">
                         <button mat-icon-button>
                             <img src="../../../assets/img/icons/add-gray.svg" alt="Add image">
                         </button>
                         <div class="vector"></div>
-                        <button mat-icon-button>
+                        <button mat-icon-button (click)="togglePicker()">
                             <img src="../../../assets/img/icons/sentiment_satisfied.svg" alt="Add emoji">
                         </button>
                         <button mat-icon-button>
                             <img src="../../../assets/img/icons/alternate_email.svg" alt="Tag someone">
                         </button>
                     </div>
-                    <button mat-icon-button>
+                    <button mat-icon-button (click)="send()">
                         <img src="../../../assets/img/icons/send-button.svg" alt="Send message">
                     </button>
                 </div>

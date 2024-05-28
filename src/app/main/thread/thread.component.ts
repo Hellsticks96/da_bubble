@@ -1,86 +1,85 @@
-import { CommonModule} from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule,Router} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ChatService } from '../chat/chat.service';
+import { Message } from '../../interfaces/message';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-thread',
   standalone: true,
-  imports: [MatButtonModule, CommonModule,RouterModule],
+  imports: [MatButtonModule, CommonModule, RouterModule, FormsModule],
   templateUrl: './thread.component.html',
-  styleUrl: './thread.component.scss'
+  styleUrls: ['./thread.component.scss']
 })
-export class ThreadComponent {
+export class ThreadComponent implements OnInit {
+  @Input() channelId!: string;
+  @Input() messageId!: string;
   @Output() threadClose = new EventEmitter<boolean>();
+  messages: Message[] = [];
+  messageText: string = '';
+  isPickerVisible = false;
 
-  constructor(private chatService: ChatService){ }
+  constructor(private chatService: ChatService) { }
 
-  closeThread(){
+  ngOnInit() {
+    this.loadMessages();
+  }
+
+  closeThread() {
     this.threadClose.emit(false);
     if (window.matchMedia('(max-width: 768px)').matches) {
       this.chatService.mobileOpen = 'chat';
     }
   }
-  messages = [
-    {
-      avatar: '4',
-      name: 'Noah Braun',
-      time: '14:25 Uhr',
-      message: 'Welche Version ist aktuell von Angular?',
-      reactions: {
 
-      }
-    },
-    {
-      avatar: '5',
-      name: 'Sofia Müller',
-      time: '14:30 Uhr',
-      message: 'Ich habe die gleiche Frage. Ich habe gegoogelt und es scheint, dass die aktuelle Version Angular 13 ist. Vielleicht weiß Frederik, ob es wahr ist.',
-      reactions: {
-        'nerd': 1
-      }
-    },
-    {
-      avatar: '6',
-      name: 'Frederik Beck',
-      time: '15:06 Uhr',
-      message: 'Ja das ist es.',
-      reactions: {
-        'hands-up': 1,
-        'nerd': 3,
-      }
-    },
-    {
-      avatar: '5',
-      name: 'Sofia Müller',
-      time: '14:30 Uhr',
-      message: 'Ich habe die gleiche Frage. Ich habe gegoogelt und es scheint, dass die aktuelle Version Angular 13 ist. Vielleicht weiß Frederik, ob es wahr ist.',
-      reactions: {
-        'nerd': 1
-      }
-    },
-    {
-      avatar: '6',
-      name: 'Frederik Beck',
-      time: '15:06 Uhr',
-      message: 'Ja das ist es.',
-      reactions: {
-        'hands-up': 1,
-        'nerd': 3,
-      }
+  loadMessages() {
+    this.chatService.loadThreadMessages(this.channelId, this.messageId).subscribe(messages => {
+      this.messages = messages;
+    });
+  }
+
+  async send() {
+    if (this.messageText.trim() !== '') {
+      const message: Message = {
+        id: '',
+        avatar: '',
+        name: '',
+        time: new Date().toISOString(),
+        message: this.messageText,
+        createdAt: new Date(),
+        reactions: {}
+      };
+      await this.chatService.sendThreadMessage(this.channelId, this.messageId, message);
+      this.messageText = '';
     }
-  ];
+  }
 
-  objectKeys(obj: object) {
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      this.send();
+    }
+  }
+
+  togglePicker() {
+    this.isPickerVisible = !this.isPickerVisible;
+  }
+
+  addEmoji(event: any) {
+    this.messageText += event.emoji.native;
+  }
+
+  objectKeys(obj: object): string[] {
     return Object.keys(obj);
   }
 
-  objectValues(obj: object) {
+  objectValues(obj: object): any[] {
     return Object.values(obj);
   }
 
-  objectKeysLength(obj: object | string) {
+  objectKeysLength(obj: object | string): number {
     return Object.keys(obj).length;
   }
 }

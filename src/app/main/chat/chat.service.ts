@@ -1,24 +1,24 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FirestoreService } from '../../firestore.service';
-import { collection, doc, onSnapshot, orderBy, query, setDoc, where, serverTimestamp, getDocs } from '@angular/fire/firestore';
+import { collection, doc, onSnapshot, orderBy, query, setDoc, getDocs, serverTimestamp } from '@angular/fire/firestore';
 import { Channel } from '../../interfaces/channel';
 import { Message } from '../../interfaces/message';
-import { update } from '@angular/fire/database';
-import { v4 as uuidv4 } from 'uuid';
 import { CurrentuserService } from '../../currentuser.service';
 import { UsersList } from '../../interfaces/users-list';
 import { ChannelsList } from '../../interfaces/channels-list';
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  // channels: Record<string, Map<string, JSON> > = {};
   channels: Record<string, Channel> = {};
   currentChannel: Channel = {
     name: '',
     description: "",
     creator: '',
-    members: []
+    members: [],
+    messages: new Map()
   };
   channelsList: ChannelsList[] = [];
   currentChannelID = '';
@@ -35,44 +35,9 @@ export class ChatService {
     online: false
   };
 
-  // messages = [
-  //   {
-  //     id: 1,
-  //     avatar: '4',
-  //     name: 'Noah Braun',
-  //     time: '14:25 Uhr',
-  //     message: 'Welche Version ist aktuell von Angular?',
-  //     reactions: {
-
-  //     }
-  //   },
-  //   {
-  //     id: 2,
-  //     avatar: '5',
-  //     name: 'Sofia Müller',
-  //     time: '14:30 Uhr',
-  //     message: 'Ich habe die gleiche Frage. Ich habe gegoogelt und es scheint, dass die aktuelle Version Angular 13 ist. Vielleicht weiß Frederik, ob es wahr ist.',
-  //     reactions: {
-  //       'nerd': 1
-  //     }
-  //   },
-  //   {
-  //     id: 3,
-  //     avatar: '6',
-  //     name: 'Frederik Beck',
-  //     time: '15:06 Uhr',
-  //     message: 'Ja das ist es.',
-  //     reactions: {
-  //       'hands-up': 1,
-  //       'nerd': 3,
-  //     }
-  //   }
-  // ];
-
   constructor(public firestore: FirestoreService, public currentUser: CurrentuserService) {
     this.subUsersList();
     this.subChannelsList();
-
   }
 
   subChannelsList() {
@@ -115,9 +80,7 @@ export class ChatService {
     const channelDocRef = doc(channelRef, id);
     const messagesCollectionRef = collection(channelDocRef, 'messages');
 
-    // Erstellen einer Abfrage mit Sortierung
-    const messagesQuery = query(messagesCollectionRef, orderBy("time") // Sortiert die Nachrichten absteigend nach Zeit
-    );
+    const messagesQuery = query(messagesCollectionRef, orderBy("time"));
 
     return onSnapshot(messagesQuery, (querySnapshot) => {
       if (!this.channels[id]) {
@@ -132,26 +95,50 @@ export class ChatService {
 
       querySnapshot.forEach((doc) => {
         const messageData = doc.data() as Message;
-        this.channels[id].messages?.set(doc.id, messageData); // Speichert jede Nachricht in der Map
+        this.channels[id].messages?.set(doc.id, messageData);
       });
 
       onSnapshot(doc(channelRef, id), (docSnap) => {
         if (docSnap.exists()) {
           this.channels[id].name = docSnap.data()['name'];
           this.channels[id].creator = docSnap.data()['creator'];
-
-          if (docSnap.data()['members']) {
-            this.channels[id].members = docSnap.data()['members'];
-          }
-
-          if (docSnap.data()['description']) {
-            this.channels[id].description = docSnap.data()['description'];
-          }
+          this.channels[id].members = docSnap.data()['members'] || [];
+          this.channels[id].description = docSnap.data()['description'] || '';
         }
       });
 
       this.currentChannel = this.channels[id];
       this.currentChannelID = id;
+    });
+  }
+
+  loadMessages(channelId: string): Observable<Message[]> {
+    const messagesRef = collection(this.firestore.firestore, `channels/${channelId}/messages`);
+    const messagesQuery = query(messagesRef, orderBy('time'));
+
+    return new Observable(observer => {
+      onSnapshot(messagesQuery, snapshot => {
+        const messages: Message[] = [];
+        snapshot.forEach(doc => {
+          messages.push(doc.data() as Message);
+        });
+        observer.next(messages);
+      });
+    });
+  }
+
+  loadThreadMessages(channelId: string, messageId: string): Observable<Message[]> {
+    const threadMessagesRef = collection(this.firestore.firestore, `channels/${channelId}/messages/${messageId}/threads`);
+    const threadMessagesQuery = query(threadMessagesRef, orderBy('time'));
+
+    return new Observable(observer => {
+      onSnapshot(threadMessagesQuery, snapshot => {
+        const messages: Message[] = [];
+        snapshot.forEach(doc => {
+          messages.push(doc.data() as Message);
+        });
+        observer.next(messages);
+      });
     });
   }
 
@@ -163,7 +150,26 @@ export class ChatService {
 
     const messageData: Message = {
       id: this.currentUser.currentUser.id,
-      avatar: this.currentUser.currentUser.avatar,// avatar: message.avatar,
+      avatar: this.currentUser.currentUser.avatar,
+      name: this.currentUser.currentUser.name,
+      time: message.time,
+      message: message.message,
+      createdAt: serverTimestamp(),
+      reactions: {}
+    };
+    console.log(messageData);
+    await setDoc(newMessageRef, messageData);
+  }
+
+  async sendThreadMessage(channelId: string, messageId: string, message: Message) {
+    const threadRef = collection(this.firestore.firestore, `channels/${channelId}/messages/${messageId}/threads`);
+    const messagesSnapshot = await getDocs(threadRef);
+    const messageCount = messagesSnapshot.size;
+    const newMessageRef = doc(threadRef, this.padNumber(messageCount, 4));
+
+    const messageData: Message = {
+      id: this.currentUser.currentUser.id,
+      avatar: this.currentUser.currentUser.avatar,
       name: this.currentUser.currentUser.name,
       time: message.time,
       message: message.message,
@@ -175,8 +181,8 @@ export class ChatService {
   }
 
   padNumber(num: number, size: number) {
-    let s = num+"";
-    while (s.length < size) s = "0" + s;
+    let s = num + '';
+    while (s.length < size) s = '0' + s;
     return s;
   }
 
@@ -186,9 +192,6 @@ export class ChatService {
       this.usersList = [];
       list.forEach(element => {
         this.usersList.push(this.setUsersListObj(element.data(), element.id));
-        // if (element.id !== this.currentUser.currentUserUid) {
-        //   this.usersList.push(this.setUsersListObj(element.data(), element.id))
-        // }
       });
     });
   }
