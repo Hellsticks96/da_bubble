@@ -156,28 +156,17 @@
                                                 <div class="reaction-tooltip">
                                                     <ngx-emoji
                                                         [emoji]="reaction.key"
-                                                        style="
-                                                            font-size: 24px;
-                                                            height: 24px;
-                                                            width: 24px;
-                                                        "
                                                     ></ngx-emoji>
-                                                    <span>Name, Name</span>
+                                                    <span>{{reaction.key}}</span>
+                                                    <span>{{message.value.name}}</span>
                                                     <p>hat reagiert</p>
                                                 </div>
-                                                <button mat-raised-button>
                                                     <ngx-emoji
-                                                        emoji="smileys"
-                                                        style="
-                                                            font-size: 24px;
-                                                            height: 24px;
-                                                            width: 24px;
-                                                        "
+                                                        [emoji]="reaction.key"
                                                     ></ngx-emoji>
-                                                    <span>{{
-                                                        reaction.value
-                                                    }}</span>
-                                                </button>
+                                                    <span>
+                                                        {{reaction.key}}
+                                                {{reaction.value}}</span>
                                             </div>
                                         }
                                     }
@@ -248,7 +237,6 @@
                     <div class="button-wrapper">
                         <button
                             mat-icon-button
-                            (click)="log()"
                         >
                             <img
                                 src="../../../assets/img/icons/add-gray.svg"

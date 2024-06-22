@@ -132,9 +132,6 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
         }
     }
 
-    log() {
-        console.log(this.imageService.storage);
-    }
 
     addEmoji(event: any) {
         if (this.pickerContext === "input") {
@@ -158,6 +155,7 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
             .addReaction(messagePadnr, emoji)
             .then(() => console.log("Reaction added"))
             .catch((error) => console.error("Error adding reaction: ", error));
+            console.log(this.chatService.currentChannel.messages)
     }
 
     closePicker(event: Event) {
