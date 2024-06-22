@@ -67,6 +67,7 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
         messageId: string;
     }>();
     @ViewChild("chatContainer") private chatContainer!: ElementRef;
+    messagesArrayLength: number |undefined;
     messageText: string = "";
     isPickerVisible = false;
     pickerContext: string = "";
@@ -93,10 +94,13 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
     }
 
     ngAfterViewInit() {
+        if (this.chatService.currentChannel.messages)
+        this.messagesArrayLength = this.chatService.currentChannel.messages.size
         this.scrollToBottom();
     }
 
     ngAfterViewChecked() {
+        if (this.messagesArrayLength !== this.chatService.currentChannel.messages?.size)
         this.scrollToBottom();
     }
 
