@@ -45,12 +45,12 @@ section {
         align-items: center;
         gap: 0.9375rem;
 
-        >img {
+        > img {
             width: 1rem;
             height: 1rem;
         }
 
-        >span {
+        > span {
             font-size: 1.25rem;
         }
     }
@@ -68,7 +68,7 @@ section {
         align-items: center;
         gap: 1.25rem;
 
-        >span {
+        > span {
             font-size: 1.25rem;
             font-weight: 700;
         }
@@ -84,7 +84,6 @@ section {
         /* 1.35rem */
     }
 }
-
 
 .submit {
     width: min-content;
@@ -117,14 +116,13 @@ section {
         line-height: normal;
         letter-spacing: normal;
 
-        >img {
+        > img {
             width: 1.5rem;
             height: 1.5rem;
         }
     }
 
     &:hover {
-
         ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
             background-color: var(--purple-2);
 

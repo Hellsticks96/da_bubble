@@ -1,9 +1,9 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
-@import './assets/fonts/fonts.scss';
-@import '@ctrl/ngx-emoji-mart/picker';
+@import "./assets/fonts/fonts.scss";
+@import "@ctrl/ngx-emoji-mart/picker";
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
@@ -20,12 +20,17 @@ $DABubble-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$DABubble-theme: mat.define-light-theme((color: (primary: $DABubble-primary,
-        accent: $DABubble-accent,
-        warn: $DABubble-warn,
-      ),
-      typography: mat.define-typography-config(),
-      density: 0));
+$DABubble-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $DABubble-primary,
+            accent: $DABubble-accent,
+            warn: $DABubble-warn,
+        ),
+        typography: mat.define-typography-config(),
+        density: 0,
+    )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -35,8 +40,8 @@ $DABubble-theme: mat.define-light-theme((color: (primary: $DABubble-primary,
 /* You can add global styles to this file, and also import other style files */
 
 html {
-  background-color: var(--bg-color);
-  height: 100vh;
+    background-color: var(--bg-color);
+    height: 100vh;
 }
 
 // body {
@@ -44,110 +49,112 @@ html {
 // }
 
 * {
-  --purple-1: #444DF2;
-  --purple-2: #797EF3;
-  --purple-3: #535AF1;
-  --light-purple-line: #ADB0D9;
-  --bg-color: #ECEEFE;
-  --black: #000;
-  --white: #FFF;
-  --menu-color: #42526E;
-  --text-gray: #686868;
-  --online-green: #92C83E;
-  --error: #ED1E79;
-  --link: #1381FF;
+    --purple-1: #444df2;
+    --purple-2: #797ef3;
+    --purple-3: #535af1;
+    --light-purple-line: #adb0d9;
+    --bg-color: #eceefe;
+    --black: #000;
+    --white: #fff;
+    --menu-color: #42526e;
+    --text-gray: #686868;
+    --online-green: #92c83e;
+    --error: #ed1e79;
+    --link: #1381ff;
 
-  margin: 0;
-  padding: 0;
-  font-family: 'Nunito', 'Figtree', 'Open Sans';
+    margin: 0;
+    padding: 0;
+    font-family: "Nunito", "Figtree", "Open Sans";
 }
 
 a {
-  text-decoration: none;
-  color: var(--purple-2);
-  font-family: Figtree;
-  font-size: 1.125rem;
+    text-decoration: none;
+    color: var(--purple-2);
+    font-family: Figtree;
+    font-size: 1.125rem;
 }
 
 .custom-dialog .mdc-dialog__container .mat-mdc-dialog-surface {
-  border-radius: 1.875rem;
+    border-radius: 1.875rem;
 }
 
 .custom-dialog-br .mdc-dialog__container .mat-mdc-dialog-surface {
-  border-radius: 1.875rem 0 1.875rem 1.875rem;
+    border-radius: 1.875rem 0 1.875rem 1.875rem;
 }
 
 .mat-autocomplete-panel {
-  border-radius: 10px !important;
+    border-radius: 10px !important;
 }
 
 .custom-dialog-mid {
-  border-radius: 1.875rem !important;
-  overflow: hidden;
+    border-radius: 1.875rem !important;
+    overflow: hidden;
 }
 
 .mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before {
-  background-color: unset !important; }
+    background-color: unset !important;
+}
 
-.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel {
-  border-radius: 0 0.8rem 0.8rem 0.8rem !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: auto;
-  padding: 1rem;
+.cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above)
+    div.mat-mdc-autocomplete-panel {
+    border-radius: 0 0.8rem 0.8rem 0.8rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: auto;
+    padding: 1rem;
 }
 
 .d-none {
-  display: none;
+    display: none;
 }
 
 /* Chrome, Edge, Safari */
 *::-webkit-scrollbar {
-  width: 6px;
-  /* vertical scrollbar */
+    width: 6px;
+    /* vertical scrollbar */
 }
 
 *::-webkit-scrollbar-track {
-  background: transparent;
+    background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 1.875rem;
-  border: 0;
+    background: black;
+    border-radius: 1.875rem;
+    border: 0;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: var(--purple-3);
+    background: var(--purple-3);
 }
 
-button.closeButton  {
-  padding: 0.5rem !important;
-  width: 2.5rem !important;
-  height: 2.5rem !important;
+button.closeButton {
+    padding: 0.5rem !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
 
-  ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple,
-  ::ng-deep::ng-deep .mat-mdc-button-touch-target,
-  ::ng-deep::ng-deep .mat-mdc-focus-indicator,
-  ::ng-deep::ng-deep .mat-ripple {
-      width: 2.5rem !important;
-      height: 2.5rem !important;
-  }
+    ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple,
+    ::ng-deep::ng-deep .mat-mdc-button-touch-target,
+    ::ng-deep::ng-deep .mat-mdc-focus-indicator,
+    ::ng-deep::ng-deep .mat-ripple {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+    }
 
-  &:hover {
-      background-color: var(--bg-color) !important;
+    &:hover {
+        background-color: var(--bg-color) !important;
 
-      >img {
-          content: url(./assets/img/icons/close-purple.svg) !important;
-      }
-  }
+        > img {
+            content: url(./assets/img/icons/close-purple.svg) !important;
+        }
+    }
 }
 
 .mat-bottom-sheet-container {
-  padding: 0 !important;
-  border-radius: 1.875rem 1.875rem 0rem 0rem;
+    padding: 0 !important;
+    border-radius: 1.875rem 1.875rem 0rem 0rem;
 }
 
 /* Chrome, Edge, Safari */
@@ -155,57 +162,57 @@ button.closeButton  {
 // Media Queries
 
 @media (max-width: 1300px) {
-  html {
-      font-size: 15px;
-  }
+    html {
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 1150px) {
-  html {
-      font-size: 14px;
-  }
+    html {
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 1075px) {
-  html {
-      font-size: 13px;
-  }
+    html {
+        font-size: 13px;
+    }
 }
 
 @media (max-width: 1025px) {
-  html {
-      font-size: 12px;
-  }
+    html {
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 940px) {
-  html {
-      font-size: 11px;
-  }
+    html {
+        font-size: 11px;
+    }
 }
 
 @media (max-width: 875px) {
-  html {
-      font-size: 10px;
-  }
+    html {
+        font-size: 10px;
+    }
 }
 
 @media (max-width: 825px) {
-  html {
-      font-size: 9.5px;
-  }
+    html {
+        font-size: 9.5px;
+    }
 }
 
 @media (max-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 
-  .cdk-overlay-pane.mat-mdc-dialog-panel {
-    max-width: unset !important;
-  }
+    .cdk-overlay-pane.mat-mdc-dialog-panel {
+        max-width: unset !important;
+    }
 
-  .custom-dialog .mdc-dialog__container .mat-mdc-dialog-surface {
-    border-radius: 0;
-  }
+    .custom-dialog .mdc-dialog__container .mat-mdc-dialog-surface {
+        border-radius: 0;
+    }
 }

@@ -1,4 +1,4 @@
-@import '../legal-notice/legal-notice.component.scss';
+@import "../legal-notice/legal-notice.component.scss";
 
 app-start {
     ::ng-deep::ng-deep .content {
@@ -9,14 +9,14 @@ app-start {
 }
 
 @media (max-width: 768px) {
-        app-start {
+    app-start {
         ::ng-deep::ng-deep .content {
             width: calc(92.5vw - 1.25rem - 1.25rem);
             height: calc(75vh - 2.1875rem - 2.1875rem);
             padding: 2.1875rem 1.25rem;
             gap: 1.5rem;
 
-            >div {
+            > div {
                 gap: 0.75rem;
             }
         }
@@ -29,8 +29,8 @@ app-start {
 
     h1 {
         font-size: 2rem;
-    } 
-    
+    }
+
     p {
         font-size: 1.0625rem;
     }

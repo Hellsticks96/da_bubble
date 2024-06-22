@@ -8,10 +8,13 @@ main {
     width: 50vw;
 
     background: var(--white);
-    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.20);
+    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
-::ng-deep::ng-deep .custom-dialog-br .mdc-dialog__container .mat-mdc-dialog-surface {
+::ng-deep::ng-deep
+    .custom-dialog-br
+    .mdc-dialog__container
+    .mat-mdc-dialog-surface {
     border-radius: 1.875rem;
 }
 
@@ -21,11 +24,11 @@ main {
     justify-content: space-between;
     width: 100%;
 
-    >div {
+    > div {
         display: flex;
         gap: 0.9375rem;
 
-        >img {
+        > img {
             width: 1.875rem;
             height: 1.875rem;
         }
@@ -44,7 +47,7 @@ main {
     border-radius: 1.25rem;
     border: 1px solid var(--light-purple-line);
 
-    >div:first-child {
+    > div:first-child {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
@@ -55,23 +58,22 @@ main {
         font-size: 1.125rem;
     }
 
-    >div {
-
-        >span {
+    > div {
+        > span {
             color: var(--purple-3);
             font-size: 1.125rem;
             font-weight: 600;
             transition: 150ms ease-in;
 
             &:hover {
-                color: var(--Purple-1, #444DF2);
+                color: var(--Purple-1, #444df2);
                 font-weight: 700;
                 cursor: pointer;
             }
         }
     }
 
-    >div:last-child {
+    > div:last-child {
         display: flex;
         width: 100%;
         padding: 0.125rem 0.0625rem;
@@ -97,8 +99,7 @@ main {
     position: relative;
     width: 100%;
 
-    >input {
-
+    > input {
         border: 0;
         width: calc(100% - 2rem - 5.375rem);
         padding: 1.125rem 2rem 1.125rem 5.375rem;
@@ -124,13 +125,13 @@ main {
         &:focus {
             outline: 1px solid var(--purple-3);
 
-            &+img {
+            & + img {
                 filter: brightness(0%);
             }
         }
     }
 
-    >img {
+    > img {
         width: 1.5rem;
         height: 1.5rem;
         position: absolute;
@@ -142,28 +143,28 @@ main {
 }
 
 .noIcon {
-    >input {
+    > input {
         width: calc(100% - 2rem - 2rem);
         padding: 1.125rem 2rem;
     }
 }
 
 .description-box {
-    >div:nth-child(2) {
+    > div:nth-child(2) {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 1.875rem;
         width: 100%;
 
-        >div {
+        > div {
             width: 100%;
             height: 1px;
             background-color: var(--light-purple-line);
         }
     }
 
-    >span {
+    > span {
         font-size: 1.5rem;
         font-weight: 400;
         color: var(--purple-3);
@@ -200,7 +201,6 @@ main {
     }
 
     &:hover {
-
         ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
             background-color: var(--purple-2);
 
@@ -238,7 +238,7 @@ main {
         align-items: flex-start;
 
         .dialog-header {
-            >button {
+            > button {
                 display: none;
             }
         }
@@ -252,13 +252,13 @@ main {
             }
 
             .channel-member {
-                >h4 {
+                > h4 {
                     max-width: unset;
                 }
             }
 
             .dialog-add-member {
-                >button {
+                > button {
                     background-color: var(--bg-color);
                 }
             }
@@ -277,7 +277,10 @@ main {
         justify-content: flex-start;
     }
 
-    ::ng-deep::ng-deep .custom-dialog-br .mdc-dialog__container .mat-mdc-dialog-surface {
+    ::ng-deep::ng-deep
+        .custom-dialog-br
+        .mdc-dialog__container
+        .mat-mdc-dialog-surface {
         border-radius: 0;
     }
 
@@ -286,13 +289,13 @@ main {
         width: calc(100% - 1rem - 1rem);
         box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
 
-        >div {
-            >img {
+        > div {
+            > img {
                 width: 1.5625rem;
                 height: 1.5625rem;
             }
 
-            >h1 {
+            > h1 {
                 font-size: 1.25rem;
             }
         }
@@ -302,8 +305,8 @@ main {
         margin: 0 1rem;
         width: calc(100% - 1.25rem - 1.25rem - 1rem - 1rem - 2px);
 
-        >div {
-            >span {
+        > div {
+            > span {
                 content: url(../../assets/img/icons/edit.svg);
                 width: 1.5rem;
                 height: 1.5rem;
@@ -313,7 +316,7 @@ main {
             }
 
             .save {
-                content: url(../../assets/img/icons/check_circle.svg)
+                content: url(../../assets/img/icons/check_circle.svg);
             }
         }
     }
@@ -322,12 +325,12 @@ main {
         margin: 0 1rem;
         width: calc(100% - 1.25rem - 1.25rem - 1rem - 1rem - 2px);
 
-        >span {
+        > span {
             font-size: 1.25rem;
         }
 
-        >div {
-            >span {
+        > div {
+            > span {
                 content: url(../../assets/img/icons/edit.svg);
                 width: 1.5rem;
                 height: 1.5rem;
@@ -337,7 +340,7 @@ main {
             }
 
             .save {
-                content: url(../../assets/img/icons/check_circle.svg)
+                content: url(../../assets/img/icons/check_circle.svg);
             }
         }
     }
@@ -351,13 +354,13 @@ main {
     }
 
     .inputDiv {
-        >input {
+        > input {
             padding: 1.125rem 1.25rem 1.125rem 3.625rem;
             width: calc(100% - 1.25rem - 3.625rem);
             border-radius: 2.5rem;
         }
 
-        >img {
+        > img {
             width: 1.4375rem;
             height: 1.4375rem;
             left: 1.25rem;
@@ -365,10 +368,9 @@ main {
     }
 
     .noIcon {
-        >input {
+        > input {
             padding: 1.125rem 1.25rem;
             width: calc(100% - 1.25rem - 1.25rem);
         }
     }
-
 }

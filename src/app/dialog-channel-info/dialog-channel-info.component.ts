@@ -1,83 +1,96 @@
-import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogRef } from '@angular/material/dialog';
-import { ChatService } from '../main/chat/chat.service';
-import { FormsModule } from '@angular/forms';
-import { doc, getFirestore, updateDoc } from '@angular/fire/firestore';
-import { CurrentuserService } from '../currentuser.service';
+import { Component } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogRef } from "@angular/material/dialog";
+import { ChatService } from "../main/chat/chat.service";
+import { FormsModule } from "@angular/forms";
+import { doc, getFirestore, updateDoc } from "@angular/fire/firestore";
+import { CurrentuserService } from "../currentuser.service";
 import { DialogShowChannelMemberComponent } from "../dialog-show-channel-member/dialog-show-channel-member.component";
 
 @Component({
-    selector: 'app-dialog-channel-info',
+    selector: "app-dialog-channel-info",
     standalone: true,
-    templateUrl: './dialog-channel-info.component.html',
-    styleUrl: './dialog-channel-info.component.scss',
-    imports: [MatButtonModule, FormsModule, DialogShowChannelMemberComponent]
+    templateUrl: "./dialog-channel-info.component.html",
+    styleUrl: "./dialog-channel-info.component.scss",
+    imports: [MatButtonModule, FormsModule, DialogShowChannelMemberComponent],
 })
 export class DialogChannelInfoComponent {
-  editingName = false;
-  editingDescription = false;
-  name = '';
-  description = '';
-  invalidName = false;
+    editingName = false;
+    editingDescription = false;
+    name = "";
+    description = "";
+    invalidName = false;
 
-  dataBase = getFirestore();
+    dataBase = getFirestore();
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogChannelInfoComponent>,
-    public chatService: ChatService,
-    private currentUser: CurrentuserService
-  ) { }
+    constructor(
+        public dialogRef: MatDialogRef<DialogChannelInfoComponent>,
+        public chatService: ChatService,
+        private currentUser: CurrentuserService,
+    ) {}
 
-  async leaveChannel() {
-    const updatedMembers = this.chatService.currentChannel.members.filter(member => member.id !== this.currentUser.currentUserUid);
+    async leaveChannel() {
+        const updatedMembers = this.chatService.currentChannel.members.filter(
+            (member) => member.id !== this.currentUser.currentUserUid,
+        );
 
-    await updateDoc(doc(this.dataBase, "channels", this.chatService.currentChannelID), {
-      members: updatedMembers
-    });
+        await updateDoc(
+            doc(this.dataBase, "channels", this.chatService.currentChannelID),
+            {
+                members: updatedMembers,
+            },
+        );
 
-    this.chatService.setComponent('');
-    this.closeDialog();
-  }
-
-  editName() {
-    this.name = this.chatService.currentChannel.name;
-    this.editingName = true;
-  }
-
-  async saveName() {
-    if (this.nameValid() && this.name) {
-
-      await updateDoc(doc(this.dataBase, "channels", this.chatService.currentChannelID), {
-        name: this.name
-      })
-
-      this.editingName = false;
-    } else {
-      this.invalidName = true;
+        this.chatService.setComponent("");
+        this.closeDialog();
     }
-  }
 
-  editDescription() {
-    this.description = this.chatService.currentChannel.description;
-    this.editingDescription = true;
-  }
+    editName() {
+        this.name = this.chatService.currentChannel.name;
+        this.editingName = true;
+    }
 
-  async saveDescription() {
+    async saveName() {
+        if (this.nameValid() && this.name) {
+            await updateDoc(
+                doc(
+                    this.dataBase,
+                    "channels",
+                    this.chatService.currentChannelID,
+                ),
+                {
+                    name: this.name,
+                },
+            );
 
-    await updateDoc(doc(this.dataBase, "channels", this.chatService.currentChannelID), {
-      description: this.description
-    })
-    this.chatService.currentChannel.description = this.description;
+            this.editingName = false;
+        } else {
+            this.invalidName = true;
+        }
+    }
 
-    this.editingDescription = false;
-  }
+    editDescription() {
+        this.description = this.chatService.currentChannel.description;
+        this.editingDescription = true;
+    }
 
-  nameValid() {
-    return this.name.indexOf(' ') == -1;
-  }
+    async saveDescription() {
+        await updateDoc(
+            doc(this.dataBase, "channels", this.chatService.currentChannelID),
+            {
+                description: this.description,
+            },
+        );
+        this.chatService.currentChannel.description = this.description;
 
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
+        this.editingDescription = false;
+    }
+
+    nameValid() {
+        return this.name.indexOf(" ") == -1;
+    }
+
+    closeDialog(): void {
+        this.dialogRef.close();
+    }
 }

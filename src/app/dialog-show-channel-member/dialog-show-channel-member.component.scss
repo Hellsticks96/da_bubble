@@ -44,12 +44,12 @@ main {
     transition: 80ms ease-in;
     width: max-content;
 
-    >h4 {
+    > h4 {
         font-size: 1.125rem;
         font-weight: 400;
         overflow-wrap: break-word;
-    white-space: break-spaces;
-    max-width: 9.75rem;
+        white-space: break-spaces;
+        max-width: 9.75rem;
     }
 
     &:hover {
@@ -63,13 +63,13 @@ main {
     width: 3.125rem;
     height: 3.125rem;
 
-    >img:first-child {
+    > img:first-child {
         width: 3.125rem;
         height: 3.125rem;
         border-radius: 100%;
     }
 
-    >img:last-child {
+    > img:last-child {
         width: 0.875rem;
         height: 0.875rem;
         position: absolute;
@@ -84,14 +84,13 @@ main {
     align-items: center;
     gap: 0.9375rem;
 
-    >button {
+    > button {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 2.5rem;
         height: 2.5rem;
         padding: 0.5rem;
-
 
         ::ng-deep::ng-deep .mat-mdc-button-touch-target {
             width: 2.5rem;
@@ -110,20 +109,18 @@ main {
         &:hover {
             background-color: var(--bg-color);
 
-            >img {
+            > img {
                 content: url(../../assets/img/icons/person-add-purple.svg);
             }
         }
     }
 
-    >p {
+    > p {
         font-size: 1.125rem;
         font-weight: 400;
     }
-
 }
 
 ::ng-deep::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
     border-radius: 1.875rem 0rem 1.875rem 1.875rem;
 }
-

@@ -6,10 +6,9 @@
     width: 2.5rem;
     height: 2.5rem;
 
-    >img {
+    > img {
         width: 1.5rem;
         height: 1.5rem;
-
     }
 }
 
@@ -21,13 +20,13 @@
     gap: 2rem;
     margin-bottom: 2.5rem;
 
-    >h1 {
+    > h1 {
         color: var(--purple-1);
         font-size: 2.875rem;
         line-height: 120%;
     }
 
-    >p {
+    > p {
         text-align: center;
         font-size: 1.25rem;
         line-height: 120%;
@@ -39,11 +38,10 @@ form {
     flex-direction: column;
     gap: 2.5rem;
 
-    >div {
+    > div {
         position: relative;
 
-        >input {
-
+        > input {
             border: 0;
             width: calc(100% - 2rem - 5.375rem);
             padding: 1.125rem 2rem 1.125rem 5.375rem;
@@ -69,13 +67,13 @@ form {
             &:focus {
                 outline: 1px solid var(--purple-3);
 
-                &+img {
+                & + img {
                     filter: brightness(0%);
                 }
             }
         }
 
-        >img {
+        > img {
             width: 1.5rem;
             height: 1.5rem;
             position: absolute;
@@ -110,7 +108,12 @@ mat-checkbox {
         gap: 0.5rem;
     }
 
-    ::ng-deep::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+    ::ng-deep::ng-deep
+        .mdc-checkbox
+        .mdc-checkbox__native-control:enabled:not(:checked):not(
+            :indeterminate
+        ):not([data-indeterminate="true"])
+        ~ .mdc-checkbox__background {
         border-color: var(--purple-2);
     }
 
@@ -120,13 +123,22 @@ mat-checkbox {
         justify-content: center;
     }
 
-    ::ng-deep::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:focus:checked~.mdc-checkbox__background,
-    ::ng-deep::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
+    ::ng-deep::ng-deep
+        .mdc-checkbox
+        .mdc-checkbox__native-control:enabled:focus:checked
+        ~ .mdc-checkbox__background,
+    ::ng-deep::ng-deep
+        .mdc-checkbox
+        .mdc-checkbox__native-control:enabled:checked
+        ~ .mdc-checkbox__background {
         border-color: var(--purple-1);
         background-color: var(--purple-1);
     }
 
-    ::ng-deep::ng-deep .mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mdc-checkbox__ripple {
+    ::ng-deep::ng-deep
+        .mdc-checkbox
+        .mdc-checkbox__native-control:focus:checked
+        ~ .mdc-checkbox__ripple {
         background-color: var(--bg-color);
     }
 
@@ -187,7 +199,6 @@ mat-checkbox {
     }
 
     &:hover {
-
         ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
             background-color: var(--purple-2);
 
@@ -208,10 +219,9 @@ mat-checkbox {
     }
 }
 
-// Media Queries 
+// Media Queries
 
 @media (max-width: 768px) {
-
     .goBack {
         top: 2.1875rem;
         left: 1.25rem;
@@ -221,20 +231,20 @@ mat-checkbox {
         gap: 0.9375rem;
         margin-bottom: 1.5rem;
 
-        >h1 {
+        > h1 {
             font-size: 2rem;
         }
 
-        >p {
+        > p {
             font-size: 1.0625rem;
         }
     }
 
     form {
         gap: 1.875rem;
-        
-        >div {
-            >input {
+
+        > div {
+            > input {
                 padding: 0.8125rem 2rem 0.8125rem 5.375rem;
             }
         }

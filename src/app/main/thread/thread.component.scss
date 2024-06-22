@@ -22,27 +22,26 @@ header {
     border-radius: 2rem 2rem 0 0;
     z-index: 2;
 
-    >div {
+    > div {
         display: flex;
         align-items: center;
         gap: 0.3125rem;
 
-
-        >h1 {
+        > h1 {
             font-size: 1.5rem;
         }
 
-        >div {
+        > div {
             display: flex;
             align-items: center;
             gap: 0.3125rem;
 
-            >img {
+            > img {
                 width: 1rem;
                 height: 1rem;
             }
 
-            >span {
+            > span {
                 color: var(--purple-2);
                 font-size: 0.875rem;
             }
@@ -81,17 +80,16 @@ header {
     align-items: flex-start;
     gap: 1.25rem;
 
-    >img {
+    > img {
         width: 4.375rem;
         height: 4.375rem;
         border-radius: 50%;
     }
 
-    >div:not(.message-info) {
+    > div:not(.message-info) {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-
     }
 }
 
@@ -104,11 +102,11 @@ header {
     align-items: center;
     gap: 1.25rem;
 
-    >h5 {
+    > h5 {
         font-size: 1.125rem;
     }
 
-    >span {
+    > span {
         color: var(--text-gray);
         font-size: 0.875rem;
     }
@@ -146,7 +144,7 @@ header {
         left: 10%;
         right: unset;
 
-        >.moreButton {
+        > .moreButton {
             display: flex;
         }
     }
@@ -189,7 +187,7 @@ header {
     gap: 0.5rem;
     align-items: center;
 
-    >button {
+    > button {
         padding: 0.3125rem 0.625rem;
         border-radius: 1.25rem;
         border: 1px solid var(--light-purple-line);
@@ -201,18 +199,18 @@ header {
             align-items: center;
             gap: 0.625rem;
 
-            >img {
+            > img {
                 width: 1.5rem;
                 height: 1.5rem;
             }
 
-            >span {
+            > span {
                 font-size: 1rem;
             }
         }
     }
 
-    >img {
+    > img {
         padding: 0.3125rem;
         width: 1.5rem;
         height: 1.5rem;
@@ -249,7 +247,7 @@ header {
         justify-content: space-between;
         margin-top: 0.5rem;
 
-        >button {
+        > button {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -257,7 +255,7 @@ header {
             width: 2.5rem;
             height: 2.5rem;
 
-            >img {
+            > img {
                 width: 2.5rem;
                 height: 2.5rem;
             }
@@ -282,7 +280,7 @@ header {
                 border: 1px solid var(--light-purple-line);
             }
 
-            >button {
+            > button {
                 padding: 0.5rem;
                 width: 2.5rem;
                 height: 2.5rem;
@@ -323,8 +321,8 @@ header {
     header {
         padding: 0.625rem 1rem;
 
-        >div {
-            >h1 {
+        > div {
+            > h1 {
                 font-size: 1.25rem;
             }
         }
@@ -338,7 +336,7 @@ header {
         padding: 0.625rem 1rem;
         gap: 1rem;
 
-        >img {
+        > img {
             width: 3.125rem;
             height: 3.125rem;
         }

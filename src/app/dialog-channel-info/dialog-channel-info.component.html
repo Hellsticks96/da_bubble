@@ -1,11 +1,15 @@
 <main>
     <section class="title">
         <div>
-            <img src="../../assets/img/icons/tag-black.svg">
+            <img src="../../assets/img/icons/tag-black.svg" />
             <h1>{{ chatService.currentChannel.name }}</h1>
         </div>
-        <button class="closeButton" (click)="closeDialog()" mat-icon-button>
-            <img src="../../../assets/img/icons/close.svg">
+        <button
+            class="closeButton"
+            (click)="closeDialog()"
+            mat-icon-button
+        >
+            <img src="../../../assets/img/icons/close.svg" />
         </button>
     </section>
     @if (!editingName) {
@@ -15,7 +19,7 @@
                 <span (click)="editName()">Bearbeiten</span>
             </div>
             <div>
-                <img src="../../assets/img/icons/tag-black.svg">
+                <img src="../../assets/img/icons/tag-black.svg" />
                 <p>{{ chatService.currentChannel.name }}</p>
             </div>
         </section>
@@ -23,14 +27,22 @@
         <section class="name-box edit-name">
             <div>
                 <h6>Channel-Name</h6>
-                <span (click)="saveName()" class="save">Speichern</span>
+                <span
+                    (click)="saveName()"
+                    class="save"
+                    >Speichern</span
+                >
             </div>
             <div class="inputDiv">
-                <input [(ngModel)]="name" value="{{ this.name }}" placeholder="z.B. Kooperationsprojekte">
-                <img src="../../assets/img/icons/tag-black.svg">
+                <input
+                    [(ngModel)]="name"
+                    value="{{ this.name }}"
+                    placeholder="z.B. Kooperationsprojekte"
+                />
+                <img src="../../assets/img/icons/tag-black.svg" />
                 @if (invalidName) {
                     <span class="error">Bitte keine Leerzeichen.</span>
-                    }
+                }
             </div>
         </section>
     }
@@ -52,10 +64,18 @@
         <section class="description-box">
             <div>
                 <h6>Beschreibung</h6>
-                <span (click)="saveDescription()" class="save">Speichern</span>
+                <span
+                    (click)="saveDescription()"
+                    class="save"
+                    >Speichern</span
+                >
             </div>
             <div class="inputDiv noIcon">
-                <input [(ngModel)]="description" value="{{ this.description }}" placeholder="Dein Text hier">
+                <input
+                    [(ngModel)]="description"
+                    value="{{ this.description }}"
+                    placeholder="Dein Text hier"
+                />
                 <div></div>
                 <h6>Erstellt von</h6>
             </div>
@@ -63,7 +83,15 @@
         </section>
     }
 
-    <app-dialog-show-channel-member class="members-box"></app-dialog-show-channel-member>
+    <app-dialog-show-channel-member
+        class="members-box"
+    ></app-dialog-show-channel-member>
 
-    <button (click)="leaveChannel()" mat-flat-button class="leave">Channel verlassen</button>
+    <button
+        (click)="leaveChannel()"
+        mat-flat-button
+        class="leave"
+    >
+        Channel verlassen
+    </button>
 </main>

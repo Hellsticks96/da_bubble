@@ -1,63 +1,100 @@
 <section class="header-content">
-    @if (isMobileOpen('chat') || isMobileOpen('thread') || isMobileOpen('directmessage') || isMobileOpen('newMessage')) {
-        <div class="mobile-header-open" (click)="mobileGoBack()">
-            <img src="../../../assets/img/icons/keyboard_arrow_left.svg">
+    @if (
+        isMobileOpen("chat") ||
+        isMobileOpen("thread") ||
+        isMobileOpen("directmessage") ||
+        isMobileOpen("newMessage")
+    ) {
+        <div
+            class="mobile-header-open"
+            (click)="mobileGoBack()"
+        >
+            <img src="../../../assets/img/icons/keyboard_arrow_left.svg" />
             <div class="devspace">
-                <img src="../../../assets/img/devspace/background.png">
-                <img src="../../../assets/img/devspace/devspace.svg">
+                <img src="../../../assets/img/devspace/background.png" />
+                <img src="../../../assets/img/devspace/devspace.svg" />
             </div>
-            <img src="../../../assets/img/devspace/name.svg">
+            <img src="../../../assets/img/devspace/name.svg" />
         </div>
     } @else {
-        <div class="logo" (click)="log()">
-            <img src="../../../assets/img/logo/icon.svg">
-            <img src="../../../assets/img/logo/name.svg">
+        <div
+            class="logo"
+            (click)="log()"
+        >
+            <img src="../../../assets/img/logo/icon.svg" />
+            <img src="../../../assets/img/logo/name.svg" />
         </div>
     }
     <div class="searchbar-wrapper">
-            <input matInput placeholder="Code learning durchsuchen" #searchInput [formControl]="formCtrl"
-                [matAutocomplete]="auto"/>
-              <!-- (matChipInputTokenEnd)="add($event)" -->
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-              @for (option of filteredResults | async; track option) {
-                @if (option.type === 'user') {
-                  <mat-option [value]="option.id">
-                    <!-- @if (option.avatar && option.avatar.length > 1) {
+        <input
+            matInput
+            placeholder="Code learning durchsuchen"
+            #searchInput
+            [formControl]="formCtrl"
+            [matAutocomplete]="auto"
+        />
+        <!-- (matChipInputTokenEnd)="add($event)" -->
+        <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="selected($event)"
+        >
+            @for (option of filteredResults | async; track option) {
+                @if (option.type === "user") {
+                    <mat-option [value]="option.id">
+                        <!-- @if (option.avatar && option.avatar.length > 1) {
                       <img src="{{ option.avatar }}">
                   } @else {
                       <img src="../../assets/img/avatar/{{ option.avatar}}.svg">
                   } -->
-                    <h3>{{option.name}}</h3>
-                  </mat-option>
+                        <h3>{{ option.name }}</h3>
+                    </mat-option>
                 } @else {
                     <mat-option [value]="option.id">
                         <!-- <img src="../../../assets/img/icons/tag.svg"> -->
-                        <h3>{{option.name}}</h3>
+                        <h3>{{ option.name }}</h3>
                     </mat-option>
                 }
-              }
-            </mat-autocomplete>
+            }
+        </mat-autocomplete>
         <span class="material-icons">search</span>
     </div>
-    <div class="profile-info" (click)="mobileMenu()">
+    <div
+        class="profile-info"
+        (click)="mobileMenu()"
+    >
         <h1>{{ currentuser.currentUser.name }}</h1>
         <div class="avatar-wrapper">
             <span class="online-status">
-                <img src="../../../assets/img/icons/is-online.svg">
+                <img src="../../../assets/img/icons/is-online.svg" />
             </span>
             @if (currentuser.currentUser.avatar.length > 1) {
-                <img src="{{ currentuser.currentUser.avatar }}">
+                <img src="{{ currentuser.currentUser.avatar }}" />
             } @else {
-                <img src="../../../assets/img/avatar/{{ currentuser.currentUser.avatar}}.svg">
+                <img
+                    src="../../../assets/img/avatar/{{
+                        currentuser.currentUser.avatar
+                    }}.svg"
+                />
             }
         </div>
-        <button (click)="openDialog($event)" mat-icon-button>
+        <button
+            (click)="openDialog($event)"
+            mat-icon-button
+        >
             <span class="material-icons">keyboard_arrow_down</span>
         </button>
     </div>
 </section>
-<div [ngClass]="{'d-none': isMobileOpen('chat') || isMobileOpen('thread') || isMobileOpen('directmessage') || isMobileOpen('newMessage')}"
-class="searchbar-wrapper mobile">
-    <input placeholder="Gehe zu...">
-    <img src="../../../assets/img/icons/search.svg">
+<div
+    [ngClass]="{
+        'd-none':
+            isMobileOpen('chat') ||
+            isMobileOpen('thread') ||
+            isMobileOpen('directmessage') ||
+            isMobileOpen('newMessage'),
+    }"
+    class="searchbar-wrapper mobile"
+>
+    <input placeholder="Gehe zu..." />
+    <img src="../../../assets/img/icons/search.svg" />
 </div>

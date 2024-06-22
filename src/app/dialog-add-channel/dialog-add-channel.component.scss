@@ -1,197 +1,195 @@
 .dialog-container {
-  padding: 2.5rem;
-  gap: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  font-family: nunito;
-  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
-  width: 50vw;
-
-  >div {
+    padding: 2.5rem;
+    gap: 1.25rem;
     display: flex;
-    justify-content: space-between;
-  }
+    flex-direction: column;
+    font-family: nunito;
+    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
+    width: 50vw;
 
-  >span {
-    font-size: 1.125rem;
-  }
+    > div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    > span {
+        font-size: 1.125rem;
+    }
 }
 
 .inputContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
 
-  h3 {
-    font-size: 1.125rem;
-
-    span {
-      color: var(--text-gray);
-      font-weight: 400;
-    }
-  }
-
-  div {
-    position: relative;
-    width: 100%;
-
-    >input {
-
-      border: 0;
-      width: calc(100% - 2rem - 5.375rem);
-      padding: 1.125rem 2rem 1.125rem 5.375rem;
-      border-radius: 6.25rem;
-      background: var(--bg-color);
-      color: var(--black);
-      font-size: 1.125rem;
-      font-weight: 500;
-      line-height: 120%;
-      /* 21.6px */
-
-      &::placeholder {
-        color: var(--text-gray);
+    h3 {
         font-size: 1.125rem;
-        font-weight: 500;
-        line-height: 120%;
-      }
 
-      &:hover {
-        outline: 1px solid var(--light-purple-line);
-      }
-
-      &:focus {
-        outline: 1px solid var(--purple-3);
-
-        &+img {
-          filter: brightness(0%);
+        span {
+            color: var(--text-gray);
+            font-weight: 400;
         }
-      }
     }
 
-    >img {
-      width: 1.5rem;
-      height: 1.5rem;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 2rem;
-      margin: auto 0;
+    div {
+        position: relative;
+        width: 100%;
+
+        > input {
+            border: 0;
+            width: calc(100% - 2rem - 5.375rem);
+            padding: 1.125rem 2rem 1.125rem 5.375rem;
+            border-radius: 6.25rem;
+            background: var(--bg-color);
+            color: var(--black);
+            font-size: 1.125rem;
+            font-weight: 500;
+            line-height: 120%;
+            /* 21.6px */
+
+            &::placeholder {
+                color: var(--text-gray);
+                font-size: 1.125rem;
+                font-weight: 500;
+                line-height: 120%;
+            }
+
+            &:hover {
+                outline: 1px solid var(--light-purple-line);
+            }
+
+            &:focus {
+                outline: 1px solid var(--purple-3);
+
+                & + img {
+                    filter: brightness(0%);
+                }
+            }
+        }
+
+        > img {
+            width: 1.5rem;
+            height: 1.5rem;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 2rem;
+            margin: auto 0;
+        }
     }
-  }
 }
 
 .second {
-  margin-top: 1.25rem;
+    margin-top: 1.25rem;
 
-  >div {
-    >input {
-      padding: 1.125rem 2rem;
-      width: calc(100% - 2rem - 2rem);
+    > div {
+        > input {
+            padding: 1.125rem 2rem;
+            width: calc(100% - 2rem - 2rem);
+        }
     }
-  }
 }
 
 :host ::ng-deep .mdc-text-field--outlined {
-  --mdc-outlined-text-field-container-shape: 1.875rem;
+    --mdc-outlined-text-field-container-shape: 1.875rem;
 }
 
 Mat-dialog-actions {
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-  padding: 0;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0;
 
-  >button {
-    width: min-content;
-    padding: 0 1.5625rem;
-    height: 3.0625rem;
-    transition: 100ms ease-out;
+    > button {
+        width: min-content;
+        padding: 0 1.5625rem;
+        height: 3.0625rem;
+        transition: 100ms ease-out;
 
-    ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
-      border-radius: 1.5625rem;
-      background: var(--purple-1);
-      overflow: hidden;
-      transition: 100ms ease-out;
-    }
-
-    ::ng-deep::ng-deep .mat-mdc-button-ripple {
-      border-radius: 1.5625rem;
-      overflow: hidden;
-    }
-
-    ::ng-deep::ng-deep .mdc-button__label {
-      color: var(--white);
-      font-family: Nunito;
-      font-size: 1.125rem;
-      padding: 0;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: normal;
-    }
-
-    &:hover {
-
-      ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
-        background-color: var(--purple-2);
-
-        &::before {
-          opacity: 0;
+        ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+            border-radius: 1.5625rem;
+            background: var(--purple-1);
+            overflow: hidden;
+            transition: 100ms ease-out;
         }
-      }
+
+        ::ng-deep::ng-deep .mat-mdc-button-ripple {
+            border-radius: 1.5625rem;
+            overflow: hidden;
+        }
+
+        ::ng-deep::ng-deep .mdc-button__label {
+            color: var(--white);
+            font-family: Nunito;
+            font-size: 1.125rem;
+            padding: 0;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: normal;
+        }
+
+        &:hover {
+            ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
+                background-color: var(--purple-2);
+
+                &::before {
+                    opacity: 0;
+                }
+            }
+        }
     }
-  }
 }
 
 .error {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 0.375rem);
-  animation: 100ms ease-in blendIn;
-  color: var(--error);
-  font-family: Nunito;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 0.375rem);
+    animation: 100ms ease-in blendIn;
+    color: var(--error);
+    font-family: Nunito;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
-// Media Queries 
+// Media Queries
 
 @media (max-width: 768px) {
-  .dialog-container {
-    padding: 2.5rem 1.25rem;
-    width: calc(100vw - 1.25rem - 1.25rem);
-    height: calc(100vh - 2.5rem - 2.5rem);
-    gap: 1.5625rem;
+    .dialog-container {
+        padding: 2.5rem 1.25rem;
+        width: calc(100vw - 1.25rem - 1.25rem);
+        height: calc(100vh - 2.5rem - 2.5rem);
+        gap: 1.5625rem;
 
-    >span {
-      font-size: 1.0625rem;
+        > span {
+            font-size: 1.0625rem;
+        }
     }
-  }
 
-  .inputContainer {
-    div {
-      >input {
-        padding: 1.125rem 1.25rem 1.125rem 3.625rem;
-        width: calc(100% - 1.25rem - 3.625rem);
-        border-radius: 2.5rem;
-      }
+    .inputContainer {
+        div {
+            > input {
+                padding: 1.125rem 1.25rem 1.125rem 3.625rem;
+                width: calc(100% - 1.25rem - 3.625rem);
+                border-radius: 2.5rem;
+            }
 
-      >img {
-        width: 1.4375rem;
-        height: 1.4375rem;
-        left: 1.25rem;
-      }
+            > img {
+                width: 1.4375rem;
+                height: 1.4375rem;
+                left: 1.25rem;
+            }
+        }
     }
-  }
 
-  .second {
-    div {
-      >input {
-        padding: 1.125rem 1.25rem;
-        width: calc(100% - 1.25rem - 1.25rem);
-      }
+    .second {
+        div {
+            > input {
+                padding: 1.125rem 1.25rem;
+                width: calc(100% - 1.25rem - 1.25rem);
+            }
+        }
     }
-  }
 }

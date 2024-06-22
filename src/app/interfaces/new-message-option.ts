@@ -1,7 +1,7 @@
 export interface NewMessageOption {
-    type: 'user' | 'channel';
+    type: "user" | "channel";
     id: string;
     name: string;
     email?: string;
-    avatar?: string;  // Optional, nur für Benutzer relevant
+    avatar?: string; // Optional, nur für Benutzer relevant
 }

@@ -40,16 +40,16 @@ main {
     transform-origin: 0 0;
     border-radius: 0rem 0rem 1.875rem 1.875rem;
     background: var(--white);
-    box-shadow: -4px 4px 7px 0px rgba(0, 0, 0, 0.20);
+    box-shadow: -4px 4px 7px 0px rgba(0, 0, 0, 0.2);
     padding: 0.875rem 1.4375rem;
 
-    >span {
+    > span {
         font-size: 1.25rem;
         font-weight: 500;
         line-height: 120%;
     }
 
-    >span::after {
+    > span::after {
         display: block;
         content: attr(name);
         font-weight: 700;
@@ -58,7 +58,7 @@ main {
         height: 0px;
     }
 
-    >img {
+    > img {
         transform: rotate(90deg);
         width: 1rem;
         height: 1rem;
@@ -68,11 +68,11 @@ main {
     &:hover {
         cursor: pointer;
 
-        >img {
+        > img {
             content: url(../../assets/img/icons/sidenav-close-purple.svg);
         }
 
-        >span {
+        > span {
             font-weight: 700;
             color: var(--purple-3);
         }
@@ -111,14 +111,13 @@ main {
         line-height: normal;
         letter-spacing: normal;
 
-        >img {
+        > img {
             width: 1.5rem;
             height: 1.5rem;
         }
     }
 
     &:hover {
-
         ::ng-deep::ng-deep .mat-mdc-button-persistent-ripple {
             background-color: var(--purple-2);
 
@@ -130,7 +129,7 @@ main {
 }
 
 .closed:hover {
-    >img {
+    > img {
         content: url(../../assets/img/icons/sidenav-open-purple.svg) !important;
     }
 }
@@ -138,8 +137,6 @@ main {
 .mobile {
     display: none;
 }
-
-
 
 // Media Queries
 

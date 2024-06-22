@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { BottomsheetProfileMenuComponent } from './bottomsheet-profile-menu.component';
+import { BottomsheetProfileMenuComponent } from "./bottomsheet-profile-menu.component";
 
-describe('BottomsheetProfileMenuComponent', () => {
-  let component: BottomsheetProfileMenuComponent;
-  let fixture: ComponentFixture<BottomsheetProfileMenuComponent>;
+describe("BottomsheetProfileMenuComponent", () => {
+    let component: BottomsheetProfileMenuComponent;
+    let fixture: ComponentFixture<BottomsheetProfileMenuComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [BottomsheetProfileMenuComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(BottomsheetProfileMenuComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [BottomsheetProfileMenuComponent],
+        }).compileComponents();
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        fixture = TestBed.createComponent(BottomsheetProfileMenuComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

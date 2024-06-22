@@ -35,13 +35,13 @@
         }
     }
 
-    >img:first-child {
+    > img:first-child {
         width: 4.375rem;
         height: 4.375rem;
         border-radius: 50%;
     }
 
-    >img:last-child {
+    > img:last-child {
         position: absolute;
         right: 0;
         bottom: 0;
@@ -81,13 +81,13 @@
         }
     }
 
-    >img {
+    > img {
         width: 4.375rem;
         height: 4.375rem;
         border-radius: 50%;
     }
 
-    >div:not(.message-info, .hoverMenu) {
+    > div:not(.message-info, .hoverMenu) {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
@@ -99,11 +99,11 @@
     align-items: center;
     gap: 1.25rem;
 
-    >h5 {
+    > h5 {
         font-size: 1.125rem;
     }
 
-    >span {
+    > span {
         color: var(--text-gray);
         font-size: 0.875rem;
     }
@@ -128,7 +128,6 @@
         border-radius: 1.875rem 0rem 1.875rem 1.875rem;
         background-color: var(--purple-2);
         color: var(--white);
-
     }
 
     .reaction {
@@ -139,7 +138,7 @@
         left: 10%;
         right: unset;
 
-        >.moreButton {
+        > .moreButton {
             display: flex;
         }
     }
@@ -186,7 +185,7 @@
 .reaction-wrapper {
     position: relative;
 
-    >button {
+    > button {
         padding: 0.3125rem 0.625rem;
         border-radius: 1.25rem;
         border: 1px solid var(--light-purple-line);
@@ -198,24 +197,24 @@
             align-items: center;
             gap: 0.625rem;
 
-            >img {
+            > img {
                 width: 1.5rem;
                 height: 1.5rem;
             }
 
-            >span {
+            > span {
                 font-size: 1rem;
             }
         }
     }
 
-    >img {
+    > img {
         padding: 0.3125rem;
         width: 1.5rem;
         height: 1.5rem;
     }
 
-    &:hover>div {
+    &:hover > div {
         display: flex;
     }
 }
@@ -227,26 +226,26 @@
     padding: 1rem;
     left: 2.25rem;
     bottom: 2.25rem;
-    background-color: #444DF2;
+    background-color: #444df2;
     border-radius: 1.875rem 1.875rem 1.875rem 0rem;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 0.25rem;
 
-    >span {
+    > span {
         font-size: 1rem;
         font-weight: 700;
         color: white;
     }
 
-    >p {
+    > p {
         font-size: 1rem;
         font-weight: 400;
         color: white;
     }
 
-    >img {
+    > img {
         width: 1.875rem;
         height: 1.875rem;
     }
@@ -273,13 +272,13 @@
     flex-direction: column;
     gap: 1.5rem;
 
-    >div {
+    > div {
         display: flex;
         justify-content: flex-start;
         align-items: flex-end;
         gap: 1.5625rem;
 
-        >img {
+        > img {
             width: 6.25rem;
             height: 6.25rem;
             border-radius: 50%;
@@ -334,7 +333,7 @@
     justify-content: space-between;
     margin-top: 0.5rem;
 
-    >button {
+    > button {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -342,7 +341,7 @@
         width: 2.5rem;
         height: 2.5rem;
 
-        >img {
+        > img {
             width: 2.5rem;
             height: 2.5rem;
         }
@@ -373,7 +372,7 @@
         border: 1px solid var(--light-purple-line);
     }
 
-    >button {
+    > button {
         padding: 0.5rem;
         width: 2.5rem;
         height: 2.5rem;
@@ -404,7 +403,7 @@
     border: 1px solid var(--light-purple-line);
     background: var(--white);
 
-    >button {
+    > button {
         width: 2.5rem;
         height: 2.5rem;
         display: flex;
@@ -412,7 +411,7 @@
         align-items: center;
     }
 
-    >.moreButton {
+    > .moreButton {
         display: none;
     }
 
@@ -433,12 +432,12 @@
     align-items: flex-start;
     gap: 0.9375rem;
     border-radius: 0rem 1.875rem 1.875rem 1.875rem !important;
-    box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.20) !important;
+    box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.2) !important;
 
-    >div {
+    > div {
         padding: 0;
 
-        >button {
+        > button {
             display: flex;
             padding: 0.625rem 1.25rem;
             justify-content: center;
@@ -446,7 +445,7 @@
             gap: 0.9375rem;
             border-radius: 6.25rem;
 
-            >span {
+            > span {
                 font-family: Nunito !important;
                 font-size: 1.25rem !important;
                 font-weight: 500 !important;
@@ -468,7 +467,9 @@
     border: none;
     gap: 1.5rem;
 
-    ::ng-deep::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    ::ng-deep::ng-deep
+        .mat-button-toggle-appearance-standard
+        .mat-button-toggle-label-content {
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -476,18 +477,18 @@
         padding: 0;
         flex: 1;
 
-        >div {
+        > div {
             height: 3.125rem;
             width: 3.125rem;
             position: relative;
 
-            >img:first-child {
+            > img:first-child {
                 width: 3.125rem;
                 height: 3.125rem;
                 border-radius: 50%;
             }
 
-            >img:last-child {
+            > img:last-child {
                 position: absolute;
                 right: 0;
                 bottom: 0;
@@ -496,7 +497,7 @@
             }
         }
 
-        >span {
+        > span {
             color: var(--black);
             font-family: Nunito;
             font-size: 1.125rem;
@@ -509,7 +510,7 @@
     ::ng-deep::ng-deep .mat-button-toggle-checked {
         background-color: white !important;
 
-        ::ng-deep::ng-deep .mat-button-toggle-label-content>span {
+        ::ng-deep::ng-deep .mat-button-toggle-label-content > span {
             color: var(--purple-3);
             font-weight: 700;
             width: min-content;
@@ -569,7 +570,7 @@
         padding: 0.625rem 1rem;
         gap: 1rem;
 
-        >img {
+        > img {
             width: 3.125rem;
             height: 3.125rem;
         }
@@ -580,10 +581,10 @@
     }
 
     .blank-info {
-        >div {
+        > div {
             gap: 0.625rem;
 
-            >img {
+            > img {
                 width: 5.5rem;
                 height: 5.5rem;
             }

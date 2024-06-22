@@ -1,6 +1,13 @@
 <app-start>
-    <button class="goBack" mat-icon-button (click)="location.back()">
-        <img src="../../../assets/img/icons/arrow_back.svg" alt="Go back">
+    <button
+        class="goBack"
+        mat-icon-button
+        (click)="location.back()"
+    >
+        <img
+            src="../../../assets/img/icons/arrow_back.svg"
+            alt="Go back"
+        />
     </button>
     <div class="description">
         <h1>Passwort zurücksetzen</h1>
@@ -8,18 +15,35 @@
     </div>
     <form (submit)="sendResetEmail()">
         <div>
-            <input type="email" [(ngModel)]="email" name="email" placeholder="beispielname@email.com" id="email">
-            <img src="../../../assets/img/icons/mail-gray.svg">
+            <input
+                type="email"
+                [(ngModel)]="email"
+                name="email"
+                placeholder="beispielname@email.com"
+                id="email"
+            />
+            <img src="../../../assets/img/icons/mail-gray.svg" />
         </div>
-        <p>Wir senden Ihnen eine E-Mail, über die<br>
-            Sie Ihr Passwort ändern können.</p>
-        <button mat-flat-button class="submit" type="submit">E-Mail senden</button>
+        <p>
+            Wir senden Ihnen eine E-Mail, über die<br />
+            Sie Ihr Passwort ändern können.
+        </p>
+        <button
+            mat-flat-button
+            class="submit"
+            type="submit"
+        >
+            E-Mail senden
+        </button>
     </form>
 </app-start>
 
 @if (emailSent) {
     <div class="mail-sent-slider">
-    <img src="../../../assets/img/icons/send-white.svg" alt="">
-    <h2>E-Mail gesendet</h2>
-</div>
+        <img
+            src="../../../assets/img/icons/send-white.svg"
+            alt=""
+        />
+        <h2>E-Mail gesendet</h2>
+    </div>
 }

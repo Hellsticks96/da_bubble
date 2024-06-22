@@ -1,5 +1,5 @@
 export interface SearchResult {
-    type: 'user' | 'channel';
+    type: "user" | "channel";
     id: string;
     name: string;
     avatar: string;

@@ -11,7 +11,7 @@ main {
     padding: 0 calc(1.5rem + 6px) 1.5625rem 0;
     justify-content: space-between;
 
-    >div:not(.logo) {
+    > div:not(.logo) {
         display: flex;
         align-items: center;
         gap: 0.9375rem;
@@ -25,23 +25,23 @@ main {
         border-radius: 1.875rem;
         overflow: hidden;
 
-        >img:first-child {
+        > img:first-child {
             width: 3.75rem;
             height: 3.75rem;
         }
 
-        >img:last-child {
+        > img:last-child {
             position: absolute;
             width: 2.16rem;
             height: 1.4505rem;
         }
     }
 
-    >h2 {
+    > h2 {
         padding-right: 1.25rem;
     }
 
-    >img {
+    > img {
         padding: 0.5rem;
     }
 }
@@ -77,14 +77,14 @@ main {
 .directmessages {
     box-shadow: none !important;
 
-    >mat-expansion-panel-header {
+    > mat-expansion-panel-header {
         padding: 0 0 1rem 0;
 
         mat-panel-title {
             display: flex;
             justify-content: space-between;
 
-            >div {
+            > div {
                 display: flex;
                 align-items: center;
 
@@ -93,16 +93,11 @@ main {
                 }
             }
         }
-
     }
-
-
 }
-
 
 .channels,
 .directmessages {
-
     mat-expansion-panel-header {
         h3 {
             font-size: 1.25rem;
@@ -112,7 +107,7 @@ main {
     mat-expansion-panel-header:hover {
         background: none !important;
 
-        mat-panel-title>div>h3 {
+        mat-panel-title > div > h3 {
             color: var(--purple-3);
         }
 
@@ -124,7 +119,7 @@ main {
 
 .channels {
     mat-expansion-panel-header:hover {
-        mat-panel-title>div>img {
+        mat-panel-title > div > img {
             content: url(../../../assets/img/icons/workspaces-purple.svg);
         }
     }
@@ -132,7 +127,7 @@ main {
 
 .directmessages {
     mat-expansion-panel-header:hover {
-        mat-panel-title>div>img {
+        mat-panel-title > div > img {
             content: url(../../../assets/img/icons/account_circle-purple.svg);
         }
     }
@@ -166,20 +161,21 @@ main {
 }
 
 .channels {
-
-    ::ng-deep::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    ::ng-deep::ng-deep
+        .mat-button-toggle-appearance-standard
+        .mat-button-toggle-label-content {
         padding: 0;
         display: flex;
         align-items: center;
         width: max-content;
         gap: 0.625rem;
 
-        >img {
+        > img {
             width: 1.5rem;
             height: 1.5rem;
         }
 
-        >h3 {
+        > h3 {
             line-height: normal;
             font-size: 1.125rem;
             font-weight: 400;
@@ -187,7 +183,6 @@ main {
             white-space: break-spaces;
             max-width: 8.25rem;
         }
-
     }
 }
 
@@ -219,7 +214,9 @@ mat-button-toggle {
         border: 0 !important;
         overflow: hidden;
 
-        &:hover:not(.mat-button-toggle-appearance-standard.mat-button-toggle-checked) {
+        &:hover:not(
+                .mat-button-toggle-appearance-standard.mat-button-toggle-checked
+            ) {
             transition: 80ms ease-in;
             background-color: var(--bg-color);
 
@@ -237,7 +234,8 @@ mat-button-toggle {
         padding: 0.25rem 1.25rem;
     }
 
-    ::ng-deep::ng-deep .mat-button-toggle-appearance-standard.mat-button-toggle-checked {
+    ::ng-deep::ng-deep
+        .mat-button-toggle-appearance-standard.mat-button-toggle-checked {
         background: var(--bg-color);
 
         img {
@@ -256,12 +254,12 @@ mat-button-toggle {
     align-items: center;
     gap: 0.625rem;
 
-    >img {
+    > img {
         width: 1.5rem;
         height: 1.5rem;
     }
 
-    >span {
+    > span {
         font-size: 1.125rem;
         line-height: normal;
     }
@@ -269,11 +267,11 @@ mat-button-toggle {
     &:hover {
         cursor: pointer;
 
-        >img {
+        > img {
             content: url(../../../assets/img/icons/add_circle-purple.svg);
         }
 
-        >span {
+        > span {
             color: var(--purple-3);
         }
     }
@@ -290,7 +288,9 @@ mat-button-toggle {
     width: 100%;
     gap: 0.8125rem;
 
-    ::ng-deep::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    ::ng-deep::ng-deep
+        .mat-button-toggle-appearance-standard
+        .mat-button-toggle-label-content {
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -299,17 +299,17 @@ mat-button-toggle {
         flex: 1;
         width: max-content;
 
-        >div {
+        > div {
             height: 3.125rem;
             position: relative;
 
-            >img:first-child {
+            > img:first-child {
                 width: 3.125rem;
                 height: 3.125rem;
                 border-radius: 50%;
             }
 
-            >img:last-child {
+            > img:last-child {
                 position: absolute;
                 right: 0;
                 bottom: 0;
@@ -318,7 +318,7 @@ mat-button-toggle {
             }
         }
 
-        >span {
+        > span {
             color: var(--black);
             font-family: Nunito;
             font-size: 1.125rem;
@@ -335,7 +335,7 @@ mat-button-toggle {
     ::ng-deep::ng-deep .mat-button-toggle-checked {
         background-color: var(--bg-color);
 
-        ::ng-deep::ng-deep .mat-button-toggle-label-content>span {
+        ::ng-deep::ng-deep .mat-button-toggle-label-content > span {
             color: var(--purple-3);
             font-weight: 700;
         }
@@ -394,13 +394,11 @@ mat-button-toggle {
 
     .channels,
     .directmessages {
-
-        >mat-expansion-panel-header {
+        > mat-expansion-panel-header {
             height: 2.875rem;
 
             mat-panel-title {
                 margin: 0;
-
             }
         }
     }
