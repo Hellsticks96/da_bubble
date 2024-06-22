@@ -161,12 +161,12 @@
                                                     <span>{{message.value.name}}</span>
                                                     <p>hat reagiert</p>
                                                 </div>
-                                                    <ngx-emoji
-                                                        [emoji]="reaction.key"
-                                                    ></ngx-emoji>
-                                                    <span>
-                                                        {{reaction.key}}
-                                                {{reaction.value}}</span>
+                                                <button mat-raised-button (click)="addOrSubReaction(message, reaction.key)">                                                    <ngx-emoji
+                                                    [emoji]="reaction.key"
+                                                ></ngx-emoji>
+                                                <span>
+                                                    {{reaction.key}}
+                                            {{reaction.value}}</span></button>
                                             </div>
                                         }
                                     }

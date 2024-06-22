@@ -49,6 +49,7 @@ export class DirectmessageService {
             createdAt: serverTimestamp(),
             reactions: {},
             padNumber: "",
+            btnReactions: []
         };
         try {
             await setDoc(newMessageRef, newMessage, { merge: true });

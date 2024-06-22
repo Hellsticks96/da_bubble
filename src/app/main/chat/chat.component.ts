@@ -279,6 +279,7 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
                 createdAt: serverTimestamp(),
                 reactions: {},
                 padNumber: "",
+                btnReactions: []
             };
 
             await this.chatService.sendMessage(
@@ -418,4 +419,9 @@ export class ChatComponent implements AfterViewInit, AfterViewChecked {
         }
         this.messageInput.nativeElement.focus();
     }
+
+    addOrSubReaction(message: any, reaction: any) {
+        this.chatService.addOrSubReaction(message, reaction)
+    }
+
 }

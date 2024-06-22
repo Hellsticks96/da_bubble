@@ -7,4 +7,5 @@ export interface Message {
     createdAt: any;
     reactions?: { [key: string]: number }; //Map<string, number>
     padNumber: number | string;
+    btnReactions: string[];
 }
