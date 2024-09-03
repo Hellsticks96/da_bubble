@@ -49,7 +49,7 @@ import { HighlightMentionsPipe } from "../../pipes/highlist-mentions.pipe";
     templateUrl: "./thread.component.html",
     styleUrls: ["./thread.component.scss"],
 })
-export class ThreadComponent implements OnInit, OnChanges {
+export class ThreadComponent implements OnChanges {
     @Input() channelId!: string;
     @Input() messageId!: string;
     @Input() initialMessage!: Message;
