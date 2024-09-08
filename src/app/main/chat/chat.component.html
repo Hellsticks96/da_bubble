@@ -177,6 +177,12 @@
             </div>
         </div>
         }
+        <div *ngIf="showModal" class="modal">
+            <div class="modal-content">
+                <span class="close" (click)="closeModal()">&times;</span>
+                <img [src]="modalSrc" alt="Expanded Image Preview">
+            </div>
+        </div>
         <div class="input-container">
             <div class="chat-input">
                 <textarea #messageInput matInput (input)="onInputChange($event)" [formControl]="formCtrl"
