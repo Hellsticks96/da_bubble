@@ -135,7 +135,6 @@ export class ThreadComponent implements OnChanges {
         }
 
         if ((this.messageText.trim() !== "") || (imageUrl.trim() !== "")) {
-            debugger
             const message: Message = {
                 id: "",
                 avatar: "",
